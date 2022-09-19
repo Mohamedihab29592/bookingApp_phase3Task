@@ -1,11 +1,10 @@
 import 'package:booking_app/core/constants/colors.dart';
-import 'package:booking_app/presentation/widgets/google_button.dart';
-import 'package:booking_app/presentation/widgets/my_button.dart';
-import 'package:booking_app/presentation/widgets/my_text.dart';
-import 'package:booking_app/presentation/widgets/my_text_form_field.dart';
+import 'package:booking_app/features/auth/widgets/google_button.dart';
+import 'package:booking_app/features/auth/widgets/my_button.dart';
+import 'package:booking_app/features/auth/widgets/my_text.dart';
+import 'package:booking_app/features/auth/widgets/my_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -60,15 +59,21 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const MyText(
                   text: "Your Email", fontSize: 20, colors: Colors.grey),
-              const My_Text_Form(
-                hint: "Entre your Email",
+              MyTextForm(
+                hintText: "Entre your Email",
+                validator: (value) {},
+                controller: TextEditingController(),
+                textInputType: TextInputType.emailAddress,
               ),
               const SizedBox(
                 height: 15,
               ),
               const MyText(text: "Password", fontSize: 20, colors: Colors.grey),
-              const My_Text_Form(
-                hint: "Entre your Password",
+              MyTextForm(
+                hintText: "Entre your Password",
+                validator: (value) {},
+                controller: TextEditingController(),
+                textInputType: TextInputType.visiblePassword,
               ),
               const SizedBox(
                 height: 15,
@@ -92,9 +97,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 50,
                     width: double.infinity,
                     child: MyButton(
+                      onPressed: () {},
                       label: "Login",
                       fontWeight: FontWeight.bold,
-                      fontsize: 20,
+                      fontSize: 20,
                       radius: 15,
                     ),
                   ),

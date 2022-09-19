@@ -1,4 +1,3 @@
-import 'package:booking_app/presentation/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
@@ -6,30 +5,35 @@ class MyButton extends StatelessWidget {
   final Color backGroundColor;
   final Color textColor;
   final double radius;
-  final double fontsize;
+  final double fontSize;
   final FontWeight fontWeight;
-  MyButton({
+  final VoidCallback? onPressed;
+
+  const MyButton({
+    super.key,
     required this.label,
     this.backGroundColor = Colors.teal,
     this.textColor = Colors.white,
     required this.radius,
-    required this.fontsize,
+    required this.fontSize,
     required this.fontWeight,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
-      child: Text(label),
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
           backgroundColor: backGroundColor,
           foregroundColor: textColor,
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(10),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(20.0),
           ),
-          textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          textStyle:
+              const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      child: Text(label),
     );
   }
 }
