@@ -1,3 +1,5 @@
+import 'package:booking_app/core/local/cache_helper.dart';
+import 'package:booking_app/core/routes/routes_manager.dart';
 import 'package:booking_app/features/auth/login/domain/entities/user_login_entity.dart';
 import 'package:booking_app/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:booking_app/features/auth/login/presentation/cubit/login_state.dart';
@@ -12,7 +14,6 @@ import 'package:booking_app/injection_container.dart' as di;
 import '../../../../../core/utilis/constants/app_strings.dart';
 import '../../../../../core/utilis/constants/colors.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -82,7 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     isDense: true,
                     radius: AppSize.s40,
                     labelText: AppStrings.email,
-
                     validator: (value) {
                       if (value!.isEmpty) {
                         return AppStrings.emailHint;
@@ -93,10 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: emailController,
                     textInputType: TextInputType.emailAddress,
                   ),
-                  const SizedBox(
-                      height: AppSize.s15
-                  ),
-
+                  const SizedBox(height: AppSize.s15),
                   MyTextForm(
                     isDense: true,
                     radius: AppSize.s40,
@@ -111,9 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passwordController,
                     textInputType: TextInputType.visiblePassword,
                   ),
-                  const SizedBox(
-                      height: AppSize.s15
-                  ),
+                  const SizedBox(height: AppSize.s15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: const [
@@ -133,7 +128,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: AppSize.s50,
                         width: double.infinity,
                         child: BlocConsumer<LoginCubit, LoginState>(
-                          listener: (BuildContext context, state) {},
+                          listener: (BuildContext context, state) {
+                            if(state is LoginSuccessState){
+                              
+                              Navigator.pushReplacementNamed(context, Routes.homeRoute,);
+
+                            }
+                          },
                           builder: (BuildContext context, Object? state) {
                             var cubit = LoginCubit.get(context);
                             if (state is! LoginLoadingState) {
@@ -142,9 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (_formKey.currentState!.validate()) {
                                     cubit.loginEmail(
                                         userLoginEntity: UserLoginEntity(
-                                            email: emailController.text, password: passwordController.text)
-
-                                    );
+                                            email: emailController.text,
+                                            password: passwordController.text));
                                   }
                                 },
                                 label: AppStrings.logIn,
@@ -152,16 +152,29 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: AppSize.s20,
                                 radius: AppPadding.p12,
                               );
-                            }
-                            else {
+                            } else {
                               return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
                           },
-
                         ),
                       ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const MyText(
+                        text: AppStrings.haveNoAcc,
+                        fontSize: AppSize.s15,
+                        colors: AppColors.grey,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.registerRoute);
+                          },
+                          child: const Text(AppStrings.createAcc))
                     ],
                   ),
                 ],
@@ -170,7 +183,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-
     );
   }
 }

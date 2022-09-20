@@ -14,6 +14,8 @@ class AppStrings {
   static const String passHintMatch = 'passwords should be match';
   static const String passHint = 'please Enter your Password';
   static const String passForget = "Forget your password ?";
+  static const String haveNoAcc = "Don'\t have an account?";
+  static const String createAcc = "Register Now!";
   static const String policy = "By Signing up , you agreed with our terms of Services and privacy policy.";
   static const String haveAnAccount = "Already have account?";
 

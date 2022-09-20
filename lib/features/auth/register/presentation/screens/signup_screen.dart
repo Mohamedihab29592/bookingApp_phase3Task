@@ -1,4 +1,4 @@
-
+import 'package:booking_app/core/component/toast.dart';
 import 'package:booking_app/features/auth/register/domain/entities/user_info_entity.dart';
 import 'package:booking_app/features/auth/register/presentation/cubit/user_register_cubit.dart';
 import 'package:booking_app/features/auth/widgets/google_button.dart';
@@ -53,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const MyText(
+                  const MyText(
                     text: AppStrings.signUp,
                     fontSize: AppSize.s28,
                     fontWeight: FontWeight.bold,
@@ -61,14 +61,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: AppSize.s30,
                   ),
-                  const Align(alignment: Alignment.center, child: MySignButton()),
+                  const Align(
+                      alignment: Alignment.center, child: MySignButton()),
                   const SizedBox(
                     height: AppSize.s30,
                   ),
-                  const  Center(
-                    child:  MyText(
+                  const Center(
+                    child: MyText(
                       text: AppStrings.orLoginWith,
-                      fontSize:AppSize.s15,
+                      fontSize: AppSize.s15,
                       colors: AppColors.grey,
                     ),
                   ),
@@ -76,7 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
-                    labelText:AppStrings.name ,
+                    labelText: AppStrings.name,
                     isDense: true,
                     radius: AppSize.s40,
                     validator: (value) {
@@ -92,8 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
-                    labelText:AppStrings.email ,
-
+                    labelText: AppStrings.email,
                     isDense: true,
                     radius: AppSize.s40,
                     controller: emailController,
@@ -111,7 +111,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   MyTextForm(
                     labelText: AppStrings.password,
-
                     isDense: true,
                     radius: AppSize.s40,
                     textInputType: TextInputType.visiblePassword,
@@ -148,11 +147,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Column(
                     children: [
                       SizedBox(
-                        height:AppSize.s50,
+                        height: AppSize.s50,
                         width: double.infinity,
                         child:
                             BlocConsumer<UserRegisterCubit, UserRegisterState>(
-                          listener: (BuildContext context, state) {},
+                          listener: (BuildContext context, state) {
+                            if (state is UserRegisterSuccessState) {
+                              showToast(
+                                text: 'User Registered Successfully',
+                                state: ToastStates.success,
+                              );
+                              Navigator.pushReplacementNamed(context, Routes.loginRoute,);
+                            }
+                          },
                           builder: (BuildContext context, Object? state) {
                             var cubit = UserRegisterCubit.get(context);
                             if (state is! UserRegisterLoadingState) {
@@ -160,7 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 label: AppStrings.signUp,
                                 fontWeight: FontWeight.w700,
                                 fontSize: AppSize.s15,
-                                radius:AppPadding.p12 ,
+                                radius: AppPadding.p12,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     cubit.registerWithEmail(
@@ -188,7 +195,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: AppSize.s30,
                       ),
                       const MyText(
-                        text:AppStrings.policy,
+                        text: AppStrings.policy,
                         fontSize: AppSize.s15,
                         colors: AppColors.grey,
                       ),
@@ -200,7 +207,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           const MyText(
                             text: AppStrings.haveAnAccount,
                             fontSize: AppSize.s15,
-                            colors:AppColors.grey,
+                            colors: AppColors.grey,
                           ),
                           TextButton(
                             onPressed: () {
@@ -210,7 +217,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               AppStrings.logIn,
                               style: TextStyle(
                                   color: AppColors.teal,
-                                  fontSize:AppSize.s18,
+                                  fontSize: AppSize.s18,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
