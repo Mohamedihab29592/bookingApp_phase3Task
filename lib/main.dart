@@ -1,5 +1,6 @@
-import 'package:booking_app/features/auth/register/presentation/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'core/routes/routes_manager.dart';
+import 'core/utilis/constants/app_strings.dart';
 import 'injection_container.dart' as di;
 
 void main() {
@@ -13,9 +14,14 @@ class MotelApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  const MaterialApp(
+      title: AppStrings.appName,
       debugShowCheckedModeBanner: false,
-      home: SignUpScreen(),
+      initialRoute: Routes.registerRoute,
+      onGenerateRoute: RouteGenerator.getRoute,
+
+
+
     );
   }
 }

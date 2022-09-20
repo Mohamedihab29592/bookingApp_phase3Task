@@ -1,6 +1,4 @@
-import 'dart:io';
 
-import 'package:booking_app/core/constants/colors.dart';
 import 'package:booking_app/features/auth/register/domain/entities/user_info_entity.dart';
 import 'package:booking_app/features/auth/register/presentation/cubit/user_register_cubit.dart';
 import 'package:booking_app/features/auth/widgets/google_button.dart';
@@ -11,12 +9,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booking_app/injection_container.dart' as di;
 
-class SignUpScreen extends StatelessWidget {
-  SignUpScreen({Key? key}) : super(key: key);
+import '../../../../../core/routes/routes_manager.dart';
+import '../../../../../core/utilis/constants/app_strings.dart';
+import '../../../../../core/utilis/constants/colors.dart';
+import '../../../../../core/utilis/constants/values_manger.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   final nameController = TextEditingController();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
   final confirmPassController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -24,9 +36,10 @@ class SignUpScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => di.sl<UserRegisterCubit>(),
       child: Scaffold(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: AppColors.kPrimaryColor,
         appBar: AppBar(
-          backgroundColor: kPrimaryColor,
+          elevation: AppSize.s0,
+          backgroundColor: AppColors.kPrimaryColor,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {},
@@ -36,114 +49,106 @@ class SignUpScreen extends StatelessWidget {
           child: Form(
             key: _formKey,
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(AppPadding.p14),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MyText(
-                    text: "Sing up",
-                    fontSize: 23,
+                   const MyText(
+                    text: AppStrings.signUp,
+                    fontSize: AppSize.s28,
                     fontWeight: FontWeight.bold,
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: AppSize.s30,
                   ),
-                  Align(alignment: Alignment.center, child: MySignButton()),
+                  const Align(alignment: Alignment.center, child: MySignButton()),
                   const SizedBox(
-                    height: 30,
+                    height: AppSize.s30,
                   ),
-                  const Center(
-                    child: MyText(
-                      text: "or log in with email",
-                      fontSize: 20,
-                      colors: Colors.grey,
+                  const  Center(
+                    child:  MyText(
+                      text: AppStrings.orLoginWith,
+                      fontSize:AppSize.s15,
+                      colors: AppColors.grey,
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: AppSize.s15,
                   ),
-                  const MyText(
-                      text: "First Name", fontSize: 20, colors: Colors.grey),
                   MyTextForm(
+                    labelText:AppStrings.name ,
                     isDense: true,
-                    radius: 50.0,
-                    hintText: "Entre your Name",
+                    radius: AppSize.s40,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please Enter your Name';
-                      } else {
-                        return null;
+                        return AppStrings.nameHint;
                       }
+                      return null;
                     },
                     textInputType: TextInputType.name,
                     controller: nameController,
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: AppSize.s15,
                   ),
-                  const MyText(
-                      text: "Last Name", fontSize: 20, colors: Colors.grey),
                   MyTextForm(
+                    labelText:AppStrings.email ,
+
                     isDense: true,
-                    radius: 50.0,
-                    hintText: "Entre your Email",
+                    radius: AppSize.s40,
                     controller: emailController,
                     textInputType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please Enter your Email';
+                        return AppStrings.emailHint;
                       } else {
                         return null;
                       }
                     },
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: AppSize.s15,
                   ),
-                  const MyText(
-                      text: "Your Email", fontSize: 20, colors: Colors.grey),
                   MyTextForm(
+                    labelText: AppStrings.password,
+
                     isDense: true,
-                    radius: 50.0,
-                    hintText: "Entre your Password",
+                    radius: AppSize.s40,
                     textInputType: TextInputType.visiblePassword,
                     controller: passwordController,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "please Enter your Password";
-                      } else {
-                        return null;
+                        return AppStrings.passHint;
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: AppSize.s15,
                   ),
-                  const MyText(
-                      text: "Password", fontSize: 20, colors: Colors.grey),
                   MyTextForm(
+                    labelText: AppStrings.confirmedPassword,
                     isDense: true,
-                    radius: 50.0,
-                    hintText: "Entre Password",
+                    radius: AppSize.s40,
                     textInputType: TextInputType.visiblePassword,
                     controller: confirmPassController,
                     validator: (value) {
                       if (value!.isEmpty ||
                           passwordController.text !=
                               confirmPassController.text) {
-                        return "please Enter your confirm number";
+                        return AppStrings.passHintMatch;
                       } else {
                         return null;
                       }
                     },
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: AppSize.s40,
                   ),
                   Column(
                     children: [
                       SizedBox(
-                        height: 50,
+                        height:AppSize.s50,
                         width: double.infinity,
                         child:
                             BlocConsumer<UserRegisterCubit, UserRegisterState>(
@@ -152,10 +157,10 @@ class SignUpScreen extends StatelessWidget {
                             var cubit = UserRegisterCubit.get(context);
                             if (state is! UserRegisterLoadingState) {
                               return MyButton(
-                                label: "Sign Up",
+                                label: AppStrings.signUp,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 18,
-                                radius: 10,
+                                fontSize: AppSize.s15,
+                                radius:AppPadding.p12 ,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     cubit.registerWithEmail(
@@ -180,31 +185,32 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: AppSize.s30,
                       ),
                       const MyText(
-                        text:
-                            "By Siging up , you agreed with our terms of Services and privacy policy.",
-                        fontSize: 17,
-                        colors: Colors.grey,
+                        text:AppStrings.policy,
+                        fontSize: AppSize.s15,
+                        colors: AppColors.grey,
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: AppSize.s30,
                       ),
                       Row(
                         children: [
                           const MyText(
-                            text: "Already have account?",
-                            fontSize: 17,
-                            colors: Colors.grey,
+                            text: AppStrings.haveAnAccount,
+                            fontSize: AppSize.s15,
+                            colors:AppColors.grey,
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.loginRoute);
+                            },
                             child: const Text(
-                              "Login",
+                              AppStrings.logIn,
                               style: TextStyle(
-                                  color: Colors.teal,
-                                  fontSize: 18,
+                                  color: AppColors.teal,
+                                  fontSize:AppSize.s18,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),

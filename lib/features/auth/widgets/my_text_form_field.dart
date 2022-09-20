@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/utilis/constants/colors.dart';
+
 class MyTextForm extends StatelessWidget {
   final ValueChanged<String>? onChange;
   final String? hintText;
@@ -35,6 +37,7 @@ class MyTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: const TextStyle(color:AppColors.white),
       onFieldSubmitted: onSubmit,
       controller: controller,
       keyboardType: textInputType,
@@ -42,13 +45,16 @@ class MyTextForm extends StatelessWidget {
       onChanged: onChange,
       validator: validator,
       decoration: InputDecoration(
-        hintStyle: const TextStyle(
+        hintStyle:  const TextStyle(
           fontWeight: FontWeight.bold,
+          color: AppColors.grey
         ),
         labelStyle: const TextStyle(
           fontWeight: FontWeight.bold,
+            color: AppColors.grey
         ),
         hintText: hintText,
+
         labelText: labelText,
         prefixIcon: Icon(prefixIcon),
         suffixIcon:
@@ -56,27 +62,24 @@ class MyTextForm extends StatelessWidget {
         isDense: isDense,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: Colors.black),
+          borderSide:  const BorderSide(color:AppColors.grey),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: Colors.blue),
+          borderSide: const BorderSide(color: AppColors.blue),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: Colors.blue),
+          borderSide: const BorderSide(color:  AppColors.blue),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: Colors.blue),
+          borderSide: const BorderSide(color:  AppColors.blue),
         ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: Colors.blue),
-        ),
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: Colors.blue),
+          borderSide: const BorderSide(color: AppColors.blue),
         ),
       ),
     );

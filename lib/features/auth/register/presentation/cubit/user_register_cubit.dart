@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:booking_app/core/error/failures.dart';
-import 'package:booking_app/core/utilis/strings_manager.dart';
 import 'package:booking_app/features/auth/register/domain/entities/user_info_entity.dart';
 import 'package:booking_app/features/auth/register/domain/use_cases/register_email_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../../../core/utilis/constants/app_strings.dart';
 part 'user_register_state.dart';
 
 class UserRegisterCubit extends Cubit<UserRegisterState> {

@@ -1,35 +1,30 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/utilis/constants/app_strings.dart';
+import '../../../core/utilis/constants/assets_manager.dart';
+import '../../../core/utilis/constants/colors.dart';
+import '../../../core/utilis/constants/values_manger.dart';
+
+
 class MySignButton extends StatelessWidget {
-  // final String label;
-  // final Color backGroundColor;
-  // final Color textColor;
-  // final double radius;
-  // final double fontsize;
-  // final FontWeight fontWeight;
-  // MySignButton({
-  //   required this.label,
-  //   required this.backGroundColor,
-  //   required this.textColor,
-  //   required this.radius,
-  //   required this.fontsize,
-  //   required this.fontWeight,
-  // });
+  const MySignButton({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () {},
-      icon: Image.asset("assets/images/google.jpg"),
-      label: Text("Google"),
+      icon: Image.asset(ImageAssets.google),
+      label: const Text(AppStrings.google),
       style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.shade900,
-          foregroundColor: Colors.white,
-          padding: EdgeInsets.all(15),
+          backgroundColor: AppColors.darkGrey,
+          foregroundColor: AppColors.white,
+          padding:const EdgeInsets.all(AppPadding.p14),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(AppSize.s30),
           ),
-          textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          textStyle: const TextStyle(fontSize: AppSize.s20, fontWeight: FontWeight.bold)),
     );
   }
 }

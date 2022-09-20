@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:booking_app/core/local/cache_helper.dart';
 import 'package:booking_app/core/routes/routes_manager.dart';
-import 'package:booking_app/core/utilis/asset_manager.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -41,9 +40,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       body: Center(
-        child: Image(image: AssetImage(ImageAsset.logoImage)),
+        child: Image(image: AssetImage("ImageAsset.logoImage")),
       ),
     );
   }
