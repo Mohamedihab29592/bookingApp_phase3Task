@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import 'end_points.dart';
+
 class DioHelper {
   static final DioHelper _instance = DioHelper._internal();
 
@@ -11,7 +13,7 @@ class DioHelper {
 
   DioHelper._internal() {
     _dio = Dio(BaseOptions(
-      baseUrl: 'http://api.mahmoudtaha.com/',
+      baseUrl: baseApiUrl,
       receiveDataWhenStatusError: true,
     ));
   }

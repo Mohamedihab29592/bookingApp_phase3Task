@@ -5,6 +5,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/netowrk/end_points.dart';
+
 abstract class BaseRegisterRemoteDataSource {
   Future<Unit> registerWithEmail({required UserInfoEntity userInfoEntity});
 }
@@ -20,7 +22,7 @@ class RegisterRemoteDataSource implements BaseRegisterRemoteDataSource {
       'password_confirmation': userInfoEntity.passwordConfirmation,
       // "image": await MultipartFile.fromFile(userInfoEntity.image.path),
     });
-    final response = await DioHelper.postData(url: 'api/auth/register', data: formData);
+    final response = await DioHelper.postData(url:registerEndPoint, data: formData);
 
     // {
     //   'name': userInfoEntity.name,
