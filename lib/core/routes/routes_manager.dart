@@ -3,8 +3,10 @@ import 'package:booking_app/features/auth/register/presentation/screens/signup_s
 import 'package:booking_app/features/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../utilis/constants/app_strings.dart';
+
 class Routes {
-  static const String splashRoute = '/';
+  // static const String splashRoute = "/";
   static const String loginRoute = '/login';
   static const String registerRoute = '/register';
   static const String mainRoute = '/main';
@@ -13,12 +15,12 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.splashRoute:
-        return MaterialPageRoute(builder: (_) => const SplashScreen());
+      // case Routes.splashRoute:
+      //   return MaterialPageRoute(builder: (context) => const SplashScreen());
       case Routes.loginRoute:
-        return MaterialPageRoute(builder: (_) => LoginScreen());
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
       case Routes.registerRoute:
-        return MaterialPageRoute(builder: (_) => SignUpScreen());
+        return MaterialPageRoute(builder: (context) => const SignUpScreen());
       default:
         return unDefinedRoute();
     }
@@ -26,12 +28,12 @@ class RouteGenerator {
 
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
-        builder: (_) => Scaffold(
+        builder: (context) => Scaffold(
               appBar: AppBar(
-                title: const Text('No Route Found'),
+                title:  const Text(AppStrings.noRouteFound),
               ),
               body: const Center(
-                child: Text('No Route Found'),
+                child: Text(AppStrings.noRouteFound),
               ),
             ));
   }
