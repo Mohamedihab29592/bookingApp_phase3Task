@@ -1,4 +1,3 @@
-
 abstract class LoginState {}
 
 class LoginInitial extends LoginState {}
@@ -13,5 +12,6 @@ class LoginErrorState extends LoginState {
   LoginErrorState({required this.error});
 }
 
-class SuccessGetUserImageState extends LoginState{}
-class ErrorGetUserImageState extends LoginState{}
+class SuccessGetUserImageState extends LoginState {}
+
+class ErrorGetUserImageState extends LoginState {}

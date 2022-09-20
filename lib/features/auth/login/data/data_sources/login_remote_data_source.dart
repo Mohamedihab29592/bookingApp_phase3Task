@@ -20,11 +20,6 @@ class LoginRemoteDataSource implements BaseLoginRemoteDataSource {
       'password': userLoginEntity.password,
     });
     final response = await DioHelper.postData(url: loginEndPoint, data: formData);
-
-    // {
-    // 'email': userInfoEntity.email,
-    // 'password': userInfoEntity.password,
-    // }
     if (response.statusCode == 200 && response.data['status']['type'] == '1') {
       debugPrint(response.data.toString());
       return Future.value(unit);
