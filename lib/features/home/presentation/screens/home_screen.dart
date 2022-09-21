@@ -21,8 +21,17 @@ class HomeScreen extends StatelessWidget {
             return Row(
               children: [
                 IconButton(
-                    onPressed: () {
-                      cubit.getHomeData();
+                    onPressed: ()
+                    {
+                        cubit.getHomeData();
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                    )),
+                IconButton(
+                    onPressed: ()
+                    {
+                        cubit.getHomeData(isFirst: false);
                     },
                     icon: const Icon(
                       Icons.add,

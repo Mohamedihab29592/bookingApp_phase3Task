@@ -19,18 +19,23 @@ class HotelsModel extends HotelsEntity {
 }
 
 class HotelHomeModel extends HotelHomeEntity {
-  const HotelHomeModel({required super.data});
+  const HotelHomeModel({
+    required super.data,
+    required super.lastPage,
+  });
 
   factory HotelHomeModel.fromJson(Map<String, dynamic> json) {
     return HotelHomeModel(
       data: List<DataHotelModel>.from((json['data'] as List)
           .map((hotel) => DataHotelModel.fromJson(hotel))),
+      lastPage: json['last_page'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       "data": data,
+      "last_page": lastPage,
     };
   }
 }
@@ -54,7 +59,8 @@ class DataHotelModel extends DataHotelEntity {
       price: json['price'],
       address: json['address'],
       rate: json['rate'],
-      images: List<HotelImageModel>.from(json['hotel_images'].map((image) => HotelImageModel.fromJson(image))),
+      images: List<HotelImageModel>.from(
+          json['hotel_images'].map((image) => HotelImageModel.fromJson(image))),
       // images: List<HotelImageModel>.from(json['hotel_images'].map((image) => HotelImageModel.fromJson(image))),
     );
   }
@@ -95,4 +101,5 @@ class HotelImageModel extends HotelImages {
     };
   }
 }
+
 /// cubit@mail.com

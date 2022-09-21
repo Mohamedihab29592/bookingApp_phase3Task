@@ -6,15 +6,15 @@ import 'package:booking_app/core/netowrk/network_.dart';
 import 'package:booking_app/features/home/data/models/hotels_model.dart';
 
 abstract class BaseHomeDataRemoteDataSource {
-  Future<HotelsModel> getHomeData();
+  Future<HotelsModel> getHomeData({required int page});
 }
 
 class HomeDataRemoteDataSource implements BaseHomeDataRemoteDataSource {
   @override
-  Future<HotelsModel> getHomeData() async {
+  Future<HotelsModel> getHomeData({required int page}) async {
     final response = await DioHelper.getData(url: hotelsEndPoint, query: {
       "count" : 10,
-      "page" : 0,
+      "page" : page,
     });
     if (response.statusCode == 200 && response.data['status']['type'] == '1') {
       log('home data is ${response.data}');
