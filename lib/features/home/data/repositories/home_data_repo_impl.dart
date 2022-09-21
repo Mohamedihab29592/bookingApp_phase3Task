@@ -19,10 +19,10 @@ class HomeDataRepositoryImpl extends BaseHomeDataRepository {
   });
 
   @override
-  Future<Either<Failure, HotelsEntity>> getHomeData() async {
+  Future<Either<Failure, HotelsEntity>> getHomeData({required int page}) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteHome = await homeDataRemoteDataSource.getHomeData();
+        final remoteHome = await homeDataRemoteDataSource.getHomeData(page: page);
         homeDataLocalDataSource.cachedHomeData(hotelsModel: remoteHome);
         return Right(remoteHome);
       } on ServerException {

@@ -15,14 +15,17 @@ class HotelsEntity extends Equatable {
 
 class HotelHomeEntity extends Equatable {
   final List<DataHotelEntity> data;
+  final int lastPage;
 
   const HotelHomeEntity({
     required this.data,
+    required this.lastPage,
   });
 
   @override
   List<Object> get props => [
         data,
+        lastPage,
       ];
 }
 

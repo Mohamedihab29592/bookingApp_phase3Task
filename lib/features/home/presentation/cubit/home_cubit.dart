@@ -14,15 +14,26 @@ class HomeCubit extends Cubit<HomeState> {
 
   static HomeCubit get(context) => BlocProvider.of(context);
   HotelsEntity? hotelsEntity;
+  int pageNo = 0;
+  List<dynamic> data = [];
 
-  void getHomeData() {
+  void getHomeData({bool isFirst = true}) {
+    if (isFirst) {
+      pageNo = 0;
+    }
     emit(GetHomeDataLoadingState());
-    homeDataUseCase.call(NoParams()).then((value) {
+    homeDataUseCase.call(params: NoParams(), page: 0).then((value) {
       value.fold((failure) {
         return emit(
             GetHomeDataErrorState(error: _mapFailureToMsg(failure: failure)));
       }, (hotelEntity) {
         hotelsEntity = hotelEntity;
+        if (isFirst) {
+          data = hotelsEntity!.homeEntity.data;
+        } else {
+          data.addAll(hotelsEntity!.homeEntity.data);
+        }
+        pageNo++;
         return emit(GetHomeDataSuccessState());
       });
     });

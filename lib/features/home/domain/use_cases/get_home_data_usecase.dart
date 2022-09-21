@@ -4,13 +4,13 @@ import 'package:booking_app/features/home/domain/entities/hotels_entity.dart';
 import 'package:booking_app/features/home/domain/repositories/hotels_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class GetHomeDataUseCase implements UseCase<HotelsEntity, NoParams> {
+class GetHomeDataUseCase {
   final BaseHomeDataRepository homeDataRepository;
 
   GetHomeDataUseCase({required this.homeDataRepository});
 
-  @override
-  Future<Either<Failure, HotelsEntity>> call(NoParams params) async {
-    return await homeDataRepository.getHomeData();
+  Future<Either<Failure, HotelsEntity>> call(
+      {required NoParams params, required int page}) async {
+    return await homeDataRepository.getHomeData(page: page);
   }
 }
