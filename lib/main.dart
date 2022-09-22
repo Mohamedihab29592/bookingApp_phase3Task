@@ -24,12 +24,11 @@ class MotelApp extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<HomeCubit>()),
         BlocProvider(create: (context) => di.sl<SearchCubit>()),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         title: AppStrings.appName,
         debugShowCheckedModeBanner: false,
-        home: SearchTest(),
-        // initialRoute: Routes.splashRoute,
-        // onGenerateRoute: RouteGenerator.getRoute,
+        initialRoute: Routes.splashRoute,
+        onGenerateRoute: RouteGenerator.getRoute,
       ),
     );
   }
