@@ -1,6 +1,6 @@
 import 'package:booking_app/core/error/exceptions.dart';
 import 'package:booking_app/core/error/failures.dart';
-import 'package:booking_app/core/netowrk/info.dart';
+import 'package:booking_app/core/network/info.dart';
 import 'package:booking_app/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:booking_app/features/home/data/data_sources/home_remote_data_source.dart';
 import 'package:booking_app/features/home/domain/entities/hotels_entity.dart';

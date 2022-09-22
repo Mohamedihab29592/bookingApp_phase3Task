@@ -1,10 +1,12 @@
 import 'package:booking_app/core/error/exceptions.dart';
-import 'package:booking_app/core/netowrk/network_.dart';
+import 'package:booking_app/core/network/network.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/netowrk/end_points.dart';
+import '../../../../../core/local/cache_helper.dart';
+import '../../../../../core/network/end_points.dart';
+import '../../../../../core/utilis/constants/app_strings.dart';
 import '../../domain/entities/user_login_entity.dart';
 
 abstract class BaseLoginRemoteDataSource {
@@ -21,6 +23,8 @@ class LoginRemoteDataSource implements BaseLoginRemoteDataSource {
     });
     final response = await DioHelper.postData(url: loginEndPoint, data: formData);
     if (response.statusCode == 200 && response.data['status']['type'] == '1') {
+      CacheHelper.saveData(
+          key: AppStrings.token, value: response.data['data']['api_token']);
       debugPrint(response.data.toString());
       return Future.value(unit);
     } else {

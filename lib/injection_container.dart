@@ -1,6 +1,6 @@
 import 'package:booking_app/core/local/cache_helper.dart';
-import 'package:booking_app/core/netowrk/info.dart';
-import 'package:booking_app/core/netowrk/network_.dart';
+import 'package:booking_app/core/network/info.dart';
+import 'package:booking_app/core/network/network.dart';
 import 'package:booking_app/features/auth/login/data/data_sources/login_remote_data_source.dart';
 import 'package:booking_app/features/auth/login/data/repositories/login_repository_impl.dart';
 import 'package:booking_app/features/auth/login/domain/repositories/base_login_repository.dart';

@@ -11,15 +11,21 @@ class MyTextForm extends StatelessWidget {
   final bool obscureText;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
-  final Function()? suffixPressed;
   final bool? isDense;
   final Function(String)? onSubmit;
   final TextInputType textInputType;
   final TextEditingController controller;
+  final bool isPassword;
+  final VoidCallback? suffixIconPressed;
+
+
+
 
   const MyTextForm({
     Key? key,
     this.hintText,
+    this.isPassword = false,
+    this.suffixIconPressed,
     required this.validator,
     this.onChange,
     this.onSubmit,
@@ -28,7 +34,6 @@ class MyTextForm extends StatelessWidget {
     this.labelText,
     this.obscureText = false,
     this.prefixIcon,
-    this.suffixPressed,
     this.suffixIcon,
     required this.textInputType,
     this.isDense,
@@ -41,7 +46,7 @@ class MyTextForm extends StatelessWidget {
       onFieldSubmitted: onSubmit,
       controller: controller,
       keyboardType: textInputType,
-      obscureText: obscureText,
+      obscureText: isPassword,
       onChanged: onChange,
       validator: validator,
       decoration: InputDecoration(
@@ -54,11 +59,9 @@ class MyTextForm extends StatelessWidget {
             color: AppColors.grey
         ),
         hintText: hintText,
-
         labelText: labelText,
         prefixIcon: Icon(prefixIcon),
-        suffixIcon:
-        IconButton(onPressed: suffixPressed, icon: Icon(suffixIcon)),
+        suffixIcon: IconButton(onPressed: suffixIconPressed, icon: Icon(suffixIcon,color: AppColors.white,),),
         isDense: isDense,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),

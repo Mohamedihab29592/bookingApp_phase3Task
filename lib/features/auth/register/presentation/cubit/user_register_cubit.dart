@@ -38,6 +38,8 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
     });
   }
 
+
+
   String _mapFailureToMsg({required Failure failure}) {
     switch (failure.runtimeType) {
       case ServerFailure:
