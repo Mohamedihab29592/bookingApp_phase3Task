@@ -18,6 +18,11 @@ class AppStrings {
   static const String createAcc = "Register Now!";
   static const String policy = "By Signing up , you agreed with our terms of Services and privacy policy.";
   static const String haveAnAccount = "Already have account?";
+  static const String token = "token";
+  static const String successLoginEn = "signed in successfully";
+  static const String errorLoginEn = "email or password is incorrect";
+  static const String successLoginAr = "تم تسجيل الدخول بنجاح";
+  static const String errorLoginAr = "تأكد من كلمة المرور او الايميل";
 
 
 

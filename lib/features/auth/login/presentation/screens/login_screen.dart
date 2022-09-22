@@ -1,3 +1,4 @@
+import 'package:booking_app/core/component/toast.dart';
 import 'package:booking_app/core/local/cache_helper.dart';
 import 'package:booking_app/core/routes/routes_manager.dart';
 import 'package:booking_app/features/auth/login/domain/entities/user_login_entity.dart';
@@ -129,10 +130,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: double.infinity,
                         child: BlocConsumer<LoginCubit, LoginState>(
                           listener: (BuildContext context, state) {
-                            if(state is LoginSuccessState){
-                              
-                              Navigator.pushReplacementNamed(context, Routes.homeRoute,);
-
+                            if (state is LoginSuccessState) {
+                              showToast(
+                                  text: AppStrings.successLoginEn,
+                                  state: ToastStates.success);
+                              Navigator.pushReplacementNamed(
+                                context,
+                                Routes.homeRoute,
+                              );
+                            }else{
+                              showToast(text: AppStrings.errorLoginEn, state: ToastStates.success);
                             }
                           },
                           builder: (BuildContext context, Object? state) {
