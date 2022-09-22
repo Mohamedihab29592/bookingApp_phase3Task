@@ -17,6 +17,11 @@ import 'package:booking_app/features/home/data/repositories/home_data_repo_impl.
 import 'package:booking_app/features/home/domain/repositories/hotels_repository.dart';
 import 'package:booking_app/features/home/domain/use_cases/get_home_data_usecase.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:booking_app/features/search/data/data_sources/search_remote_data_source.dart';
+import 'package:booking_app/features/search/data/repositories/search_repo_impl.dart';
+import 'package:booking_app/features/search/domain/repositories/search_hotel_repo.dart';
+import 'package:booking_app/features/search/domain/use_cases/search_hotel_usecase.dart';
+import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -33,12 +38,15 @@ Future<void> init() async {
   sl.registerFactory(() => UserRegisterCubit(registerWithEmailUseCase: sl()));
   sl.registerFactory(() => HomeCubit(homeDataUseCase: sl()));
   sl.registerFactory(() => LoginCubit(loginUseCase: sl()));
+  sl.registerFactory(() => SearchCubit(searchHotelUseCase: sl()));
 
   /// Use Cases
   sl.registerLazySingleton(
       () => RegisterWithEmailUseCase(registerRepository: sl()));
   sl.registerLazySingleton(() => GetHomeDataUseCase(homeDataRepository: sl()));
   sl.registerLazySingleton(() => LoginUseCase(loginRepository: sl()));
+  sl.registerLazySingleton(
+      () => SearchHotelUseCase(searchHotelRepository: sl()));
 
   /// Repository
   sl.registerLazySingleton<BaseRegisterRepository>(
@@ -50,6 +58,9 @@ Future<void> init() async {
       ));
   sl.registerLazySingleton<BaseLoginRepository>(
       () => LoginRepositoryImpl(loginRemoteDataSource: sl()));
+  sl.registerLazySingleton<BaseSearchHotelRepository>(() =>
+      SearchHotelRepositoryImpl(
+          searchRemoteDataSource: sl(), networkInfo: sl()));
 
   /// Data Sources
   sl.registerLazySingleton<BaseRegisterRemoteDataSource>(
@@ -57,12 +68,15 @@ Future<void> init() async {
 
   sl.registerLazySingleton<BaseHomeDataRemoteDataSource>(
       () => HomeDataRemoteDataSource());
-  
+
   sl.registerLazySingleton<BaseHomeDataLocalDataSource>(
       () => HomeDataLocalDataSourceImpl());
 
   sl.registerLazySingleton<BaseLoginRemoteDataSource>(
       () => LoginRemoteDataSource());
+
+  sl.registerLazySingleton<BaseSearchRemoteDataSource>(
+          () => SearchRemoteDataSourceImpl());
 
   /// Core
 
