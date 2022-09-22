@@ -23,7 +23,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final nameController = TextEditingController();
-
+bool _isHidePass=true;
+bool _isHidePasss=true;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -42,7 +43,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           backgroundColor: AppColors.kPrimaryColor,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
         ),
         body: SingleChildScrollView(
@@ -59,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                   const SizedBox(
-                    height: AppSize.s30,
+                    height: AppSize.s15,
                   ),
                   const Align(
                       alignment: Alignment.center, child: MySignButton()),
@@ -110,6 +113,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
+                    isPassword:  _isHidePass,
+                    suffixIcon:  _isHidePass
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    suffixIconPressed: () {
+                      setState(() {
+                        _isHidePass = ! _isHidePass;
+                      });
+                    },
                     labelText: AppStrings.password,
                     isDense: true,
                     radius: AppSize.s40,
@@ -126,6 +138,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
+                    isPassword:  _isHidePasss,
+                    suffixIcon:  _isHidePasss
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    suffixIconPressed: () {
+                      setState(() {
+                        _isHidePasss = ! _isHidePasss;
+                      });
+                    },
                     labelText: AppStrings.confirmedPassword,
                     isDense: true,
                     radius: AppSize.s40,
@@ -154,7 +175,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           listener: (BuildContext context, state) {
                             if (state is UserRegisterSuccessState) {
                               showToast(
-                                text: 'User Registered Successfully',
+                                text: AppStrings.successRegisterEn,
                                 state: ToastStates.success,
                               );
                               Navigator.pushReplacementNamed(context, Routes.loginRoute,);
@@ -200,7 +221,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         colors: AppColors.grey,
                       ),
                       const SizedBox(
-                        height: AppSize.s30,
+                        height: AppSize.s15,
                       ),
                       Row(
                         children: [

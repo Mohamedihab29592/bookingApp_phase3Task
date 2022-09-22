@@ -15,7 +15,8 @@ class MySignButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () {},
-      icon: Image.asset(ImageAssets.google),
+
+      icon: Image.asset(ImageAssets.google,height: AppSize.s20,),
       label: const Text(AppStrings.google),
       style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.darkGrey,

@@ -2,8 +2,8 @@ const String imagePath = "assets/images";
 const String jsonPath = "assets/json";
 
 class ImageAssets {
-  static const String google = "$imagePath/google.jpg";
-  static const String splash = "$imagePath/splash.jpg";
+  static const String google = "$imagePath/google.png";
+  static const String hotel = "$imagePath/hotel.jpg";
 
 
 

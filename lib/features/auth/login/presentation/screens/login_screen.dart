@@ -1,4 +1,3 @@
-import 'package:booking_app/core/local/cache_helper.dart';
 import 'package:booking_app/core/routes/routes_manager.dart';
 import 'package:booking_app/features/auth/login/domain/entities/user_login_entity.dart';
 import 'package:booking_app/features/auth/login/presentation/cubit/login_cubit.dart';
@@ -11,12 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booking_app/injection_container.dart' as di;
 
+import '../../../../../core/component/toast.dart';
 import '../../../../../core/utilis/constants/app_strings.dart';
 import '../../../../../core/utilis/constants/colors.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, });
+
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -25,6 +26,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool _isHidePass =true ;
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -37,12 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: AppBar(
           elevation: AppSize.s0,
           backgroundColor: AppColors.kPrimaryColor,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+
         ),
         body: SingleChildScrollView(
           child: Form(
@@ -95,6 +93,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: AppSize.s15),
                   MyTextForm(
+                    isPassword:  _isHidePass,
+                    suffixIcon:  _isHidePass
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    suffixIconPressed: () {
+                      setState(() {
+                        _isHidePass = ! _isHidePass;
+                      });
+                    },
                     isDense: true,
                     radius: AppSize.s40,
                     labelText: AppStrings.password,
@@ -107,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     controller: passwordController,
                     textInputType: TextInputType.visiblePassword,
+
                   ),
                   const SizedBox(height: AppSize.s15),
                   Row(
@@ -129,10 +137,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: double.infinity,
                         child: BlocConsumer<LoginCubit, LoginState>(
                           listener: (BuildContext context, state) {
-                            if(state is LoginSuccessState){
-                              
-                              Navigator.pushReplacementNamed(context, Routes.homeRoute,);
-
+                            if (state is LoginSuccessState) {
+                              showToast(
+                                  text: AppStrings.successLoginEn,
+                                  state: ToastStates.success);
+                              Navigator.pushReplacementNamed(
+                                context,
+                                Routes.homeLayout,
+                              );
+                            }else{
+                              showToast(text: AppStrings.errorLoginEn, state: ToastStates.success);
                             }
                           },
                           builder: (BuildContext context, Object? state) {
@@ -166,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const MyText(
-                        text: AppStrings.haveNoAcc,
+                        text: AppStrings.haveNotAnAccount,
                         fontSize: AppSize.s15,
                         colors: AppColors.grey,
                       ),

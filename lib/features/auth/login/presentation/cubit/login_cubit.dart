@@ -9,8 +9,7 @@ import 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase loginUseCase;
 
-  LoginCubit({required this.loginUseCase})
-      : super(LoginInitial());
+  LoginCubit({required this.loginUseCase}) : super(LoginInitial());
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
@@ -24,8 +23,7 @@ class LoginCubit extends Cubit<LoginState> {
         .then((value) {
       value.fold((failure) {
         print('fail');
-        return emit(
-            LoginErrorState(error: _mapFailureToMsg(failure: failure)));
+        return emit(LoginErrorState(error: _mapFailureToMsg(failure: failure)));
       }, (unit) {
         print('success');
         return emit(LoginSuccessState());
@@ -43,6 +41,4 @@ class LoginCubit extends Cubit<LoginState> {
         return AppStrings.unExpectedError;
     }
   }
-
-
 }
