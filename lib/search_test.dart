@@ -1,5 +1,4 @@
-import 'package:booking_app/features/search/domain/entity/search_entity.dart';
-import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
+=import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
