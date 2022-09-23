@@ -1,17 +1,15 @@
 import 'package:booking_app/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:booking_app/features/auth/register/presentation/screens/signup_screen.dart';
-import 'package:booking_app/features/home/presentation/screens/home_screen.dart';
 import 'package:booking_app/features/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/home/presentation/screens/layout/layoutScreen.dart';
 import '../utilis/constants/app_strings.dart';
-
 class Routes {
   static const String splashRoute = "/";
   static const String loginRoute = '/login';
   static const String registerRoute = '/register';
-  static const String mainRoute = '/main';
-  static const String homeRoute = '/home';
+  static const String homeLayout = '/homeLayout';
 }
 
 class RouteGenerator {
@@ -23,8 +21,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const LoginScreen());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (context) => const SignUpScreen());
-     case Routes.homeRoute:
-        return MaterialPageRoute(builder: (context) => const HomeScreen());
+
+      case Routes.homeLayout:
+        return MaterialPageRoute(builder: (context) => const HomeLayout());
       default:
         return unDefinedRoute();
     }
@@ -33,12 +32,12 @@ class RouteGenerator {
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
         builder: (context) => Scaffold(
-              appBar: AppBar(
-                title:  const Text(AppStrings.noRouteFound),
-              ),
-              body: const Center(
-                child: Text(AppStrings.noRouteFound),
-              ),
-            ));
+          appBar: AppBar(
+            title:  const Text(AppStrings.noRouteFound),
+          ),
+          body: const Center(
+            child: Text(AppStrings.noRouteFound),
+          ),
+        ));
   }
 }

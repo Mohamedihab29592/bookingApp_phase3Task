@@ -4,6 +4,10 @@ import 'package:booking_app/core/routes/routes_manager.dart';
 import 'package:booking_app/core/utilis/constants/app_strings.dart';
 import 'package:booking_app/core/utilis/constants/assets_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+
+import '../../core/utilis/constants/colors.dart';
+import '../../core/utilis/constants/constats_manager.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,13 +20,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
 
   _startDelay() {
-    _timer = Timer(const Duration(milliseconds: 2000), _goNext);
+    _timer =
+        Timer(const Duration(milliseconds: AppConstants.splashDelay), _goNext);
   }
 
   _goNext() {
-    String token = CacheHelper.getData(key: AppStrings.token)?? '';
+    String token = CacheHelper.getData(key: AppStrings.token) ?? '';
     if (token.isNotEmpty) {
-      Navigator.pushReplacementNamed(context, Routes.homeRoute);
+      Navigator.pushReplacementNamed(context, Routes.homeLayout);
     } else {
       Navigator.pushReplacementNamed(
         context,
@@ -39,16 +44,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: AppColors.kPrimaryColor,
       body: Center(
-        child: Image(
-            image: AssetImage(
-          ImageAssets.splash,
-        ),
-        fit: BoxFit.cover,
-          height: double.infinity,
-          width: double.infinity,
-        ),
+
+        child: Lottie.asset(JsonAssets.splashLogo),
       ),
     );
   }

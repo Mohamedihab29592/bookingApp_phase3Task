@@ -1,11 +1,11 @@
 import 'package:booking_app/core/error/exceptions.dart';
-import 'package:booking_app/core/netowrk/network_.dart';
+import 'package:booking_app/core/network/network.dart';
 import 'package:booking_app/features/auth/register/domain/entities/user_info_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/netowrk/end_points.dart';
+import '../../../../../core/network/end_points.dart';
 
 abstract class BaseRegisterRemoteDataSource {
   Future<Unit> registerWithEmail({required UserInfoEntity userInfoEntity});

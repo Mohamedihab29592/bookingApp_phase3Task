@@ -1,6 +1,6 @@
 import 'package:booking_app/core/local/cache_helper.dart';
-import 'package:booking_app/core/netowrk/info.dart';
-import 'package:booking_app/core/netowrk/network_.dart';
+import 'package:booking_app/core/network/info.dart';
+import 'package:booking_app/core/network/network.dart';
 import 'package:booking_app/features/auth/login/data/data_sources/login_remote_data_source.dart';
 import 'package:booking_app/features/auth/login/data/repositories/login_repository_impl.dart';
 import 'package:booking_app/features/auth/login/domain/repositories/base_login_repository.dart';
@@ -24,6 +24,8 @@ import 'package:booking_app/features/search/domain/use_cases/search_hotel_usecas
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+
+import 'core/network/info.dart';
 
 GetIt sl = GetIt.instance;
 

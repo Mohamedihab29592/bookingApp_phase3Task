@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:booking_app/core/error/exceptions.dart';
-import 'package:booking_app/core/netowrk/end_points.dart';
-import 'package:booking_app/core/netowrk/network_.dart';
+import 'package:booking_app/core/network/end_points.dart';
+import 'package:booking_app/core/network/network.dart';
 import 'package:booking_app/features/home/data/models/hotels_model.dart';
 
 abstract class BaseHomeDataRemoteDataSource {

@@ -13,3 +13,4 @@ class GetHomeDataErrorState extends HomeState {
 
   GetHomeDataErrorState({required this.error});
 }
+class ChangeBottomNavState extends HomeState{}
