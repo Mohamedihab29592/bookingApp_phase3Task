@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:booking_app/core/error/exceptions.dart';
-import 'package:booking_app/core/netowrk/end_points.dart';
-import 'package:booking_app/core/netowrk/network_.dart';
+import 'package:booking_app/core/network/end_points.dart';
+import 'package:booking_app/core/network/network.dart';
 import 'package:booking_app/features/search/data/models/search_model.dart';
 import 'package:booking_app/features/search/domain/entity/search_entity.dart';
 

@@ -3,6 +3,7 @@ import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart
 import 'package:booking_app/search_test.dart';
 import 'package:booking_app/test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'core/routes/routes_manager.dart';
 import 'core/utilis/constants/app_strings.dart';
 import 'injection_container.dart' as di;
@@ -10,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   di.init();
   runApp(const MotelApp());
 }

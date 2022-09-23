@@ -17,7 +17,8 @@ import '../../../../../core/utilis/constants/colors.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, });
+
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -26,6 +27,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool _isHidePass =true ;
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -38,12 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: AppBar(
           elevation: AppSize.s0,
           backgroundColor: AppColors.kPrimaryColor,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+
         ),
         body: SingleChildScrollView(
           child: Form(
@@ -96,6 +94,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: AppSize.s15),
                   MyTextForm(
+                    isPassword:  _isHidePass,
+                    suffixIcon:  _isHidePass
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    suffixIconPressed: () {
+                      setState(() {
+                        _isHidePass = ! _isHidePass;
+                      });
+                    },
                     isDense: true,
                     radius: AppSize.s40,
                     labelText: AppStrings.password,
@@ -108,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     controller: passwordController,
                     textInputType: TextInputType.visiblePassword,
+
                   ),
                   const SizedBox(height: AppSize.s15),
                   Row(
@@ -136,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   state: ToastStates.success);
                               Navigator.pushReplacementNamed(
                                 context,
-                                Routes.homeRoute,
+                                Routes.homeLayout,
                               );
                             }else{
                               showToast(text: AppStrings.errorLoginEn, state: ToastStates.success);
@@ -173,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const MyText(
-                        text: AppStrings.haveNoAcc,
+                        text: AppStrings.haveNotAnAccount,
                         fontSize: AppSize.s15,
                         colors: AppColors.grey,
                       ),
