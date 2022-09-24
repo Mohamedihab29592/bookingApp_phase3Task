@@ -8,9 +8,9 @@ import 'package:booking_app/features/home/domain/use_cases/get_home_data_usecase
 
 import '../../../../core/local/cache_helper.dart';
 import '../../../../core/routes/routes_manager.dart';
-import '../screens/exploreScreen.dart';
-import '../screens/layout/tripsScreen.dart';
-import '../screens/profileScreen.dart';
+import '../screens/exploreScreen/exploreScreen.dart';
+import '../screens/profileScreen/profileScreen.dart';
+import '../screens/tripsScreen/tripsScreen.dart';
 
 part 'home_state.dart';
 
