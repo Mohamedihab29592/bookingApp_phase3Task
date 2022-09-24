@@ -106,7 +106,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         itemCount: _images.length,
                         options: CarouselOptions(
                           enlargeStrategy: CenterPageEnlargeStrategy.height,
-                          height: MediaQuery.of(context).size.height,
+                          height:double.infinity,
                           viewportFraction: 1,
                           initialPage: 0,
                           enableInfiniteScroll: true,
@@ -115,6 +115,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           autoPlayAnimationDuration: const Duration(milliseconds:  AppConstants.sliderAnimationTime),
                           autoPlayCurve: Curves.fastOutSlowIn,
                           scrollDirection: Axis.horizontal,
+
                           onPageChanged: (index,reason){
                             setState(() {
                               _current = index;
@@ -126,6 +127,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         itemBuilder:
                             (BuildContext context, int index, int realIndex) {
                           return Image(
+
                             image: AssetImage(_images[index]),
                             fit: BoxFit.cover,
                             width: double.infinity,
@@ -135,7 +137,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top:AppSize.s30,right: AppSize.s20,left: AppSize.s20,bottom: AppSize.s20),
                         child: Column(
-
                           children: [
                             Container(
                               height: AppSize.s50,
