@@ -1,7 +1,5 @@
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
-import 'package:booking_app/search_test.dart';
-import 'package:booking_app/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'core/routes/routes_manager.dart';

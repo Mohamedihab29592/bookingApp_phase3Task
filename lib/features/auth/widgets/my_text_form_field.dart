@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utilis/constants/colors.dart';
+import '../../../core/utilis/constants/values_manger.dart';
 
 class MyTextForm extends StatelessWidget {
   final ValueChanged<String>? onChange;
@@ -17,6 +18,7 @@ class MyTextForm extends StatelessWidget {
   final TextEditingController controller;
   final bool isPassword;
   final VoidCallback? suffixIconPressed;
+  final VoidCallback? onTap;
 
 
 
@@ -37,11 +39,13 @@ class MyTextForm extends StatelessWidget {
     this.suffixIcon,
     required this.textInputType,
     this.isDense,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       style: const TextStyle(color:AppColors.white),
       onFieldSubmitted: onSubmit,
       controller: controller,
@@ -60,7 +64,7 @@ class MyTextForm extends StatelessWidget {
         ),
         hintText: hintText,
         labelText: labelText,
-        prefixIcon: Icon(prefixIcon),
+        prefixIcon: Icon(prefixIcon,color: AppColors.teal,size: AppSize.s20,),
         suffixIcon: IconButton(onPressed: suffixIconPressed, icon: Icon(suffixIcon,color: AppColors.white,),),
         isDense: isDense,
         enabledBorder: OutlineInputBorder(
@@ -85,6 +89,7 @@ class MyTextForm extends StatelessWidget {
           borderSide: const BorderSide(color: AppColors.blue),
         ),
       ),
+      onTap:onTap ,
     );
   }
 }

@@ -1,4 +1,5 @@
 class AppStrings {
+  //en
   static const String appName = 'BookingApp';
   static const String signUp = 'Sign Up';
   static const String logIn = 'Login';
@@ -23,6 +24,20 @@ class AppStrings {
   static const String successRegisterEn = "User Registered Successfully";
   static const String errorLoginEn = "email or password is incorrect";
   static const String errorRegisterEn = "email  is registered before";
+  static const String explore = "Explore";
+  static const String trips = "Trips";
+  static const String profile = "Profile";
+  static const String popularDestination = "Popular Destination";
+  static const String bestDeals = "Best Deals";
+  static const String viewAll = "View All ->";
+  static const String whereAreYouGoing = "Where are you going ?";
+  static const String capTown = "Cap Town";
+  static const String extraordinary = "Extraordinary five-star outdoor activities";
+  static const String viewHotel = "View Hotel";
+
+
+
+  //Ar
   static const String successLoginAr = "تم تسجيل الدخول بنجاح";
   static const String successRegisterAr = "تم تسجيل الحساب بنجاح";
   static const String errorLoginAr = "تأكد من كلمة المرور او الايميل";

@@ -1,9 +1,10 @@
-import 'package:booking_app/core/utilis/constants/values_manger.dart';
+import 'package:booking_app/core/utilis/constants/app_strings.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../core/utilis/constants/colors.dart';
 
 
 class HomeLayout extends StatefulWidget {
@@ -26,24 +27,32 @@ class _HomeLayoutState extends State<HomeLayout> {
           return Scaffold(
 
             body: cubit.screens[cubit.currentIndex],
-            bottomNavigationBar: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(AppPadding.p28),
-                    topLeft: Radius.circular(AppPadding.p28)),
-                boxShadow: [
-                  BoxShadow(spreadRadius: 1, blurRadius: 3),
+            bottomNavigationBar: Scaffold(
+              body: cubit.screens[cubit.currentIndex],
+              bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: AppColors.darkGrey,
+                selectedItemColor: AppColors.teal,
+                type: BottomNavigationBarType.fixed,
+                unselectedItemColor: AppColors.grey,
+                currentIndex: cubit.currentIndex,
+                onTap: (index) => setState(() => cubit.currentIndex = index),
+                items:  const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.search),
+                    label: AppStrings.explore,
+                 //   backgroundColor: AppColors.backGroundColorOfNaviBar,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite_border),
+                    label: AppStrings.trips,
+                 //   backgroundColor: AppColors.backGroundColorOfNaviBar,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person_sharp),
+                    label: AppStrings.profile,
+                   // backgroundColor: AppColors.backGroundColorOfNaviBar,
+                  ),
                 ],
-              ),
-              child: CurvedNavigationBar(
-                height: 50,
-                color: Theme.of(context).bottomAppBarColor,
-                backgroundColor: Colors.black87,
-                index: cubit.currentIndex,
-                onTap: (index) {
-                  cubit.changeBottomNav(index);
-                },
-                items: cubit.bottomItems,
               ),
             ),
 

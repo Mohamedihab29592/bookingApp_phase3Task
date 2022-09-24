@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/utilis/constants/values_manger.dart';
+
 class MyButton extends StatelessWidget {
   final String label;
   final Color backGroundColor;
@@ -22,18 +24,23 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-          backgroundColor: backGroundColor,
-          foregroundColor: textColor,
-          padding: const EdgeInsets.all(10),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          textStyle:
-              const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-      child: Text(label),
+    return SizedBox(
+      height: AppSize.s55,
+      width: AppSize.s120,
+      child: ElevatedButton(
+          onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+            backgroundColor: backGroundColor,
+
+            foregroundColor: textColor,
+            padding: const EdgeInsets.all(AppPadding.p10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppPadding.p30),
+            ),
+
+        ),
+        child: Text(label,style:
+            TextStyle(fontSize: fontSize,))),
     );
   }
 }
