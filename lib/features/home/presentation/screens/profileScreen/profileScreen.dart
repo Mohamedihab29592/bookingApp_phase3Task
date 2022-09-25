@@ -1,10 +1,9 @@
+import 'package:booking_app/core/utilis/constants/colors.dart';
+import 'package:booking_app/core/utilis/constants/values_manger.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:booking_app/features/home/presentation/widgets/build_profile_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/utilis/constants/colors.dart';
-import '../../../../../core/utilis/constants/values_manger.dart';
-import '../../widgets/build_profile_item.dart';
 import 'edit_profile_screen.dart';
 
 
@@ -21,8 +20,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit,HomeState>(
       listener: (context,state){},
-      builder: (context,state) =>
-          Scaffold(
+      builder: (context,state) {
+        var cubit = HomeCubit.get(context);
+        return Scaffold(
+            appBar: AppBar(
+              title: IconButton(onPressed: (){
+                cubit.getProfileData();
+              }, icon: const Icon(Icons.add)),
+            ),
             backgroundColor: AppColors.kPrimaryColor,
             body: Padding(
               padding:  const EdgeInsets.all(AppMargin.m20),
@@ -45,21 +50,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children:  [
                               Text(
-                                'Mohamed',
+                                cubit.profileModel!.profileData.name,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 25,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 3,
                               ),
-                              Text(
+                              const Text(
                                 'View and Edit Profile',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -87,10 +92,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 offset: const Offset(0, 10),
                               ),
                             ],
-                            image: const DecorationImage(
+                            image:  DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  'https://images.ctfassets.net/hrltx12pl8hq/a2hkMAaruSQ8haQZ4rBL9/8ff4a6f289b9ca3f4e6474f29793a74a/nature-image-for-website.jpg?fit=fill&w=1024&h=683&fm=webp'),
+                                  cubit.profileModel!.profileData.image,),
                             ),
                           ),
                         ),
@@ -117,7 +122,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-          ),
+          );
+      },
     );
   }
 }
