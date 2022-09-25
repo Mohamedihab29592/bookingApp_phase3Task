@@ -1,6 +1,8 @@
+import 'dart:io';
+import 'package:booking_app/features/home/data/models/update_profile_model.dart';
+import 'package:booking_app/features/home/domain/use_cases/update_profile_data_usecase.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:booking_app/core/error/failures.dart';
-import 'package:booking_app/core/network/end_points.dart';
-import 'package:booking_app/core/network/network.dart';
 import 'package:booking_app/core/usecases/usecase.dart';
 import 'package:booking_app/core/utilis/constants/app_strings.dart';
 import 'package:booking_app/features/home/data/models/profile_model.dart';
@@ -9,7 +11,6 @@ import 'package:booking_app/features/home/domain/use_cases/get_profile_data_usec
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booking_app/features/home/domain/use_cases/get_home_data_usecase.dart';
-
 import '../../../../core/local/cache_helper.dart';
 import '../../../../core/routes/routes_manager.dart';
 import '../screens/exploreScreen/exploreScreen.dart';
@@ -21,10 +22,12 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final GetHomeDataUseCase homeDataUseCase;
   final GetProfileDataUseCase profileDataUseCase;
+  final UpdateProfileDataUseCase updateProfileDataUseCase;
 
   HomeCubit({
     required this.homeDataUseCase,
     required this.profileDataUseCase,
+    required this.updateProfileDataUseCase,
   }) : super(HomeInitial());
 
   static HomeCubit get(context) => BlocProvider.of(context);
@@ -109,6 +112,38 @@ class HomeCubit extends Cubit<HomeState> {
         return emit(GetProfileDataSuccessState());
       });
     });
+  }
 
+  File? userImage;
+  final ImagePicker picker = ImagePicker();
+
+  Future<void> addProfileImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      userImage = File(pickedFile.path);
+      emit(SuccessGetUserImageState());
+    } else {
+      debugPrint('No Image Selected');
+      emit(ErrorGetUserImageState());
+    }
+  }
+
+  UpdateProfileModel? updateProfileModel;
+
+  void updateProfileData({required UpdateImageEntity updateImageEntity}) {
+    emit(UpdateProfileDataLoadingState());
+    updateProfileDataUseCase
+        .call(UpdateImageEntity(updateImageEntity.name, updateImageEntity.email,
+            updateImageEntity.image))
+        .then((value) {
+      value.fold((failure) {
+        return emit(UpdateProfileDataErrorState(
+            error: _mapFailureToMsg(failure: failure)));
+      }, (model) {
+        updateProfileModel = model;
+        getProfileData();
+        return emit(UpdateProfileDataSuccessState());
+      });
+    });
   }
 }

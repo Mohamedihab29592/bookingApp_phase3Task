@@ -25,3 +25,17 @@ class GetProfileDataErrorState extends HomeState {
 
   GetProfileDataErrorState({required this.error});
 }
+
+class SuccessGetUserImageState extends HomeState {}
+
+class ErrorGetUserImageState extends HomeState {}
+
+class UpdateProfileDataErrorState extends HomeState {
+  final String error;
+
+  UpdateProfileDataErrorState({required this.error});
+}
+
+class UpdateProfileDataSuccessState extends HomeState {}
+
+class UpdateProfileDataLoadingState extends HomeState {}

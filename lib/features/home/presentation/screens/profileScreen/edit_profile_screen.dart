@@ -1,20 +1,26 @@
+import 'package:booking_app/core/component/custom_button.dart';
+import 'package:booking_app/core/utilis/constants/colors.dart';
+import 'package:booking_app/features/home/domain/use_cases/update_profile_data_usecase.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/component/custom_button.dart';
-import '../../../../../core/utilis/constants/colors.dart';
-
 class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({Key? key}) : super(key: key);
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    controller.text = 'Mohamed Reda';
-    return BlocConsumer<HomeCubit,HomeState>(
-      listener: (context,state){},
-      builder: (context,state){
-        return  Scaffold(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if(state is GetProfileDataSuccessState){
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state) {
+        var cubit = HomeCubit.get(context);
+        return Scaffold(
           backgroundColor: AppColors.darkGrey,
           appBar: AppBar(
             backgroundColor: AppColors.darkGrey,
@@ -47,7 +53,8 @@ class EditProfileScreen extends StatelessWidget {
                         height: 130,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(width: 4, color: AppColors.darkGrey),
+                          border:
+                              Border.all(width: 4, color: AppColors.darkGrey),
                           boxShadow: [
                             BoxShadow(
                               spreadRadius: 2,
@@ -56,15 +63,19 @@ class EditProfileScreen extends StatelessWidget {
                               offset: const Offset(0, 10),
                             ),
                           ],
-                          image: const DecorationImage(
+                          image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://images.ctfassets.net/hrltx12pl8hq/a2hkMAaruSQ8haQZ4rBL9/8ff4a6f289b9ca3f4e6474f29793a74a/nature-image-for-website.jpg?fit=fill&w=1024&h=683&fm=webp'),
+                            image: (cubit.userImage != null)
+                                ? FileImage(cubit.userImage!) as ImageProvider
+                                : NetworkImage(
+                                    cubit.profileModel!.profileData.image),
                           ),
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          cubit.addProfileImage();
+                        },
                         child: Container(
                           height: 35,
                           width: 35,
@@ -87,16 +98,24 @@ class EditProfileScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       TextFormField(
-                        controller: TextEditingController(),
+                        controller: userNameController,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: AppColors.white,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please Enter your Name';
+                          }
+                        },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(bottom: 3),
                           labelText: 'Username',
                           floatingLabelBehavior: FloatingLabelBehavior.always,
-                          hintText: 'Mohamed Reda',
+                          hintText: 'User Name',
                           hintStyle: const TextStyle(
                             fontSize: 16,
-                            color: AppColors.white,
-                            fontWeight: FontWeight.bold,
+                            color: AppColors.grey,
                           ),
                           labelStyle: const TextStyle(
                             fontSize: 16,
@@ -119,16 +138,24 @@ class EditProfileScreen extends StatelessWidget {
                         height: 35,
                       ),
                       TextFormField(
-                        controller: TextEditingController(),
+                        controller: emailController,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: AppColors.white,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please Enter your Email';
+                          }
+                        },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(bottom: 3),
                           labelText: 'Email',
                           floatingLabelBehavior: FloatingLabelBehavior.always,
-                          hintText: 'email@gmail.com',
+                          hintText: 'Email',
                           hintStyle: const TextStyle(
                             fontSize: 16,
-                            color: AppColors.white,
-                            fontWeight: FontWeight.bold,
+                            color: AppColors.grey,
                           ),
                           labelStyle: const TextStyle(
                             fontSize: 16,
@@ -154,7 +181,9 @@ class EditProfileScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: CustomButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
                                   backgroundColor: Colors.white,
                                   child: const Text(
                                     'Cancel',
@@ -165,7 +194,14 @@ class EditProfileScreen extends StatelessWidget {
                           ),
                           Expanded(
                               child: CustomButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    cubit.updateProfileData(
+                                        updateImageEntity: UpdateImageEntity(
+                                      userNameController.text,
+                                      emailController.text,
+                                      cubit.userImage!,
+                                    ));
+                                  },
                                   backgroundColor: Colors.teal,
                                   child: const Text(
                                     'Save',
@@ -180,11 +216,7 @@ class EditProfileScreen extends StatelessWidget {
             ),
           ),
         );
-
       },
-
-
     );
-
   }
 }

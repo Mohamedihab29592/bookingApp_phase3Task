@@ -44,7 +44,7 @@ class DioHelper {
       "Content-Type": "application/json",
       "Accept": "*/*",
       "Accept-language": lang,
-      "Authorization": token
+      "token": token
     };
     return _dio!.post(url, queryParameters: query, data: data);
   }

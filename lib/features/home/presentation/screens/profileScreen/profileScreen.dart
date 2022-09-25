@@ -26,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             appBar: AppBar(
               title: IconButton(onPressed: (){
                 cubit.getProfileData();
-              }, icon: Icon(Icons.add)),
+              }, icon: const Icon(Icons.add)),
             ),
             backgroundColor: AppColors.kPrimaryColor,
             body: Padding(
@@ -50,21 +50,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children:  [
                               Text(
-                                'Mohamed',
+                                cubit.profileModel!.profileData.name,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 25,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 3,
                               ),
-                              Text(
+                              const Text(
                                 'View and Edit Profile',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -92,10 +92,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 offset: const Offset(0, 10),
                               ),
                             ],
-                            image: const DecorationImage(
+                            image:  DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  'https://images.ctfassets.net/hrltx12pl8hq/a2hkMAaruSQ8haQZ4rBL9/8ff4a6f289b9ca3f4e6474f29793a74a/nature-image-for-website.jpg?fit=fill&w=1024&h=683&fm=webp'),
+                                  cubit.profileModel!.profileData.image,),
                             ),
                           ),
                         ),
