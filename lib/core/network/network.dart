@@ -24,6 +24,12 @@ class DioHelper {
     String? token,
     String? lang,
   }) {
+    _dio!.options.headers = {
+      "Content-Type": "application/json",
+      "Accept": "*/*",
+      "Accept-language": lang,
+      "token": token
+    };
     return _dio!.get(url, queryParameters: query);
   }
 

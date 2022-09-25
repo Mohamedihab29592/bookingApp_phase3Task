@@ -1,10 +1,9 @@
+import 'package:booking_app/core/utilis/constants/colors.dart';
+import 'package:booking_app/core/utilis/constants/values_manger.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:booking_app/features/home/presentation/widgets/build_profile_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/utilis/constants/colors.dart';
-import '../../../../../core/utilis/constants/values_manger.dart';
-import '../../widgets/build_profile_item.dart';
 import 'edit_profile_screen.dart';
 
 
@@ -21,8 +20,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit,HomeState>(
       listener: (context,state){},
-      builder: (context,state) =>
-          Scaffold(
+      builder: (context,state) {
+        var cubit = HomeCubit.get(context);
+        return Scaffold(
+            appBar: AppBar(
+              title: IconButton(onPressed: (){
+                cubit.getProfileData();
+              }, icon: Icon(Icons.add)),
+            ),
             backgroundColor: AppColors.kPrimaryColor,
             body: Padding(
               padding:  const EdgeInsets.all(AppMargin.m20),
@@ -117,7 +122,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-          ),
+          );
+      },
     );
   }
 }

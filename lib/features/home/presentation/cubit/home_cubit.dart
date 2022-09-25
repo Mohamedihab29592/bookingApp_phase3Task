@@ -1,7 +1,11 @@
 import 'package:booking_app/core/error/failures.dart';
+import 'package:booking_app/core/network/end_points.dart';
+import 'package:booking_app/core/network/network.dart';
 import 'package:booking_app/core/usecases/usecase.dart';
 import 'package:booking_app/core/utilis/constants/app_strings.dart';
+import 'package:booking_app/features/home/data/models/profile_model.dart';
 import 'package:booking_app/features/home/domain/entities/hotels_entity.dart';
+import 'package:booking_app/features/home/domain/use_cases/get_profile_data_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booking_app/features/home/domain/use_cases/get_home_data_usecase.dart';
@@ -16,8 +20,12 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final GetHomeDataUseCase homeDataUseCase;
+  final GetProfileDataUseCase profileDataUseCase;
 
-  HomeCubit({required this.homeDataUseCase}) : super(HomeInitial());
+  HomeCubit({
+    required this.homeDataUseCase,
+    required this.profileDataUseCase,
+  }) : super(HomeInitial());
 
   static HomeCubit get(context) => BlocProvider.of(context);
 
@@ -85,5 +93,22 @@ class HomeCubit extends Cubit<HomeState> {
         );
       }
     });
+  }
+
+  ProfileModel? profileModel;
+
+  void getProfileData() {
+    var token = CacheHelper.getData(key: AppStrings.token);
+    emit(GetProfileDataLoadingState());
+    profileDataUseCase.call(NoParams()).then((value) {
+      value.fold((failure) {
+        return emit(GetProfileDataErrorState(
+            error: _mapFailureToMsg(failure: failure)));
+      }, (model) {
+        profileModel = model;
+        return emit(GetProfileDataSuccessState());
+      });
+    });
+
   }
 }
