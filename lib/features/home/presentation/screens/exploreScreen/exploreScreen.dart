@@ -15,7 +15,6 @@ import '../../../../auth/widgets/my_text.dart';
 import '../../../../auth/widgets/my_text_form_field.dart';
 import '../../widgets/hotelCardItem.dart';
 
-
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({Key? key}) : super(key: key);
 
@@ -26,29 +25,25 @@ class ExploreScreen extends StatefulWidget {
 class _ExploreScreenState extends State<ExploreScreen> {
   late ScrollController _scrollController;
   bool _appBarCollapsed = true;
-  var _carouselController = CarouselController();
-
-
+  final _carouselController = CarouselController();
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _scrollController .addListener(() {
-        if (_scrollController.position.pixels > 200) {
-          setState(() {
-            _appBarCollapsed = false;
-          });
-        }
-        else {
-          setState(() {
-            _appBarCollapsed = true;
-          });
-        }
-
-
-      });
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels > 200) {
+        setState(() {
+          _appBarCollapsed = false;
+        });
+      } else {
+        setState(() {
+          _appBarCollapsed = true;
+        });
+      }
+    });
   }
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -76,89 +71,86 @@ class _ExploreScreenState extends State<ExploreScreen> {
   ];
   int _current = 0;
 
-
-
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit,HomeState>(
-      listener:(context, state){},
-      builder:(context, state)=> Scaffold(
-
-        backgroundColor: AppColors.kPrimaryColor,
-        body: DefaultTabController(
-
-          length: 1,
-          child: NestedScrollView(
-            controller: _scrollController,
-            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  floating: true,
-                  pinned: true,
-                  expandedHeight: AppSize.s500,
-                  collapsedHeight: AppSize.s172,
-                  actionsIconTheme: const IconThemeData(opacity: AppSize.s0),
-                  flexibleSpace: Stack(
-                    children: <Widget>[
-                      CarouselSlider.builder(
-                        carouselController: _carouselController,
-                        itemCount: _images.length,
-                        options: CarouselOptions(
-                          enlargeStrategy: CenterPageEnlargeStrategy.height,
-                          height:double.infinity,
-                          viewportFraction: 1,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          autoPlay: true,
-                          autoPlayInterval: const Duration(seconds: AppConstants.autoPlayInterval),
-                          autoPlayAnimationDuration: const Duration(milliseconds:  AppConstants.sliderAnimationTime),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          scrollDirection: Axis.horizontal,
-
-                          onPageChanged: (index,reason){
-                            setState(() {
-                              _current = index;
-
-                            });
-                          },
-
-                        ),
-                        itemBuilder:
-                            (BuildContext context, int index, int realIndex) {
-                          return Image(
-
-                            image: AssetImage(_images[index]),
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                          );
+    return Scaffold(
+      backgroundColor: AppColors.kPrimaryColor,
+      body: DefaultTabController(
+        length: 1,
+        child: NestedScrollView(
+          controller: _scrollController,
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                floating: true,
+                pinned: true,
+                backgroundColor: AppColors.kPrimaryColor,
+                expandedHeight: AppSize.s500,
+                collapsedHeight: AppSize.s172,
+                actionsIconTheme: const IconThemeData(opacity: AppSize.s0),
+                flexibleSpace: Stack(
+                  children: <Widget>[
+                    CarouselSlider.builder(
+                      carouselController: _carouselController,
+                      itemCount: _images.length,
+                      options: CarouselOptions(
+                        enlargeStrategy: CenterPageEnlargeStrategy.height,
+                        height: double.infinity,
+                        viewportFraction: 1,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(
+                            seconds: AppConstants.autoPlayInterval),
+                        autoPlayAnimationDuration: const Duration(
+                            milliseconds: AppConstants.sliderAnimationTime),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        scrollDirection: Axis.horizontal,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          });
                         },
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top:AppSize.s30,right: AppSize.s20,left: AppSize.s20,bottom: AppSize.s20),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: AppSize.s50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(AppSize.s30),
-                                color: AppColors.kPrimaryColor,
-                              ),
-                              child: MyTextForm(
-                                onTap: (){},
-                                isDense: true,
-                                controller: _controller,
-                                textInputType: TextInputType.text,
-                                validator: (value) {},
-                                prefixIcon: Icons.search,
-                                hintText: AppStrings.whereAreYouGoing,
-                                radius: AppSize.s30,
-                              ),
-
+                      itemBuilder:
+                          (BuildContext context, int index, int realIndex) {
+                        return Image(
+                          image: AssetImage(_images[index]),
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        );
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: AppSize.s30,
+                          right: AppSize.s20,
+                          left: AppSize.s20,
+                          bottom: AppSize.s20),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: AppSize.s50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(AppSize.s30),
+                              color: AppColors.kPrimaryColor,
                             ),
-                            const Spacer(),
-                            if(_appBarCollapsed == true)
-                              Column(
+                            child: MyTextForm(
+                              onTap: () {},
+                              isDense: true,
+                              controller: _controller,
+                              textInputType: TextInputType.text,
+                              validator: (value) {
+                                return null;
+                              },
+                              prefixIcon: Icons.search,
+                              hintText: AppStrings.whereAreYouGoing,
+                              radius: AppSize.s30,
+                            ),
+                          ),
+                          const Spacer(),
+                          if (_appBarCollapsed == true)
+                            Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -170,10 +162,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 const SizedBox(
                                   height: AppSize.s10,
                                 ),
-                                const  MyText(
-                                    text:AppStrings.extraordinary,
+                                const MyText(
+                                    text: AppStrings.extraordinary,
                                     fontSize: AppSize.s20),
-                                const   SizedBox(
+                                const SizedBox(
                                   height: AppSize.s15,
                                 ),
                                 Row(
@@ -200,54 +192,59 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 ),
                               ],
                             ),
-                            if(_appBarCollapsed == false)
-                              Container(),
-                          ],
-                        ),
+                          if (_appBarCollapsed == false) Container(),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ];
-            },
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const MyText(
-                        text: AppStrings.popularDestination,
-                        fontSize: AppSize.s25,
-                        fontWeight: FontWeight.bold,
-                        colors: AppColors.white),
-                    const  SizedBox(
-                      height: AppSize.s20,
                     ),
-                    SizedBox(
-                      height: AppSize.s140,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: AppPadding.p5),
-                        child: ListView.separated(
-
-
-                          itemCount: _popularDestination.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: ((context, index) => Container(
+                  ],
+                ),
+              ),
+            ];
+          },
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15,
+              vertical: 15,
+            ),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const MyText(
+                      text: AppStrings.popularDestination,
+                      fontSize: AppSize.s25,
+                      fontWeight: FontWeight.bold,
+                      colors: AppColors.white),
+                  const SizedBox(
+                    height: AppSize.s20,
+                  ),
+                  SizedBox(
+                    height: AppSize.s140,
+                    width: double.infinity,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.symmetric(vertical: AppPadding.p5),
+                      child: ListView.separated(
+                        itemCount: _popularDestination.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: ((context, index) {
+                          return Container(
                             clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(AppPadding.p30),
+                              borderRadius:
+                                  BorderRadius.circular(AppPadding.p30),
                             ),
                             width: AppSize.s300,
                             child: Card(
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(AppPadding.p100)),
+                                  borderRadius:
+                                      BorderRadius.circular(AppPadding.p100)),
                               child: Stack(
                                 alignment: Alignment.bottomLeft,
                                 children: [
                                   Image.asset(
-                                   _popularDestination[index],
+                                    _popularDestination[index],
                                     height: double.infinity,
                                     width: double.infinity,
                                     fit: BoxFit.cover,
@@ -256,10 +253,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                     alignment: Alignment.topLeft,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
-                                          left: AppPadding.p20, top:AppPadding.p10),
+                                          left: AppPadding.p20,
+                                          top: AppPadding.p10),
                                       child: MyText(
-                                        text:
-                                        _popularDestinationNames[index],
+                                        text: _popularDestinationNames[index],
                                         fontSize: AppSize.s30,
                                         fontWeight: FontWeight.w900,
                                       ),
@@ -268,50 +265,40 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 ],
                               ),
                             ),
-                          )),
-                          separatorBuilder: (BuildContext context, int index) =>
-                              const SizedBox(
-                                width: AppSize.s15,
-                              ),
+                          );
+                        }),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(
+                          width: AppSize.s15,
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(AppPadding.p10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const MyText(
-                            text: AppStrings.bestDeals,
-                            fontSize: AppSize.s25,
-                            fontWeight: FontWeight.bold,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(AppPadding.p10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const MyText(
+                          text: AppStrings.bestDeals,
+                          fontSize: AppSize.s25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            AppStrings.viewAll,
+                            style: TextStyle(
+                                fontSize: AppSize.s20,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.teal),
                           ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              AppStrings.viewAll,
-                              style: TextStyle(
-                                  fontSize: AppSize.s20,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.teal),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    ListView.separated(
-
-                      separatorBuilder: (context, index) => const SizedBox(
-                        height:AppSize.s22,
-                      ),
-                      padding: EdgeInsets.zero,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 10,
-                      itemBuilder: (context, index) => const CardOfHotel(),
-                    ),
-                  ],
-                ),
+                  ),
+                  const CardOfHotel(),
+                ],
               ),
             ),
           ),
