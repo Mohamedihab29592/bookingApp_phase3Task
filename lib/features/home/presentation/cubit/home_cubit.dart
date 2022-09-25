@@ -41,7 +41,7 @@ class HomeCubit extends Cubit<HomeState> {
   ];
   HotelsEntity? hotelsEntity;
   int pageNo = 0;
-  List<dynamic> data = [];
+  List<dynamic> exploreData = [];
 
   void getHomeData({bool isFirst = true}) {
     if (isFirst) {
@@ -55,11 +55,11 @@ class HomeCubit extends Cubit<HomeState> {
       }, (hotelEntity) {
         hotelsEntity = hotelEntity;
         if (isFirst) {
-          data = hotelsEntity!.homeEntity.data;
+          exploreData = hotelsEntity!.homeEntity.data;
         } else {
-          data.addAll(hotelsEntity!.homeEntity.data);
+          exploreData.addAll(hotelsEntity!.homeEntity.data);
         }
-        pageNo++;
+        // pageNo++;
         return emit(GetHomeDataSuccessState());
       });
     });

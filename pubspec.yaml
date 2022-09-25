@@ -10,11 +10,11 @@ environment:
 
 dependencies:
   carousel_slider: ^4.1.1
-  firebase_auth: ^3.10.0
-  firebase_core: ^1.23.0
+#  firebase_auth: ^3.10.0
+#  firebase_core: ^1.23.0
   flutter:
     sdk: flutter
-  google_sign_in: ^5.4.1
+#  google_sign_in: ^5.4.1
   json_annotation: ^4.7.0
   json_serializable: ^6.4.0
   lottie: ^1.4.2
