@@ -1,12 +1,10 @@
 import 'package:booking_app/core/utilis/constants/app_strings.dart';
 import 'package:booking_app/core/utilis/constants/constats_manager.dart';
-import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../../../core/routes/routes_manager.dart';
 import '../../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../../core/utilis/constants/colors.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
@@ -133,17 +131,20 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             height: AppSize.s50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(AppSize.s30),
-                              color: AppColors.kPrimaryColor,
+                              color: AppColors.darkGrey,
                             ),
                             child: MyTextForm(
-                              onTap: () {},
+                              readOnly: true,
+                              onTap: () {
+                                Navigator.pushNamed(context, Routes.search);
+                              },
                               isDense: true,
                               controller: _controller,
                               textInputType: TextInputType.text,
                               validator: (value) {
                                 return null;
                               },
-                              prefixIcon: Icons.search,
+                              prefixIcon: IconButton(onPressed: (){},icon:const Icon(Icons.search,color: AppColors.teal,) ,),
                               hintText: AppStrings.whereAreYouGoing,
                               radius: AppSize.s30,
                             ),
@@ -157,7 +158,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 const MyText(
                                   text: AppStrings.capTown,
                                   fontSize: AppSize.s35,
-                                  fontWeight: FontWeight.w900,
                                 ),
                                 const SizedBox(
                                   height: AppSize.s10,
@@ -192,7 +192,20 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 ),
                               ],
                             ),
-                          if (_appBarCollapsed == false) Container(),
+                          if (_appBarCollapsed == false)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                AnimatedSmoothIndicator(
+                                  activeIndex: _current,
+                                  count: _images.length,
+                                  effect: const ExpandingDotsEffect(
+                                      activeDotColor: AppColors.teal,
+                                      dotWidth: 8,
+                                      dotHeight: 8),
+                                ),
+                              ],
+                            ),
                         ],
                       ),
                     ),
@@ -213,8 +226,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 children: [
                   const MyText(
                       text: AppStrings.popularDestination,
-                      fontSize: AppSize.s25,
-                      fontWeight: FontWeight.bold,
+                      fontSize: AppSize.s20,
                       colors: AppColors.white),
                   const SizedBox(
                     height: AppSize.s20,
@@ -258,7 +270,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                       child: MyText(
                                         text: _popularDestinationNames[index],
                                         fontSize: AppSize.s30,
-                                        fontWeight: FontWeight.w900,
                                       ),
                                     ),
                                   ),
@@ -274,28 +285,27 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(AppPadding.p10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const MyText(
-                          text: AppStrings.bestDeals,
-                          fontSize: AppSize.s25,
-                          fontWeight: FontWeight.bold,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const MyText(
+                        text: AppStrings.bestDeals,
+                        fontSize: AppSize.s20,
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {},
+                        child: const MyText(
+                          text: AppStrings.viewAll,
+                          fontSize: AppSize.s16,
+                          colors: AppColors.teal,
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            AppStrings.viewAll,
-                            style: TextStyle(
-                                fontSize: AppSize.s20,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.teal),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                      const Icon(
+                        Icons.arrow_forward,
+                        color: AppColors.teal,
+                      ),
+                    ],
                   ),
                   const CardOfHotel(),
                 ],
