@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utilis/constants/colors.dart';
-import '../../../core/utilis/constants/values_manger.dart';
 
 class MyTextForm extends StatelessWidget {
   final ValueChanged<String>? onChange;
@@ -10,7 +9,7 @@ class MyTextForm extends StatelessWidget {
   final String? labelText;
   final FormFieldValidator? validator;
   final bool obscureText;
-  final IconData? prefixIcon;
+  final IconButton? prefixIcon;
   final IconData? suffixIcon;
   final bool? isDense;
   final Function(String)? onSubmit;
@@ -18,7 +17,9 @@ class MyTextForm extends StatelessWidget {
   final TextEditingController controller;
   final bool isPassword;
   final VoidCallback? suffixIconPressed;
+  final VoidCallback? prefixIconPressed;
   final VoidCallback? onTap;
+  final bool readOnly;
 
 
 
@@ -40,12 +41,13 @@ class MyTextForm extends StatelessWidget {
     required this.textInputType,
     this.isDense,
     this.onTap,
+    this.readOnly =false, this.prefixIconPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
+      readOnly: readOnly,
       style: const TextStyle(color:AppColors.white),
       onFieldSubmitted: onSubmit,
       controller: controller,
@@ -64,29 +66,20 @@ class MyTextForm extends StatelessWidget {
         ),
         hintText: hintText,
         labelText: labelText,
-        prefixIcon: Icon(prefixIcon,color: AppColors.teal,size: AppSize.s20,),
+        prefixIcon:  prefixIcon,
         suffixIcon: IconButton(onPressed: suffixIconPressed, icon: Icon(suffixIcon,color: AppColors.white,),),
         isDense: isDense,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius!),
-          borderSide:  const BorderSide(color:AppColors.grey),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: AppColors.blue),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color:  AppColors.blue),
-        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color:  AppColors.blue),
+          borderSide: const BorderSide(color:  AppColors.transparent),
         ),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: const BorderSide(color:  AppColors.red)),
 
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: AppColors.blue),
+          borderSide: const BorderSide(color: AppColors.transparent),
         ),
       ),
       onTap:onTap ,
