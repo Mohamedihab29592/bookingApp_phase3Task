@@ -26,6 +26,7 @@ class Hotel {
   int? id;
   String? price;
   String? address;
+  String? name;
   String? rate;
   List<HotelImages> images = [];
 
@@ -34,6 +35,7 @@ class Hotel {
     price = json['price'];
     address = json['address'];
     rate = json['rate'];
+    name = json['name'];
     json['hotel_images'].forEach((image) {
       images.add(HotelImages.fromJson(image));
     });

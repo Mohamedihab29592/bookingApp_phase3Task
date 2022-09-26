@@ -57,13 +57,7 @@ class HomeCubit extends Cubit<HomeState> {
     const Icon(Icons.person),
   ];
   HotelsEntity? hotelsEntity;
-  int pageNo = 0;
-  List<dynamic> exploreData = [];
-
-  void getHomeData({bool isFirst = true}) {
-    if (isFirst) {
-      pageNo = 0;
-    }
+  void getHomeData() {
     emit(GetHomeDataLoadingState());
     homeDataUseCase.call(params: NoParams(), page: 0).then((value) {
       value.fold((failure) {
@@ -71,12 +65,6 @@ class HomeCubit extends Cubit<HomeState> {
             GetHomeDataErrorState(error: _mapFailureToMsg(failure: failure)));
       }, (hotelEntity) {
         hotelsEntity = hotelEntity;
-        if (isFirst) {
-          exploreData = hotelsEntity!.homeEntity.data;
-        } else {
-          exploreData.addAll(hotelsEntity!.homeEntity.data);
-        }
-        // pageNo++;
         return emit(GetHomeDataSuccessState());
       });
     });
@@ -171,27 +159,27 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void getCancelledBooking() {
-    emit(GetBookingDataLoadingState());
-    bookingUseCase.call(type: 'completed').then((value) {
+    emit(GetCancelBookingDataLoadingState());
+    bookingUseCase.call(type: 'cancelled').then((value) {
       value.fold((failure) {
-        return emit(GetBookingDataErrorState(
+        return emit(GetCancelBookingDataErrorState(
             error: _mapFailureToMsg(failure: failure)));
       }, (model) {
         cancelledModel = model;
-        return emit(GetBookingDataSuccessState());
+        return emit(GetCancelBookingDataSuccessState());
       });
     });
   }
 
   void getCompletedBooking() {
-    emit(GetBookingDataLoadingState());
+    emit(GetCompletedBookingDataLoadingState());
     bookingUseCase.call(type: 'completed').then((value) {
       value.fold((failure) {
-        return emit(GetBookingDataErrorState(
+        return emit(GetCompletedBookingDataErrorState(
             error: _mapFailureToMsg(failure: failure)));
       }, (model) {
         completedModel = model;
-        return emit(GetBookingDataSuccessState());
+        return emit(GetCompletedBookingDataSuccessState());
       });
     });
   }
@@ -208,4 +196,6 @@ class HomeCubit extends Cubit<HomeState> {
     );
     print(response.data);
   }
+
+  
 }

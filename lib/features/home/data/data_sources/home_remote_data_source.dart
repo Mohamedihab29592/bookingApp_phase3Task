@@ -83,10 +83,10 @@ class HomeDataRemoteDataSource implements BaseHomeDataRemoteDataSource {
         "count": 10,
         "type": type,
       },
-      token: token,
+      token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
     );
-    if (response.statusCode == 200 && response.data['status']['type'] == '1') {
-      log('home data is ${response.data}');
+    if (response.statusCode == 200) {
+      log('getBookingData is ${response.data}');
       return GetBookingModel.fromJson(response.data);
     } else {
       throw ServerException();

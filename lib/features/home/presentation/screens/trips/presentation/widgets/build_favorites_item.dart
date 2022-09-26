@@ -12,7 +12,7 @@ class BuildFavoritesItem extends StatelessWidget {
   final String city;
   final String day;
   final String location;
-  final int price;
+  final String price;
   final double initialRating;
 
   const BuildFavoritesItem(
@@ -40,7 +40,7 @@ class BuildFavoritesItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            width: 130,height: 130,
+            width: 120,height: 130,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
               image:  DecorationImage(
@@ -49,7 +49,7 @@ class BuildFavoritesItem extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 7,),
+          const SizedBox(width: 4,),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -73,14 +73,14 @@ class BuildFavoritesItem extends StatelessWidget {
               const SizedBox(height: 20,),
               Row(
                 children:  [
-                  const Icon(Icons.location_on,color: AppColors.teal,size: 20,),
+                  const Icon(Icons.location_on,color: AppColors.teal,size: 16,),
                   CustomText(
                     text: location,
                     fontSize: 16,fontWeight: FontWeight.w400,color: AppColors.grey,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(width: 40,),
+                  const SizedBox(width: 8,),
                   CustomText(
                     text: '\$$price',
                     fontSize: 20,

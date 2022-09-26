@@ -1,34 +1,83 @@
+import 'package:booking_app/core/network/end_points.dart';
+import 'package:booking_app/core/utilis/constants/colors.dart';
+import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'build_upcoming_item.dart';
 
-class UpcomingWidget extends StatelessWidget {
+class UpcomingWidget extends StatefulWidget {
   const UpcomingWidget({Key? key}) : super(key: key);
 
   @override
+  State<UpcomingWidget> createState() => _UpcomingWidgetState();
+}
+
+class _UpcomingWidgetState extends State<UpcomingWidget> {
+  @override
+  void initState() {
+    HomeCubit.get(context).getUpcomingBooking();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        padding: EdgeInsets.zero,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder:  (context, index) =>
-            BuildUpcomingItem(
-              urlImage:
-              'https://images.ctfassets.net/hrltx12pl8hq/a2hkMAaruSQ8haQZ4rBL9/8ff4a6f289b9ca3f4e6474f29793a74a/nature-image-for-website.jpg?fit=fill&w=1024&h=683&fm=webp',
-              startDate: '25 Sep',
-              endDate: '29 Sep',
-              roomsNumber: index+1,
-              peopleNumber: (index+1)*2,
-              isFavorite: index%2==0?false:true,
-              hotelName: 'Grand Royal Hotel',
-              city: 'Cairo',
-              day: 'Sunday',
-              location: '$index.0km to hotelhotelhotelhotelhotel',
-              price: 180,
-              initialRating: index+.5,
-            ),
-        itemCount: 7,
-      ),
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var upcomingItem = HomeCubit.get(context);
+        if(state is GetBookingDataSuccessState){
+          if (upcomingItem.upComingModel!.bookingData.isNotEmpty) {
+            return Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return BuildUpcomingItem(
+                    urlImage: (upcomingItem.upComingModel!.bookingData[index].hotel!.images.isNotEmpty)? '$imageBaseUrl${upcomingItem.upComingModel!.bookingData[index].hotel!.images[0].image}' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/d2/f1/44/exterior.jpg?w=1100&h=-1&s=1',
+                    startDate: '25 Sep',
+                    endDate: '29 Sep',
+                    roomsNumber: index + 1,
+                    peopleNumber: (index + 1) * 2,
+                    isFavorite: index % 2 == 0 ? false : true,
+                    hotelName: upcomingItem.upComingModel!.bookingData[index].hotel!.name.toString(),
+                    city: upcomingItem.upComingModel!.bookingData[index].hotel!.address.toString(),
+                    day: 'Sunday',
+                    location: '$index.0km to ${upcomingItem.upComingModel!.bookingData[index].hotel!.name}',
+                    price: upcomingItem.upComingModel!.bookingData[index].hotel!.price.toString(),
+                    initialRating: index + .5,
+                  );
+                },
+                itemCount: upcomingItem.upComingModel!.bookingData.length,
+              ),
+            );
+          } else {
+            return Center(
+              child: Column(
+                children: [
+                  Image(
+                    image: const AssetImage(
+                      'assets/images/empty.png',
+                    ),
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: MediaQuery.of(context).size.height / 2,
+                  ),
+                  const Text(
+                    'No Booking Now',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        }else{
+          return const Center(child: CupertinoActivityIndicator(color: AppColors.white,));
+        }
+      },
     );
   }
 }

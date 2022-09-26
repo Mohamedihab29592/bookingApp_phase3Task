@@ -16,7 +16,7 @@ class TripsScreen extends StatefulWidget {
 class _TripsScreenState extends State<TripsScreen> {
   final List<Widget> screens = [
     const UpcomingWidget(),
-    const FinishedWidget(),
+    const CompletedWidget(),
     const FavoritesWidget(),
   ];
 

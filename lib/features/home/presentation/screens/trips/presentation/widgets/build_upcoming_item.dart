@@ -15,7 +15,7 @@ class BuildUpcomingItem extends StatelessWidget {
   final String city;
   final String day;
   final String location;
-  final int price;
+  final String price;
   final double initialRating;
 
   const BuildUpcomingItem(

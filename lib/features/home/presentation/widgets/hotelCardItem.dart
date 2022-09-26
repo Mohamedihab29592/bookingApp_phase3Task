@@ -20,6 +20,7 @@ class CardOfHotel extends StatelessWidget {
       builder: (BuildContext context, state) {
         var cubit = HomeCubit.get(context);
         if(state is GetHomeDataSuccessState){
+          print('dataaaa ${cubit.hotelsEntity!.homeEntity.data.length.toString()}');
           return ListView.separated(
             separatorBuilder: (context, index) => const SizedBox(
               height: AppSize.s22,
@@ -41,7 +42,7 @@ class CardOfHotel extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      if(_item.images.isEmpty )
+                      if(_item.images.isEmpty)
                       Image(
                         image:  const AssetImage(ImageAssets.hotel),
                         fit: BoxFit.cover,
