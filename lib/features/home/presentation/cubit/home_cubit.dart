@@ -15,7 +15,7 @@ import '../../../../core/local/cache_helper.dart';
 import '../../../../core/routes/routes_manager.dart';
 import '../screens/exploreScreen/exploreScreen.dart';
 import '../screens/profileScreen/profileScreen.dart';
-import '../screens/tripsScreen/tripsScreen.dart';
+import '../screens/trips/presentation/screens/trips_screen.dart';
 
 part 'home_state.dart';
 
