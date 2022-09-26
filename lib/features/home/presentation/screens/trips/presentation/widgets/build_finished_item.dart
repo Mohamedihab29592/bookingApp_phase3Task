@@ -93,7 +93,7 @@ class BuildFinishedItem extends StatelessWidget {
                   const Icon(
                     Icons.location_on,
                     color: AppColors.teal,
-                    size: 20,
+                    size: 16,
                   ),
                   CustomText(
                     text: location,
