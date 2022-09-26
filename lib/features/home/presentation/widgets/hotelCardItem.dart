@@ -1,10 +1,12 @@
-import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/core/utilis/constants/values_manger.dart';
-import 'package:booking_app/features/auth/widgets/my_text.dart';
+import 'package:booking_app/core/component/my_text.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../../../../core/utilis/constants/assets_manager.dart';
 
 class CardOfHotel extends StatelessWidget {
   const CardOfHotel({
@@ -27,7 +29,7 @@ class CardOfHotel extends StatelessWidget {
             shrinkWrap: true,
             itemCount: cubit.hotelsEntity!.homeEntity.data.length,
             itemBuilder: (context, index) {
-              var item = cubit.hotelsEntity!.homeEntity.data[index];
+              var _item = cubit.hotelsEntity!.homeEntity.data[index];
               return SizedBox(
                 height: AppSize.s130,
                 width: double.infinity,
@@ -39,8 +41,16 @@ class CardOfHotel extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      if(_item.images.isEmpty )
                       Image(
-                        image: (item.images.isNotEmpty) ? NetworkImage('$imageBaseUrl${item.images[0].image}') : const NetworkImage('https://www.ahstatic.com/photos/1276_ho_00_p_1024x768.jpg'),
+                        image:  const AssetImage(ImageAssets.hotel),
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width / 3,
+                        height: double.infinity,
+                      )
+                      else
+                      Image(
+                        image:  const AssetImage(ImageAssets.resort),
                         fit: BoxFit.cover,
                         width: MediaQuery.of(context).size.width / 3,
                         height: double.infinity,
@@ -52,12 +62,12 @@ class CardOfHotel extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             MyText(
-                              text: item.name,
+                              text: _item.name,
                               fontSize: 15,
                               fontWeight: FontWeight.w900,
                             ),
                             MyText(
-                              text: item.address,
+                              text: _item.address,
                               fontSize: 14,
                               fontWeight: FontWeight.w900,
                               colors: AppColors.grey,
@@ -75,23 +85,39 @@ class CardOfHotel extends StatelessWidget {
                                     fontSize: 14,
                                     colors: AppColors.grey),
                                 const SizedBox(
-                                  width: 20,
+                                  width: 60,
                                 ),
                                 MyText(
-                                  text: "\$${item.price}",
-                                  fontSize: 22,
+                                  text: "\$${_item.price}",
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ],
                             ),
                             Row(
                               children: [
-                                MyText(
-                                    text: "Rate : ${item.rate}",
-                                    fontSize: 14,
-                                    colors: AppColors.teal),
+                              RatingBar.builder(
+                                itemSize: 18,
+                              initialRating: double.parse(_item.rate)/2,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+
+                              itemBuilder: (context, _) => const Icon(
+                                Icons.star,
+                                color: AppColors.teal,
+                              ),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            ),
+                                // MyText(
+                                //     text: "Rate : ${item.rate}",
+                                //     fontSize: 14,
+                                //     colors: AppColors.teal),
                                 const SizedBox(
-                                  width: 25,
+                                  width: AppSize.s50,
                                 ),
                                 MyText(
                                   text: "/per night",

@@ -24,98 +24,100 @@ class _ProfileScreenState extends State<ProfileScreen> {
         var cubit = HomeCubit.get(context);
         return Scaffold(
             backgroundColor: AppColors.kPrimaryColor,
-            body: Padding(
-              padding:  const EdgeInsets.all(AppMargin.m20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: AppSize.s20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditProfileScreen()));
-                    },
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children:  [
-                                Text(
-                                  cubit.profileModel!.profileData.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 25,
+            body: SingleChildScrollView(
+              child: Padding(
+                padding:  const EdgeInsets.all(AppMargin.m20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: AppSize.s20,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfileScreen()));
+                      },
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:  [
+                                  Text(
+                                    cubit.profileModel!.profileData.name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 25,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 3,
-                                ),
-                                const Text(
-                                  'View and Edit Profile',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    color: AppColors.grey,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 18,
+                                  const SizedBox(
+                                    height: 3,
                                   ),
+                                  const Text(
+                                    'View and Edit Profile',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: AppColors.grey,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 75,
+                            height: 75,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(width: 4, color: AppColors.darkGrey),
+                              boxShadow: [
+                                BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  color: AppColors.white.withOpacity(.1),
+                                  offset: const Offset(0, 10),
                                 ),
                               ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 75,
-                          height: 75,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 4, color: AppColors.darkGrey),
-                            boxShadow: [
-                              BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: AppColors.white.withOpacity(.1),
-                                offset: const Offset(0, 10),
+                              image:  DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    cubit.profileModel!.profileData.image,),
                               ),
-                            ],
-                            image:  DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  cubit.profileModel!.profileData.image,),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  BuildProfileItem(
-                      text: 'Change Password', icon: Icons.lock, function: () {}),
-                  BuildProfileItem(
-                      text: 'Invite Friend', icon: Icons.people, function: () {}),
-                  BuildProfileItem(
-                      text: 'Credit & Coupons',
-                      icon: Icons.card_giftcard,
-                      function: () {}),
-                  BuildProfileItem(
-                      text: 'Help Center', icon: Icons.info, function: () {}),
-                  BuildProfileItem(
-                      text: 'Payment', icon: Icons.payment, function: () {}),
-                  BuildProfileItem(
-                      text: 'Settings', icon: Icons.settings, function: () {}),
-                ],
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    BuildProfileItem(
+                        text: 'Change Password', icon: Icons.lock, function: () {}),
+                    BuildProfileItem(
+                        text: 'Invite Friend', icon: Icons.people, function: () {}),
+                    BuildProfileItem(
+                        text: 'Credit & Coupons',
+                        icon: Icons.card_giftcard,
+                        function: () {}),
+                    BuildProfileItem(
+                        text: 'Help Center', icon: Icons.info, function: () {}),
+                    BuildProfileItem(
+                        text: 'Payment', icon: Icons.payment, function: () {}),
+                    BuildProfileItem(
+                        text: 'Settings', icon: Icons.settings, function: () {}),
+                  ],
+                ),
               ),
             ),
           );

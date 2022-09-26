@@ -13,6 +13,7 @@ class AppStrings {
   static const String emailHint = 'Enter your Email';
   static const String passHintMatch = 'passwords should be match';
   static const String passHint = 'please Enter your Password';
+  static const String searchHint = 'please Enter your valid input';
   static const String passForget = "Forget your password ?";
   static const String createAcc = "Register Now!";
   static const String policy = "By Signing up , you agreed with our terms of Services and privacy policy.";
@@ -29,11 +30,22 @@ class AppStrings {
   static const String profile = "Profile";
   static const String popularDestination = "Popular Destination";
   static const String bestDeals = "Best Deals";
-  static const String viewAll = "View All ->";
+  static const String viewAll = "View All";
+  static const String clear = "Clear all";
   static const String whereAreYouGoing = "Where are you going ?";
   static const String capTown = "Cap Town";
   static const String extraordinary = "Extraordinary five-star outdoor activities";
   static const String viewHotel = "View Hotel";
+  static const String search = "Search";
+  static const String searchResult = "Search Result";
+  static const String hotel = "Hotel";
+  static const String backPacker = "BackPacker";
+  static const String resort = "Resort";
+  static const String villa = "Villa";
+  static const String apartment = "Apartment";
+  static const String guestHouse = "Guest House";
+  static const String accommodation = "Accommodation";
+  static const String bedAndBreakFast = "Bed & Breakfast";
 
 
 

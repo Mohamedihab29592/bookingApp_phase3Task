@@ -20,6 +20,7 @@ class MyText extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize,
         color: colors,
+        fontWeight: fontWeight,
       ),
     );
   }
