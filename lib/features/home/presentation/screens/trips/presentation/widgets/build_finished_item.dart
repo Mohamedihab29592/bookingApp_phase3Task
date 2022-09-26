@@ -79,6 +79,7 @@ class BuildFinishedItem extends StatelessWidget {
               CustomText(
                 text: '$startDate - $endDate',
                 fontSize: 14,
+                color: AppColors.white,
               ),
               CustomText(
                 text: '$roomsNumber Room $peopleNumber People',
@@ -91,7 +92,7 @@ class BuildFinishedItem extends StatelessWidget {
                   const Icon(
                     Icons.location_on,
                     color: AppColors.teal,
-                    size: 20,
+                    size: 16,
                   ),
                   CustomText(
                     text: location,
