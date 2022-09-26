@@ -20,10 +20,10 @@ class UpdateProfileDataUseCase {
 class UpdateImageEntity extends Equatable {
   final String name;
   final String email;
-  final File image;
+  final File? image;
 
   const UpdateImageEntity(this.name, this.email, this.image);
 
   @override
-  List<Object> get props => [name, email, image];
+  List<Object> get props => [name, email, image!];
 }

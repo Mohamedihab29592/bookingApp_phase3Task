@@ -56,8 +56,8 @@ class HomeDataRemoteDataSource implements BaseHomeDataRemoteDataSource {
     var formData = FormData.fromMap({
       'name': updateImageEntity.name,
       'email': updateImageEntity.email,
-      if (updateImageEntity.image.path.isNotEmpty)
-        "image": await MultipartFile.fromFile(updateImageEntity.image.path),
+      if (updateImageEntity.image != null)
+        "image": await MultipartFile.fromFile(updateImageEntity.image!.path),
     });
     final response = await DioHelper.postData(
       url: updateProfileEndPoint,

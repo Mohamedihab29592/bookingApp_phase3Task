@@ -23,11 +23,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context,state) {
         var cubit = HomeCubit.get(context);
         return Scaffold(
-            appBar: AppBar(
-              title: IconButton(onPressed: (){
-                cubit.getProfileData();
-              }, icon: const Icon(Icons.add)),
-            ),
             backgroundColor: AppColors.kPrimaryColor,
             body: Padding(
               padding:  const EdgeInsets.all(AppMargin.m20),
@@ -46,38 +41,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                     child: Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:  [
-                              Text(
-                                cubit.profileModel!.profileData.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 25,
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:  [
+                                Text(
+                                  cubit.profileModel!.profileData.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 25,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 3,
-                              ),
-                              const Text(
-                                'View and Edit Profile',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: AppColors.grey,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18,
+                                const SizedBox(
+                                  height: 3,
                                 ),
-                              ),
-                            ],
+                                const Text(
+                                  'View and Edit Profile',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: AppColors.grey,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        const Spacer(),
                         Container(
                           width: 75,
                           height: 75,
