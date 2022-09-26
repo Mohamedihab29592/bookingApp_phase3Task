@@ -39,3 +39,13 @@ class UpdateProfileDataErrorState extends HomeState {
 class UpdateProfileDataSuccessState extends HomeState {}
 
 class UpdateProfileDataLoadingState extends HomeState {}
+
+class GetBookingDataErrorState extends HomeState {
+  final String error;
+
+  GetBookingDataErrorState({required this.error});
+}
+
+class GetBookingDataSuccessState extends HomeState {}
+
+class GetBookingDataLoadingState extends HomeState {}

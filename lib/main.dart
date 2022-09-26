@@ -23,7 +23,7 @@ class MotelApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => di.sl<HomeCubit>()..getHomeData()..getProfileData()),
+        BlocProvider(create: (context) => di.sl<HomeCubit>()..getHomeData()..getProfileData()..getCancelledBooking()..getCompletedBooking()..getUpcomingBooking()),
         BlocProvider(create: (context) => di.sl<SearchCubit>()),
       ],
       child:  MaterialApp(
