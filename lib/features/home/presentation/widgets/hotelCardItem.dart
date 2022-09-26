@@ -1,6 +1,6 @@
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/core/utilis/constants/values_manger.dart';
-import 'package:booking_app/features/auth/widgets/my_text.dart';
+import 'package:booking_app/core/component/my_text.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

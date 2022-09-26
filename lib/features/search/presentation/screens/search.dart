@@ -1,4 +1,4 @@
-import 'package:booking_app/features/auth/widgets/my_text.dart';
+import 'package:booking_app/core/component/my_text.dart';
 import 'package:booking_app/features/search/domain/entity/search_entity.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utilis/constants/app_strings.dart';
 import '../../../../core/utilis/constants/colors.dart';
 import '../../../../core/utilis/constants/values_manger.dart';
-import '../../../auth/widgets/my_text_form_field.dart';
+import '../../../../core/component/my_text_form_field.dart';
 import '../widgets/circuleAvatarImages.dart';
 import '../widgets/searchItem.dart';
 

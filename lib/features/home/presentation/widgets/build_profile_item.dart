@@ -28,7 +28,7 @@ class BuildProfileItem extends StatelessWidget {
                   style: const TextStyle(
                     color: AppColors.white,
                     fontWeight: FontWeight.w400,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
                 const Spacer(),
@@ -37,7 +37,7 @@ class BuildProfileItem extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10,),
-          const Divider(height: 1,color: AppColors.grey,),
+           Divider(height: 0.5,color: AppColors.softGrey,),
           const SizedBox(height: 10,),
         ],
       ),

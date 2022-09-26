@@ -8,9 +8,9 @@ import '../../../../../core/routes/routes_manager.dart';
 import '../../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../../core/utilis/constants/colors.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
-import '../../../../auth/widgets/my_button.dart';
-import '../../../../auth/widgets/my_text.dart';
-import '../../../../auth/widgets/my_text_form_field.dart';
+import '../../../../../core/component/my_button.dart';
+import '../../../../../core/component/my_text.dart';
+import '../../../../../core/component/my_text_form_field.dart';
 import '../../widgets/hotelCardItem.dart';
 
 class ExploreScreen extends StatefulWidget {

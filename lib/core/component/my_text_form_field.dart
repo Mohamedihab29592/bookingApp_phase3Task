@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utilis/constants/colors.dart';
+import '../utilis/constants/colors.dart';
 
 class MyTextForm extends StatelessWidget {
   final ValueChanged<String>? onChange;

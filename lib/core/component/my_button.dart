@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utilis/constants/values_manger.dart';
+import '../utilis/constants/values_manger.dart';
 
 class MyButton extends StatelessWidget {
   final String label;

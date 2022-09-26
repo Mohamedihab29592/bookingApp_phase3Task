@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utilis/constants/app_strings.dart';
 import '../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../core/utilis/constants/values_manger.dart';
-import '../../../auth/widgets/my_text.dart';
+import '../../../../core/component/my_text.dart';
 
 class CircleAvatarItems extends StatelessWidget {
 

@@ -34,78 +34,78 @@ class EditProfileScreen extends StatelessWidget {
             backgroundColor: AppColors.darkGrey,
             elevation: 0,
           ),
-          body: Form(
-            key: _formKey,
+          body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(right: 16, left: 16, top: 25),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    '  Edit Profile',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 25,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      '  Edit Profile',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 25,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Center(
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        Container(
-                          width: 130,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border:
-                                Border.all(width: 4, color: AppColors.darkGrey),
-                            boxShadow: [
-                              BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: AppColors.white.withOpacity(.1),
-                                offset: const Offset(0, 10),
-                              ),
-                            ],
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: (cubit.userImage != null)
-                                  ? FileImage(cubit.userImage!) as ImageProvider
-                                  : NetworkImage(
-                                      cubit.profileModel!.profileData.image),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            cubit.addProfileImage();
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-                            decoration: const BoxDecoration(
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Center(
+                      child: Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          Container(
+                            width: 130,
+                            height: 130,
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: AppColors.teal,
-                            ),
-                            child: const Icon(
-                              Icons.camera_alt,
+                              border:
+                                  Border.all(width: 4, color: AppColors.darkGrey),
+                              boxShadow: [
+                                BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  color: AppColors.white.withOpacity(.1),
+                                  offset: const Offset(0, 10),
+                                ),
+                              ],
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: (cubit.userImage != null)
+                                    ? FileImage(cubit.userImage!) as ImageProvider
+                                    : NetworkImage(
+                                        cubit.profileModel!.profileData.image),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          InkWell(
+                            onTap: () {
+                              cubit.addProfileImage();
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColors.teal,
+                              ),
+                              child: const Icon(
+                                Icons.camera_alt,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 35,
-                  ),
-                  Expanded(
-                    child: Column(
+                    const SizedBox(
+                      height: 35,
+                    ),
+                    Column(
                       children: [
                         TextFormField(
                           controller: userNameController,
@@ -192,15 +192,16 @@ class EditProfileScreen extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                                child: CustomButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    backgroundColor: Colors.white,
-                                    child: const Text(
-                                      'Cancel',
-                                      style: TextStyle(color: Colors.black),
-                                    ))),
+                              child: CustomButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  backgroundColor: Colors.white,
+                                  child: const Text(
+                                    'Cancel',
+                                    style: TextStyle(color: Colors.black),
+                                  )),
+                            ),
                             const SizedBox(
                               width: 10,
                             ),
@@ -226,8 +227,8 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

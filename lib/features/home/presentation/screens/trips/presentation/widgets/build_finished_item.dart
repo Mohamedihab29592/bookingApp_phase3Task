@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../../../core/component/custom_text.dart';
 import '../../../../../../../core/utilis/constants/colors.dart';
@@ -79,6 +80,7 @@ class BuildFinishedItem extends StatelessWidget {
               CustomText(
                 text: '$startDate - $endDate',
                 fontSize: 14,
+                color: AppColors.white,
               ),
               CustomText(
                 text: '$roomsNumber Room $peopleNumber People',
@@ -103,19 +105,19 @@ class BuildFinishedItem extends StatelessWidget {
                   ),
                 ],
               ),
-              // RatingBar.builder(
-              //   initialRating: initialRating,
-              //   minRating: 0,
-              //   direction: Axis.horizontal,
-              //   allowHalfRating: true,
-              //   itemCount: 5,
-              //   itemBuilder: (context, _) => const Icon(
-              //     Icons.star,
-              //     color: AppColors.teal,
-              //   ),
-              //   onRatingUpdate: (rating) {},
-              //   itemSize: 20,
-              // ),
+              RatingBar.builder(
+                initialRating: initialRating,
+                minRating: 0,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: AppColors.teal,
+                ),
+                onRatingUpdate: (rating) {},
+                itemSize: 20,
+              ),
               Row(
                 children: [
                   CustomText(
