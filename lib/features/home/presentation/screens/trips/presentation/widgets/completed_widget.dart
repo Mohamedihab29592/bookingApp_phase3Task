@@ -1,11 +1,11 @@
 import 'package:booking_app/core/component/others.dart';
-import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:booking_app/features/home/presentation/screens/trips/presentation/screens/view_hotel_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../../core/utilis/constants/assets_manager.dart';
 import 'build_finished_item.dart';
 
 class CompletedWidget extends StatefulWidget {
@@ -38,10 +38,10 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: (){
-                      navigateTo(context: context, widget: ViewHotelDetails());
+                      navigateTo(context: context, widget: const ViewHotelDetails());
                     },
                     child: BuildFinishedItem(
-                      urlImage: (upcomingItem.completedModel!.bookingData[index].hotel!.images.isNotEmpty)? '$imageBaseUrl${upcomingItem.completedModel!.bookingData[index].hotel!.images[0].image}' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/d2/f1/44/exterior.jpg?w=1100&h=-1&s=1',
+                      urlImage: (upcomingItem.completedModel!.bookingData[index].hotel!.images.isNotEmpty)? ImageAssets.resort : ImageAssets.hotel,
                       startDate: '25 Sep',
                       endDate: '29 Sep',
                       roomsNumber: index + 1,

@@ -57,7 +57,7 @@ class BuildFinishedItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(urlImage),
+                      image: AssetImage(urlImage),
                     ),
                   ),
                 ),

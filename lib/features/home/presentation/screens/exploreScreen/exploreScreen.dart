@@ -136,6 +136,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               color: AppColors.darkGrey,
                             ),
                             child: MyTextForm(
+                              enableBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: const BorderSide(color:  AppColors.transparent)),
                               readOnly: true,
                               onTap: () {
                                 Navigator.pushNamed(context, Routes.search);
@@ -246,16 +249,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: ((context, index) {
                           return Container(
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(AppPadding.p30),
-                            ),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            height: AppSize.s100,
                             width: AppSize.s300,
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
                             child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(AppPadding.p100)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+
                               child: Stack(
                                 alignment: Alignment.bottomLeft,
                                 children: [

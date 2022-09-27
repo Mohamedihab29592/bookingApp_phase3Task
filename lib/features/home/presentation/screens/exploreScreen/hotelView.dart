@@ -7,12 +7,19 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../core/component/my_button.dart';
 import '../../../../../core/component/my_text.dart';
+import '../../../../../core/services/maps.dart';
 import '../../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../../core/utilis/constants/colors.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
 
 class HotelView extends StatefulWidget {
-  const HotelView({Key? key}) : super(key: key);
+  final String hotelName;
+  final String locationName;
+  final String rate;
+  final String price;
+  final List <dynamic> images;
+
+  const HotelView({Key? key, required this.hotelName, required this.locationName, required this.rate,  required this.price, required this.images}) : super(key: key);
 
   @override
   State<HotelView> createState() => _HotelViewState();
@@ -45,6 +52,16 @@ class _HotelViewState extends State<HotelView> {
     super.dispose();
   }
 
+  final List<String> _hotelPhoto = [
+    ImageAssets.hotelPhoto,
+    ImageAssets.hotelPhoto1,
+    ImageAssets.hotelPhoto2,
+    ImageAssets.hotelPhoto3,
+    ImageAssets.hotelPhoto4,
+    ImageAssets.hotelPhoto5,
+    ImageAssets.swimmingpool,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
@@ -65,16 +82,13 @@ class _HotelViewState extends State<HotelView> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon:  const CircleAvatar(
-
-
+                      icon: const CircleAvatar(
                         backgroundColor: AppColors.grey,
                         child: Icon(
-                        Icons.arrow_back,
-                        size: AppSize.s20,
-                        color: AppColors.black,
-                      ),
-
+                          Icons.arrow_back,
+                          size: AppSize.s20,
+                          color: AppColors.black,
+                        ),
                       ),
                     ),
                     actions: [
@@ -87,9 +101,7 @@ class _HotelViewState extends State<HotelView> {
                             color: AppColors.teal,
                           ),
                         ),
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                       ),
                     ],
                     systemOverlayStyle: const SystemUiOverlayStyle(
@@ -100,11 +112,19 @@ class _HotelViewState extends State<HotelView> {
                     actionsIconTheme: const IconThemeData(opacity: AppSize.s0),
                     flexibleSpace: Stack(
                       children: <Widget>[
+                        if(widget.images.isEmpty)
+
                         Positioned.fill(
                             child: Image.asset(
-                          ImageAssets.hotel,
+                                ImageAssets.hotel,
                           fit: BoxFit.cover,
                         )),
+                        if(widget.images.isNotEmpty)
+                          Positioned.fill(
+                              child: Image.asset(
+                                ImageAssets.resort,
+                                fit: BoxFit.cover,
+                              )),
                         if (_appBarCollapsed == false)
                           Padding(
                             padding: const EdgeInsets.all(AppPadding.p8),
@@ -127,33 +147,33 @@ class _HotelViewState extends State<HotelView> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const MyText(
-                                              text: "Grand Royal Hotel",
+                                             MyText(
+                                              text: widget.hotelName,
                                               fontSize: AppSize.s20,
                                             ),
                                             const SizedBox(
                                               height: AppSize.s5,
                                             ),
                                             Row(
-                                              children: const [
+                                              children:  [
                                                 MyText(
-                                                  text: "Wembly,London",
+                                                  text: widget.locationName,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w900,
                                                   colors: AppColors.white74,
                                                 ),
-                                                Icon(
+                                                const Icon(
                                                   Icons.location_on,
                                                   color: AppColors.teal,
                                                   size: 11,
                                                 ),
-                                                MyText(
+                                                const MyText(
                                                     text: "2.0 Km to City",
                                                     fontSize: 14,
                                                     colors: AppColors.white74),
-                                                Spacer(),
-                                                MyText(
-                                                  text: "\$180",
+                                                const Spacer(),
+                                                 MyText(
+                                                  text: "\$${widget.price}",
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -163,7 +183,7 @@ class _HotelViewState extends State<HotelView> {
                                               children: [
                                                 RatingBar.builder(
                                                   itemSize: 18,
-                                                  initialRating: 3,
+                                                  initialRating: double.parse(widget.rate)/2,
                                                   minRating: 1,
                                                   direction: Axis.horizontal,
                                                   allowHalfRating: true,
@@ -174,7 +194,6 @@ class _HotelViewState extends State<HotelView> {
                                                     color: AppColors.teal,
                                                   ),
                                                   onRatingUpdate: (rating) {
-                                                    print(rating);
                                                   },
                                                 ),
                                                 const SizedBox(
@@ -193,19 +212,19 @@ class _HotelViewState extends State<HotelView> {
                                                 ),
                                               ],
                                             ),
-                                            const SizedBox(height: AppSize.s10,),
+                                            const SizedBox(
+                                              height: AppSize.s10,
+                                            ),
                                             Center(
                                               child: SizedBox(
                                                 width: double.infinity,
                                                 height: AppSize.s50,
-
                                                 child: MyButton(
                                                   onPressed: () {},
                                                   label: AppStrings.bookNow,
                                                   fontWeight: FontWeight.normal,
                                                   fontSize: AppSize.s18,
                                                   radius: AppPadding.p10,
-
                                                 ),
                                               ),
                                             ),
@@ -225,7 +244,7 @@ class _HotelViewState extends State<HotelView> {
                                     child: TextButton(
                                       onPressed: () {
                                         jumpTo();
-                                        },
+                                      },
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -252,7 +271,6 @@ class _HotelViewState extends State<HotelView> {
                       ],
                     ),
                   ),
-
                 ];
               },
               body: SingleChildScrollView(
@@ -260,15 +278,15 @@ class _HotelViewState extends State<HotelView> {
                   padding: const EdgeInsets.all(AppPadding.p20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children:  [
+                    children: [
                       Row(
-                        children: const [
+                        children:  [
                           MyText(
-                            text: "Grand Royal Hotel",
+                            text: widget.hotelName,
                             fontSize: AppSize.s20,
                           ),
-                          Spacer(),
-                          MyText(
+                          const  Spacer(),
+                          const MyText(
                             text: "\$180",
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -276,30 +294,362 @@ class _HotelViewState extends State<HotelView> {
                         ],
                       ),
                       Row(
-                        children:  const [
+                        children:  [
                           MyText(
-                            text: "Wembly,London",
+                            text: widget.locationName,
                             fontSize: 14,
                             fontWeight: FontWeight.w900,
                             colors: AppColors.white74,
                           ),
-                          Icon(
+                          const Icon(
                             Icons.location_on,
                             color: AppColors.teal,
                             size: 11,
                           ),
-                          MyText(
+                          const MyText(
                               text: "2.0 Km to City",
                               fontSize: 14,
                               colors: AppColors.white74),
-                          Spacer(),
-                          MyText(
+                          const Spacer(),
+                          const MyText(
                             text: "/per night",
                             colors: AppColors.grey,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ],
+                      ),
+                      const SizedBox(
+                        height: AppSize.s20,
+                      ),
+                      const Divider(
+                        height: 0.5,
+                        color: AppColors.grey,
+                      ),
+                      const SizedBox(
+                        height: AppSize.s20,
+                      ),
+                      const MyText(text: 'Summary', fontSize: 20),
+                      const SizedBox(
+                        height: AppSize.s5,
+                      ),
+                      const MyText(
+                        text:
+                            'Featuring a fitness center, Grand Royale Park Hotel is Located in Sweden 4.7 km frome National Museum a fitness center,',
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                        colors: AppColors.grey,
+                      ),
+                      const SizedBox(
+                        height: AppSize.s10,
+                      ),
+                      SizedBox(
+                        height: 145,
+                        width: double.infinity,
+                        child: Card(
+                          color: AppColors.darkGrey,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children:  [
+                                    MyText(
+                                      text: widget.rate,
+                                      fontSize: 30,
+                                      colors: AppColors.teal,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const MyText(
+                                      text: 'Overall rating',
+                                      fontSize: 13,
+                                      colors: AppColors.grey,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const MyText(
+                                      text: 'Room',
+                                      fontSize: 15,
+                                      colors: AppColors.grey,
+                                    ),
+                                    const SizedBox(
+                                      width: 25,
+                                    ),
+                                    Container(
+                                      height: 3,
+                                      width: 200,
+                                      color: AppColors.teal,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const MyText(
+                                      text: 'services',
+                                      fontSize: 15,
+                                      colors: AppColors.grey,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      height: 3,
+                                      width: 170,
+                                      color: AppColors.teal,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const MyText(
+                                      text: 'Location',
+                                      fontSize: 15,
+                                      colors: AppColors.grey,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      height: 3,
+                                      width: 100,
+                                      color: AppColors.teal,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const MyText(
+                                      text: 'Price',
+                                      fontSize: 15,
+                                      colors: AppColors.grey,
+                                    ),
+                                    const SizedBox(
+                                      width: 30,
+                                    ),
+                                    Container(
+                                      height: 3,
+                                      width: 180,
+                                      color: AppColors.teal,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: AppSize.s10,
+                      ),
+                      Row(
+                        children: const [
+                          MyText(
+                            text: "Photo",
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            colors: AppColors.white,
+                          ),
+                          Spacer(),
+                          MyText(
+                            text: AppStrings.viewAll,
+                            colors: AppColors.teal,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: AppSize.s140,
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: AppPadding.p5),
+                          child: ListView.separated(
+                            itemCount: _hotelPhoto.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: ((context, index) {
+                              return Container(
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30)),
+                                width: 100,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          AppPadding.p100)),
+                                  child: Stack(
+                                    alignment: Alignment.bottomLeft,
+                                    children: [
+                                      Image.asset(
+                                        _hotelPhoto[index],
+                                        height: double.infinity,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const SizedBox(
+                              width: AppSize.s15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: AppSize.s10,
+                      ),
+                      Row(
+                        children: const [
+                          MyText(
+                            text: "Reviews",
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            colors: AppColors.white,
+                          ),
+                          Spacer(),
+                          MyText(
+                            text: AppStrings.viewAll,
+                            colors: AppColors.teal,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    height: 60,
+                                    width: 60,
+                                    child: const Image(
+                                        image:
+                                            AssetImage(ImageAssets.profile))),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    MyText(
+                                      text: 'Alexia Jane',
+                                      fontSize: 15,
+                                    ),
+                                    MyText(
+                                      text: 'last Update 27 Sep 2022',
+                                      fontSize: 10,
+                                      colors: AppColors.grey,
+                                    ),
+                                    MyText(
+                                      text: '(8.0)',
+                                      fontSize: 15,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text(
+                              "This is located in a great Spot close to the shops and bars, very quiet locations.",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: AppColors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(20)),
+                                    height: 60,
+                                    width: 60,
+                                    child: const Image(
+                                        image:
+                                        AssetImage(ImageAssets.profile))),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    MyText(
+                                      text: 'Jacky Dep',
+                                      fontSize: 15,
+                                    ),
+                                    MyText(
+                                      text: 'last Update 29 Sep 2022',
+                                      fontSize: 10,
+                                      colors: AppColors.grey,
+                                    ),
+                                    MyText(
+                                      text: '(10.0)',
+                                      fontSize: 15,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text(
+                              "Good staff, very comfortable bed, very quiet location, place could do with an update.",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: AppColors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                          height:250,
+                          width:double.infinity,
+                          child: Maps()),
+                      const SizedBox(height: 20,),
+                      Center(
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: AppSize.s50,
+                          child: MyButton(
+                            onPressed: () {},
+                            label: AppStrings.bookNow,
+                            fontWeight: FontWeight.normal,
+                            fontSize: AppSize.s18,
+                            radius: AppPadding.p10,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -310,11 +660,10 @@ class _HotelViewState extends State<HotelView> {
     );
   }
 
-  void jumpTo()
-  {
-    final _maxExtent =_scrollController.position.maxScrollExtent ;
+  void jumpTo() {
+    final _maxExtent = _scrollController.position.maxScrollExtent;
     _scrollController.animateTo(
-      _maxExtent * 0.85,   // scrolls to 65% of maxScrollExtent
+      _maxExtent * 0.85, // scrolls to 85% of maxScrollExtent
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
