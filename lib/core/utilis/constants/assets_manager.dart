@@ -16,6 +16,16 @@ class ImageAssets {
   static const String accommodation = "$imagePath/accommodation.jpg";
   static const String bedAndBreakFast = "$imagePath/bedAndBreakFast.jpg";
 
+  //photoHotels
+  static const String hotelPhoto = "$imagePath/hotelPhoto.jpeg";
+  static const String hotelPhoto1 = "$imagePath/hotelPhoto1.jpg";
+  static const String hotelPhoto2 = "$imagePath/hotelPhoto2.jpg";
+  static const String hotelPhoto3 = "$imagePath/hotelPhoto3.jpg";
+  static const String hotelPhoto4 = "$imagePath/hotelPhoto4.jpg";
+  static const String hotelPhoto5 = "$imagePath/hotelPhoto5.jpg";
+  static const String swimmingpool = "$imagePath/swimmingpool.jpg";
+  static const String profile = "$imagePath/profile.jpg";
+
 
   static const String egypt = "$imagePath/Egypt.jpg";
   static const String paris = "$imagePath/paris.jpg";

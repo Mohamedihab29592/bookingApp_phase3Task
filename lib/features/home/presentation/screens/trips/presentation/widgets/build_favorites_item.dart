@@ -47,7 +47,7 @@ class BuildFavoritesItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(0),
               image:  DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(urlImage),
+                image: AssetImage(urlImage),
               ),
             ),
           ),

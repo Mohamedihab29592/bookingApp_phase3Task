@@ -67,6 +67,9 @@ class _SearchState extends State<Search> {
                             color: AppColors.darkGrey,
                           ),
                           child: MyTextForm(
+                            enableBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: const BorderSide(color:  AppColors.grey)),
                             isDense: true,
                             controller: _controller,
                             textInputType: TextInputType.text,

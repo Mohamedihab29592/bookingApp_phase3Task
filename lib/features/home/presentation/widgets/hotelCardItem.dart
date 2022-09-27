@@ -1,12 +1,13 @@
+import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/core/utilis/constants/values_manger.dart';
 import 'package:booking_app/core/component/my_text.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:booking_app/features/home/presentation/screens/exploreScreen/hotelView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../../../core/routes/routes_manager.dart';
 import '../../../../core/utilis/constants/assets_manager.dart';
 
 class CardOfHotel extends StatelessWidget {
@@ -33,7 +34,7 @@ class CardOfHotel extends StatelessWidget {
               var _item = cubit.hotelsEntity!.homeEntity.data[index];
               return InkWell(
                 onTap: (){
-                  Navigator.pushNamed(context, Routes.hotelView);
+                  navigateTo(context: context, widget: HotelView(hotelName: _item.name, locationName: _item.address, rate: _item.rate,price: _item.price, images: _item.images,));
                 },
                 child: SizedBox(
                   height: AppSize.s130,

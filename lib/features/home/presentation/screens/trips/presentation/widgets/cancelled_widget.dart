@@ -1,10 +1,10 @@
 import 'package:booking_app/core/component/others.dart';
-import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../../core/utilis/constants/assets_manager.dart';
 import 'build_favorites_item.dart';
 import 'package:booking_app/features/home/presentation/screens/trips/presentation/screens/view_hotel_details.dart';
 
@@ -40,7 +40,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget> {
                       navigateTo(context: context, widget: ViewHotelDetails());
                     },
                     child: BuildFavoritesItem(
-                      urlImage: (upcomingItem.cancelledModel!.bookingData[index].hotel!.images.isNotEmpty)? '$imageBaseUrl${upcomingItem.cancelledModel!.bookingData[index].hotel!.images[0].image}' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/d2/f1/44/exterior.jpg?w=1100&h=-1&s=1',
+                      urlImage: (upcomingItem.cancelledModel!.bookingData[index].hotel!.images.isNotEmpty)? ImageAssets.resort : ImageAssets.hotel,
                       hotelName: upcomingItem
                           .cancelledModel!.bookingData[index].hotel!.name
                           .toString(),

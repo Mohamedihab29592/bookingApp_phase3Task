@@ -78,6 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: AppSize.s20,
                   ),
                   MyTextForm(
+                    enableBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(color:  AppColors.grey)),
                     isDense: true,
                     radius: AppSize.s40,
                     labelText: AppStrings.email,
@@ -93,6 +96,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: AppSize.s15),
                   MyTextForm(
+                    enableBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: const BorderSide(color:  AppColors.grey)),
                     isPassword:  _isHidePass,
                     suffixIcon:  _isHidePass
                         ? Icons.visibility_off

@@ -80,6 +80,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
+                    enableBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(color:  AppColors.grey)),
                     labelText: AppStrings.name,
                     isDense: true,
                     radius: AppSize.s40,
@@ -96,6 +99,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
+                    enableBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(color:  AppColors.grey)),
                     labelText: AppStrings.email,
                     isDense: true,
                     radius: AppSize.s40,
@@ -113,6 +119,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
+                    enableBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(color:  AppColors.grey)),
                     isPassword:  _isHidePass,
                     suffixIcon:  _isHidePass
                         ? Icons.visibility_off
@@ -138,6 +147,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
+                    enableBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(color:  AppColors.grey)),
                     isPassword:  _isHidePasss,
                     suffixIcon:  _isHidePasss
                         ? Icons.visibility_off

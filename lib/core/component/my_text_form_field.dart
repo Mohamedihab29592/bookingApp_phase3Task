@@ -20,6 +20,7 @@ class MyTextForm extends StatelessWidget {
   final VoidCallback? prefixIconPressed;
   final VoidCallback? onTap;
   final bool readOnly;
+  final InputBorder? enableBorder;
 
 
 
@@ -41,7 +42,7 @@ class MyTextForm extends StatelessWidget {
     required this.textInputType,
     this.isDense,
     this.onTap,
-    this.readOnly =false, this.prefixIconPressed,
+    this.readOnly =false, this.prefixIconPressed,  this.enableBorder,
   }) : super(key: key);
 
   @override
@@ -77,11 +78,10 @@ class MyTextForm extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(color:  AppColors.red)),
 
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: AppColors.blue),
-        ),
+        enabledBorder: enableBorder,
       ),
+
+
       onTap:onTap ,
     );
   }
