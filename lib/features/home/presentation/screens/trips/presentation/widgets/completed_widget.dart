@@ -4,19 +4,20 @@ import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'build_upcoming_item.dart';
+import 'build_finished_item.dart';
 
-class UpcomingWidget extends StatefulWidget {
-  const UpcomingWidget({Key? key}) : super(key: key);
+class CompletedWidget extends StatefulWidget {
+  const CompletedWidget({Key? key}) : super(key: key);
 
   @override
-  State<UpcomingWidget> createState() => _UpcomingWidgetState();
+  State<CompletedWidget> createState() => _CompletedWidgetState();
 }
 
-class _UpcomingWidgetState extends State<UpcomingWidget> {
+class _CompletedWidgetState extends State<CompletedWidget> {
   @override
   void initState() {
-    HomeCubit.get(context).getUpcomingBooking();
+    HomeCubit.get(context).getCompletedBooking();
+
     super.initState();
   }
 
@@ -26,29 +27,35 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
       listener: (context, state) {},
       builder: (context, state) {
         var upcomingItem = HomeCubit.get(context);
-        if(state is GetBookingDataSuccessState){
-          if (upcomingItem.upComingModel!.bookingData.isNotEmpty) {
+        if (state is GetCompletedBookingDataSuccessState) {
+          if (upcomingItem.completedModel!.bookingData.isNotEmpty) {
             return Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return BuildUpcomingItem(
-                    urlImage: (upcomingItem.upComingModel!.bookingData[index].hotel!.images.isNotEmpty)? '$imageBaseUrl${upcomingItem.upComingModel!.bookingData[index].hotel!.images[0].image}' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/d2/f1/44/exterior.jpg?w=1100&h=-1&s=1',
+                  return BuildFinishedItem(
+                    urlImage: (upcomingItem.completedModel!.bookingData[index].hotel!.images.isNotEmpty)? '$imageBaseUrl${upcomingItem.completedModel!.bookingData[index].hotel!.images[0].image}' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/d2/f1/44/exterior.jpg?w=1100&h=-1&s=1',
                     startDate: '25 Sep',
                     endDate: '29 Sep',
                     roomsNumber: index + 1,
                     peopleNumber: (index + 1) * 2,
-                    isFavorite: index % 2 == 0 ? false : true,
-                    hotelName: upcomingItem.upComingModel!.bookingData[index].hotel!.name.toString(),
-                    city: upcomingItem.upComingModel!.bookingData[index].hotel!.address.toString(),
+                    hotelName: upcomingItem
+                        .completedModel!.bookingData[index].hotel!.name
+                        .toString(),
+                    city: upcomingItem
+                        .completedModel!.bookingData[index].hotel!.address
+                        .toString(),
                     day: 'Sunday',
-                    location: '$index.0km to ${upcomingItem.upComingModel!.bookingData[index].hotel!.name}',
-                    price: upcomingItem.upComingModel!.bookingData[index].hotel!.price.toString(),
+                    location: '$index.0km to ${upcomingItem
+                        .completedModel!.bookingData[index].hotel!.name}',
+                    price: upcomingItem
+                        .completedModel!.bookingData[index].hotel!.price
+                        .toString(),
                     initialRating: index + .5,
                   );
                 },
-                itemCount: upcomingItem.upComingModel!.bookingData.length,
+                itemCount: upcomingItem.completedModel!.bookingData.length,
               ),
             );
           } else {
@@ -74,7 +81,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
               ),
             );
           }
-        }else{
+        } else {
           return const Center(child: CupertinoActivityIndicator(color: AppColors.white,));
         }
       },

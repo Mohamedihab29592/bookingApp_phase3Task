@@ -1,5 +1,9 @@
 import 'dart:io';
+import 'package:booking_app/core/network/end_points.dart';
+import 'package:booking_app/core/network/network.dart';
+import 'package:booking_app/features/home/data/models/get_booking_model.dart';
 import 'package:booking_app/features/home/data/models/update_profile_model.dart';
+import 'package:booking_app/features/home/domain/use_cases/get_booking_usecase.dart';
 import 'package:booking_app/features/home/domain/use_cases/update_profile_data_usecase.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:booking_app/core/error/failures.dart';
@@ -23,11 +27,13 @@ class HomeCubit extends Cubit<HomeState> {
   final GetHomeDataUseCase homeDataUseCase;
   final GetProfileDataUseCase profileDataUseCase;
   final UpdateProfileDataUseCase updateProfileDataUseCase;
+  final GetBookingUseCase bookingUseCase;
 
   HomeCubit({
     required this.homeDataUseCase,
     required this.profileDataUseCase,
     required this.updateProfileDataUseCase,
+    required this.bookingUseCase,
   }) : super(HomeInitial());
 
   static HomeCubit get(context) => BlocProvider.of(context);
@@ -51,13 +57,7 @@ class HomeCubit extends Cubit<HomeState> {
     const Icon(Icons.person),
   ];
   HotelsEntity? hotelsEntity;
-  int pageNo = 0;
-  List<dynamic> exploreData = [];
-
-  void getHomeData({bool isFirst = true}) {
-    if (isFirst) {
-      pageNo = 0;
-    }
+  void getHomeData() {
     emit(GetHomeDataLoadingState());
     homeDataUseCase.call(params: NoParams(), page: 0).then((value) {
       value.fold((failure) {
@@ -65,12 +65,6 @@ class HomeCubit extends Cubit<HomeState> {
             GetHomeDataErrorState(error: _mapFailureToMsg(failure: failure)));
       }, (hotelEntity) {
         hotelsEntity = hotelEntity;
-        if (isFirst) {
-          exploreData = hotelsEntity!.homeEntity.data;
-        } else {
-          exploreData.addAll(hotelsEntity!.homeEntity.data);
-        }
-        // pageNo++;
         return emit(GetHomeDataSuccessState());
       });
     });
@@ -146,4 +140,62 @@ class HomeCubit extends Cubit<HomeState> {
       });
     });
   }
+
+  GetBookingModel? upComingModel;
+  GetBookingModel? cancelledModel;
+  GetBookingModel? completedModel;
+
+  void getUpcomingBooking() {
+    emit(GetBookingDataLoadingState());
+    bookingUseCase.call(type: 'upcomming').then((value) {
+      value.fold((failure) {
+        return emit(GetBookingDataErrorState(
+            error: _mapFailureToMsg(failure: failure)));
+      }, (model) {
+        upComingModel = model;
+        return emit(GetBookingDataSuccessState());
+      });
+    });
+  }
+
+  void getCancelledBooking() {
+    emit(GetCancelBookingDataLoadingState());
+    bookingUseCase.call(type: 'cancelled').then((value) {
+      value.fold((failure) {
+        return emit(GetCancelBookingDataErrorState(
+            error: _mapFailureToMsg(failure: failure)));
+      }, (model) {
+        cancelledModel = model;
+        return emit(GetCancelBookingDataSuccessState());
+      });
+    });
+  }
+
+  void getCompletedBooking() {
+    emit(GetCompletedBookingDataLoadingState());
+    bookingUseCase.call(type: 'completed').then((value) {
+      value.fold((failure) {
+        return emit(GetCompletedBookingDataErrorState(
+            error: _mapFailureToMsg(failure: failure)));
+      }, (model) {
+        completedModel = model;
+        return emit(GetCompletedBookingDataSuccessState());
+      });
+    });
+  }
+
+  void dataData() async{
+    emit(GetBookingDataLoadingState());
+    final response = await DioHelper.getData(
+      url: getBookingEndPoint,
+      query: {
+        "count": 10,
+        "type": 'upcomming',
+      },
+      token: 'VFPhjbPtzCfhdhOLyAv5ueSMxWSk54jv87lFJ4YYEWA4aCuNWKYgIDm2GmS3',
+    );
+    print(response.data);
+  }
+
+  
 }

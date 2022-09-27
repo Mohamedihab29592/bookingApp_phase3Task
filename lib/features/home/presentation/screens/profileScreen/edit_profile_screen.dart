@@ -33,6 +33,9 @@ class EditProfileScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: AppColors.darkGrey,
             elevation: 0,
+            title: IconButton(icon: Icon(Icons.add, color: Colors.white), onPressed: (){
+              // cubit.getCompletedBooking();
+            }),
           ),
           body: SingleChildScrollView(
             child: Padding(
