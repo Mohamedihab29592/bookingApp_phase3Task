@@ -15,6 +15,7 @@ import 'package:booking_app/features/home/data/data_sources/home_local_data_sour
 import 'package:booking_app/features/home/data/data_sources/home_remote_data_source.dart';
 import 'package:booking_app/features/home/data/repositories/home_data_repo_impl.dart';
 import 'package:booking_app/features/home/domain/repositories/hotels_repository.dart';
+import 'package:booking_app/features/home/domain/use_cases/booking_hotel_usecase.dart';
 import 'package:booking_app/features/home/domain/use_cases/get_booking_usecase.dart';
 import 'package:booking_app/features/home/domain/use_cases/get_home_data_usecase.dart';
 import 'package:booking_app/features/home/domain/use_cases/get_profile_data_usecase.dart';
@@ -44,6 +45,7 @@ Future<void> init() async {
         profileDataUseCase: sl(),
         updateProfileDataUseCase: sl(),
         bookingUseCase: sl(),
+        bookingHotelUseCase: sl(),
       ));
   sl.registerFactory(() => LoginCubit(loginUseCase: sl()));
   sl.registerFactory(() => SearchCubit(searchHotelUseCase: sl()));
@@ -61,6 +63,7 @@ Future<void> init() async {
       () => UpdateProfileDataUseCase(homeDataRepository: sl()));
 
   sl.registerLazySingleton(() => GetBookingUseCase(homeDataRepository: sl()));
+  sl.registerLazySingleton(() => BookingHotelUseCase(homeDataRepository: sl()));
 
   /// Repository
   sl.registerLazySingleton<BaseRegisterRepository>(

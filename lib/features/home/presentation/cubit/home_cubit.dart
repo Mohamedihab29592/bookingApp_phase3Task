@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/network/network.dart';
+import 'package:booking_app/features/home/data/models/booking_hotel_model.dart';
 import 'package:booking_app/features/home/data/models/get_booking_model.dart';
 import 'package:booking_app/features/home/data/models/update_profile_model.dart';
+import 'package:booking_app/features/home/domain/use_cases/booking_hotel_usecase.dart';
 import 'package:booking_app/features/home/domain/use_cases/get_booking_usecase.dart';
 import 'package:booking_app/features/home/domain/use_cases/update_profile_data_usecase.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,12 +29,14 @@ class HomeCubit extends Cubit<HomeState> {
   final GetHomeDataUseCase homeDataUseCase;
   final GetProfileDataUseCase profileDataUseCase;
   final UpdateProfileDataUseCase updateProfileDataUseCase;
+  final BookingHotelUseCase bookingHotelUseCase;
   final GetBookingUseCase bookingUseCase;
 
   HomeCubit({
     required this.homeDataUseCase,
     required this.profileDataUseCase,
     required this.updateProfileDataUseCase,
+    required this.bookingHotelUseCase,
     required this.bookingUseCase,
   }) : super(HomeInitial());
 
@@ -57,6 +61,7 @@ class HomeCubit extends Cubit<HomeState> {
     const Icon(Icons.person),
   ];
   HotelsEntity? hotelsEntity;
+
   void getHomeData() {
     emit(GetHomeDataLoadingState());
     homeDataUseCase.call(params: NoParams(), page: 0).then((value) {
@@ -184,18 +189,18 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  void dataData() async{
-    emit(GetBookingDataLoadingState());
-    final response = await DioHelper.getData(
-      url: getBookingEndPoint,
-      query: {
-        "count": 10,
-        "type": 'upcomming',
-      },
-      token: 'VFPhjbPtzCfhdhOLyAv5ueSMxWSk54jv87lFJ4YYEWA4aCuNWKYgIDm2GmS3',
-    );
-    print(response.data);
-  }
+  BookingHotelModel? bookingHotelModel;
 
-  
+  void bookAHotel({required String hotelId}) {
+    emit(BookingHotelLoadingState());
+    bookingHotelUseCase.call(hotelId: hotelId).then((value) {
+      value.fold((failure) {
+        return emit(
+            BookingHotelErrorState(error: _mapFailureToMsg(failure: failure)));
+      }, (model) {
+        bookingHotelModel = model;
+        return emit(BookingHotelSuccessState());
+      });
+    });
+  }
 }

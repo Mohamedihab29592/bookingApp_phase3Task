@@ -1,4 +1,5 @@
 import 'package:booking_app/core/error/failures.dart';
+import 'package:booking_app/features/home/data/models/booking_hotel_model.dart';
 import 'package:booking_app/features/home/data/models/get_booking_model.dart';
 import 'package:booking_app/features/home/data/models/profile_model.dart';
 import 'package:booking_app/features/home/data/models/update_profile_model.dart';
@@ -15,5 +16,7 @@ abstract class BaseHomeDataRepository {
       {required UpdateImageEntity updateImageEntity});
 
   Future<Either<Failure, GetBookingModel>> getBookingData({required String type});
+
+  Future<Either<Failure, BookingHotelModel>> bookingHotelData({required String hotelId});
 
 }
