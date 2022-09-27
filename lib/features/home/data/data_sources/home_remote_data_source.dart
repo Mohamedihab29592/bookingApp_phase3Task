@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:booking_app/features/home/data/models/get_booking_model.dart';
 import 'package:dio/dio.dart';
 import 'package:booking_app/core/error/exceptions.dart';
 import 'package:booking_app/core/local/cache_helper.dart';
@@ -17,6 +18,8 @@ abstract class BaseHomeDataRemoteDataSource {
 
   Future<UpdateProfileModel> updateProfileData(
       {required UpdateImageEntity updateImageEntity});
+
+  Future<GetBookingModel> getBookingData({required String type});
 }
 
 class HomeDataRemoteDataSource implements BaseHomeDataRemoteDataSource {
@@ -67,6 +70,24 @@ class HomeDataRemoteDataSource implements BaseHomeDataRemoteDataSource {
     if (response.statusCode == 200 && response.data['status']['type'] == '1') {
       log('update profile is ${response.data}');
       return UpdateProfileModel.fromJson(response.data);
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<GetBookingModel> getBookingData({required String type}) async {
+    final response = await DioHelper.getData(
+      url: getBookingEndPoint,
+      query: {
+        "count": 10,
+        "type": type,
+      },
+      token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
+    );
+    if (response.statusCode == 200) {
+      log('getBookingData is ${response.data}');
+      return GetBookingModel.fromJson(response.data);
     } else {
       throw ServerException();
     }
