@@ -53,12 +53,11 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                           .completedModel!.bookingData[index].hotel!.address
                           .toString(),
                       day: 'Sunday',
-                      location: '$index.0km to ${upcomingItem
-                          .completedModel!.bookingData[index].hotel!.name}',
-                      price: upcomingItem
-                          .completedModel!.bookingData[index].hotel!.price
+                      location: '$index.0km to ${upcomingItem.completedModel!.bookingData[index].hotel!.name}',
+                      price: upcomingItem.completedModel!.bookingData[index].hotel!.price
                           .toString(),
-                      initialRating: index + .5,
+                      initialRating: double.parse(upcomingItem
+                          .completedModel!.bookingData[index].hotel!.rate!) / 2,
                     ),
                   );
                 },

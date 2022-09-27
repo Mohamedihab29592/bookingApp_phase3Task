@@ -1,8 +1,9 @@
+import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../../../core/component/custom_text.dart';
 import '../../../../../../../core/utilis/constants/colors.dart';
-
 
 class BuildUpcomingItem extends StatelessWidget {
   final String urlImage;
@@ -31,14 +32,16 @@ class BuildUpcomingItem extends StatelessWidget {
       required this.day,
       required this.location,
       required this.price,
-        required this.initialRating})
+      required this.initialRating})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 50,),
+        const SizedBox(
+          height: 50,
+        ),
         Row(
           children: [
             const Spacer(),
@@ -51,7 +54,9 @@ class BuildUpcomingItem extends StatelessWidget {
             const Spacer(),
           ],
         ),
-        const SizedBox(height: 5,),
+        const SizedBox(
+          height: 5,
+        ),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -76,18 +81,23 @@ class BuildUpcomingItem extends StatelessWidget {
                     child: IconButton(
                       onPressed: () {},
                       icon: Icon(
-                        isFavorite?Icons.favorite:Icons.favorite_outline_sharp,
+                        isFavorite
+                            ? Icons.favorite
+                            : Icons.favorite_outline_sharp,
                         color: AppColors.teal,
                         size: 20,
-                      ),),),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Column(
                   children: [
                     Row(
-                      children:[
+                      children: [
                         Expanded(
                           child: CustomText(
                             text: hotelName,
@@ -108,20 +118,28 @@ class BuildUpcomingItem extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                         CustomText(
+                        CustomText(
                           text: '$day, $city ',
-                          fontSize: 14,fontWeight: FontWeight.w400,color: AppColors.grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.grey,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Expanded(
                           child: Row(
-                            children:  [
-                              const Icon(Icons.location_on,color: AppColors.teal,size: 20,),
+                            children: [
+                              const Icon(
+                                Icons.location_on,
+                                color: AppColors.teal,
+                                size: 20,
+                              ),
                               Expanded(
-                                child:  CustomText(
+                                child: CustomText(
                                   text: location,
-                                  fontSize: 14,fontWeight: FontWeight.w400,color: AppColors.grey,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.grey,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -139,24 +157,25 @@ class BuildUpcomingItem extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        // RatingBar.builder(
-                        //   initialRating: initialRating,
-                        //   minRating: 0,
-                        //   direction: Axis.horizontal,
-                        //   allowHalfRating: true,
-                        //   itemCount: 5,
-                        //   itemBuilder: (context, _) => const Icon(
-                        //     Icons.star,
-                        //     color: AppColors.teal,
-                        //   ),
-                        //   onRatingUpdate: (rating) {
-                        //   },
-                        //   itemSize: 20,
-                        // ),
-                         const Expanded(
-                          child:  CustomText(
+                        RatingBar.builder(
+                          initialRating: initialRating,
+                          minRating: 0,
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          itemCount: 5,
+                          itemBuilder: (context, _) => const Icon(
+                            Icons.star,
+                            color: AppColors.teal,
+                          ),
+                          onRatingUpdate: (rating) {},
+                          itemSize: 20,
+                        ),
+                        const Expanded(
+                          child: CustomText(
                             text: '  80 Reviewers',
-                            fontSize: 14,fontWeight: FontWeight.w400,color: AppColors.grey,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.grey,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),

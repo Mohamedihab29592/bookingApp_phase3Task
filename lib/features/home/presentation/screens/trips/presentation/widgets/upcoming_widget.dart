@@ -51,7 +51,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       day: 'Sunday',
                       location: '$index.0km to ${upcomingItem.upComingModel!.bookingData[index].hotel!.name}',
                       price: upcomingItem.upComingModel!.bookingData[index].hotel!.price.toString(),
-                      initialRating: index + .5,
+                      initialRating: double.parse(upcomingItem.upComingModel!.bookingData[index].hotel!.rate!) / 2,
                     ),
                   );
                 },

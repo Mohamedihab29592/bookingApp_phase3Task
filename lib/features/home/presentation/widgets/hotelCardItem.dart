@@ -5,7 +5,6 @@ import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import '../../../../core/utilis/constants/assets_manager.dart';
 
 class CardOfHotel extends StatelessWidget {

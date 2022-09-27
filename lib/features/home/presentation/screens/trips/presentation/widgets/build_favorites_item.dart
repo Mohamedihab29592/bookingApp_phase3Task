@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../../../core/component/custom_text.dart';
 import '../../../../../../../core/utilis/constants/colors.dart';
@@ -94,20 +95,20 @@ class BuildFavoritesItem extends StatelessWidget {
               const SizedBox(height: 4,),
               Row(
                 children: [
-                  // RatingBar.builder(
-                  //   initialRating: initialRating,
-                  //   minRating: 0,
-                  //   direction: Axis.horizontal,
-                  //   allowHalfRating: true,
-                  //   itemCount: 5,
-                  //   itemBuilder: (context, _) => const Icon(
-                  //     Icons.star,
-                  //     color: AppColors.teal,
-                  //   ),
-                  //   onRatingUpdate: (rating) {
-                  //   },
-                  //   itemSize: 20,
-                  // ),
+                  RatingBar.builder(
+                    initialRating: initialRating,
+                    minRating: 0,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    itemCount: 5,
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.star,
+                      color: AppColors.teal,
+                    ),
+                    onRatingUpdate: (rating) {
+                    },
+                    itemSize: 20,
+                  ),
                   const SizedBox(width: 30,),
                   const CustomText(
                     text: '/per night',
