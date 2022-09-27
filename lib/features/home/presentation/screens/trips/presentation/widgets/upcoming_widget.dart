@@ -1,9 +1,11 @@
+import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../screens/view_hotel_details.dart';
 import 'build_upcoming_item.dart';
 
 class UpcomingWidget extends StatefulWidget {
@@ -33,19 +35,24 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                 padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return BuildUpcomingItem(
-                    urlImage: (upcomingItem.upComingModel!.bookingData[index].hotel!.images.isNotEmpty)? '$imageBaseUrl${upcomingItem.upComingModel!.bookingData[index].hotel!.images[0].image}' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/d2/f1/44/exterior.jpg?w=1100&h=-1&s=1',
-                    startDate: '25 Sep',
-                    endDate: '29 Sep',
-                    roomsNumber: index + 1,
-                    peopleNumber: (index + 1) * 2,
-                    isFavorite: index % 2 == 0 ? false : true,
-                    hotelName: upcomingItem.upComingModel!.bookingData[index].hotel!.name.toString(),
-                    city: upcomingItem.upComingModel!.bookingData[index].hotel!.address.toString(),
-                    day: 'Sunday',
-                    location: '$index.0km to ${upcomingItem.upComingModel!.bookingData[index].hotel!.name}',
-                    price: upcomingItem.upComingModel!.bookingData[index].hotel!.price.toString(),
-                    initialRating: index + .5,
+                  return InkWell(
+                    onTap: (){
+                      navigateTo(context: context, widget: ViewHotelDetails());
+                    },
+                    child: BuildUpcomingItem(
+                      urlImage: (upcomingItem.upComingModel!.bookingData[index].hotel!.images.isNotEmpty)? '$imageBaseUrl${upcomingItem.upComingModel!.bookingData[index].hotel!.images[0].image}' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/d2/f1/44/exterior.jpg?w=1100&h=-1&s=1',
+                      startDate: '25 Sep',
+                      endDate: '29 Sep',
+                      roomsNumber: index + 1,
+                      peopleNumber: (index + 1) * 2,
+                      isFavorite: index % 2 == 0 ? false : true,
+                      hotelName: upcomingItem.upComingModel!.bookingData[index].hotel!.name.toString(),
+                      city: upcomingItem.upComingModel!.bookingData[index].hotel!.address.toString(),
+                      day: 'Sunday',
+                      location: '$index.0km to ${upcomingItem.upComingModel!.bookingData[index].hotel!.name}',
+                      price: upcomingItem.upComingModel!.bookingData[index].hotel!.price.toString(),
+                      initialRating: index + .5,
+                    ),
                   );
                 },
                 itemCount: upcomingItem.upComingModel!.bookingData.length,
