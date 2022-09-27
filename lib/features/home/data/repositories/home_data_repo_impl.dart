@@ -3,6 +3,7 @@ import 'package:booking_app/core/error/failures.dart';
 import 'package:booking_app/core/network/info.dart';
 import 'package:booking_app/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:booking_app/features/home/data/data_sources/home_remote_data_source.dart';
+import 'package:booking_app/features/home/data/models/booking_hotel_model.dart';
 import 'package:booking_app/features/home/data/models/get_booking_model.dart';
 import 'package:booking_app/features/home/data/models/profile_model.dart';
 import 'package:booking_app/features/home/data/models/update_profile_model.dart';
@@ -72,6 +73,18 @@ class HomeDataRepositoryImpl extends BaseHomeDataRepository {
       final getBooking =
           await homeDataRemoteDataSource.getBookingData(type: type);
       return Right(getBooking);
+    } on ServerException {
+      throw Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, BookingHotelModel>> bookingHotelData(
+      {required String hotelId}) async {
+    try {
+      final bookingHotel =
+          await homeDataRemoteDataSource.bookingHotelData(hotelId: hotelId);
+      return Right(bookingHotel);
     } on ServerException {
       throw Left(ServerFailure());
     }

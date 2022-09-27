@@ -69,3 +69,13 @@ class GetCompletedBookingDataErrorState extends HomeState {
 class GetCompletedBookingDataSuccessState extends HomeState {}
 
 class GetCompletedBookingDataLoadingState extends HomeState {}
+
+class BookingHotelErrorState extends HomeState {
+  final String error;
+
+  BookingHotelErrorState({required this.error});
+}
+
+class BookingHotelSuccessState extends HomeState {}
+
+class BookingHotelLoadingState extends HomeState {}
