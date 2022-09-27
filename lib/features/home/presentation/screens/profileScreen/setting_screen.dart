@@ -1,7 +1,8 @@
+import 'package:booking_app/core/app_localization/cubit/locale_cubit.dart';
 import 'package:booking_app/core/component/custom_text.dart';
 import 'package:booking_app/features/home/presentation/screens/profileScreen/build_setting_item.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utilis/constants/colors.dart';
 import '../../cubit/home_cubit.dart';
 
@@ -30,51 +31,65 @@ class SettingScreen extends StatelessWidget {
                 color: AppColors.white,
               ),
               Column(
-                children:  [
+                children: [
 
-                   BuildSettingItem(
-                       onTap: (){},
+                  BuildSettingItem(
+                      onTap: () {},
                       widget: const Icon(
                         Icons.notifications,
                         color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Notifications'),
-                   BuildSettingItem(
-                       onTap: (){},
+                  BuildSettingItem(
+                      onTap: () {},
                       widget: const Icon(
                         Icons.dark_mode,
                         color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Theme Mode'),
-                   BuildSettingItem(
-                       onTap: (){},
+                  BuildSettingItem(
+                      onTap: () {},
                       widget: const Icon(
                         Icons.font_download_outlined,
                         color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Fonts'),
-                   BuildSettingItem(
-                       onTap: (){},
+                  BuildSettingItem(
+                      onTap: () {},
                       widget: const Icon(
                         Icons.color_lens,
                         color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Color'),
-                   BuildSettingItem(
-                       onTap: (){},
-                      widget: const Icon(
+                  BlocConsumer<LocaleCubit, ChangeLocaleState>(
+                    listener: (context, state){
+                      Navigator.pop(context);
+                    },
+                    builder: (context, state) {
+                        return BuildSettingItem(
+                          onTap: () {
+                            if(state.locale.languageCode == 'en') {
+                              context.read<LocaleCubit>().changeLanguage('ar');
+                            }else{
+                              context.read<LocaleCubit>().changeLanguage('en');
+                            }
+                          },
+                          widget: const Icon(
 
-                        Icons.language,
-                        color: AppColors.white,
-                        size: 20,
-                      ),
-                      label: 'Language'),
-                   BuildSettingItem(
-                       onTap: (){},
+                            Icons.language,
+                            color: AppColors.white,
+                            size: 20,
+                          ),
+                          label: 'Language');
+
+                    },
+                  ),
+                  BuildSettingItem(
+                      onTap: () {},
                       widget: const CustomText(
                         text: 'Egypt',
                         fontWeight: FontWeight.normal,
@@ -82,8 +97,8 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.grey,
                       ),
                       label: 'Country'),
-                   BuildSettingItem(
-                       onTap: (){},
+                  BuildSettingItem(
+                      onTap: () {},
                       widget: const CustomText(
                         text: '\$ AUD',
                         fontWeight: FontWeight.normal,
@@ -91,24 +106,24 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.grey,
                       ),
                       label: 'Currency'),
-                   BuildSettingItem(
-                       onTap: (){},
+                  BuildSettingItem(
+                      onTap: () {},
                       widget: const Icon(
                         Icons.keyboard_arrow_right,
                         color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Terms of Services'),
-                   BuildSettingItem(
-                       onTap: (){},
+                  BuildSettingItem(
+                      onTap: () {},
                       widget: const Icon(
                         Icons.keyboard_arrow_right,
                         color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Privacy Policy'),
-                   BuildSettingItem(
-                      onTap: (){},
+                  BuildSettingItem(
+                      onTap: () {},
                       widget: const Icon(
                         Icons.keyboard_arrow_right,
                         color: AppColors.white,
@@ -116,10 +131,10 @@ class SettingScreen extends StatelessWidget {
                       ),
                       label: 'Give Us Feedbacks'),
                   BuildSettingItem(
-                    onTap: (){
-                      HomeCubit.get(context).signOut(context);
-                    },
-                      widget:const Icon(
+                      onTap: () {
+                        HomeCubit.get(context).signOut(context);
+                      },
+                      widget: const Icon(
                         Icons.keyboard_arrow_right,
                         color: AppColors.white,
                         size: 20,
