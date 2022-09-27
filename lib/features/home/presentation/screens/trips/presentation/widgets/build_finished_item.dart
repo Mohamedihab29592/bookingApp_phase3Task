@@ -37,110 +37,121 @@ class BuildFinishedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 40),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(urlImage),
-              ),
+      padding: const EdgeInsets.only(top: 8.0,),
+      child: SizedBox(
+        height: 160,
+        child: Card(
+          elevation: 10,
+          color: AppColors.darkGrey,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 120,
+                  height: 130,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(urlImage),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: hotelName,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      color: AppColors.white,
+
+                    ),
+                    CustomText(
+                      text: '$day, $city',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.grey,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    CustomText(
+                      text: '$startDate - $endDate',
+                      fontSize: 14,
+                      color: AppColors.white,
+                    ),
+                    CustomText(
+                      text: '$roomsNumber Room $peopleNumber People',
+                      fontSize: 14,
+                      color: AppColors.white,
+
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.location_on,
+                          color: AppColors.teal,
+                          size: 16,
+                        ),
+                        CustomText(
+                          text: location,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.grey,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                    RatingBar.builder(
+                      initialRating: initialRating,
+                      minRating: 0,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: AppColors.teal,
+                      ),
+                      onRatingUpdate: (rating) {},
+                      itemSize: 20,
+                    ),
+                    Row(
+                      children: [
+                        CustomText(
+                          text: '\$$price',
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          color: AppColors.white,
+                        ),
+                        const CustomText(
+                          text: '/per night',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.grey,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CustomText(
-                text: hotelName,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                color: AppColors.white,
-
-              ),
-              CustomText(
-                text: '$day, $city',
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: AppColors.grey,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              CustomText(
-                text: '$startDate - $endDate',
-                fontSize: 14,
-                color: AppColors.white,
-              ),
-              CustomText(
-                text: '$roomsNumber Room $peopleNumber People',
-                fontSize: 14,
-                color: AppColors.white,
-
-              ),
-              Row(
-                children: [
-                  const Icon(
-                    Icons.location_on,
-                    color: AppColors.teal,
-                    size: 16,
-                  ),
-                  CustomText(
-                    text: location,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.grey,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-              RatingBar.builder(
-                initialRating: initialRating,
-                minRating: 0,
-                direction: Axis.horizontal,
-                allowHalfRating: true,
-                itemCount: 5,
-                itemBuilder: (context, _) => const Icon(
-                  Icons.star,
-                  color: AppColors.teal,
-                ),
-                onRatingUpdate: (rating) {},
-                itemSize: 20,
-              ),
-              Row(
-                children: [
-                  CustomText(
-                    text: '\$$price',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    color: AppColors.white,
-                  ),
-                  const CustomText(
-                    text: '/per night',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.grey,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }

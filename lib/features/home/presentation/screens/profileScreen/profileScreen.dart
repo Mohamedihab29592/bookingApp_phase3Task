@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         return Scaffold(
             backgroundColor: AppColors.kPrimaryColor,
             body: Padding(
-              padding:  const EdgeInsets.all(AppMargin.m20),
+              padding:  const EdgeInsets.only(top:AppPadding.p30,right:AppPadding.p20,left: AppPadding.p20 ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -62,15 +62,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 const SizedBox(
                                   height: 3,
                                 ),
-                                const Text(
+                                 Text(
                                   'View and Edit Profile',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    color: AppColors.grey,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 18,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.white),
                                 ),
                               ],
                             ),

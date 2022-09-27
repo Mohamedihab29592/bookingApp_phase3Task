@@ -71,7 +71,7 @@ class MyTextForm extends StatelessWidget {
         isDense: isDense,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color:  AppColors.transparent),
+          borderSide: const BorderSide(color:  AppColors.blue),
         ),
         errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
@@ -79,7 +79,7 @@ class MyTextForm extends StatelessWidget {
 
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color: AppColors.transparent),
+          borderSide: const BorderSide(color: AppColors.blue),
         ),
       ),
       onTap:onTap ,

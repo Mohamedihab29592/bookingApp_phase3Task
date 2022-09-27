@@ -48,8 +48,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget> {
                           .cancelledModel!.bookingData[index].hotel!.address
                           .toString(),
                       day: 'Sunday',
-                      location: '$index.0km to ${upcomingItem
-                          .cancelledModel!.bookingData[index].hotel!.name}',
+                      location: '$index.5 km to your city',
                       price: upcomingItem.cancelledModel!.bookingData[index].hotel!.price.toString(),
                       initialRating: double.parse(upcomingItem.cancelledModel!.bookingData[index].hotel!.rate!) / 2,
                     ),

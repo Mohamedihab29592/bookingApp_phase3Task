@@ -69,9 +69,13 @@ class AppSize {
   static const double s120 = 120.0;
   static const double s130 = 130.0;
   static const double s140 = 140.0;
+  static const double s145 = 145.0;
   static const double s150 = 150.0;
   static const double s160 = 160.0;
   static const double s172 = 172.0;
+  static const double s175 = 175.0;
+  static const double s176 = 176.0;
+  static const double s181 = 181.0;
   static const double s190 = 190.0;
   static const double s200 = 200.0;
   static const double s220 = 220.0;
@@ -79,7 +83,7 @@ class AppSize {
   static const double s300 = 300.0;
   static const double s400 = 400.0;
   static const double s500 = 500.0;
-  static const double s706 = 706.0;
+  static const double s711 = 711.0;
 }
 
 class ScrollValue

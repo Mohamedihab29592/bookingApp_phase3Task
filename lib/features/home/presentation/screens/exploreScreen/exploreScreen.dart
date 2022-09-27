@@ -179,7 +179,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                           radius: AppSize.s100,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w900,
-                                          onPressed: () {}),
+                                          onPressed: () {
+
+                                          }),
                                     ),
                                     const Spacer(),
                                     AnimatedSmoothIndicator(

@@ -13,7 +13,7 @@ import '../widgets/circuleAvatarImages.dart';
 import '../widgets/searchItem.dart';
 
 class Search extends StatefulWidget {
-  Search({Key? key}) : super(key: key);
+ const Search({Key? key}) : super(key: key);
 
   @override
   State<Search> createState() => _SearchState();

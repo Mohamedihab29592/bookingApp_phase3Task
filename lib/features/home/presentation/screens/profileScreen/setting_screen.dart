@@ -3,6 +3,7 @@ import 'package:booking_app/features/home/presentation/screens/profileScreen/bui
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utilis/constants/colors.dart';
+import '../../cubit/home_cubit.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -17,105 +18,117 @@ class SettingScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomText(
-              text: 'Setting',
-              fontWeight: FontWeight.w900,
-              fontSize: 25,
-              color: AppColors.white,
-            ),
-            SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CustomText(
+                text: 'Setting',
+                fontWeight: FontWeight.w900,
+                fontSize: 25,
+                color: AppColors.white,
+              ),
+              Column(
                 children:  [
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const BuildSettingItem(
-                      widget: Icon(
+
+                   BuildSettingItem(
+                       onTap: (){},
+                      widget: const Icon(
                         Icons.notifications,
                         color: AppColors.white,
-                        size: 25,
+                        size: 20,
                       ),
                       label: 'Notifications'),
-                  const BuildSettingItem(
-                      widget: Icon(
+                   BuildSettingItem(
+                       onTap: (){},
+                      widget: const Icon(
                         Icons.dark_mode,
                         color: AppColors.white,
-                        size: 25,
+                        size: 20,
                       ),
                       label: 'Theme Mode'),
-                  const BuildSettingItem(
-                      widget: Icon(
+                   BuildSettingItem(
+                       onTap: (){},
+                      widget: const Icon(
                         Icons.font_download_outlined,
                         color: AppColors.white,
-                        size: 25,
+                        size: 20,
                       ),
                       label: 'Fonts'),
-                  const BuildSettingItem(
-                      widget: Icon(
+                   BuildSettingItem(
+                       onTap: (){},
+                      widget: const Icon(
                         Icons.color_lens,
                         color: AppColors.white,
-                        size: 25,
+                        size: 20,
                       ),
                       label: 'Color'),
-                  const BuildSettingItem(
-                      widget: Icon(
+                   BuildSettingItem(
+                       onTap: (){},
+                      widget: const Icon(
+
                         Icons.language,
                         color: AppColors.white,
-                        size: 25,
+                        size: 20,
                       ),
                       label: 'Language'),
-                  const BuildSettingItem(
-                      widget: CustomText(
+                   BuildSettingItem(
+                       onTap: (){},
+                      widget: const CustomText(
                         text: 'Egypt',
                         fontWeight: FontWeight.normal,
                         fontSize: 18,
                         color: AppColors.grey,
                       ),
                       label: 'Country'),
-                  const BuildSettingItem(
-                      widget: CustomText(
+                   BuildSettingItem(
+                       onTap: (){},
+                      widget: const CustomText(
                         text: '\$ AUD',
                         fontWeight: FontWeight.normal,
                         fontSize: 18,
                         color: AppColors.grey,
                       ),
                       label: 'Currency'),
-                  const BuildSettingItem(
-                      widget: Icon(
+                   BuildSettingItem(
+                       onTap: (){},
+                      widget: const Icon(
                         Icons.keyboard_arrow_right,
                         color: AppColors.white,
-                        size: 25,
+                        size: 20,
                       ),
                       label: 'Terms of Services'),
-                  const BuildSettingItem(
-                      widget: Icon(
+                   BuildSettingItem(
+                       onTap: (){},
+                      widget: const Icon(
                         Icons.keyboard_arrow_right,
                         color: AppColors.white,
-                        size: 25,
+                        size: 20,
                       ),
                       label: 'Privacy Policy'),
-                  const BuildSettingItem(
-                      widget: Icon(
+                   BuildSettingItem(
+                      onTap: (){},
+                      widget: const Icon(
                         Icons.keyboard_arrow_right,
                         color: AppColors.white,
-                        size: 25,
+                        size: 20,
                       ),
                       label: 'Give Us Feedbacks'),
                   BuildSettingItem(
-                      widget: IconButton(onPressed: (){}, icon: const Icon(
+                    onTap: (){
+                      HomeCubit.get(context).signOut(context);
+                    },
+                      widget:const Icon(
                         Icons.keyboard_arrow_right,
                         color: AppColors.white,
-                        size: 25,
-                      ),),
+                        size: 20,
+                      ),
                       label: 'Log out'),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

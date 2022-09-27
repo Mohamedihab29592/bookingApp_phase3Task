@@ -30,7 +30,8 @@ class BuildFavoritesItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 40),
+      height: 130,
+      margin: const EdgeInsets.only(top: 30),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: AppColors.darkGrey
@@ -41,7 +42,7 @@ class BuildFavoritesItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            width: 120,height: 130,
+            width: 110,height: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
               image:  DecorationImage(
@@ -81,7 +82,7 @@ class BuildFavoritesItem extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(width: 8,),
+                  const SizedBox(width: 50,),
                   CustomText(
                     text: '\$$price',
                     fontSize: 20,
@@ -109,7 +110,7 @@ class BuildFavoritesItem extends StatelessWidget {
                     },
                     itemSize: 20,
                   ),
-                  const SizedBox(width: 30,),
+                  const SizedBox(width: 80,),
                   const CustomText(
                     text: '/per night',
                     fontSize: 16,fontWeight: FontWeight.w400,color: AppColors.grey,

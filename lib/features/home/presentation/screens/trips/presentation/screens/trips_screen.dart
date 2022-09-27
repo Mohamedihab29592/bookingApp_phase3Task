@@ -28,7 +28,7 @@ class _TripsScreenState extends State<TripsScreen> {
       child: Scaffold(
         backgroundColor: AppColors.kPrimaryColor,
         body: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -75,7 +75,7 @@ class _TripsScreenState extends State<TripsScreen> {
                           });
                         },
                         child: CustomText(
-                          text: 'Finished',
+                          text: 'Completed',
                           fontSize: 16,
                           fontWeight: currentScreen == 1
                               ? FontWeight.w800
@@ -94,7 +94,7 @@ class _TripsScreenState extends State<TripsScreen> {
                           });
                         },
                         child: CustomText(
-                          text: 'Favorites',
+                          text: 'Cancelled',
                           fontSize: 16,
                           fontWeight: currentScreen == 2
                               ? FontWeight.w800

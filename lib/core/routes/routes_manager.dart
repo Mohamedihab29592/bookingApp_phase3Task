@@ -1,5 +1,6 @@
 import 'package:booking_app/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:booking_app/features/auth/register/presentation/screens/signup_screen.dart';
+import 'package:booking_app/features/home/presentation/screens/exploreScreen/hotelView.dart';
 import 'package:booking_app/features/search/presentation/screens/search.dart';
 import 'package:booking_app/features/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class Routes {
   static const String registerRoute = '/register';
   static const String homeLayout = '/homeLayout';
   static const String search = '/search';
+  static const String hotelView = '/hotelView';
 }
 
 class RouteGenerator {
@@ -26,7 +28,9 @@ class RouteGenerator {
         case Routes.homeLayout:
         return MaterialPageRoute(builder: (context) => const HomeLayout());
       case Routes.search:
-        return MaterialPageRoute(builder: (context) =>  Search());
+        return MaterialPageRoute(builder: (context) =>  const Search());
+      case Routes.hotelView:
+        return MaterialPageRoute(builder: (context) =>  const HotelView());
       default:
         return unDefinedRoute();
     }

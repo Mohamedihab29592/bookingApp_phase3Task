@@ -4,6 +4,7 @@ class AppStrings {
   static const String signUp = 'Sign Up';
   static const String logIn = 'Login';
   static const String google = 'Google';
+  static const String bookNow = 'Book now';
   static const String orLoginWith = 'or log in with email';
   static const String name = 'Name';
   static const String email = 'Email';
