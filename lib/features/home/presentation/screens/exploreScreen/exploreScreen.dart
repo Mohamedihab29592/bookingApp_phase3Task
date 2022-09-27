@@ -1,5 +1,6 @@
 import 'package:booking_app/core/utilis/constants/app_strings.dart';
 import 'package:booking_app/core/utilis/constants/constats_manager.dart';
+import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -28,6 +29,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   void initState() {
     super.initState();
+    HomeCubit.get(context).getHomeData();
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels > 200) {
