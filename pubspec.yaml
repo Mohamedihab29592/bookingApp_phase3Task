@@ -9,6 +9,9 @@ environment:
   sdk: '>=2.18.0-165.1.beta <3.0.0'
 
 dependencies:
+
+  flutter_localizations:
+    sdk: flutter
   carousel_slider: ^4.1.1
 #  firebase_auth: ^3.10.0
 #  firebase_core: ^1.23.0
@@ -58,3 +61,4 @@ flutter:
   assets:
     - assets/images/
     - assets/json/
+    - assets/lang/
