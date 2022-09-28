@@ -1,4 +1,6 @@
+import 'package:booking_app/core/component/my_text.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -7,6 +9,7 @@ import '../../../../../../../core/utilis/constants/colors.dart';
 
 class BuildUpcomingItem extends StatelessWidget {
   final String urlImage;
+  final int? id;
   final String startDate;
   final String endDate;
   final int roomsNumber;
@@ -32,7 +35,7 @@ class BuildUpcomingItem extends StatelessWidget {
       required this.day,
       required this.location,
       required this.price,
-      required this.initialRating})
+      required this.initialRating,  required this.id})
       : super(key: key);
 
   @override
@@ -40,7 +43,7 @@ class BuildUpcomingItem extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(
-          height: 50,
+          height: 15,
         ),
         Row(
           children: [
@@ -69,24 +72,47 @@ class BuildUpcomingItem extends StatelessWidget {
                 alignment: Alignment.topRight,
                 children: [
                   Image.network(urlImage),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    width: 35,
-                    height: 35,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.darkGrey,
-                    ),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        isFavorite
-                            ? Icons.favorite
-                            : Icons.favorite_outline_sharp,
-                        color: AppColors.teal,
-                        size: 20,
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child:BlocConsumer<HomeCubit,HomeState>(
+                      listener: (context,state){
+                        if (state is UpdateBookingSuccessState)
+                          {
+                            HomeCubit.get(context).getUpcomingBooking();
+                          }
+                      },
+                      builder: (context,state){
+                        var cubit = HomeCubit.get(context);
+                        return PopupMenuButton(
+                            icon:const Icon(Icons.menu,color: AppColors.white,),
+                            color: AppColors.kPrimaryColor,
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                value: 1,
+                                child:TextButton(
+                                  onPressed: (){
+                                    cubit.updateBooking(hotelId:id! , type:"completed"  );
+                                    print(id.toString());
+
+                                  },
+                                  child: const MyText(text: 'Complete',colors: AppColors.blue,fontSize: 15 ,),
+                                ),
+
+                              ),
+                              PopupMenuItem(
+                                value: 2,
+                                child:TextButton(
+                                  onPressed: (){
+                                    cubit.updateBooking(hotelId:id! , type:"cancelled"  );
+
+                                  },
+                                  child: const MyText(text: 'Cancel',colors: AppColors.red,fontSize: 15 ,),
+                                ),
+
+                              ),
+
+                            ]);
+                      },
                     ),
                   ),
                 ],
@@ -117,15 +143,16 @@ class BuildUpcomingItem extends StatelessWidget {
                       ],
                     ),
                     Row(
-                      children: [
-                        CustomText(
-                          text: '$day, $city ',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.grey,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                      children: [Expanded(
+                        child: CustomText(
+                            text: '$day, $city ',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.grey,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                      ),
                         Expanded(
                           child: Row(
                             children: [

@@ -28,37 +28,11 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
       listener: (context, state) {},
       builder: (context, state) {
         var upcomingItem = HomeCubit.get(context);
-        if(state is GetBookingDataSuccessState){
-          if (upcomingItem.upComingModel!.bookingData.isNotEmpty) {
-            return Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: (){
-                      navigateTo(context: context, widget: ViewHotelDetails());
-                    },
-                    child: BuildUpcomingItem(
-                      urlImage: (upcomingItem.upComingModel!.bookingData[index].hotel!.images.isNotEmpty)? '$imageBaseUrl${upcomingItem.upComingModel!.bookingData[index].hotel!.images[0].image}' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/d2/f1/44/exterior.jpg?w=1100&h=-1&s=1',
-                      startDate: '25 Sep',
-                      endDate: '29 Sep',
-                      roomsNumber: index + 1,
-                      peopleNumber: (index + 1) * 2,
-                      isFavorite: index % 2 == 0 ? false : true,
-                      hotelName: upcomingItem.upComingModel!.bookingData[index].hotel!.name.toString(),
-                      city: upcomingItem.upComingModel!.bookingData[index].hotel!.address.toString(),
-                      day: 'Sunday',
-                      location: '$index.0km to ${upcomingItem.upComingModel!.bookingData[index].hotel!.name}',
-                      price: upcomingItem.upComingModel!.bookingData[index].hotel!.price.toString(),
-                      initialRating: double.parse(upcomingItem.upComingModel!.bookingData[index].hotel!.rate!) / 2,
-                    ),
-                  );
-                },
-                itemCount: upcomingItem.upComingModel!.bookingData.length,
-              ),
-            );
-          } else {
+        if (state is GetBookingDataLoadingState) {
+          return const Center(child: CupertinoActivityIndicator(color: AppColors.white,));
+        }
+        else  if (state is GetBookingDataErrorState || upcomingItem.upComingModel!.bookingData.isEmpty)
+          {
             return Center(
               child: Column(
                 children: [
@@ -81,10 +55,38 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
               ),
             );
           }
-        }else{
-          return const Center(child: CupertinoActivityIndicator(color: AppColors.white,));
+
+          {return Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: (){
+                      navigateTo(context: context, widget: const ViewHotelDetails());
+                    },
+                    child: BuildUpcomingItem(
+                      id: upcomingItem.upComingModel!.bookingData[index].id,
+                      urlImage: imageBaseUrl+ upcomingItem.upComingModel!.bookingData[index].hotel!.images[0].image,
+                      startDate: '25 Sep',
+                      endDate: '29 Sep',
+                      roomsNumber: index + 1,
+                      peopleNumber: (index + 1) * 2,
+                      isFavorite: index % 2 == 0 ? false : true,
+                      hotelName: upcomingItem.upComingModel!.bookingData[index].hotel!.name.toString(),
+                      city: upcomingItem.upComingModel!.bookingData[index].hotel!.address.toString(),
+                      day: 'Sunday',
+                      location: '$index.0km to ${upcomingItem.upComingModel!.bookingData[index].hotel!.name}',
+                      price: upcomingItem.upComingModel!.bookingData[index].hotel!.price.toString(),
+                      initialRating: double.parse(upcomingItem.upComingModel!.bookingData[index].hotel!.rate!) / 2,
+                    ),
+                  );
+                },
+                itemCount: upcomingItem.upComingModel!.bookingData.length,
+              ),
+            );
+          }
         }
-      },
     );
   }
 }

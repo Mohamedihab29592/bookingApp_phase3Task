@@ -86,7 +86,7 @@ class HomeDataRemoteDataSource implements BaseHomeDataRemoteDataSource {
         "count": 10,
         "type": type,
       },
-      token: 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
+      token: token,
     );
     if (response.statusCode == 200) {
       log('getBookingData is ${response.data}');
