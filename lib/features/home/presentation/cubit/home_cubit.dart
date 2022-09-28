@@ -60,20 +60,6 @@ class HomeCubit extends Cubit<HomeState> {
     const Icon(Icons.favorite),
     const Icon(Icons.person),
   ];
-  HotelsEntity? hotelsEntity;
-
-  void getHomeData() {
-    emit(GetHomeDataLoadingState());
-    homeDataUseCase.call(params: NoParams(), page: 0).then((value) {
-      value.fold((failure) {
-        return emit(
-            GetHomeDataErrorState(error: _mapFailureToMsg(failure: failure)));
-      }, (hotelEntity) {
-        hotelsEntity = hotelEntity;
-        return emit(GetHomeDataSuccessState());
-      });
-    });
-  }
 
   String _mapFailureToMsg({required Failure failure}) {
     switch (failure.runtimeType) {
@@ -84,6 +70,46 @@ class HomeCubit extends Cubit<HomeState> {
       default:
         return AppStrings.unExpectedError;
     }
+  }
+
+  HotelsEntity? hotelsEntity;
+  List<DataHotelEntity> list = [];
+  int lastPage = 1;
+  int total = 0;
+  int currentPage = 1;
+
+  void getHomeData({
+    bool isForce = false,
+  }) {
+    // if (isForce) {
+    //   list = [];
+    //   currentPage = 1;
+    // }
+    emit(GetHomeDataLoadingState());
+    homeDataUseCase.call(params: NoParams(), page: currentPage).then((value) {
+      value.fold((failure) {
+        return emit(
+            GetHomeDataErrorState(error: _mapFailureToMsg(failure: failure)));
+      }, (hotelEntity) {
+        hotelsEntity = hotelEntity;
+        // list.addAll(hotelEntity.homeEntity.data);
+        // currentPage++;
+        //
+        // if (lastPage == 1) {
+        //   lastPage = hotelEntity.homeEntity.lastPage;
+        // }
+
+        isEnd = false;
+        return emit(GetHomeDataSuccessState());
+      });
+    });
+  }
+
+  bool isEnd = false;
+
+  void toggleIsEnd() {
+    isEnd = !isEnd;
+    emit(ToggleIsEndState());
   }
 
   dynamic signOut(context) async {

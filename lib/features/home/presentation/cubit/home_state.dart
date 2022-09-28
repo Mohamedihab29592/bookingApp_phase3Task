@@ -4,6 +4,8 @@ abstract class HomeState {}
 
 class HomeInitial extends HomeState {}
 
+class ToggleIsEndState extends HomeState {}
+
 class GetHomeDataSuccessState extends HomeState {}
 
 class GetHomeDataLoadingState extends HomeState {}

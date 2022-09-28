@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/core/utilis/constants/values_manger.dart';
@@ -63,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: 3,
                                 ),
                                  Text(
-                                  'View and Edit Profile',
+                                  'View and Edit Profile'.tr(context),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.white),
@@ -100,19 +101,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 30,
                   ),
                   BuildProfileItem(
-                      text: 'Change Password', icon: Icons.lock, function: () {}),
+                      text: 'Change Password'.tr(context), icon: Icons.lock, function: () {}),
                   BuildProfileItem(
-                      text: 'Invite Friend', icon: Icons.people, function: () {}),
+                      text: 'Invite Friend'.tr(context), icon: Icons.people, function: () {}),
                   BuildProfileItem(
-                      text: 'Credit & Coupons',
+                      text: 'Credit & Coupons'.tr(context),
                       icon: Icons.card_giftcard,
                       function: () {}),
                   BuildProfileItem(
-                      text: 'Help Center', icon: Icons.info, function: () {}),
+                      text: 'Help Center'.tr(context), icon: Icons.info, function: () {}),
                   BuildProfileItem(
-                      text: 'Payment', icon: Icons.payment, function: () {}),
+                      text: 'Payment'.tr(context), icon: Icons.payment, function: () {}),
                   BuildProfileItem(
-                      text: 'Settings', icon: Icons.settings, function: () {
+                      text: 'Settings'.tr(context), icon: Icons.settings, function: () {
                         navigateTo(context: context, widget: SettingScreen());
                   }),
                 ],

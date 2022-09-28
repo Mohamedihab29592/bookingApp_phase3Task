@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/utilis/constants/app_strings.dart';
 import 'package:booking_app/core/utilis/constants/constats_manager.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
@@ -150,7 +151,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 return null;
                               },
                               prefixIcon: IconButton(onPressed: (){},icon:const Icon(Icons.search,color: AppColors.teal,) ,),
-                              hintText: AppStrings.whereAreYouGoing,
+                              hintText: AppStrings.whereAreYouGoing.tr(context),
                               radius: AppSize.s30,
                             ),
                           ),
@@ -178,7 +179,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                     Align(
                                       alignment: Alignment.bottomLeft,
                                       child: MyButton(
-                                          label: AppStrings.viewHotel,
+                                          label: AppStrings.viewHotel.tr(context),
                                           radius: AppSize.s100,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w900,
@@ -231,8 +232,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MyText(
-                      text: AppStrings.popularDestination,
+                   MyText(
+                      text: AppStrings.popularDestination.tr(context),
                       fontSize: AppSize.s20,
                       colors: AppColors.white),
                   const SizedBox(
@@ -288,15 +289,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const MyText(
-                        text: AppStrings.bestDeals,
+                       MyText(
+                        text: AppStrings.bestDeals.tr(context),
                         fontSize: AppSize.s20,
                       ),
                       const Spacer(),
                       TextButton(
                         onPressed: () {},
-                        child: const MyText(
-                          text: AppStrings.viewAll,
+                        child: MyText(
+                          text: AppStrings.viewAll.tr(context),
                           fontSize: AppSize.s16,
                           colors: AppColors.teal,
                         ),

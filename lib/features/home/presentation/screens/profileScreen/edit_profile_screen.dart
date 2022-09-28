@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/component/custom_button.dart';
 import 'package:booking_app/core/component/toast.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
@@ -33,9 +34,6 @@ class EditProfileScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: AppColors.darkGrey,
             elevation: 0,
-
-              // cubit.getCompletedBooking();
-
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -45,11 +43,11 @@ class EditProfileScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      '  Edit Profile',
+                    Text(
+                      'Edit Profile'.tr(context),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColors.white,
                         fontWeight: FontWeight.w500,
                         fontSize: 25,
@@ -67,8 +65,8 @@ class EditProfileScreen extends StatelessWidget {
                             height: 130,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border:
-                                  Border.all(width: 4, color: AppColors.darkGrey),
+                              border: Border.all(
+                                  width: 4, color: AppColors.darkGrey),
                               boxShadow: [
                                 BoxShadow(
                                   spreadRadius: 2,
@@ -80,7 +78,8 @@ class EditProfileScreen extends StatelessWidget {
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: (cubit.userImage != null)
-                                    ? FileImage(cubit.userImage!) as ImageProvider
+                                    ? FileImage(cubit.userImage!)
+                                        as ImageProvider
                                     : NetworkImage(
                                         cubit.profileModel!.profileData.image),
                               ),
@@ -118,15 +117,15 @@ class EditProfileScreen extends StatelessWidget {
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please Enter your Name';
+                              return 'Enter your Name'.tr(context);
                             }
                             return null;
                           },
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.only(bottom: 3),
-                            labelText: 'Username',
+                            labelText: 'UserName'.tr(context),
                             floatingLabelBehavior: FloatingLabelBehavior.always,
-                            hintText: 'User Name',
+                            hintText: 'User Name'.tr(context),
                             hintStyle: const TextStyle(
                               fontSize: 16,
                               color: AppColors.grey,
@@ -159,15 +158,15 @@ class EditProfileScreen extends StatelessWidget {
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please Enter your Email';
+                              return 'Enter your Email'.tr(context);
                             }
                             return null;
                           },
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.only(bottom: 3),
-                            labelText: 'Email',
+                            labelText: 'Email'.tr(context),
                             floatingLabelBehavior: FloatingLabelBehavior.always,
-                            hintText: 'Email',
+                            hintText: 'Email'.tr(context),
                             hintStyle: const TextStyle(
                               fontSize: 16,
                               color: AppColors.grey,
@@ -200,9 +199,9 @@ class EditProfileScreen extends StatelessWidget {
                                     Navigator.pop(context);
                                   },
                                   backgroundColor: Colors.white,
-                                  child: const Text(
-                                    'Cancel',
-                                    style: TextStyle(color: Colors.black),
+                                  child: Text(
+                                    'Cancel'.tr(context),
+                                    style: const TextStyle(color: Colors.black),
                                   )),
                             ),
                             const SizedBox(
@@ -222,9 +221,9 @@ class EditProfileScreen extends StatelessWidget {
                                       }
                                     },
                                     backgroundColor: Colors.teal,
-                                    child: const Text(
-                                      'Save',
-                                      style: TextStyle(color: Colors.white),
+                                    child: Text(
+                                      'Save'.tr(context),
+                                      style: const TextStyle(color: Colors.white),
                                     ))),
                           ],
                         ),

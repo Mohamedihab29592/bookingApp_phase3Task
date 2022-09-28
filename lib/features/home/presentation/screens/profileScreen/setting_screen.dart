@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/app_localization/cubit/locale_cubit.dart';
 import 'package:booking_app/core/component/custom_text.dart';
 import 'package:booking_app/features/home/presentation/screens/profileScreen/build_setting_item.dart';
@@ -24,15 +25,14 @@ class SettingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomText(
-                text: 'Setting',
+               CustomText(
+                text: 'Settings'.tr(context),
                 fontWeight: FontWeight.w900,
                 fontSize: 25,
                 color: AppColors.white,
               ),
               Column(
                 children: [
-
                   BuildSettingItem(
                       onTap: () {},
                       widget: const Icon(
@@ -40,7 +40,7 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.white,
                         size: 20,
                       ),
-                      label: 'Notifications'),
+                      label: 'Notifications'.tr(context)),
                   BuildSettingItem(
                       onTap: () {},
                       widget: const Icon(
@@ -48,7 +48,7 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.white,
                         size: 20,
                       ),
-                      label: 'Theme Mode'),
+                      label: 'Theme Mode'.tr(context)),
                   BuildSettingItem(
                       onTap: () {},
                       widget: const Icon(
@@ -56,7 +56,7 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.white,
                         size: 20,
                       ),
-                      label: 'Fonts'),
+                      label: 'Fonts'.tr(context)),
                   BuildSettingItem(
                       onTap: () {},
                       widget: const Icon(
@@ -64,7 +64,7 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.white,
                         size: 20,
                       ),
-                      label: 'Color'),
+                      label: 'Color'.tr(context)),
                   BlocConsumer<LocaleCubit, ChangeLocaleState>(
                     listener: (context, state){
                       Navigator.pop(context);
@@ -84,28 +84,28 @@ class SettingScreen extends StatelessWidget {
                             color: AppColors.white,
                             size: 20,
                           ),
-                          label: 'Language');
+                          label: 'Language'.tr(context));
 
                     },
                   ),
                   BuildSettingItem(
                       onTap: () {},
-                      widget: const CustomText(
-                        text: 'Egypt',
+                      widget: CustomText(
+                        text: 'Egypt'.tr(context),
                         fontWeight: FontWeight.normal,
                         fontSize: 18,
                         color: AppColors.grey,
                       ),
-                      label: 'Country'),
+                      label: 'Country'.tr(context)),
                   BuildSettingItem(
                       onTap: () {},
                       widget: const CustomText(
-                        text: '\$ AUD',
+                        text: '\$ LE',
                         fontWeight: FontWeight.normal,
                         fontSize: 18,
                         color: AppColors.grey,
                       ),
-                      label: 'Currency'),
+                      label: 'Currency'.tr(context),),
                   BuildSettingItem(
                       onTap: () {},
                       widget: const Icon(
@@ -113,7 +113,7 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.white,
                         size: 20,
                       ),
-                      label: 'Terms of Services'),
+                      label: 'Terms of Services'.tr(context)),
                   BuildSettingItem(
                       onTap: () {},
                       widget: const Icon(
@@ -121,7 +121,7 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.white,
                         size: 20,
                       ),
-                      label: 'Privacy Policy'),
+                      label: 'Privacy Policy'.tr(context)),
                   BuildSettingItem(
                       onTap: () {},
                       widget: const Icon(
@@ -129,7 +129,7 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.white,
                         size: 20,
                       ),
-                      label: 'Give Us Feedbacks'),
+                      label: 'Give Us Feedbacks'.tr(context),),
                   BuildSettingItem(
                       onTap: () {
                         HomeCubit.get(context).signOut(context);
@@ -139,7 +139,7 @@ class SettingScreen extends StatelessWidget {
                         color: AppColors.white,
                         size: 20,
                       ),
-                      label: 'Log out'),
+                      label: 'Log out'.tr(context)),
                 ],
               ),
             ],
