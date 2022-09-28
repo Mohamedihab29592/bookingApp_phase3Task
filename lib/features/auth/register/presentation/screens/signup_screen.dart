@@ -64,8 +64,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: AppSize.s15,
                   ),
-                  const Align(
-                      alignment: Alignment.center, child: MySignButton()),
+                   Align(
+                      alignment: Alignment.center, child: MySignButton(ontap: () {  },)),
                   const SizedBox(
                     height: AppSize.s30,
                   ),

@@ -17,6 +17,7 @@ import 'package:booking_app/features/home/domain/use_cases/get_profile_data_usec
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booking_app/features/home/domain/use_cases/get_home_data_usecase.dart';
+import 'package:location/location.dart';
 import '../../../../core/component/toast.dart';
 import '../../../../core/local/cache_helper.dart';
 import '../../../../core/routes/routes_manager.dart';
@@ -248,6 +249,27 @@ class HomeCubit extends Cubit<HomeState> {
     }).catchError((error) {
       emit(UpdateBookingErrorState(error: error.toString()));
     });
+  }
+
+
+
+  Future<void> getCurrentPosition() async {
+
+    var location = Location();
+
+    if (!await location.serviceEnabled()) {
+      if (!await location.requestService()) {
+        return;
+      }
+    }
+    var permission = await location.hasPermission();
+    if (permission == PermissionStatus.denied) {
+      permission = await location.requestPermission();
+      if (permission != PermissionStatus.granted) {
+        return;
+      }
+    }
+
   }
 }
 

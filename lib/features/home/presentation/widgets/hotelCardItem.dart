@@ -54,6 +54,8 @@ class CardOfHotel extends StatelessWidget {
                         image:imageBaseUrl +
                             _item.images[0].image,
                       id: _item.id,
+                        lat:_item.latitude ,
+                        long:_item.longitude ,
                       ));
                 },
                 child: Container(

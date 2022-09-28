@@ -19,6 +19,8 @@ class HotelView extends StatefulWidget {
   final String rate;
   final String price;
   final String image;
+  final String lat;
+  final String long;
   final int id;
 
   const HotelView(
@@ -27,7 +29,7 @@ class HotelView extends StatefulWidget {
       required this.locationName,
       required this.rate,
       required this.price,
-    required this.image, required this.id})
+    required this.image, required this.id, required this.lat, required this.long})
       : super(key: key);
 
   @override
@@ -90,9 +92,10 @@ class _HotelViewState extends State<HotelView> {
                     leading: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
+                        HomeCubit.get(context).getHomeData();
                       },
                       icon: const CircleAvatar(
-                        backgroundColor: AppColors.grey,
+                        backgroundColor: AppColors.cardColors,
                         child: Icon(
                           Icons.arrow_back,
                           size: AppSize.s20,
@@ -235,12 +238,16 @@ class _HotelViewState extends State<HotelView> {
                                                     {
                                                      showToast(text:state.message, state: ToastStates.success);
                                                     }
+                                                  
                                                 },
                                                 builder: (context,state){
                                                   var cubit=HomeCubit.get(context);
+                                                  
                                                   return  MyButton(
                                                     onPressed: () {
                                                       cubit.bookAHotel(hotelId: widget.id.toString());
+                                                      HomeCubit.get(context).getHomeData();
+
                                                     },
                                                     label: AppStrings.bookNow,
                                                     fontWeight: FontWeight.normal,
@@ -662,8 +669,8 @@ class _HotelViewState extends State<HotelView> {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                          height: 250, width: double.infinity, child: Maps()),
+                       SizedBox(
+                          height: 250, width: double.infinity, child: Maps(lat:widget.lat,long:widget.long ,)),
                       const SizedBox(
                         height: 20,
                       ),
@@ -671,12 +678,30 @@ class _HotelViewState extends State<HotelView> {
                         child: SizedBox(
                           width: double.infinity,
                           height: AppSize.s50,
-                          child: MyButton(
-                            onPressed: () {},
-                            label: AppStrings.bookNow,
-                            fontWeight: FontWeight.normal,
-                            fontSize: AppSize.s18,
-                            radius: AppPadding.p10,
+                          child: BlocConsumer<HomeCubit,HomeState>
+                            (
+                            listener: (context,state){
+                              if(state is BookingHotelSuccessState)
+                              {
+                                showToast(text:state.message, state: ToastStates.success);
+                              }
+
+                            },
+                            builder: (context,state){
+                              var cubit=HomeCubit.get(context);
+
+                              return  MyButton(
+                                onPressed: () {
+                                  cubit.bookAHotel(hotelId: widget.id.toString());
+                                  HomeCubit.get(context).getHomeData();
+
+                                },
+                                label: AppStrings.bookNow,
+                                fontWeight: FontWeight.normal,
+                                fontSize: AppSize.s18,
+                                radius: AppPadding.p10,
+                              );
+                            },
                           ),
                         ),
                       ),

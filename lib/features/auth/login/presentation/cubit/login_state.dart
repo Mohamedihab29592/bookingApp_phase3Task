@@ -15,3 +15,21 @@ class LoginErrorState extends LoginState {
 class SuccessGetUserImageState extends LoginState {}
 
 class ErrorGetUserImageState extends LoginState {}
+
+
+///CreateGoogleUSer State
+class CreateGoogleUserLoadingState extends LoginState{}
+class CreateGoogleUserSuccessState extends LoginState{
+  final  String uId;
+  CreateGoogleUserSuccessState(this.uId);
+}
+class CreateGoogleUserErrorState extends LoginState{}
+
+
+///LoginGoogleUSer State
+class LoginGoogleUserLoadingState extends LoginState{}
+class LoginGoogleUserSuccessState extends LoginState{
+  final  String uId;
+  LoginGoogleUserSuccessState(this.uId);
+}
+class LoginGoogleUserErrorState extends LoginState{}

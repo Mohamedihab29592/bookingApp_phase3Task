@@ -3,6 +3,7 @@ import 'package:booking_app/core/app_localization/cubit/locale_cubit.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'core/routes/routes_manager.dart';
@@ -11,8 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'injection_container.dart' as di;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   di.init();
@@ -28,7 +30,7 @@ class MotelApp extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) =>
-            di.sl<HomeCubit>()
+            di.sl<HomeCubit>()..getCurrentPosition()
               ..getHomeData()
               ..getProfileData()),
         BlocProvider(create: (context) => di.sl<SearchCubit>()),

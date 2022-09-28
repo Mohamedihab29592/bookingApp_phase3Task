@@ -36,6 +36,8 @@ class DataHotelEntity extends Equatable {
   final String price;
   final String address;
   final String rate;
+  final String latitude;
+  final String longitude;
   final List<HotelImages> images;
 
   const DataHotelEntity({
@@ -46,6 +48,8 @@ class DataHotelEntity extends Equatable {
     required this.address,
     required this.rate,
     required this.images,
+    required this.latitude,
+    required this.longitude,
   });
 
   @override

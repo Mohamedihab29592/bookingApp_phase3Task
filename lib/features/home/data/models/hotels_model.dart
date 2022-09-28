@@ -46,6 +46,8 @@ class DataHotelModel extends DataHotelEntity {
     required super.name,
     required super.description,
     required super.price,
+    required super.latitude,
+    required super.longitude,
     required super.address,
     required super.rate,
     required super.images,
@@ -61,6 +63,8 @@ class DataHotelModel extends DataHotelEntity {
       rate: json['rate'],
       images: List<HotelImageModel>.from(
           json['hotel_images'].map((image) => HotelImageModel.fromJson(image))),
+      latitude: json['latitude'],
+      longitude: json['longitude'],
       // images: List<HotelImageModel>.from(json['hotel_images'].map((image) => HotelImageModel.fromJson(image))),
     );
   }
@@ -74,6 +78,7 @@ class DataHotelModel extends DataHotelEntity {
       "address": address,
       "rate": rate,
       "images": images,
+
     };
   }
 }

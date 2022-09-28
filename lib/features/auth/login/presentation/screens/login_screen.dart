@@ -62,8 +62,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: AppSize.s15,
                   ),
-                  const Align(
-                      alignment: Alignment.center, child: MySignButton()),
+                   Align(
+                      alignment: Alignment.center, child: MySignButton(ontap: (){
+                        LoginCubit.get(context).signInwithGoogle();
+                   },)),
                   const SizedBox(
                     height: AppSize.s15,
                   ),

@@ -1,4 +1,5 @@
 import 'package:booking_app/core/app_localization/app_localization.dart';
+import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/utilis/constants/app_strings.dart';
 import 'package:booking_app/core/utilis/constants/constats_manager.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
@@ -13,6 +14,7 @@ import '../../../../../core/utilis/constants/values_manger.dart';
 import '../../../../../core/component/my_button.dart';
 import '../../../../../core/component/my_text.dart';
 import '../../../../../core/component/my_text_form_field.dart';
+import '../../../../search/presentation/screens/filterSearch/filterSearch.dart';
 import '../../widgets/hotelCardItem.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -56,7 +58,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   final List<String> _images = [
     ImageAssets.hotel6,
     ImageAssets.hotel2,
-    ImageAssets.hotel4,
+    ImageAssets.hotel,
   ];
   final List<String> _popularDestination = [
     ImageAssets.egypt,
@@ -184,6 +186,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w900,
                                           onPressed: () {
+                                           navigateTo(context: context, widget: FilterPage());
 
                                           }),
                                     ),
@@ -271,7 +274,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         top: AppPadding.p10),
                                     child: MyText(
                                       text: _popularDestinationNames[index],
-                                      fontSize: AppSize.s30,
+                                      fontSize: AppSize.s25,
                                     ),
                                   ),
                                 ),

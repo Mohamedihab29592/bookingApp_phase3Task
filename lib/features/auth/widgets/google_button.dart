@@ -7,14 +7,15 @@ import '../../../core/utilis/constants/values_manger.dart';
 
 
 class MySignButton extends StatelessWidget {
-  const MySignButton({super.key});
+  final VoidCallback ontap;
+  const MySignButton({super.key, required this.ontap});
 
 
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () {},
+      onPressed: ontap,
       icon: Image.asset(ImageAssets.google,height: 20,),
       label: const Text(AppStrings.google),
       style: ElevatedButton.styleFrom(
