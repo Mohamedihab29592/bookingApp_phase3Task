@@ -79,3 +79,6 @@ class BookingHotelErrorState extends HomeState {
 class BookingHotelSuccessState extends HomeState {}
 
 class BookingHotelLoadingState extends HomeState {}
+
+
+

@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/core/utilis/constants/values_manger.dart';
@@ -25,100 +26,100 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context,state) {
         var cubit = HomeCubit.get(context);
         return Scaffold(
-            backgroundColor: AppColors.kPrimaryColor,
-            body: Padding(
-              padding:  const EdgeInsets.only(top:AppPadding.p30,right:AppPadding.p20,left: AppPadding.p20 ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: AppSize.s20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditProfileScreen()));
-                    },
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children:  [
-                                Text(
-                                  cubit.profileModel!.profileData.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 25,
-                                  ),
+          backgroundColor: AppColors.kPrimaryColor,
+          body: Padding(
+            padding:  const EdgeInsets.only(top:AppPadding.p30,right:AppPadding.p20,left: AppPadding.p20 ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: AppSize.s20,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProfileScreen()));
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:  [
+                              Text(
+                                cubit.profileModel!.profileData.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 25,
                                 ),
-                                const SizedBox(
-                                  height: 3,
-                                ),
-                                 Text(
-                                  'View and Edit Profile',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 75,
-                          height: 75,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 4, color: AppColors.darkGrey),
-                            boxShadow: [
-                              BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: AppColors.white.withOpacity(.1),
-                                offset: const Offset(0, 10),
+                              ),
+                              const SizedBox(
+                                height: 3,
+                              ),
+                              Text(
+                                'View and Edit Profile'.tr(context),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.white),
                               ),
                             ],
-                            image:  DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  cubit.profileModel!.profileData.image,),
-                            ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Container(
+                        width: 75,
+                        height: 75,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(width: 4, color: AppColors.darkGrey),
+                          boxShadow: [
+                            BoxShadow(
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              color: AppColors.white.withOpacity(.1),
+                              offset: const Offset(0, 10),
+                            ),
+                          ],
+                          image:  DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                              cubit.profileModel!.profileData.image,),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  BuildProfileItem(
-                      text: 'Change Password', icon: Icons.lock, function: () {}),
-                  BuildProfileItem(
-                      text: 'Invite Friend', icon: Icons.people, function: () {}),
-                  BuildProfileItem(
-                      text: 'Credit & Coupons',
-                      icon: Icons.card_giftcard,
-                      function: () {}),
-                  BuildProfileItem(
-                      text: 'Help Center', icon: Icons.info, function: () {}),
-                  BuildProfileItem(
-                      text: 'Payment', icon: Icons.payment, function: () {}),
-                  BuildProfileItem(
-                      text: 'Settings', icon: Icons.settings, function: () {
-                        navigateTo(context: context, widget: SettingScreen());
-                  }),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                BuildProfileItem(
+                    text: 'Change Password'.tr(context), icon: Icons.lock, function: () {}),
+                BuildProfileItem(
+                    text: 'Invite Friend'.tr(context), icon: Icons.people, function: () {}),
+                BuildProfileItem(
+                    text: 'Credit & Coupons'.tr(context),
+                    icon: Icons.card_giftcard,
+                    function: () {}),
+                BuildProfileItem(
+                    text: 'Help Center'.tr(context), icon: Icons.info, function: () {}),
+                BuildProfileItem(
+                    text: 'Payment'.tr(context), icon: Icons.payment, function: () {}),
+                BuildProfileItem(
+                    text: 'Settings'.tr(context), icon: Icons.settings, function: () {
+                  navigateTo(context: context, widget: SettingScreen());
+                }),
+              ],
             ),
-          );
+          ),
+        );
       },
     );
   }
