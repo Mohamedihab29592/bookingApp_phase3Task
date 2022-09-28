@@ -1,4 +1,5 @@
 import 'package:booking_app/core/component/others.dart';
+import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,7 +41,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget> {
                       navigateTo(context: context, widget: ViewHotelDetails());
                     },
                     child: BuildFavoritesItem(
-                      urlImage: (upcomingItem.cancelledModel!.bookingData[index].hotel!.images.isNotEmpty)? ImageAssets.resort : ImageAssets.hotel,
+                      urlImage: imageBaseUrl +upcomingItem.cancelledModel!.bookingData[index].hotel!.images[0].image,
                       hotelName: upcomingItem
                           .cancelledModel!.bookingData[index].hotel!.name
                           .toString(),

@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../core/component/my_button.dart';
 import '../../../../../core/component/my_text.dart';
+import '../../../../../core/component/toast.dart';
 import '../../../../../core/network/end_points.dart';
 import '../../../../../core/services/maps.dart';
 import '../../../../../core/utilis/constants/assets_manager.dart';
@@ -19,6 +20,7 @@ class HotelView extends StatefulWidget {
   final String rate;
   final String price;
   final String image;
+  final int id;
 
   const HotelView(
       {Key? key,
@@ -26,7 +28,7 @@ class HotelView extends StatefulWidget {
       required this.locationName,
       required this.rate,
       required this.price,
-    required this.image})
+    required this.image, required this.id})
       : super(key: key);
 
   @override
@@ -135,112 +137,122 @@ class _HotelViewState extends State<HotelView> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  SizedBox(
-                                    height: 190,
-                                    width: double.infinity,
-                                    child: Card(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      color: AppColors.cardColors,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            AppPadding.p20),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            MyText(
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              text: widget.hotelName,
-                                              fontSize: AppSize.s20,
-                                            ),
-                                            const SizedBox(
-                                              height: AppSize.s5,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: MyText(
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: widget.locationName,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w900,
-                                                    colors: AppColors.white74,
-                                                  ),
-                                                ),
-                                                const Icon(
-                                                  Icons.location_on,
-                                                  color: AppColors.teal,
-                                                  size: 11,
-                                                ),
-                                                const MyText(
-                                                    text: "2.0 Km to City",
-                                                    fontSize: 14,
-                                                    colors: AppColors.white74),
-                                                const Spacer(),
-                                                MyText(
-                                                  text: "\$${widget.price}",
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                RatingBar.builder(
-                                                  itemSize: 18,
-                                                  initialRating: double.parse(
-                                                          widget.rate) /
-                                                      2,
-                                                  minRating: 1,
-                                                  direction: Axis.horizontal,
-                                                  allowHalfRating: true,
-                                                  itemCount: 5,
-                                                  itemBuilder: (context, _) =>
-                                                      const Icon(
-                                                    Icons.star,
-                                                    color: AppColors.teal,
-                                                  ),
-                                                  onRatingUpdate: (rating) {},
-                                                ),
-                                                const SizedBox(
-                                                  width: AppSize.s5,
-                                                ),
-                                                const MyText(
-                                                  text: "80 Reviews",
-                                                  fontSize: 16,
+                                  Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    color: AppColors.cardColors,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(
+                                          AppPadding.p20),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          MyText(
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            text: widget.hotelName,
+                                            fontSize: AppSize.s20,
+                                          ),
+                                          const SizedBox(
+                                            height: AppSize.s5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: MyText(
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  text: widget.locationName,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w900,
                                                   colors: AppColors.white74,
-                                                ),
-                                                const Spacer(),
-                                                const MyText(
-                                                  text: "/per night",
-                                                  fontSize: 16,
-                                                  colors: AppColors.white74,
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: AppSize.s10,
-                                            ),
-                                            Center(
-                                              child: SizedBox(
-                                                width: double.infinity,
-                                                height: AppSize.s50,
-                                                child: MyButton(
-                                                  onPressed: () {},
-                                                  label: AppStrings.bookNow,
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: AppSize.s18,
-                                                  radius: AppPadding.p10,
                                                 ),
                                               ),
+                                              const Icon(
+                                                Icons.location_on,
+                                                color: AppColors.teal,
+                                                size: 11,
+                                              ),
+                                              const MyText(
+                                                  text: "2.0 Km to City",
+                                                  fontSize: 14,
+                                                  colors: AppColors.white74),
+                                              const Spacer(),
+                                              MyText(
+                                                text: "\$${widget.price}",
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              RatingBar.builder(
+                                                itemSize: 18,
+                                                initialRating: double.parse(
+                                                        widget.rate) /
+                                                    2,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemBuilder: (context, _) =>
+                                                    const Icon(
+                                                  Icons.star,
+                                                  color: AppColors.teal,
+                                                ),
+                                                onRatingUpdate: (rating) {},
+                                              ),
+                                              const SizedBox(
+                                                width: AppSize.s5,
+                                              ),
+                                              const MyText(
+                                                text: "80 Reviews",
+                                                fontSize: 16,
+                                                colors: AppColors.white74,
+                                              ),
+                                              const Spacer(),
+                                              const MyText(
+                                                text: "/per night",
+                                                fontSize: 16,
+                                                colors: AppColors.white74,
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: AppSize.s10,
+                                          ),
+                                          Center(
+                                            child: SizedBox(
+                                              width: double.infinity,
+                                              height: AppSize.s50,
+                                              child:BlocConsumer<HomeCubit,HomeState>
+                                                (
+                                                listener: (context,state){
+                                                  if(state is BookingHotelSuccessState)
+                                                    {
+                                                     showToast(text:state.message, state: ToastStates.success);
+                                                    }
+                                                },
+                                                builder: (context,state){
+                                                  var cubit=HomeCubit.get(context);
+                                                  return  MyButton(
+                                                    onPressed: () {
+                                                      cubit.bookAHotel(hotelId: widget.id.toString());
+                                                    },
+                                                    label: AppStrings.bookNow,
+                                                    fontWeight: FontWeight.normal,
+                                                    fontSize: AppSize.s18,
+                                                    radius: AppPadding.p10,
+                                                  );
+                                                },
+                                              ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),

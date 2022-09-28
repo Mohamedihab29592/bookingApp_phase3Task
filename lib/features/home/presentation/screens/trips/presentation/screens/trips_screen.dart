@@ -20,7 +20,7 @@ class _TripsScreenState extends State<TripsScreen> {
     const FavoritesWidget(),
   ];
 
-  int currentScreen = 1;
+  int currentScreen = 0;
 
   @override
   Widget build(BuildContext context) {

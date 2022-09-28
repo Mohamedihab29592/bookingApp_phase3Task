@@ -76,6 +76,22 @@ class BookingHotelErrorState extends HomeState {
   BookingHotelErrorState({required this.error});
 }
 
-class BookingHotelSuccessState extends HomeState {}
+class BookingHotelSuccessState extends HomeState {
+  final String message;
+
+  BookingHotelSuccessState(this.message);
+}
+
+
+
+class UpdateBookingErrorState extends HomeState {
+  final String error;
+
+  UpdateBookingErrorState({required this.error});
+}
+
+class UpdateBookingSuccessState extends HomeState {}
+
+class UpdateBookingLoadingState extends HomeState {}
 
 class BookingHotelLoadingState extends HomeState {}

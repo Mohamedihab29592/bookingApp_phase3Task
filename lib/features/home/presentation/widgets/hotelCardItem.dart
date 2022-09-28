@@ -22,7 +22,17 @@ class CardOfHotel extends StatelessWidget {
       listener: (BuildContext context, state) {},
       builder: (BuildContext context, state) {
         var cubit = HomeCubit.get(context);
-        if (state is GetHomeDataSuccessState) {
+
+        if(state is GetHomeDataLoadingState)
+          {
+            return const Center(child: CircularProgressIndicator());
+          }
+        if (state is GetHomeDataErrorState)
+          {
+            return Container(child: Text("no Data",));
+
+          }
+        else  {
           return ListView.separated(
             separatorBuilder: (context, index) =>
             const SizedBox(
@@ -43,8 +53,9 @@ class CardOfHotel extends StatelessWidget {
                         rate: _item.rate,
                         price: _item.price,
                         image:imageBaseUrl +
-                            _item.images[0].image
-                        ,));
+                            _item.images[0].image,
+                      id: _item.id,
+                      ));
                 },
                 child: Container(
                   height: AppSize.s140,
@@ -163,8 +174,6 @@ class CardOfHotel extends StatelessWidget {
               );
             },
           );
-        } else {
-          return const Center(child: CircularProgressIndicator());
         }
       },
     );

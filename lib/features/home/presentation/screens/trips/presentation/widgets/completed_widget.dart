@@ -1,4 +1,5 @@
 import 'package:booking_app/core/component/others.dart';
+import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:booking_app/features/home/presentation/screens/trips/presentation/screens/view_hotel_details.dart';
@@ -41,7 +42,7 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                       navigateTo(context: context, widget: const ViewHotelDetails());
                     },
                     child: BuildFinishedItem(
-                      urlImage: (upcomingItem.completedModel!.bookingData[index].hotel!.images.isNotEmpty)? ImageAssets.resort : ImageAssets.hotel,
+                      urlImage: imageBaseUrl+ upcomingItem.completedModel!.bookingData[index].hotel!.images[0].image,
                       startDate: '25 Sep',
                       endDate: '29 Sep',
                       roomsNumber: index + 1,

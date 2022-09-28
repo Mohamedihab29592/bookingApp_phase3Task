@@ -17,8 +17,10 @@ import 'package:booking_app/features/home/domain/use_cases/get_profile_data_usec
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booking_app/features/home/domain/use_cases/get_home_data_usecase.dart';
+import '../../../../core/component/toast.dart';
 import '../../../../core/local/cache_helper.dart';
 import '../../../../core/routes/routes_manager.dart';
+import '../../data/models/update_book_model.dart';
 import '../screens/exploreScreen/exploreScreen.dart';
 import '../screens/profileScreen/profileScreen.dart';
 import '../screens/trips/presentation/screens/trips_screen.dart';
@@ -133,7 +135,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(UpdateProfileDataLoadingState());
     updateProfileDataUseCase
         .call(UpdateImageEntity(updateImageEntity.name, updateImageEntity.email,
-            updateImageEntity.image))
+        updateImageEntity.image))
         .then((value) {
       value.fold((failure) {
         return emit(UpdateProfileDataErrorState(
@@ -199,8 +201,28 @@ class HomeCubit extends Cubit<HomeState> {
             BookingHotelErrorState(error: _mapFailureToMsg(failure: failure)));
       }, (model) {
         bookingHotelModel = model;
-        return emit(BookingHotelSuccessState());
+        return emit(BookingHotelSuccessState(bookingHotelModel!.en));
       });
+    });
+
+
+
+  }
+  UpdateBookModel? updateBookModel;
+
+  void updateBooking({required int hotelId, required String type}) {
+    emit(UpdateBookingLoadingState());
+    DioHelper.postData(url: updateBookingEndPoint, data: {
+      "booking_id": hotelId,
+      "type": type,
+    }).then((value) {
+      updateBookModel = UpdateBookModel.fromJson(value.data);
+      showToast(text: updateBookModel!.en, state: ToastStates.success);
+      emit(UpdateBookingSuccessState());
+    }).catchError((error) {
+      emit(UpdateBookingErrorState(error: error.toString()));
     });
   }
 }
+
+

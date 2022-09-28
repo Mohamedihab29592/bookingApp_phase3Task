@@ -8,3 +8,4 @@ const String getBookingEndPoint = '/get-bookings';
 const String bookingHotelEndPoint = '/create-booking';
 const String searchHotelsEndPoint = '/search-hotels';
 const String imageBaseUrl = 'http://api.mahmoudtaha.com/images/';
+const String updateBookingEndPoint = '/update-booking-status';
