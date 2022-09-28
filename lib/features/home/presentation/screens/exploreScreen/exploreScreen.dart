@@ -252,33 +252,29 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             height: AppSize.s100,
                             width: AppSize.s300,
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                            child: Card(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-
-                              child: Stack(
-                                alignment: Alignment.bottomLeft,
-                                children: [
-                                  Image.asset(
-                                    _popularDestination[index],
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: AppPadding.p20,
-                                          top: AppPadding.p10),
-                                      child: MyText(
-                                        text: _popularDestinationNames[index],
-                                        fontSize: AppSize.s30,
-                                      ),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                            child: Stack(
+                              alignment: Alignment.bottomLeft,
+                              children: [
+                                Image.asset(
+                                  _popularDestination[index],
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: AppPadding.p20,
+                                        top: AppPadding.p10),
+                                    child: MyText(
+                                      text: _popularDestinationNames[index],
+                                      fontSize: AppSize.s30,
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           );
                         }),
