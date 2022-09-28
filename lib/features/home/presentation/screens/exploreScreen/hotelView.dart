@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../../core/component/my_button.dart';
 import '../../../../../core/component/my_text.dart';
+import '../../../../../core/network/end_points.dart';
 import '../../../../../core/services/maps.dart';
 import '../../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../../core/utilis/constants/colors.dart';
@@ -17,9 +18,16 @@ class HotelView extends StatefulWidget {
   final String locationName;
   final String rate;
   final String price;
-  final List <dynamic> images;
+  final String image;
 
-  const HotelView({Key? key, required this.hotelName, required this.locationName, required this.rate,  required this.price, required this.images}) : super(key: key);
+  const HotelView(
+      {Key? key,
+      required this.hotelName,
+      required this.locationName,
+      required this.rate,
+      required this.price,
+    required this.image})
+      : super(key: key);
 
   @override
   State<HotelView> createState() => _HotelViewState();
@@ -112,19 +120,14 @@ class _HotelViewState extends State<HotelView> {
                     actionsIconTheme: const IconThemeData(opacity: AppSize.s0),
                     flexibleSpace: Stack(
                       children: <Widget>[
-                        if(widget.images.isEmpty)
-
-                        Positioned.fill(
-                            child: Image.asset(
-                                ImageAssets.hotel,
-                          fit: BoxFit.cover,
-                        )),
-                        if(widget.images.isNotEmpty)
                           Positioned.fill(
-                              child: Image.asset(
-                                ImageAssets.resort,
+                              child:  Image(
+                                image:   NetworkImage(widget.image),
                                 fit: BoxFit.cover,
-                              )),
+                                width: MediaQuery.of(context).size.width / 3,
+                                height: double.infinity,
+                              ),),
+
                         if (_appBarCollapsed == false)
                           Padding(
                             padding: const EdgeInsets.all(AppPadding.p8),
@@ -133,7 +136,7 @@ class _HotelViewState extends State<HotelView> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   SizedBox(
-                                    height: AppSize.s176,
+                                    height: 190,
                                     width: double.infinity,
                                     child: Card(
                                       shape: RoundedRectangleBorder(
@@ -147,7 +150,9 @@ class _HotelViewState extends State<HotelView> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                             MyText(
+                                            MyText(
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
                                               text: widget.hotelName,
                                               fontSize: AppSize.s20,
                                             ),
@@ -155,12 +160,17 @@ class _HotelViewState extends State<HotelView> {
                                               height: AppSize.s5,
                                             ),
                                             Row(
-                                              children:  [
-                                                MyText(
-                                                  text: widget.locationName,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w900,
-                                                  colors: AppColors.white74,
+                                              children: [
+                                                Expanded(
+                                                  child: MyText(
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    text: widget.locationName,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w900,
+                                                    colors: AppColors.white74,
+                                                  ),
                                                 ),
                                                 const Icon(
                                                   Icons.location_on,
@@ -172,7 +182,7 @@ class _HotelViewState extends State<HotelView> {
                                                     fontSize: 14,
                                                     colors: AppColors.white74),
                                                 const Spacer(),
-                                                 MyText(
+                                                MyText(
                                                   text: "\$${widget.price}",
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
@@ -183,7 +193,9 @@ class _HotelViewState extends State<HotelView> {
                                               children: [
                                                 RatingBar.builder(
                                                   itemSize: 18,
-                                                  initialRating: double.parse(widget.rate)/2,
+                                                  initialRating: double.parse(
+                                                          widget.rate) /
+                                                      2,
                                                   minRating: 1,
                                                   direction: Axis.horizontal,
                                                   allowHalfRating: true,
@@ -193,8 +205,7 @@ class _HotelViewState extends State<HotelView> {
                                                     Icons.star,
                                                     color: AppColors.teal,
                                                   ),
-                                                  onRatingUpdate: (rating) {
-                                                  },
+                                                  onRatingUpdate: (rating) {},
                                                 ),
                                                 const SizedBox(
                                                   width: AppSize.s5,
@@ -280,43 +291,46 @@ class _HotelViewState extends State<HotelView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        children:  [
+                        children: [
                           MyText(
                             text: widget.hotelName,
                             fontSize: AppSize.s20,
                           ),
-                          const  Spacer(),
-                          const MyText(
-                            text: "\$180",
+                          const Spacer(),
+                          MyText(
+                            text: "\$${widget.price}",
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
-                      Row(
-                        children:  [
-                          MyText(
-                            text: widget.locationName,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w900,
-                            colors: AppColors.white74,
-                          ),
-                          const Icon(
-                            Icons.location_on,
-                            color: AppColors.teal,
-                            size: 11,
-                          ),
                           const MyText(
-                              text: "2.0 Km to City",
-                              fontSize: 14,
-                              colors: AppColors.white74),
-                          const Spacer(),
-                          const MyText(
-                            text: "/per night",
+                            text: " /per night",
                             colors: AppColors.grey,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
+                        ],
+                      ),
+                      MyText(
+                        overflow: TextOverflow.ellipsis,
+                        text: widget.locationName,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900,
+                        colors: AppColors.white74,
+                      ),
+                      const SizedBox(
+                        height: AppSize.s5,
+                      ),
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.location_on,
+                            color: AppColors.teal,
+                            size: 11,
+                          ),
+                          MyText(
+                              text: "2.0 Km to City",
+                              fontSize: 14,
+                              colors: AppColors.white74),
                         ],
                       ),
                       const SizedBox(
@@ -355,7 +369,7 @@ class _HotelViewState extends State<HotelView> {
                             child: Column(
                               children: [
                                 Row(
-                                  children:  [
+                                  children: [
                                     MyText(
                                       text: widget.rate,
                                       fontSize: 30,
@@ -589,12 +603,12 @@ class _HotelViewState extends State<HotelView> {
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(
                                         borderRadius:
-                                        BorderRadius.circular(20)),
+                                            BorderRadius.circular(20)),
                                     height: 60,
                                     width: 60,
                                     child: const Image(
                                         image:
-                                        AssetImage(ImageAssets.profile))),
+                                            AssetImage(ImageAssets.profile))),
                                 const SizedBox(
                                   width: 5,
                                 ),
@@ -634,10 +648,10 @@ class _HotelViewState extends State<HotelView> {
                         ),
                       ),
                       const SizedBox(
-                          height:250,
-                          width:double.infinity,
-                          child: Maps()),
-                      const SizedBox(height: 20,),
+                          height: 250, width: double.infinity, child: Maps()),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Center(
                         child: SizedBox(
                           width: double.infinity,

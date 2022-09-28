@@ -1,4 +1,5 @@
 import 'package:booking_app/core/component/others.dart';
+import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/core/utilis/constants/values_manger.dart';
 import 'package:booking_app/core/component/my_text.dart';
@@ -21,10 +22,12 @@ class CardOfHotel extends StatelessWidget {
       listener: (BuildContext context, state) {},
       builder: (BuildContext context, state) {
         var cubit = HomeCubit.get(context);
-        if(state is GetHomeDataSuccessState){
+        if (state is GetHomeDataSuccessState) {
           return ListView.separated(
-            separatorBuilder: (context, index) => const SizedBox(
+            separatorBuilder: (context, index) =>
+            const SizedBox(
               height: AppSize.s22,
+
             ),
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
@@ -33,46 +36,63 @@ class CardOfHotel extends StatelessWidget {
             itemBuilder: (context, index) {
               var _item = cubit.hotelsEntity!.homeEntity.data[index];
               return InkWell(
-                onTap: (){
-                  navigateTo(context: context, widget: HotelView(hotelName: _item.name, locationName: _item.address, rate: _item.rate,price: _item.price, images: _item.images,));
+                onTap: () {
+                  navigateTo(context: context,
+                      widget: HotelView(hotelName: _item.name,
+                        locationName: _item.address,
+                        rate: _item.rate,
+                        price: _item.price,
+                        image:imageBaseUrl +
+                            _item.images[0].image
+                        ,));
                 },
-                child: SizedBox(
-                  height: AppSize.s130,
+                child: Container(
+                  height: AppSize.s140,
                   width: double.infinity,
-                  child: Card(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
                     color: AppColors.darkGrey,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        if(_item.images.isEmpty )
-                        Image(
-                          image:  const AssetImage(ImageAssets.hotel),
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: double.infinity,
-                        )
-                        else
-                        Image(
-                          image:  const AssetImage(ImageAssets.resort),
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: double.infinity,
-                        ),
-                        Padding(
+                  ),
+                  clipBehavior: Clip.antiAlias,
+
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      // if(_item.images.isEmpty )
+                      Image(
+                        image: NetworkImage(imageBaseUrl +
+                            _item.images[0].image),
+                        fit: BoxFit.cover,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width / 3,
+                        height: double.infinity,
+                      ),
+                      // else
+                      // Image(
+                      //   image:  const AssetImage(ImageAssets.resort),
+                      //   fit: BoxFit.cover,
+                      //   width: MediaQuery.of(context).size.width / 3,
+                      //   height: double.infinity,
+                      // ),
+                      Expanded(
+                        child: Padding(
                           padding: const EdgeInsets.only(
-                              top: 15, left: 7, right: 3, bottom: 12),
+                              top: 15, left: 7, right: 7, bottom: 12),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               MyText(
+                                maxLines: 2,
+                                overflow: TextOverflow.fade,
                                 text: _item.name,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w900,
                               ),
                               MyText(
+                                maxLines: 2,
+                                overflow: TextOverflow.fade,
                                 text: _item.address,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w900,
@@ -102,22 +122,23 @@ class CardOfHotel extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                RatingBar.builder(
-                                  itemSize: 18,
-                                initialRating: double.parse(_item.rate)/2,
-                                minRating: 1,
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                itemCount: 5,
+                                  RatingBar.builder(
+                                    itemSize: 18,
+                                    initialRating: double.parse(_item.rate) / 2,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
 
-                                itemBuilder: (context, _) => const Icon(
-                                  Icons.star,
-                                  color: AppColors.teal,
-                                ),
-                                onRatingUpdate: (rating) {
-                                  print(rating);
-                                },
-                              ),
+                                    itemBuilder: (context, _) =>
+                                    const Icon(
+                                      Icons.star,
+                                      color: AppColors.teal,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  ),
                                   // MyText(
                                   //     text: "Rate : ${item.rate}",
                                   //     fontSize: 14,
@@ -134,18 +155,17 @@ class CardOfHotel extends StatelessWidget {
                               ),
                             ],
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               );
             },
           );
-        }else{
+        } else {
           return const Center(child: CircularProgressIndicator());
         }
-
       },
     );
   }
