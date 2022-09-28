@@ -72,48 +72,51 @@ class BuildUpcomingItem extends StatelessWidget {
                 alignment: Alignment.topRight,
                 children: [
                   Image.network(urlImage),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child:BlocConsumer<HomeCubit,HomeState>(
-                      listener: (context,state){
-                        if (state is UpdateBookingSuccessState)
-                          {
-                            HomeCubit.get(context).getUpcomingBooking();
-                          }
-                      },
-                      builder: (context,state){
-                        var cubit = HomeCubit.get(context);
-                        return PopupMenuButton(
-                            icon:const Icon(Icons.menu,color: AppColors.white,),
-                            color: AppColors.kPrimaryColor,
-                            itemBuilder: (context) => [
-                              PopupMenuItem(
-                                value: 1,
-                                child:TextButton(
-                                  onPressed: (){
-                                    cubit.updateBooking(hotelId:id! , type:"completed"  );
-                                    print(id.toString());
+                  BlocConsumer<HomeCubit,HomeState>(
+                    listener: (context,state){
+                      if (state is UpdateBookingSuccessState)
+                        {
+                          HomeCubit.get(context).getUpcomingBooking();
+                        }
+                    },
+                    builder: (context,state){
+                      var cubit = HomeCubit.get(context);
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.darkGrey,
+                          child: PopupMenuButton(
+                            position: PopupMenuPosition.under,
+                              icon:const Icon(Icons.menu_rounded,color: AppColors.white,),
+                              color: AppColors.kPrimaryColor,
+                              itemBuilder: (context) => [
+                                PopupMenuItem(
+                                  value: 1,
+                                  child:TextButton(
+                                    onPressed: (){
+                                      cubit.updateBooking(hotelId:id! , type:"completed"  );
 
-                                  },
-                                  child: const MyText(text: 'Complete',colors: AppColors.blue,fontSize: 15 ,),
+                                    },
+                                    child: const MyText(text: 'Complete',colors: AppColors.blue,fontSize: 15 ,),
+                                  ),
+
+                                ),
+                                PopupMenuItem(
+                                  value: 2,
+                                  child:TextButton(
+                                    onPressed: (){
+                                      cubit.updateBooking(hotelId:id! , type:"cancelled"  );
+
+                                    },
+                                    child: const MyText(text: 'Cancel',colors: AppColors.red,fontSize: 15 ,),
+                                  ),
+
                                 ),
 
-                              ),
-                              PopupMenuItem(
-                                value: 2,
-                                child:TextButton(
-                                  onPressed: (){
-                                    cubit.updateBooking(hotelId:id! , type:"cancelled"  );
-
-                                  },
-                                  child: const MyText(text: 'Cancel',colors: AppColors.red,fontSize: 15 ,),
-                                ),
-
-                              ),
-
-                            ]);
-                      },
-                    ),
+                              ]),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

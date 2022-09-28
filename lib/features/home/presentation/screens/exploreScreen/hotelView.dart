@@ -8,7 +8,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../core/component/my_button.dart';
 import '../../../../../core/component/my_text.dart';
 import '../../../../../core/component/toast.dart';
-import '../../../../../core/network/end_points.dart';
 import '../../../../../core/services/maps.dart';
 import '../../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../../core/utilis/constants/colors.dart';
@@ -304,9 +303,13 @@ class _HotelViewState extends State<HotelView> {
                     children: [
                       Row(
                         children: [
-                          MyText(
-                            text: widget.hotelName,
-                            fontSize: AppSize.s20,
+                          Expanded(
+                            child: MyText(
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              text: widget.hotelName,
+                              fontSize: AppSize.s20,
+                            ),
                           ),
                           const Spacer(),
                           MyText(

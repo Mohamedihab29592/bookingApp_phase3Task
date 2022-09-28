@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../../../core/utilis/constants/assets_manager.dart';
 
 class CardOfHotel extends StatelessWidget {
   const CardOfHotel({
@@ -29,10 +28,10 @@ class CardOfHotel extends StatelessWidget {
           }
         if (state is GetHomeDataErrorState)
           {
-            return Container(child: Text("no Data",));
+            return const Center(child: Text("no Data",));
 
           }
-        else  {
+        else if (state is GetHomeDataSuccessState)  {
           return ListView.separated(
             separatorBuilder: (context, index) =>
             const SizedBox(
@@ -147,7 +146,6 @@ class CardOfHotel extends StatelessWidget {
                                       color: AppColors.teal,
                                     ),
                                     onRatingUpdate: (rating) {
-                                      print(rating);
                                     },
                                   ),
                                   // MyText(
@@ -175,6 +173,7 @@ class CardOfHotel extends StatelessWidget {
             },
           );
         }
+        else { return const Center(child: CircularProgressIndicator());}
       },
     );
   }
