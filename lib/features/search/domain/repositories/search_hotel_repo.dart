@@ -5,5 +5,5 @@ import 'package:dartz/dartz.dart';
 
 abstract class BaseSearchHotelRepository {
   Future<Either<Failure, SearchModel>> searchHotel(
-      {required UserSearchEntity userSearchEntity});
+      {required UserSearchEntity userSearchEntity, Map<String, int>? facilities});
 }

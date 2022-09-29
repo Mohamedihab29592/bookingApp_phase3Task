@@ -14,3 +14,15 @@ class SearchHotelErrorState extends SearchState {
 
   SearchHotelErrorState({required this.error});
 }
+
+class GetFacilitiesLoadingState extends SearchState {}
+
+class GetFacilitiesSuccessState extends SearchState {}
+
+class SelectFacilityState extends SearchState {}
+
+class GetFacilitiesErrorState extends SearchState {
+  final String error;
+
+  GetFacilitiesErrorState({required this.error});
+}

@@ -11,8 +11,8 @@ class SearchHotelUseCase {
   SearchHotelUseCase({required this.searchHotelRepository});
 
   Future<Either<Failure, SearchModel>> call(
-      {required UserSearchEntity userSearchEntity}) async {
+      {required UserSearchEntity userSearchEntity, Map<String, int>? facilities}) async {
     return await searchHotelRepository.searchHotel(
-        userSearchEntity: userSearchEntity);
+        userSearchEntity: userSearchEntity, facilities: facilities);
   }
 }

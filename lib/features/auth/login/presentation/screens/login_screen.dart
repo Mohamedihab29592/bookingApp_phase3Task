@@ -16,7 +16,7 @@ import '../../../../../core/utilis/constants/colors.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key, });
+  const LoginScreen({super.key,});
 
 
   @override
@@ -26,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool _isHidePass =true ;
+  bool _isHidePass = true;
 
 
   final _formKey = GlobalKey<FormState>();
@@ -62,10 +62,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: AppSize.s15,
                   ),
-                   Align(
-                      alignment: Alignment.center, child: MySignButton(ontap: (){
-                        LoginCubit.get(context).signInwithGoogle();
-                   },)),
+                  Align(
+                      alignment: Alignment.center,
+                      child: BlocConsumer<LoginCubit, LoginState>(
+                        listener: (context, state) {
+                          // TODO: implement listener
+                        },
+                        builder: (context, state) {
+                          return MySignButton(ontap: () {
+                            LoginCubit.get(context).signInwithGoogle();
+                          },);
+                        },
+                      )),
                   const SizedBox(
                     height: AppSize.s15,
                   ),
@@ -82,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   MyTextForm(
                     enableBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color:  AppColors.grey)),
+                        borderSide: const BorderSide(color: AppColors.grey)),
                     isDense: true,
                     radius: AppSize.s40,
                     labelText: AppStrings.email,
@@ -99,15 +107,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: AppSize.s15),
                   MyTextForm(
                     enableBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: const BorderSide(color:  AppColors.grey)),
-                    isPassword:  _isHidePass,
-                    suffixIcon:  _isHidePass
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(color: AppColors.grey)),
+                    isPassword: _isHidePass,
+                    suffixIcon: _isHidePass
                         ? Icons.visibility_off
                         : Icons.visibility,
                     suffixIconPressed: () {
                       setState(() {
-                        _isHidePass = ! _isHidePass;
+                        _isHidePass = !_isHidePass;
                       });
                     },
                     isDense: true,
@@ -153,8 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context,
                                 Routes.homeLayout,
                               );
-                            }else{
-                              showToast(text: AppStrings.errorLoginEn, state: ToastStates.success);
+                            } else {
+                              showToast(text: AppStrings.errorLoginEn,
+                                  state: ToastStates.success);
                             }
                           },
                           builder: (BuildContext context, Object? state) {

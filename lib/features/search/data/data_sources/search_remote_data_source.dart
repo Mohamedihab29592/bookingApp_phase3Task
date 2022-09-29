@@ -6,25 +6,24 @@ import 'package:booking_app/features/search/data/models/search_model.dart';
 import 'package:booking_app/features/search/domain/entity/search_entity.dart';
 
 abstract class BaseSearchRemoteDataSource {
-  Future<SearchModel> searchHotel({required UserSearchEntity userSearchEntity});
+  Future<SearchModel> searchHotel({required UserSearchEntity userSearchEntity, Map<String, int>? facilities});
 }
 
 class SearchRemoteDataSourceImpl implements BaseSearchRemoteDataSource {
   @override
   Future<SearchModel> searchHotel(
-      {required UserSearchEntity userSearchEntity}) async {
+      {required UserSearchEntity userSearchEntity, Map<String, int>? facilities}) async {
     final response = await DioHelper.getData(url: searchHotelsEndPoint, query: {
       "count": 10,
       "page": 1,
-      if (userSearchEntity.name.isNotEmpty) "name": userSearchEntity.name,
+      if (userSearchEntity.name.isNotEmpty)
+        "name": userSearchEntity.name,
       if (userSearchEntity.address.isNotEmpty)
         "address": userSearchEntity.address,
       if (userSearchEntity.distance.isNotEmpty)
         "distance": userSearchEntity.distance,
-      if (userSearchEntity.facilities0.isNotEmpty)
-        "facilities[0]": userSearchEntity.facilities0,
-      if (userSearchEntity.facilities1.isNotEmpty)
-        "facilities[1]": userSearchEntity.facilities1,
+      // if (userSearchEntity.facilities.isNotEmpty)
+        ...facilities!,
       if (userSearchEntity.latitude.isNotEmpty)
         "latitude": userSearchEntity.latitude,
       if (userSearchEntity.longitude.isNotEmpty)

@@ -20,8 +20,7 @@ class ErrorGetUserImageState extends LoginState {}
 ///CreateGoogleUSer State
 class CreateGoogleUserLoadingState extends LoginState{}
 class CreateGoogleUserSuccessState extends LoginState{
-  final  String uId;
-  CreateGoogleUserSuccessState(this.uId);
+
 }
 class CreateGoogleUserErrorState extends LoginState{}
 

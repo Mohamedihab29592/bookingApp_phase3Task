@@ -89,8 +89,6 @@ class _SearchState extends State<Search> {
                                       address: '',
                                       maxPrice: '',
                                       minPrice: '',
-                                      facilities0: '',
-                                      facilities1: '',
                                       latitude: '',
                                       longitude: '',
                                       distance: '',
