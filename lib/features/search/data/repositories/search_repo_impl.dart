@@ -16,11 +16,11 @@ class SearchHotelRepositoryImpl implements BaseSearchHotelRepository {
 
   @override
   Future<Either<Failure, SearchModel>> searchHotel(
-      {required UserSearchEntity userSearchEntity}) async {
+      {required UserSearchEntity userSearchEntity,Map<String, int>? facilities,}) async {
     if (await networkInfo.isConnected) {
       try {
         final remoteHome = await searchRemoteDataSource.searchHotel(
-            userSearchEntity: userSearchEntity);
+            userSearchEntity: userSearchEntity, facilities: facilities);
         return Right(remoteHome);
       } on ServerException {
         throw Left(ServerFailure());
