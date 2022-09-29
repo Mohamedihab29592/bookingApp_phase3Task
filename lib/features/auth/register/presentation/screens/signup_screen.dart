@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/component/toast.dart';
 import 'package:booking_app/features/auth/register/domain/entities/user_info_entity.dart';
 import 'package:booking_app/features/auth/register/presentation/cubit/user_register_cubit.dart';
@@ -23,8 +24,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final nameController = TextEditingController();
-  bool _isHidePass=true;
-  bool _isHidePasss=true;
+  bool _isHidePass = true;
+  bool _isHidePasss = true;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -56,22 +57,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MyText(
-                    text: AppStrings.signUp,
-                    fontSize: AppSize.s28,
-                    fontWeight: FontWeight.bold,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: MyText(
+                      text: AppStrings.signUp.tr(context),
+                      fontSize: AppSize.s28,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(
                     height: AppSize.s15,
                   ),
-                   Align(
-                      alignment: Alignment.center, child: MySignButton(ontap: () {  },)),
+                  Align(
+                      alignment: Alignment.center,
+                      child: MySignButton(
+                        ontap: () {},
+                      )),
                   const SizedBox(
                     height: AppSize.s30,
                   ),
-                  const Center(
+                  Center(
                     child: MyText(
-                      text: AppStrings.orLoginWith,
+                      text: AppStrings.orLoginWith.tr(context),
                       fontSize: AppSize.s15,
                       colors: AppColors.grey,
                     ),
@@ -82,13 +89,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   MyTextForm(
                     enableBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color:  AppColors.grey)),
-                    labelText: AppStrings.name,
+                        borderSide: const BorderSide(color: AppColors.grey)),
+                    labelText: AppStrings.name.tr(context),
                     isDense: true,
                     radius: AppSize.s40,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.nameHint;
+                        return AppStrings.nameHint.tr(context);
                       }
                       return null;
                     },
@@ -101,15 +108,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   MyTextForm(
                     enableBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color:  AppColors.grey)),
-                    labelText: AppStrings.email,
+                        borderSide: const BorderSide(color: AppColors.grey)),
+                    labelText: AppStrings.email.tr(context),
                     isDense: true,
                     radius: AppSize.s40,
                     controller: emailController,
                     textInputType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.emailHint;
+                        return AppStrings.emailHint.tr(context);
                       } else {
                         return null;
                       }
@@ -121,24 +128,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   MyTextForm(
                     enableBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color:  AppColors.grey)),
-                    isPassword:  _isHidePass,
-                    suffixIcon:  _isHidePass
-                        ? Icons.visibility_off
-                        : Icons.visibility,
+                        borderSide: const BorderSide(color: AppColors.grey)),
+                    isPassword: _isHidePass,
+                    suffixIcon:
+                        _isHidePass ? Icons.visibility_off : Icons.visibility,
                     suffixIconPressed: () {
                       setState(() {
-                        _isHidePass = ! _isHidePass;
+                        _isHidePass = !_isHidePass;
                       });
                     },
-                    labelText: AppStrings.password,
+                    labelText: AppStrings.password.tr(context),
                     isDense: true,
                     radius: AppSize.s40,
                     textInputType: TextInputType.visiblePassword,
                     controller: passwordController,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.passHint;
+                        return AppStrings.passHint.tr(context);
                       }
                       return null;
                     },
@@ -149,17 +155,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   MyTextForm(
                     enableBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color:  AppColors.grey)),
-                    isPassword:  _isHidePasss,
-                    suffixIcon:  _isHidePasss
-                        ? Icons.visibility_off
-                        : Icons.visibility,
+                        borderSide: const BorderSide(color: AppColors.grey)),
+                    isPassword: _isHidePasss,
+                    suffixIcon:
+                        _isHidePasss ? Icons.visibility_off : Icons.visibility,
                     suffixIconPressed: () {
                       setState(() {
-                        _isHidePasss = ! _isHidePasss;
+                        _isHidePasss = !_isHidePasss;
                       });
                     },
-                    labelText: AppStrings.confirmedPassword,
+                    labelText: AppStrings.confirmedPassword.tr(context),
                     isDense: true,
                     radius: AppSize.s40,
                     textInputType: TextInputType.visiblePassword,
@@ -168,7 +173,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (value!.isEmpty ||
                           passwordController.text !=
                               confirmPassController.text) {
-                        return AppStrings.passHintMatch;
+                        return AppStrings.passHintMatch.tr(context);
                       } else {
                         return null;
                       }
@@ -183,21 +188,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: AppSize.s50,
                         width: double.infinity,
                         child:
-                        BlocConsumer<UserRegisterCubit, UserRegisterState>(
+                            BlocConsumer<UserRegisterCubit, UserRegisterState>(
                           listener: (BuildContext context, state) {
                             if (state is UserRegisterSuccessState) {
                               showToast(
-                                text: AppStrings.successRegisterEn,
+                                text: AppStrings.successRegisterEn.tr(context),
                                 state: ToastStates.success,
                               );
-                              Navigator.pushReplacementNamed(context, Routes.loginRoute,);
+                              Navigator.pushReplacementNamed(
+                                context,
+                                Routes.loginRoute,
+                              );
                             }
                           },
                           builder: (BuildContext context, Object? state) {
                             var cubit = UserRegisterCubit.get(context);
                             if (state is! UserRegisterLoadingState) {
                               return MyButton(
-                                label: AppStrings.signUp,
+                                label: AppStrings.signUp.tr(context),
                                 fontWeight: FontWeight.w700,
                                 fontSize: AppSize.s15,
                                 radius: AppPadding.p12,
@@ -209,7 +217,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         email: emailController.text,
                                         password: passwordController.text,
                                         passwordConfirmation:
-                                        passwordController.text,
+                                            passwordController.text,
                                         // image: cubit.userImage ?? File('p',),
                                       ),
                                     );
@@ -227,32 +235,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(
                         height: AppSize.s30,
                       ),
-                      const MyText(
-                        text: AppStrings.policy,
-                        fontSize: AppSize.s15,
-                        colors: AppColors.grey,
-                      ),
-                      const SizedBox(
-                        height: AppSize.s15,
-                      ),
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const MyText(
-                            text: AppStrings.haveAnAccount,
+                          MyText(
+                            text: AppStrings.policy.tr(context),
                             fontSize: AppSize.s15,
                             colors: AppColors.grey,
                           ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, Routes.loginRoute);
-                            },
-                            child: const Text(
-                              AppStrings.logIn,
-                              style: TextStyle(
-                                  color: AppColors.teal,
-                                  fontSize: AppSize.s18,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                          const SizedBox(
+                            height: AppSize.s15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              MyText(
+                                text: AppStrings.haveAnAccount.tr(context),
+                                fontSize: AppSize.s15,
+                                colors: AppColors.grey,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, Routes.loginRoute);
+                                },
+                                child: Text(
+                                  AppStrings.logIn.tr(context),
+                                  style: const TextStyle(
+                                      color: AppColors.teal,
+                                      fontSize: AppSize.s18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

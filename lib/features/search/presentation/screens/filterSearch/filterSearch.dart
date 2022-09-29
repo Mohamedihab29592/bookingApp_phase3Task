@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class FilterPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.kPrimaryColor,
-        title: const Text('Explore'),
+        title: Text('Explore'.tr(context)),
         centerTitle: true,
         actions: [
           IconButton(

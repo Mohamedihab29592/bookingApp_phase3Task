@@ -132,29 +132,34 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           bottom: AppSize.s20),
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             height: AppSize.s50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(AppSize.s30),
-                              color: AppColors.darkGrey,
-                            ),
-                            child: MyTextForm(
-                              enableBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                  borderSide: const BorderSide(color:  AppColors.transparent)),
-                              readOnly: true,
-                              onTap: () {
-                                Navigator.pushNamed(context, Routes.search);
-                              },
-                              isDense: true,
-                              controller: _controller,
-                              textInputType: TextInputType.text,
-                              validator: (value) {
-                                return null;
-                              },
-                              prefixIcon: IconButton(onPressed: (){},icon:const Icon(Icons.search,color: AppColors.teal,) ,),
-                              hintText: AppStrings.whereAreYouGoing.tr(context),
-                              radius: AppSize.s30,
+                            child: Card(
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSize.s30)),
+                                color: AppColors.darkGrey,
+                              child:  InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, Routes.search);
+                                },
+                                child: Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    IconButton(onPressed: (){},icon:const Icon(Icons.search,color: AppColors.teal,) ,),
+                                    const Spacer(),
+                                    Text(
+                                      AppStrings.whereAreYouGoing.tr(context),
+                                      style: const TextStyle(
+                                          color: AppColors.grey,
+                                          fontSize: 18.0
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                           const Spacer(),
@@ -181,13 +186,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                     Align(
                                       alignment: Alignment.bottomLeft,
                                       child: MyButton(
-                                          label: AppStrings.viewHotel.tr(context),
+                                          label:
+                                              AppStrings.viewHotel.tr(context),
                                           radius: AppSize.s100,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w900,
                                           onPressed: () {
-                                           navigateTo(context: context, widget: FilterPage());
-
+                                            navigateTo(
+                                                context: context,
+                                                widget: const FilterPage());
                                           }),
                                     ),
                                     const Spacer(),
@@ -235,7 +242,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   MyText(
+                  MyText(
                       text: AppStrings.popularDestination.tr(context),
                       fontSize: AppSize.s20,
                       colors: AppColors.white),
@@ -252,33 +259,38 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         itemCount: _popularDestination.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: ((context, index) {
-                          return Container(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                          return SizedBox(
                             height: AppSize.s100,
                             width: AppSize.s300,
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                            child: Stack(
-                              alignment: Alignment.bottomLeft,
-                              children: [
-                                Image.asset(
-                                  _popularDestination[index],
-                                  height: double.infinity,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: AppPadding.p20,
-                                        top: AppPadding.p10),
-                                    child: MyText(
-                                      text: _popularDestinationNames[index],
-                                      fontSize: AppSize.s25,
+                            child: Card(
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: Stack(
+                                alignment: Alignment.bottomLeft,
+                                children: [
+                                  Image.asset(
+                                    _popularDestination[index],
+                                    height: double.infinity,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: AppPadding.p20,
+                                          top: AppPadding.p10),
+                                      child: MyText(
+                                        text: _popularDestinationNames[index],
+                                        fontSize: AppSize.s25,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         }),
@@ -292,7 +304,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                       MyText(
+                      MyText(
                         text: AppStrings.bestDeals.tr(context),
                         fontSize: AppSize.s20,
                       ),
