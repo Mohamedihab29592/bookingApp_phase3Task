@@ -33,7 +33,7 @@ class MyTextForm extends StatelessWidget {
     required this.validator,
     this.onChange,
     this.onSubmit,
-    this.radius,
+    this.radius = 0,
     required this.controller,
     this.labelText,
     this.obscureText = false,

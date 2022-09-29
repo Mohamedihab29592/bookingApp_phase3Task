@@ -12,11 +12,11 @@ class AppStrings {
   static const String confirmedPassword = 'Confirmed Password';
   static const String nameHint = 'Enter your Name';
   static const String emailHint = 'Enter your Email';
-  static const String passHintMatch = 'passwords should be match';
-  static const String passHint = 'please Enter your Password';
+  static const String passHintMatch = 'passwords should be matched';
+  static const String passHint = 'Enter your Password';
   static const String searchHint = 'please Enter your valid input';
-  static const String passForget = "Forget your password ?";
-  static const String createAcc = "Register Now!";
+  static const String passForget = "Forgot Your Password?";
+  static const String createAcc = "Register Now";
   static const String policy = "By Signing up , you agreed with our terms of Services and privacy policy.";
   static const String haveAnAccount = "Already have account?";
   static const String haveNotAnAccount = "Don't have Account?";

@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/component/toast.dart';
 import 'package:booking_app/core/routes/routes_manager.dart';
 import 'package:booking_app/features/auth/login/domain/entities/user_login_entity.dart';
@@ -50,14 +51,17 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: const [
-                      MyText(
-                        text: AppStrings.logIn,
-                        fontSize: AppSize.s28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Row(
+                      children:  [
+                        MyText(
+                          text: AppStrings.logIn.tr(context),
+                          fontSize: AppSize.s28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: AppSize.s15,
@@ -77,9 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: AppSize.s15,
                   ),
-                  const Center(
+                   Center(
                     child: MyText(
-                      text: AppStrings.orLoginWith,
+                      text: AppStrings.orLoginWith.tr(context),
                       fontSize: AppSize.s15,
                       colors: AppColors.grey,
                     ),
@@ -93,10 +97,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderSide: const BorderSide(color: AppColors.grey)),
                     isDense: true,
                     radius: AppSize.s40,
-                    labelText: AppStrings.email,
+                    labelText: AppStrings.email.tr(context),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.emailHint;
+                        return AppStrings.emailHint.tr(context);
                       } else {
                         return null;
                       }
@@ -120,10 +124,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     isDense: true,
                     radius: AppSize.s40,
-                    labelText: AppStrings.password,
+                    labelText: AppStrings.password.tr(context),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.passHint;
+                        return AppStrings.passHint.tr(context);
                       } else {
                         return null;
                       }
@@ -133,15 +137,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   ),
                   const SizedBox(height: AppSize.s15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      MyText(
-                        text: AppStrings.passForget,
-                        fontSize: AppSize.s15,
-                        colors: AppColors.grey,
-                      ),
-                    ],
+                  Align(
+                    alignment: AlignmentDirectional.bottomStart,
+                    child: MyText(
+                      text: AppStrings.passForget.tr(context),
+                      fontSize: AppSize.s15,
+                      colors: AppColors.grey,
+                    ),
                   ),
                   const SizedBox(
                     height: AppSize.s15,
@@ -155,15 +157,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           listener: (BuildContext context, state) {
                             if (state is LoginSuccessState) {
                               showToast(
-                                  text: AppStrings.successLoginEn,
-                                  state: ToastStates.success);
+                                  text: AppStrings.successLoginEn.tr(context),
+                                  state: ToastStates.success,
+                              );
                               Navigator.pushReplacementNamed(
                                 context,
                                 Routes.homeLayout,
                               );
-                            } else {
-                              showToast(text: AppStrings.errorLoginEn,
-                                  state: ToastStates.success);
                             }
                           },
                           builder: (BuildContext context, Object? state) {
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             password: passwordController.text));
                                   }
                                 },
-                                label: AppStrings.logIn,
+                                label: AppStrings.logIn.tr(context),
                                 fontWeight: FontWeight.bold,
                                 fontSize: AppSize.s20,
                                 radius: AppPadding.p12,
@@ -196,8 +196,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const MyText(
-                        text: AppStrings.haveNotAnAccount,
+                       MyText(
+                        text: AppStrings.haveNotAnAccount.tr(context),
                         fontSize: AppSize.s15,
                         colors: AppColors.grey,
                       ),
@@ -205,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.registerRoute);
                           },
-                          child: const Text(AppStrings.createAcc))
+                          child:  Text(AppStrings.createAcc.tr(context)))
                     ],
                   ),
                 ],

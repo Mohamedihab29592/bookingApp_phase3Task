@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/component/my_text.dart';
 import 'package:booking_app/features/search/domain/entity/search_entity.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
@@ -53,8 +54,8 @@ class _SearchState extends State<Search> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const MyText(
-                          text: AppStrings.search,
+                         MyText(
+                          text: AppStrings.search.tr(context),
                           fontSize: AppSize.s22,
                         ),
                         const SizedBox(
@@ -75,7 +76,7 @@ class _SearchState extends State<Search> {
                             textInputType: TextInputType.text,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return AppStrings.searchHint;
+                                return AppStrings.searchHint.tr(context);
                               } else {
                                 return null;
                               }
@@ -101,7 +102,7 @@ class _SearchState extends State<Search> {
                                 color: AppColors.teal,
                               ),
                             ),
-                            hintText: AppStrings.whereAreYouGoing,
+                            hintText: AppStrings.whereAreYouGoing.tr(context),
                             radius: AppSize.s30,
                           ),
                         ),
@@ -117,14 +118,14 @@ class _SearchState extends State<Search> {
                         ),
                         Row(
                           children: [
-                            const MyText(
-                                text: AppStrings.searchResult,
+                             MyText(
+                                text: AppStrings.searchResult.tr(context),
                                 fontSize: AppSize.s16),
                             const Spacer(),
                             TextButton(
                               onPressed: () {},
-                              child: const MyText(
-                                text: AppStrings.clear,
+                              child: MyText(
+                                text: AppStrings.clear.tr(context),
                                 fontSize: AppSize.s16,
                                 colors: AppColors.teal,
                               ),

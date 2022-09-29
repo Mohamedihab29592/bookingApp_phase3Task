@@ -1,3 +1,4 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/utilis/constants/assets_manager.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
@@ -71,9 +72,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                               ),
                             ),
                             padding: const EdgeInsets.all(16.0),
-                            child: const Text(
-                              'Search',
-                              style: TextStyle(
+                            child:  Text(
+                              'Search'.tr(context),
+                              style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 16,
                               ),
@@ -124,8 +125,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
                   ),
-                  child: Text(
-                    '7 Hotel',
+                  child:  Text(
+                    '7' + 'Hotel'.tr(context),
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.white,
@@ -166,7 +167,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 width: double.infinity,
                                 height: 200,
                                 child: Stack(
-                                  children: [
+                                  children: const [
                                     Image(
                                       image: AssetImage(
                                           ImageAssets.guestHouse),
@@ -183,11 +184,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 child: Column(
                                   children: [
                                     Row(
-                                      children: [
+                                      children: const [
                                         Expanded(
                                           child: Text(
                                             'Hotel Name',
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontSize: 16,
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -196,7 +197,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         ),
                                         Text(
                                           '200\$',
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 16,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -206,15 +207,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     ),
                                     const SizedBox(height: 8),
                                     Row(
-                                      children: [
-                                        const Icon(
+                                      children: const [
+                                        Icon(
                                           Icons.star_rate_rounded,
                                           color: Colors.amber,
                                           size: 24,
                                         ),
                                         Text(
                                           "10.5",
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 16,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
