@@ -70,11 +70,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.center,
                       child: BlocConsumer<LoginCubit, LoginState>(
                         listener: (context, state) {
-                          // TODO: implement listener
+                          if(state is CreateGoogleUserSuccessState)
+                            {
+                              showToast(
+                                text: AppStrings.successLoginEn.tr(context),
+                                state: ToastStates.success,
+                              );
+                              Navigator.pushReplacementNamed(
+                                context,
+                                Routes.homeLayout,
+                              );                            }
                         },
                         builder: (context, state) {
                           return MySignButton(ontap: () {
                             LoginCubit.get(context).signInwithGoogle();
+
                           },);
                         },
                       )),

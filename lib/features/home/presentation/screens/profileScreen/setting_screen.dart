@@ -15,6 +15,12 @@ class SettingScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.kPrimaryColor,
       appBar: AppBar(
+        title:  CustomText(
+          text: 'Settings'.tr(context),
+          fontWeight: FontWeight.w900,
+          fontSize: 25,
+          color: AppColors.white,
+        ),
         backgroundColor: AppColors.kPrimaryColor,
         elevation: 0,
       ),
@@ -25,12 +31,7 @@ class SettingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               CustomText(
-                text: 'Settings'.tr(context),
-                fontWeight: FontWeight.w900,
-                fontSize: 25,
-                color: AppColors.white,
-              ),
+
               Column(
                 children: [
                   BuildSettingItem(

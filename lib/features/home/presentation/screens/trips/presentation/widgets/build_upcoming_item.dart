@@ -40,185 +40,188 @@ class BuildUpcomingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 15,
-        ),
-        Row(
-          children: [
-            const Spacer(),
-            CustomText(
-              text:
-                  '$startDate - $endDate, $roomsNumber Room $peopleNumber People',
-              fontSize: 14,
-              color: AppColors.white,
-            ),
-            const Spacer(),
-          ],
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: AppColors.darkGrey,
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 15,
           ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Column(
+          Row(
             children: [
-              Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  Image.network(urlImage),
-                  BlocConsumer<HomeCubit,HomeState>(
-                    listener: (context,state){
-                      if (state is UpdateBookingSuccessState)
-                        {
-                          HomeCubit.get(context).getUpcomingBooking();
-                        }
-                    },
-                    builder: (context,state){
-                      var cubit = HomeCubit.get(context);
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          backgroundColor: AppColors.darkGrey,
-                          child: PopupMenuButton(
-                            position: PopupMenuPosition.under,
-                              icon:const Icon(Icons.menu_rounded,color: AppColors.white,),
-                              color: AppColors.kPrimaryColor,
-                              itemBuilder: (context) => [
-                                PopupMenuItem(
-                                  value: 1,
-                                  child:TextButton(
-                                    onPressed: (){
-                                      cubit.updateBooking(hotelId:id! , type:"completed"  );
-
-                                    },
-                                    child: const MyText(text: 'Complete',colors: AppColors.blue,fontSize: 15 ,),
-                                  ),
-
-                                ),
-                                PopupMenuItem(
-                                  value: 2,
-                                  child:TextButton(
-                                    onPressed: (){
-                                      cubit.updateBooking(hotelId:id! , type:"cancelled"  );
-
-                                    },
-                                    child: const MyText(text: 'Cancel',colors: AppColors.red,fontSize: 15 ,),
-                                  ),
-
-                                ),
-
-                              ]),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+              const Spacer(),
+              CustomText(
+                text:
+                    '$startDate - $endDate, $roomsNumber Room $peopleNumber People',
+                fontSize: 14,
+                color: AppColors.white,
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
+              const Spacer(),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: AppColors.darkGrey,
+            ),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: Column(
+              children: [
+                Stack(
+                  alignment: Alignment.topRight,
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomText(
-                            text: hotelName,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            color: AppColors.white,
+                    Image.network(urlImage),
+                    BlocConsumer<HomeCubit,HomeState>(
+                      listener: (context,state){
+                        if (state is UpdateBookingSuccessState)
+                          {
+                            HomeCubit.get(context).getUpcomingBooking();
+                          }
+                      },
+                      builder: (context,state){
+                        var cubit = HomeCubit.get(context);
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            backgroundColor: AppColors.darkGrey,
+                            child: PopupMenuButton(
+                              position: PopupMenuPosition.under,
+                                icon:const Icon(Icons.menu_rounded,color: AppColors.white,),
+                                color: AppColors.kPrimaryColor,
+                                itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                    value: 1,
+                                    child:TextButton(
+                                      onPressed: (){
+                                        cubit.updateBooking(hotelId:id! , type:"completed"  );
+
+                                      },
+                                      child: const MyText(text: 'Complete',colors: AppColors.blue,fontSize: 15 ,),
+                                    ),
+
+                                  ),
+                                  PopupMenuItem(
+                                    value: 2,
+                                    child:TextButton(
+                                      onPressed: (){
+                                        cubit.updateBooking(hotelId:id! , type:"cancelled"  );
+
+                                      },
+                                      child: const MyText(text: 'Cancel',colors: AppColors.red,fontSize: 15 ,),
+                                    ),
+
+                                  ),
+
+                                ]),
                           ),
-                        ),
-                        CustomText(
-                          text: "\$$price",
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.white,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [Expanded(
-                        child: CustomText(
-                            text: '$day, $city ',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.grey,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                      ),
-                        Expanded(
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.location_on,
-                                color: AppColors.teal,
-                                size: 20,
-                              ),
-                              Expanded(
-                                child: CustomText(
-                                  text: location,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.grey,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const CustomText(
-                          text: "/per night",
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.grey,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        RatingBar.builder(
-                          initialRating: initialRating,
-                          minRating: 0,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.star,
-                            color: AppColors.teal,
-                          ),
-                          onRatingUpdate: (rating) {},
-                          itemSize: 20,
-                        ),
-                        const Expanded(
-                          child: CustomText(
-                            text: '  80 Reviewers',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.grey,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   ],
                 ),
-              ),
-            ],
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomText(
+                              text: hotelName,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              color: AppColors.white,
+                            ),
+                          ),
+                          CustomText(
+                            text: "\$$price",
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.white,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [Expanded(
+                          child: CustomText(
+                              text: '$day, $city ',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.grey,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                        ),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on,
+                                  color: AppColors.teal,
+                                  size: 20,
+                                ),
+                                Expanded(
+                                  child: CustomText(
+                                    text: location,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.grey,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const CustomText(
+                            text: "/per night",
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.grey,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          RatingBar.builder(
+                            initialRating: initialRating,
+                            minRating: 0,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            itemCount: 5,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.star,
+                              color: AppColors.teal,
+                            ),
+                            onRatingUpdate: (rating) {},
+                            itemSize: 20,
+                          ),
+                          const Expanded(
+                            child: CustomText(
+                              text: '  80 Reviewers',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.grey,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

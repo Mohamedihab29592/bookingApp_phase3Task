@@ -21,6 +21,7 @@ SearchDataModel _$SearchDataModelFromJson(Map<String, dynamic> json) =>
           .map((e) => DataHotelModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       lastPage: json['last_page'] as int,
+      total: json['total'] as int,
     );
 
 Map<String, dynamic> _$SearchDataModelToJson(SearchDataModel instance) =>

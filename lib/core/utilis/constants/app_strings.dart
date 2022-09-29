@@ -22,6 +22,8 @@ class AppStrings {
   static const String haveNotAnAccount = "Don't have Account?";
   static const String moreDetails = "More Details";
   static const String token = "token";
+  static const String kmToCity = "2 Km to City";
+
   static const String successLoginEn = "signed in successfully";
   static const String successRegisterEn = "User Registered Successfully";
   static const String errorLoginEn = "email or password is incorrect";

@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../../../core/utilis/constants/app_strings.dart';
+
 class CardOfHotel extends StatelessWidget {
   const CardOfHotel({
     Key? key,
@@ -58,7 +60,7 @@ class CardOfHotel extends StatelessWidget {
                       ));
                 },
                 child: SizedBox(
-                  height: AppSize.s140,
+                  height: AppSize.s145,
                   width: double.infinity,
                   child: Card(
                     elevation: 5,
@@ -92,16 +94,18 @@ class CardOfHotel extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                MyText(
-                                  maxLines: 2,
-                                  overflow: TextOverflow.fade,
-                                  text: _item.name,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w900,
+                                Expanded(
+                                  child: MyText(
+                                    maxLines: 1,
+                                    overflow: TextOverflow.fade,
+                                    text: _item.name,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                                 MyText(
-                                  maxLines: 2,
-                                  overflow: TextOverflow.fade,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   text: _item.address,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w900,
@@ -115,13 +119,11 @@ class CardOfHotel extends StatelessWidget {
                                       color: AppColors.teal,
                                       size: 11,
                                     ),
-                                    const MyText(
-                                        text: "2.0 Km to City",
+                                     MyText(
+                                        text: AppStrings.kmToCity.tr(context),
                                         fontSize: 14,
                                         colors: AppColors.grey),
-                                    const SizedBox(
-                                      width: 60,
-                                    ),
+                                    const Spacer(),
                                     MyText(
                                       text: "\$${_item.price}",
                                       fontSize: 18,
@@ -149,9 +151,7 @@ class CardOfHotel extends StatelessWidget {
                                     //     text: "Rate : ${item.rate}",
                                     //     fontSize: 14,
                                     //     colors: AppColors.teal),
-                                    const SizedBox(
-                                      width: AppSize.s50,
-                                    ),
+                                    const Spacer(),
                                     MyText(
                                       text: "/per night".tr(context),
                                       fontSize: 16,

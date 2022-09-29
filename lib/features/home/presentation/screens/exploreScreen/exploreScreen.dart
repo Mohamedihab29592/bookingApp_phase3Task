@@ -143,12 +143,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                   Navigator.pushNamed(context, Routes.search);
                                 },
                                 child: Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
+
                                   children: [
                                     IconButton(onPressed: (){},icon:const Icon(Icons.search,color: AppColors.teal,) ,),
-                                    const Spacer(),
                                     Text(
                                       AppStrings.whereAreYouGoing.tr(context),
                                       style: const TextStyle(

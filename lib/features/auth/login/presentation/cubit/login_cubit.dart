@@ -47,28 +47,27 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
 
+
+  // Future<String?> signInwithGoogle2() async {
+  //   emit(CreateGoogleUserLoadingState());
+  //   try {
+  //     final GoogleSignInAccount? googleSignInAccount =
+  //     await _googleSignIn.signIn();
+  //     final GoogleSignInAuthentication googleSignInAuthentication =
+  //     await googleSignInAccount!.authentication;
+  //     final AuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleSignInAuthentication.accessToken,
+  //       idToken: googleSignInAuthentication.idToken,
+  //     );
+  //     emit(CreateGoogleUserSuccessState());
+  //     await _auth.signInWithCredential(credential);
+  //   } on FirebaseAuthException catch (errrorrrrrr) {
+  //     print('errrorrrrrr${errrorrrrrr.message}');
+  //     throw errrorrrrrr;
+  //   }
+  // }
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-  Future<String?> signInwithGoogle2() async {
-    emit(CreateGoogleUserLoadingState());
-    try {
-      final GoogleSignInAccount? googleSignInAccount =
-      await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount!.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
-      emit(CreateGoogleUserSuccessState());
-      await _auth.signInWithCredential(credential);
-    } on FirebaseAuthException catch (errrorrrrrr) {
-      print('errrorrrrrr${errrorrrrrr.message}');
-      throw errrorrrrrr;
-    }
-  }
-
   Future<UserCredential> signInwithGoogle() async {
     emit(CreateGoogleUserLoadingState());
 
@@ -76,19 +75,24 @@ class LoginCubit extends Cubit<LoginState> {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final GoogleSignInAuthentication? googleAuth = await googleUser
+        ?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
+
     emit(CreateGoogleUserSuccessState());
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    return await _auth.signInWithCredential(credential);
   }
 
+
   Future<void> signOutFromGoogle() async{
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
     await _googleSignIn.signOut();
     await _auth.signOut();
   }

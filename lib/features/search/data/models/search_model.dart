@@ -23,10 +23,13 @@ class SearchDataModel {
   final List<DataHotelModel> data;
   @JsonKey(name: 'last_page')
   final int lastPage;
+  @JsonKey(name: 'total')
+  final int total;
 
   SearchDataModel({
     required this.data,
     required this.lastPage,
+    required this.total,
   });
 
   factory SearchDataModel.fromJson(Map<String, dynamic> json) =>

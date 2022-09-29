@@ -1,13 +1,15 @@
 import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/utilis/constants/assets_manager.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
 
+import '../../../../core/network/end_points.dart';
 import '../../../../core/utilis/constants/colors.dart';
-
-
+import '../../domain/entity/search_entity.dart';
+import 'filterItem.dart';
 
 class FilterWidget extends StatefulWidget {
   const FilterWidget({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class FilterWidget extends StatefulWidget {
 
 class _FilterWidgetState extends State<FilterWidget> {
   ScrollController scrollController = ScrollController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -40,7 +43,8 @@ class _FilterWidgetState extends State<FilterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeState>(
+    var cubit = SearchCubit.get(context);
+    return BlocConsumer<SearchCubit, SearchState>(
       listener: (context, state) {
         // if (state is ErrorState) {}
       },
@@ -72,7 +76,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               ),
                             ),
                             padding: const EdgeInsets.all(16.0),
-                            child:  Text(
+                            child: Text(
                               'Search'.tr(context),
                               style: const TextStyle(
                                 color: Colors.grey,
@@ -84,7 +88,19 @@ class _FilterWidgetState extends State<FilterWidget> {
                       ),
                       const SizedBox(width: 16),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          cubit.searchForHotel(
+                            userSearchEntity: UserSearchEntity(
+                              name: "palm",
+                              address: '',
+                              maxPrice: '',
+                              minPrice: '',
+                              latitude: '',
+                              longitude: '',
+                              distance: '',
+                            ),
+                          );
+                        },
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
                           decoration: BoxDecoration(
@@ -97,7 +113,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           padding: const EdgeInsets.all(14.0),
                           child: const Icon(
                             Icons.search,
-                            color: Colors.grey,
+                            color: AppColors.teal,
                           ),
                         ),
                       ),
@@ -125,8 +141,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
                   ),
-                  child:  Text(
-                    '7' + 'Hotel'.tr(context),
+                  child: Text(
+                    "${cubit.searchModel!.data.total.toString()} total",
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.white,
@@ -138,117 +154,34 @@ class _FilterWidgetState extends State<FilterWidget> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                //  if(AppBloc.get(context).hotels.isNotEmpty)
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                        ),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                                           color: AppColors.darkGrey,
-
-                            borderRadius: BorderRadius.circular(10),
-                            // boxShadow: [
-                            //   BoxShadow(
-                            //     color: Colors.grey,
-                            //     blurRadius: 5,
-                            //     offset: const Offset(0, 1),
-                            //   ),
-                            // ],
-                          ),
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: double.infinity,
-                                height: 200,
-                                child: Stack(
-                                  children: const [
-                                    Image(
-                                      image: AssetImage(
-                                          ImageAssets.guestHouse),
-                                      width: double.infinity,
-                                      height: 200.0,
-                                      fit: BoxFit.cover,
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: const [
-                                        Expanded(
-                                          child: Text(
-                                            'Hotel Name',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Text(
-                                          '200\$',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.star_rate_rounded,
-                                          color: Colors.amber,
-                                          size: 24,
-                                        ),
-                                        Text(
-                                          "10.5",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                  //  if(AppBloc.get(context).hotels.isNotEmpty)
+                  ListView.separated(
+                    controller: scrollController,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
                       ),
-                      separatorBuilder: (context, index) => const SizedBox(height: 16),
-                      itemCount:7,
+                      child: SearchFilterItem(
+                        urlImage: imageBaseUrl+
+                            cubit.searchModel!.data.data[0].images[index].image,
+                        hotelName:  cubit.searchModel!.data.data[index].name,
+                        location:  cubit.searchModel!.data.data[index].address,
+                        price:  cubit.searchModel!.data.data[index].price,
+                        initialRating: double.parse(cubit.searchModel!.data.data[index].rate),
+                      ),
                     ),
-                  // if(AppBloc.get(context).hotels.isEmpty)
-                  //   const CupertinoActivityIndicator(),
-                  //if(AppBloc.get(context).isEnd)
-                  //   const Padding(
-                  //     padding: EdgeInsets.only(
-                  //       top: 14.0,
-                  //       bottom: 100.0,
-                  //     ),
-                  //     child: CupertinoActivityIndicator(),
-                  //   ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount:5
+                  ),
+
                 ],
               ),
             ),
           ],
         );
-
       },
     );
   }
