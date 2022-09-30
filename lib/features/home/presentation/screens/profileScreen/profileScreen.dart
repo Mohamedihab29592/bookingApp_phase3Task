@@ -26,7 +26,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context,state) {
         var cubit = HomeCubit.get(context);
         return Scaffold(
-            backgroundColor: AppColors.kPrimaryColor,
             body: Padding(
               padding:  const EdgeInsets.only(top:AppPadding.p30,right:AppPadding.p20,left: AppPadding.p20 ),
               child: Column(
@@ -55,7 +54,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
-                                    color: AppColors.white,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 25,
                                   ),
@@ -67,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   'View and Edit Profile'.tr(context),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.white),
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                 ),
                               ],
                             ),
@@ -79,14 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(width: 4, color: AppColors.darkGrey),
-                            boxShadow: [
-                              BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: AppColors.white.withOpacity(.1),
-                                offset: const Offset(0, 10),
-                              ),
-                            ],
+
                             image:  DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
@@ -97,6 +88,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
+                  Divider(
+                    height: 10,
+                  ),
+
                   const SizedBox(
                     height: 30,
                   ),

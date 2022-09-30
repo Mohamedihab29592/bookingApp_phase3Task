@@ -7,7 +7,7 @@ import '../../../../../../../core/utilis/constants/colors.dart';
 
 
 
-class BuildFavoritesItem extends StatelessWidget {
+class BuildCanceledItem extends StatelessWidget {
   final String urlImage;
   final String hotelName;
   final String city;
@@ -16,7 +16,7 @@ class BuildFavoritesItem extends StatelessWidget {
   final String price;
   final double initialRating;
 
-  const BuildFavoritesItem(
+  const BuildCanceledItem(
       {Key? key,
       required this.urlImage,
       required this.hotelName,
@@ -33,10 +33,17 @@ class BuildFavoritesItem extends StatelessWidget {
       children: [
         Container(
           height: 140,
-          margin: const EdgeInsets.only(top: 30),
+          margin: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: AppColors.darkGrey
+            color: Theme.of(context).brightness == Brightness.light ?  AppColors.white:AppColors.darkGrey,
+
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 2,
+              ),
+            ],
+            borderRadius: BorderRadius.circular(20),
+
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Row(
@@ -66,7 +73,6 @@ class BuildFavoritesItem extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      color: AppColors.white,
                     ),
                     const SizedBox(height: 4,),
                     CustomText(
@@ -92,7 +98,6 @@ class BuildFavoritesItem extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          color: AppColors.white,
                         ),
                       ],
                     ),

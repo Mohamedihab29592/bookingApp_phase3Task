@@ -13,10 +13,8 @@ class FilterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kPrimaryColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColors.kPrimaryColor,
         title: Text('Explore'.tr(context)),
         centerTitle: true,
         actions: [

@@ -30,9 +30,7 @@ class EditProfileScreen extends StatelessWidget {
         userNameController.text = cubit.profileModel!.profileData.name;
         emailController.text = cubit.profileModel!.profileData.email;
         return Scaffold(
-          backgroundColor: AppColors.darkGrey,
           appBar: AppBar(
-            backgroundColor: AppColors.darkGrey,
             elevation: 0,
           ),
           body: SingleChildScrollView(
@@ -48,7 +46,6 @@ class EditProfileScreen extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        color: AppColors.white,
                         fontWeight: FontWeight.w500,
                         fontSize: 25,
                       ),
@@ -113,7 +110,6 @@ class EditProfileScreen extends StatelessWidget {
                           controller: userNameController,
                           style: const TextStyle(
                             fontSize: 16,
-                            color: AppColors.white,
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -154,7 +150,6 @@ class EditProfileScreen extends StatelessWidget {
                           controller: emailController,
                           style: const TextStyle(
                             fontSize: 16,
-                            color: AppColors.white,
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -198,7 +193,7 @@ class EditProfileScreen extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: Colors.grey,
                                   child: Text(
                                     'Cancel'.tr(context),
                                     style: const TextStyle(color: Colors.black),

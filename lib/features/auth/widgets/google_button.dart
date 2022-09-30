@@ -19,8 +19,8 @@ class MySignButton extends StatelessWidget {
       icon: Image.asset(ImageAssets.google,height: 20,),
       label: const Text(AppStrings.google),
       style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.darkGrey,
-          foregroundColor: AppColors.white,
+          backgroundColor: AppColors.white,
+          foregroundColor: AppColors.black,
           padding:const EdgeInsets.all(AppPadding.p14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.s30),

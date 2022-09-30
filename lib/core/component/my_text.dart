@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyText extends StatelessWidget {
   final String text;
   final double fontSize;
-  final Color colors;
+  final Color? colors;
   final FontWeight fontWeight;
   final int? maxLines;
   final TextOverflow? overflow;
@@ -12,13 +12,12 @@ class MyText extends StatelessWidget {
       {super.key,
       required this.text,
       required this.fontSize,
-      this.colors = Colors.white,
+      this.colors ,
       this.fontWeight = FontWeight.bold,  this.maxLines,  this.overflow});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-
       text,
       maxLines:maxLines ,
       overflow:overflow ,

@@ -22,7 +22,6 @@ class BuildSettingItem extends StatelessWidget {
       leading: CustomText(
         text: label,
         fontSize: 18,
-        color: AppColors.white,
       ),
       trailing: widget,
     );

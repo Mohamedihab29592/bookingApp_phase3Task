@@ -20,7 +20,6 @@ class _MapScreenState extends State<MapScreen> {
         title: Text("Maps"),
         centerTitle: true,
         elevation: 10,
-        backgroundColor: AppColors.kPrimaryColor,
         systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: AppColors.transparent),
         leading: IconButton(

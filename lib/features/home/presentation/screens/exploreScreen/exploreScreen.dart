@@ -10,6 +10,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../../core/routes/routes_manager.dart';
 import '../../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../../core/utilis/constants/colors.dart';
+import '../../../../../core/utilis/constants/themes.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
 import '../../../../../core/component/my_button.dart';
 import '../../../../../core/component/my_text.dart';
@@ -77,7 +78,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kPrimaryColor,
       body: DefaultTabController(
         length: 1,
         child: NestedScrollView(
@@ -87,7 +87,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
               SliverAppBar(
                 floating: true,
                 pinned: true,
-                backgroundColor: AppColors.kPrimaryColor,
                 expandedHeight: AppSize.s500,
                 collapsedHeight: AppSize.s172,
                 actionsIconTheme: const IconThemeData(opacity: AppSize.s0),
@@ -130,98 +129,100 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           right: AppSize.s20,
                           left: AppSize.s20,
                           bottom: AppSize.s20),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: AppSize.s50,
-                            child: Card(
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSize.s30)),
-                                color: AppColors.darkGrey,
-                              child:  InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(context, Routes.search);
-                                },
-                                child: Row(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: AppSize.s50,
+                              child: Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSize.s30)),
+                                child:  InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, Routes.search);
+                                  },
+                                  child: Row(
 
-                                  children: [
-                                    IconButton(onPressed: (){},icon:const Icon(Icons.search,color: AppColors.teal,) ,),
-                                    Text(
-                                      AppStrings.whereAreYouGoing.tr(context),
-                                      style: const TextStyle(
-                                          color: AppColors.grey,
-                                          fontSize: 18.0
+                                    children: [
+                                      IconButton(onPressed: (){},icon:const Icon(Icons.search,color: AppColors.teal,) ,),
+                                      Text(
+                                        AppStrings.whereAreYouGoing.tr(context),
+                                        style: const TextStyle(
+                                            color: AppColors.grey,
+                                            fontSize: 18.0
+                                        ),
                                       ),
-                                    ),
-                                    const Spacer(),
-                                  ],
+                                      const Spacer(),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          const Spacer(),
-                          if (_appBarCollapsed == true)
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const MyText(
-                                  text: AppStrings.capTown,
-                                  fontSize: AppSize.s35,
-                                ),
-                                const SizedBox(
-                                  height: AppSize.s10,
-                                ),
-                                const MyText(
-                                    text: AppStrings.extraordinary,
-                                    fontSize: AppSize.s20),
-                                const SizedBox(
-                                  height: AppSize.s15,
-                                ),
-                                Row(
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.bottomLeft,
-                                      child: MyButton(
-                                          label:
-                                              AppStrings.viewHotel.tr(context),
-                                          radius: AppSize.s100,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w900,
-                                          onPressed: () {
-                                            navigateTo(
-                                                context: context,
-                                                widget: const FilterPage());
-                                          }),
-                                    ),
-                                    const Spacer(),
-                                    AnimatedSmoothIndicator(
-                                      activeIndex: _current,
-                                      count: _images.length,
-                                      effect: const ExpandingDotsEffect(
-                                          activeDotColor: AppColors.teal,
-                                          dotWidth: 8,
-                                          dotHeight: 8),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          if (_appBarCollapsed == false)
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                AnimatedSmoothIndicator(
-                                  activeIndex: _current,
-                                  count: _images.length,
-                                  effect: const ExpandingDotsEffect(
-                                      activeDotColor: AppColors.teal,
-                                      dotWidth: 8,
-                                      dotHeight: 8),
-                                ),
-                              ],
-                            ),
-                        ],
+                            const Spacer(),
+                            if (_appBarCollapsed == true)
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const MyText(
+                                    text: AppStrings.capTown,
+                                    fontSize: AppSize.s35,
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.s10,
+                                  ),
+                                  const MyText(
+                                      text: AppStrings.extraordinary,
+                                      fontSize: AppSize.s20),
+                                  const SizedBox(
+                                    height: AppSize.s15,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: MyButton(
+                                            label:
+                                                AppStrings.viewHotel.tr(context),
+                                            radius: AppSize.s100,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w900,
+                                            onPressed: () {
+                                              navigateTo(
+                                                  context: context,
+                                                  widget: const FilterPage());
+                                            }),
+                                      ),
+                                      const Spacer(),
+                                      AnimatedSmoothIndicator(
+                                        activeIndex: _current,
+                                        count: _images.length,
+                                        effect: const ExpandingDotsEffect(
+                                            activeDotColor: AppColors.teal,
+                                            dotWidth: 8,
+                                            dotHeight: 8),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            if (_appBarCollapsed == false)
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  AnimatedSmoothIndicator(
+                                    activeIndex: _current,
+                                    count: _images.length,
+                                    effect: const ExpandingDotsEffect(
+                                        activeDotColor: AppColors.teal,
+                                        dotWidth: 8,
+                                        dotHeight: 8),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -242,7 +243,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   MyText(
                       text: AppStrings.popularDestination.tr(context),
                       fontSize: AppSize.s20,
-                      colors: AppColors.white),
+                      ),
                   const SizedBox(
                     height: AppSize.s20,
                   ),
@@ -283,6 +284,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                       child: MyText(
                                         text: _popularDestinationNames[index],
                                         fontSize: AppSize.s25,
+                                        colors: AppColors.white,
                                       ),
                                     ),
                                   ),

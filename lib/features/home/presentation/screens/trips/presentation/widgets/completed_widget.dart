@@ -41,7 +41,7 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                     onTap: (){
                       navigateTo(context: context, widget: const ViewHotelDetails());
                     },
-                    child: BuildFinishedItem(
+                    child: BuildCanceledItem(
                       urlImage: imageBaseUrl+ upcomingItem.completedModel!.bookingData[index].hotel!.images[0].image,
                       startDate: '25 Sep',
                       endDate: '29 Sep',
@@ -79,7 +79,6 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                   const Text(
                     'No Booking Now',
                     style: TextStyle(
-                      color: Colors.white,
                       fontSize: 30.0,
                       fontWeight: FontWeight.w900,
                     ),
@@ -89,7 +88,7 @@ class _CompletedWidgetState extends State<CompletedWidget> {
             );
           }
         } else {
-          return const Center(child: CupertinoActivityIndicator(color: AppColors.white,));
+          return const Center(child: CupertinoActivityIndicator(color: AppColors.teal,));
         }
       },
     );

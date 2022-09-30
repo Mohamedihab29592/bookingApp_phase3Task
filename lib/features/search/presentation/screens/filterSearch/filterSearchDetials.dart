@@ -25,12 +25,9 @@ class _FilterSearchDetailsState extends State<FilterSearchDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kPrimaryColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColors.kPrimaryColor,
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: AppColors.transparent),
+
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

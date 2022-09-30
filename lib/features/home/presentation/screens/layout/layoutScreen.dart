@@ -24,7 +24,7 @@ class _HomeLayoutState extends State<HomeLayout> {
             bottomNavigationBar: Scaffold(
               body: cubit.screens[cubit.currentIndex],
               bottomNavigationBar: BottomNavigationBar(
-                backgroundColor: AppColors.darkGrey,
+                elevation: 20,
                 selectedItemColor: AppColors.teal,
                 type: BottomNavigationBarType.fixed,
                 unselectedItemColor: AppColors.grey,

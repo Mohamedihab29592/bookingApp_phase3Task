@@ -6,7 +6,6 @@ import 'package:booking_app/core/utilis/constants/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../core/utilis/constants/colors.dart';
 import '../../core/utilis/constants/constats_manager.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -45,9 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kPrimaryColor,
       body: Center(
-
         child: Lottie.asset(JsonAssets.splashLogo),
       ),
     );

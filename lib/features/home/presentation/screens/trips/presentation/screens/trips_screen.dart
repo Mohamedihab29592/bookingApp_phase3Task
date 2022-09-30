@@ -17,7 +17,7 @@ class _TripsScreenState extends State<TripsScreen> {
   final List<Widget> screens = [
     const UpcomingWidget(),
     const CompletedWidget(),
-    const FavoritesWidget(),
+    const CanceledWidget(),
   ];
 
   int currentScreen = 0;
@@ -26,7 +26,6 @@ class _TripsScreenState extends State<TripsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.kPrimaryColor,
         body: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10, top: 40),
           child: Column(
@@ -36,16 +35,22 @@ class _TripsScreenState extends State<TripsScreen> {
                 text: 'My Trip',
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: AppColors.white,
               ),
               const SizedBox(
                 height: 25,
               ),
               Container(
+
                 decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 2,
+                      ),
+                    ],
                     borderRadius: BorderRadius.circular(30),
-                    color: AppColors.darkGrey),
+                    color: Theme.of(context).brightness == Brightness.light ?  AppColors.white:AppColors.darkGrey),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
+
                 child: Row(
                   children: [
                     Expanded(

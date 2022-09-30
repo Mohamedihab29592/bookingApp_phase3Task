@@ -54,7 +54,6 @@ class BuildUpcomingItem extends StatelessWidget {
                 text:
                     '$startDate - $endDate, $roomsNumber Room $peopleNumber People',
                 fontSize: 14,
-                color: AppColors.white,
               ),
               const Spacer(),
             ],
@@ -64,8 +63,15 @@ class BuildUpcomingItem extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.light ?  AppColors.white:AppColors.darkGrey,
+
+            boxShadow: const [
+                BoxShadow(
+                  blurRadius: 2,
+                ),
+              ],
               borderRadius: BorderRadius.circular(20),
-              color: AppColors.darkGrey,
+
             ),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: Column(
@@ -90,7 +96,6 @@ class BuildUpcomingItem extends StatelessWidget {
                             child: PopupMenuButton(
                               position: PopupMenuPosition.under,
                                 icon:const Icon(Icons.menu_rounded,color: AppColors.white,),
-                                color: AppColors.kPrimaryColor,
                                 itemBuilder: (context) => [
                                   PopupMenuItem(
                                     value: 1,
@@ -136,14 +141,12 @@ class BuildUpcomingItem extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              color: AppColors.white,
                             ),
                           ),
                           CustomText(
                             text: "\$$price",
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.white,
                           ),
                         ],
                       ),
@@ -153,32 +156,11 @@ class BuildUpcomingItem extends StatelessWidget {
                               text: '$day, $city ',
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: AppColors.grey,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                         ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.location_on,
-                                  color: AppColors.teal,
-                                  size: 20,
-                                ),
-                                Expanded(
-                                  child: CustomText(
-                                    text: location,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.grey,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+
                           const CustomText(
                             text: "/per night",
                             fontSize: 14,
@@ -202,6 +184,7 @@ class BuildUpcomingItem extends StatelessWidget {
                             onRatingUpdate: (rating) {},
                             itemSize: 20,
                           ),
+
                           const Expanded(
                             child: CustomText(
                               text: '  80 Reviewers',

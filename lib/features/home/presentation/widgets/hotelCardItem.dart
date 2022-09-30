@@ -6,6 +6,7 @@ import 'package:booking_app/core/utilis/constants/values_manger.dart';
 import 'package:booking_app/core/component/my_text.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:booking_app/features/home/presentation/screens/exploreScreen/hotelView.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -25,7 +26,7 @@ class CardOfHotel extends StatelessWidget {
         var cubit = HomeCubit.get(context);
 
         if (state is GetHomeDataLoadingState) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CupertinoActivityIndicator(color: AppColors.teal,));
         }
         if (state is GetHomeDataErrorState) {
           return const Center(
@@ -63,11 +64,10 @@ class CardOfHotel extends StatelessWidget {
                   height: AppSize.s145,
                   width: double.infinity,
                   child: Card(
-                    elevation: 5,
+                    elevation: 15,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    color: AppColors.darkGrey,
                     clipBehavior: Clip.antiAlias,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -80,13 +80,7 @@ class CardOfHotel extends StatelessWidget {
                           width: MediaQuery.of(context).size.width / 3,
                           height: double.infinity,
                         ),
-                        // else
-                        // Image(
-                        //   image:  const AssetImage(ImageAssets.resort),
-                        //   fit: BoxFit.cover,
-                        //   width: MediaQuery.of(context).size.width / 3,
-                        //   height: double.infinity,
-                        // ),
+
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(
