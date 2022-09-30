@@ -97,3 +97,8 @@ class UpdateBookingSuccessState extends HomeState {}
 class UpdateBookingLoadingState extends HomeState {}
 
 class BookingHotelLoadingState extends HomeState {}
+
+
+
+
+

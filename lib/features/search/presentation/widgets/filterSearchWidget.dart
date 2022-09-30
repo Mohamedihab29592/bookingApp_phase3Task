@@ -91,7 +91,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         onTap: () {
                           cubit.searchForHotel(
                             userSearchEntity: UserSearchEntity(
-                              name: "palm",
+                              name: '',
                               address: '',
                               maxPrice: '',
                               minPrice: '',
@@ -122,13 +122,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 ),
               ),
             ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const SizedBox(height: 16),
-                ],
-              ),
-            ),
+            if (cubit.searchModel != null)
             SliverPersistentHeader(
               pinned: true,
               floating: true,
@@ -154,7 +148,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  //  if(AppBloc.get(context).hotels.isNotEmpty)
+                   if(SearchCubit.get(context).searchModel != null)
                   ListView.separated(
                     controller: scrollController,
                     shrinkWrap: true,
@@ -165,16 +159,16 @@ class _FilterWidgetState extends State<FilterWidget> {
                       ),
                       child: SearchFilterItem(
                         urlImage: imageBaseUrl+
-                            cubit.searchModel!.data.data[0].images[index].image,
+                            cubit.searchModel!.data.data[index].images[0].image,
                         hotelName:  cubit.searchModel!.data.data[index].name,
                         location:  cubit.searchModel!.data.data[index].address,
                         price:  cubit.searchModel!.data.data[index].price,
-                        initialRating: double.parse(cubit.searchModel!.data.data[index].rate),
+                        initialRating: double.parse(cubit.searchModel!.data.data[index].rate)/2,
                       ),
                     ),
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 16),
-                    itemCount:5
+                    itemCount: cubit.searchModel!.data.data.length
                   ),
 
                 ],

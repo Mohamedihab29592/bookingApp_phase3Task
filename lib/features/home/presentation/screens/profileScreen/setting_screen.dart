@@ -42,14 +42,27 @@ class SettingScreen extends StatelessWidget {
                         size: 20,
                       ),
                       label: 'Notifications'.tr(context)),
-                  BuildSettingItem(
-                      onTap: () {},
-                      widget: const Icon(
-                        Icons.dark_mode,
-                        color: AppColors.white,
-                        size: 20,
-                      ),
-                      label: 'Theme Mode'.tr(context)),
+                  BlocConsumer<LocaleCubit,LocalStates>(
+                      listener: (context,state){
+                        if (state is ChangeAppModeSucces)
+                          {
+                            state = InitialState();
+                          }
+                      },
+                      builder: (context,state){
+                        return BuildSettingItem(
+                            onTap: () {
+                              LocaleCubit.get(context).changeAppMode();
+                            },
+                            widget: const Icon(
+                              Icons.dark_mode,
+                              color: AppColors.white,
+                              size: 20,
+                            ),
+                            label: 'Theme Mode'.tr(context));
+                      },
+
+      ),
                   BuildSettingItem(
                       onTap: () {},
                       widget: const Icon(
@@ -66,26 +79,33 @@ class SettingScreen extends StatelessWidget {
                         size: 20,
                       ),
                       label: 'Color'.tr(context)),
-                  BlocConsumer<LocaleCubit, ChangeLocaleState>(
+                  BlocConsumer<LocaleCubit, LocalStates>(
                     listener: (context, state){
-                      Navigator.pop(context);
+                      // Navigator.pop(context);
                     },
                     builder: (context, state) {
-                        return BuildSettingItem(
-                          onTap: () {
-                            if(state.locale.languageCode == 'en') {
-                              context.read<LocaleCubit>().changeLanguage('ar');
-                            }else{
-                              context.read<LocaleCubit>().changeLanguage('en');
-                            }
-                          },
-                          widget: const Icon(
+                      return BuildSettingItem(
+                            onTap: () {
+                              var cubit = LocaleCubit.get(context);
 
-                            Icons.language,
-                            color: AppColors.white,
-                            size: 20,
-                          ),
-                          label: 'Language'.tr(context));
+                                if(cubit.locale!.languageCode == 'en') {
+                                  context.read<LocaleCubit>().changeLanguage('ar');
+                                }else{
+                                  context.read<LocaleCubit>().changeLanguage('en');
+
+                              }
+                            },
+                            widget: const Icon(
+
+                              Icons.language,
+                              color: AppColors.white,
+                              size: 20,
+                            ),
+                            label: 'Language'.tr(context));
+
+
+
+
 
                     },
                   ),

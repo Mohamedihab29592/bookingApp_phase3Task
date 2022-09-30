@@ -1,32 +1,46 @@
 import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/app_localization/cubit/locale_cubit.dart';
-import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:booking_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'bloc_observer.dart';
+import 'core/local/cache_helper.dart';
 import 'core/routes/routes_manager.dart';
 import 'core/utilis/constants/app_strings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'core/utilis/constants/themes.dart';
 import 'injection_container.dart' as di;
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 void main() async {
+  Bloc.observer = MyBlocObserver();
+
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  final sharedPreferences = await SharedPreferences.getInstance();
+  bool ? isDarkMode =  sharedPreferences.getBool("isDarkMode");
+print(isDarkMode);
+
+
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   di.init();
-  runApp(const MotelApp());
+  runApp( MotelApp(isDarkMode: isDarkMode!,));
 }
 
 class MotelApp extends StatelessWidget {
-  const MotelApp({super.key});
+ final bool  isDarkMode ;
+  Locale? locale;
+
+    MotelApp({super.key,required this.isDarkMode});
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +52,24 @@ class MotelApp extends StatelessWidget {
               ..getHomeData()
               ..getProfileData()),
         BlocProvider(create: (context) => di.sl<SearchCubit>()),
-        BlocProvider(create: (context) => LocaleCubit()..getSaveLanguage()),
+        BlocProvider(create: (context) => LocaleCubit()..getSaveLanguage()..changeAppMode(fromShared: isDarkMode,)),
       ],
-      child: BlocBuilder<LocaleCubit, ChangeLocaleState>(
-        builder: (context, state) {
-            return MaterialApp(
-            locale: state.locale,
+      child: BlocConsumer<LocaleCubit,  LocalStates >(
+        listener: (context,state){
+          if (state is ChangeLocaleState)
+            {
+              //locale = state.locale;
+            }
+        },
+
+        builder: (context, state)
+        {
+          return MaterialApp(
+             themeMode:  LocaleCubit.get(context).isDarkMode ? ThemeMode.dark: ThemeMode.light,
+            darkTheme: AppThemes.darkMode ,
+            theme: AppThemes.lightMode,
+
+            locale: LocaleCubit.get(context).locale,
             supportedLocales: const [
               Locale('en'),
               Locale('ar'),
@@ -65,13 +91,13 @@ class MotelApp extends StatelessWidget {
               return supportedLocales.first;
             },
             title: AppStrings.appName,
-            theme: ThemeData(
-              primaryColor: AppColors.kPrimaryColor,
-            ),
+
             debugShowCheckedModeBanner: false,
             initialRoute: Routes.splashRoute,
             onGenerateRoute: RouteGenerator.getRoute,
+
           );
+
         },
       ),
     );
