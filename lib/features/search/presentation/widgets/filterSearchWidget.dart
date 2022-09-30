@@ -1,6 +1,4 @@
 import 'package:booking_app/core/app_localization/app_localization.dart';
-import 'package:booking_app/core/utilis/constants/assets_manager.dart';
-import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
