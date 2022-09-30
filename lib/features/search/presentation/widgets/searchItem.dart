@@ -33,10 +33,11 @@ class SearchItem extends StatelessWidget {
               return  Padding(
                 padding: const EdgeInsets.all(AppSize.s8),
                 child: Card(
+                  elevation: 10,
+
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppSize.s30),),
-                  color: AppColors.darkGrey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

@@ -24,8 +24,15 @@ class SearchFilterItem extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
+              color: Theme.of(context).brightness == Brightness.light ?  AppColors.white:AppColors.darkGrey,
+
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 2,
+                ),
+              ],
               borderRadius: BorderRadius.circular(20),
-              color: AppColors.darkGrey,
+
             ),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: Column(
@@ -33,7 +40,6 @@ class SearchFilterItem extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: AppColors.darkGrey,
                   ),
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   child: Column(
@@ -59,14 +65,12 @@ class SearchFilterItem extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    color: AppColors.white,
                                   ),
                                 ),
                                 CustomText(
                                   text: "\$$price",
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.white,
                                 ),
                               ],
                             ),

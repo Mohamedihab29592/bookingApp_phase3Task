@@ -10,14 +10,14 @@ import 'build_favorites_item.dart';
 import 'package:booking_app/features/home/presentation/screens/trips/presentation/screens/view_hotel_details.dart';
 
 
-class FavoritesWidget extends StatefulWidget {
-  const FavoritesWidget({Key? key}) : super(key: key);
+class CanceledWidget extends StatefulWidget {
+  const CanceledWidget({Key? key}) : super(key: key);
 
   @override
-  State<FavoritesWidget> createState() => _FavoritesWidgetState();
+  State<CanceledWidget> createState() => _CanceledWidgetState();
 }
 
-class _FavoritesWidgetState extends State<FavoritesWidget> {
+class _CanceledWidgetState extends State<CanceledWidget> {
   @override
   void initState() {
     HomeCubit.get(context).getCancelledBooking();
@@ -40,7 +40,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget> {
                     onTap: (){
                       navigateTo(context: context, widget: ViewHotelDetails());
                     },
-                    child: BuildFavoritesItem(
+                    child: BuildCanceledItem(
                       urlImage: imageBaseUrl +upcomingItem.cancelledModel!.bookingData[index].hotel!.images[0].image,
                       hotelName: upcomingItem
                           .cancelledModel!.bookingData[index].hotel!.name
@@ -82,7 +82,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget> {
             );
           }
         } else {
-          return const Center(child: CupertinoActivityIndicator(color: AppColors.white,));
+          return const Center(child: CupertinoActivityIndicator(color: AppColors.teal,));
         }
       },
     );

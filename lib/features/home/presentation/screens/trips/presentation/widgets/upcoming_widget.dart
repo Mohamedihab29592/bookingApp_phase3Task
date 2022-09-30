@@ -29,7 +29,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
       builder: (context, state) {
         var upcomingItem = HomeCubit.get(context);
         if (state is GetBookingDataLoadingState) {
-          return const Center(child: CupertinoActivityIndicator(color: AppColors.white,));
+          return const Center(child: CupertinoActivityIndicator(color: AppColors.teal,));
         }
         else  if (state is GetBookingDataErrorState || upcomingItem.upComingModel!.bookingData.isEmpty)
           {
@@ -46,7 +46,6 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                   const Text(
                     'No Booking Now',
                     style: TextStyle(
-                      color: Colors.white,
                       fontSize: 30.0,
                       fontWeight: FontWeight.w900,
                     ),

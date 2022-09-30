@@ -38,10 +38,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return BlocProvider(
       create: (context) => di.sl<UserRegisterCubit>(),
       child: Scaffold(
-        backgroundColor: AppColors.kPrimaryColor,
         appBar: AppBar(
           elevation: AppSize.s0,
-          backgroundColor: AppColors.kPrimaryColor,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -240,7 +238,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           MyText(
                             text: AppStrings.policy.tr(context),
-                            fontSize: AppSize.s15,
+                            fontSize: AppSize.s12,
                             colors: AppColors.grey,
                           ),
                           const SizedBox(
@@ -263,7 +261,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   AppStrings.logIn.tr(context),
                                   style: const TextStyle(
                                       color: AppColors.teal,
-                                      fontSize: AppSize.s18,
+
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),

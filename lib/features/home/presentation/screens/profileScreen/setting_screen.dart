@@ -13,15 +13,12 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kPrimaryColor,
       appBar: AppBar(
         title:  CustomText(
           text: 'Settings'.tr(context),
           fontWeight: FontWeight.w900,
           fontSize: 25,
-          color: AppColors.white,
         ),
-        backgroundColor: AppColors.kPrimaryColor,
         elevation: 0,
       ),
       body: Padding(
@@ -38,7 +35,6 @@ class SettingScreen extends StatelessWidget {
                       onTap: () {},
                       widget: const Icon(
                         Icons.notifications,
-                        color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Notifications'.tr(context)),
@@ -56,7 +52,6 @@ class SettingScreen extends StatelessWidget {
                             },
                             widget: const Icon(
                               Icons.dark_mode,
-                              color: AppColors.white,
                               size: 20,
                             ),
                             label: 'Theme Mode'.tr(context));
@@ -67,7 +62,6 @@ class SettingScreen extends StatelessWidget {
                       onTap: () {},
                       widget: const Icon(
                         Icons.font_download_outlined,
-                        color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Fonts'.tr(context)),
@@ -75,7 +69,6 @@ class SettingScreen extends StatelessWidget {
                       onTap: () {},
                       widget: const Icon(
                         Icons.color_lens,
-                        color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Color'.tr(context)),
@@ -98,7 +91,6 @@ class SettingScreen extends StatelessWidget {
                             widget: const Icon(
 
                               Icons.language,
-                              color: AppColors.white,
                               size: 20,
                             ),
                             label: 'Language'.tr(context));
@@ -131,7 +123,6 @@ class SettingScreen extends StatelessWidget {
                       onTap: () {},
                       widget: const Icon(
                         Icons.keyboard_arrow_right,
-                        color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Terms of Services'.tr(context)),
@@ -139,7 +130,6 @@ class SettingScreen extends StatelessWidget {
                       onTap: () {},
                       widget: const Icon(
                         Icons.keyboard_arrow_right,
-                        color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Privacy Policy'.tr(context)),
@@ -147,7 +137,6 @@ class SettingScreen extends StatelessWidget {
                       onTap: () {},
                       widget: const Icon(
                         Icons.keyboard_arrow_right,
-                        color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Give Us Feedbacks'.tr(context),),
@@ -157,7 +146,6 @@ class SettingScreen extends StatelessWidget {
                       },
                       widget: const Icon(
                         Icons.keyboard_arrow_right,
-                        color: AppColors.white,
                         size: 20,
                       ),
                       label: 'Log out'.tr(context)),

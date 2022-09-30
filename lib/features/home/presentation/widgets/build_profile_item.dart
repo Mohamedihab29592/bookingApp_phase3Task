@@ -26,7 +26,6 @@ class BuildProfileItem extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    color: AppColors.white,
                     fontWeight: FontWeight.w400,
                     fontSize: 16,
                   ),
@@ -36,9 +35,8 @@ class BuildProfileItem extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 10,),
-           Divider(height: 0.5,color: AppColors.softGrey,),
-          const SizedBox(height: 10,),
+          const SizedBox(height: 30,),
+
         ],
       ),
     );

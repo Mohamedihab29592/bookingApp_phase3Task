@@ -128,16 +128,17 @@ class _FilterWidgetState extends State<FilterWidget> {
                 minHeight: 30.0,
                 maxHeight: 30.0,
                 child: Container(
-                  color: AppColors.kPrimaryColor,
                   height: 30.0,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
                   ),
-                  child: Text(
-                    "${cubit.searchModel!.data.total.toString()} total",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "${cubit.searchModel!.data.total.toString()} total",
+                      style: const TextStyle(
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 ),

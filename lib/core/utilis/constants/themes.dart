@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 
 class AppThemes{
   static final darkMode=ThemeData(
+
+
+cardTheme: CardTheme(color: AppColors.darkGrey),
     scaffoldBackgroundColor: AppColors.kPrimaryColor,
     colorScheme: const ColorScheme.dark(),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -31,15 +34,14 @@ class AppThemes{
         color: AppColors.teal,
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Colors.grey.shade900,
-        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.transparent,
+        statusBarIconBrightness: Brightness.light,
       ),
     ),
     textTheme: const TextTheme(
       bodyText1: TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.w600,
-        color: AppColors.white,
       ),
       subtitle1: TextStyle(
         fontSize: 14,
@@ -54,7 +56,12 @@ class AppThemes{
       ),
     ),
   );
+
+
   static final lightMode=ThemeData(
+    cardTheme: const CardTheme(color: AppColors.white),
+
+
     scaffoldBackgroundColor: AppColors.white,
     colorScheme: const ColorScheme.light(),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -73,17 +80,17 @@ class AppThemes{
     buttonTheme: const ButtonThemeData(
       buttonColor: AppColors.teal,
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.white,
       elevation: 0,
-      titleTextStyle: const TextStyle(
+      titleTextStyle: TextStyle(
           color: AppColors.black, fontSize: 20, fontWeight: FontWeight.bold),
-      iconTheme: const IconThemeData(
+      iconTheme: IconThemeData(
         color: AppColors.teal,
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Colors.grey.shade900,
-        statusBarIconBrightness: Brightness.light,
+        statusBarColor: AppColors.transparent,
+        statusBarIconBrightness: Brightness.dark,
       ),
     ),
     textTheme: const TextTheme(
@@ -104,6 +111,7 @@ class AppThemes{
         height: 1.3,
       ),
     ),
+
 
   );
 }

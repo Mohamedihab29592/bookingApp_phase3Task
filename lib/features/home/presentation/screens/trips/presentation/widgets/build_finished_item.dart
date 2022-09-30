@@ -6,7 +6,7 @@ import '../../../../../../../core/utilis/constants/colors.dart';
 
 
 
-class BuildFinishedItem extends StatelessWidget {
+class BuildCanceledItem extends StatelessWidget {
   final String urlImage;
   final String startDate;
   final String endDate;
@@ -19,7 +19,7 @@ class BuildFinishedItem extends StatelessWidget {
   final String price;
   final double initialRating;
 
-  const BuildFinishedItem({
+  const BuildCanceledItem({
     Key? key,
     required this.urlImage,
     required this.startDate,
@@ -42,7 +42,6 @@ class BuildFinishedItem extends StatelessWidget {
         height: 160,
         child: Card(
           elevation: 10,
-          color: AppColors.darkGrey,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +74,6 @@ class BuildFinishedItem extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        color: AppColors.white,
 
                       ),
                       const SizedBox(height: 5,),
@@ -91,32 +89,14 @@ class BuildFinishedItem extends StatelessWidget {
                       CustomText(
                         text: '$startDate - $endDate',
                         fontSize: 14,
-                        color: AppColors.white,
                       ),
                       const SizedBox(height: 5,),
                       CustomText(
                         text: '$roomsNumber Room $peopleNumber People',
                         fontSize: 14,
-                        color: AppColors.white,
 
                       ),
-                      // Row(
-                      //   children: [
-                      //     const Icon(
-                      //       Icons.location_on,
-                      //       color: AppColors.teal,
-                      //       size: 16,
-                      //     ),
-                      //     CustomText(
-                      //       text: location,
-                      //       fontSize: 16,
-                      //       fontWeight: FontWeight.w400,
-                      //       color: AppColors.grey,
-                      //       maxLines: 1,
-                      //       overflow: TextOverflow.ellipsis,
-                      //     ),
-                      //   ],
-                      // ),
+
                       RatingBar.builder(
                         initialRating: initialRating,
                         minRating: 0,
@@ -138,7 +118,6 @@ class BuildFinishedItem extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            color: AppColors.white,
                           ),
                           const CustomText(
                             text: '/per night',

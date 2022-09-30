@@ -48,8 +48,8 @@ class MyTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: AppColors.grey,
       readOnly: readOnly,
-      style: const TextStyle(color:AppColors.white),
       onFieldSubmitted: onSubmit,
       controller: controller,
       keyboardType: textInputType,

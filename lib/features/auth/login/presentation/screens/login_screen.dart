@@ -37,10 +37,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocProvider(
       create: (context) => di.sl<LoginCubit>(),
       child: Scaffold(
-        backgroundColor: AppColors.kPrimaryColor,
+
         appBar: AppBar(
           elevation: AppSize.s0,
-          backgroundColor: AppColors.kPrimaryColor,
+
 
         ),
         body: SingleChildScrollView(
@@ -190,12 +190,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 label: AppStrings.logIn.tr(context),
                                 fontWeight: FontWeight.bold,
-                                fontSize: AppSize.s20,
+                                fontSize: AppSize.s18,
                                 radius: AppPadding.p12,
                               );
                             } else {
                               return const Center(
-                                child: CircularProgressIndicator(),
+                                child: CircularProgressIndicator(color: AppColors.teal,),
                               );
                             }
                           },
@@ -215,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.registerRoute);
                           },
-                          child:  Text(AppStrings.createAcc.tr(context)))
+                          child:  Text(AppStrings.createAcc.tr(context),style: TextStyle(color: AppColors.teal),))
                     ],
                   ),
                 ],
