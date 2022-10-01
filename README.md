@@ -45,4 +45,3 @@ https://drive.google.com/file/d/1xAaDMg65xjgzxW2Zhfxo0OsZ5lPbkjB9/view?usp=shari
 
 
 
-![Untitled-1 copy](https://user-images.githubusercontent.com/64233832/193408256-b934bc87-a3bc-4f35-8911-ce0951a07c66.jpg)
