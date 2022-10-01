@@ -52,10 +52,14 @@ class DataHotelModel {
   final String address;
   @JsonKey(name: 'rate')
   final String rate;
+  @JsonKey(name: 'longitude')
+  final String longitude;
+  @JsonKey(name: 'latitude')
+  final String latitude;
   @JsonKey(name: 'hotel_images')
   final List<SearchHotelImages> images;
 
-  DataHotelModel({
+  DataHotelModel( {
     required this.id,
     required this.name,
     required this.description,
@@ -63,6 +67,8 @@ class DataHotelModel {
     required this.address,
     required this.rate,
     required this.images,
+    required this.longitude,
+    required this.latitude,
   });
 
   factory DataHotelModel.fromJson(Map<String, dynamic> json) =>

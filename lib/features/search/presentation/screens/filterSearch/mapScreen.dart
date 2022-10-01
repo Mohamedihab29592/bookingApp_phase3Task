@@ -1,12 +1,12 @@
 import 'package:booking_app/core/services/maps.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../../../../../core/utilis/constants/colors.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({Key? key}) : super(key: key);
+  final String lat;
+  final String long;
+  const MapScreen({Key? key, required this.lat, required this.long}) : super(key: key);
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -20,8 +20,6 @@ class _MapScreenState extends State<MapScreen> {
         title: Text("Maps"),
         centerTitle: true,
         elevation: 10,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: AppColors.transparent),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -33,7 +31,8 @@ class _MapScreenState extends State<MapScreen> {
         children: [
           Expanded(
 
-              child: Maps(lat: 27.259102.toString(), long: 33.812999.toString()))
+              child: Maps(lat: widget.lat, long: widget.long)),
+
         ],
       ),
     );

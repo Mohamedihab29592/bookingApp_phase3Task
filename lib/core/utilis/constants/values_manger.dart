@@ -83,7 +83,7 @@ class AppSize {
   static const double s300 = 300.0;
   static const double s400 = 400.0;
   static const double s500 = 500.0;
-  static const double s711 = 711.0;
+  static const double s715 = 715.0;
 }
 
 class ScrollValue

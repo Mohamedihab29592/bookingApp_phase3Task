@@ -32,15 +32,19 @@ Map<String, dynamic> _$SearchDataModelToJson(SearchDataModel instance) =>
 
 DataHotelModel _$DataHotelModelFromJson(Map<String, dynamic> json) =>
     DataHotelModel(
+
       id: json['id'] as int,
       name: json['name'] as String,
       description: json['description'] as String,
       price: json['price'] as String,
       address: json['address'] as String,
       rate: json['rate'] as String,
+      latitude: json['latitude']as String,
+      longitude: json['longitude']as String,
       images: (json['hotel_images'] as List<dynamic>)
           .map((e) => SearchHotelImages.fromJson(e as Map<String, dynamic>))
           .toList(),
+
     );
 
 Map<String, dynamic> _$DataHotelModelToJson(DataHotelModel instance) =>
@@ -52,6 +56,8 @@ Map<String, dynamic> _$DataHotelModelToJson(DataHotelModel instance) =>
       'address': instance.address,
       'rate': instance.rate,
       'hotel_images': instance.images,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
     };
 
 SearchHotelImages _$SearchHotelImagesFromJson(Map<String, dynamic> json) =>

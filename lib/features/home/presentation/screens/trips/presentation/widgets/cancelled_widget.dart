@@ -1,13 +1,10 @@
-import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../../../core/utilis/constants/assets_manager.dart';
 import 'build_favorites_item.dart';
-import 'package:booking_app/features/home/presentation/screens/trips/presentation/screens/view_hotel_details.dart';
 
 
 class CanceledWidget extends StatefulWidget {
@@ -38,7 +35,6 @@ class _CanceledWidgetState extends State<CanceledWidget> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: (){
-                      navigateTo(context: context, widget: ViewHotelDetails());
                     },
                     child: BuildCanceledItem(
                       urlImage: imageBaseUrl +upcomingItem.cancelledModel!.bookingData[index].hotel!.images[0].image,

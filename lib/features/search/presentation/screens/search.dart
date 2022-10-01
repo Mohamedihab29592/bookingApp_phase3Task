@@ -22,7 +22,6 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   final _controller = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,101 +40,100 @@ class _SearchState extends State<Search> {
             ),
           ),
           body: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.all(AppPadding.p20),
-                child: Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                         MyText(
-                          text: AppStrings.search.tr(context),
-                          fontSize: AppSize.s22,
+            child: Padding(
+              padding: const EdgeInsets.all(AppPadding.p20),
+              child: Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                       MyText(
+                        text: AppStrings.search.tr(context),
+                        fontSize: AppSize.s22,
+                      ),
+                      const SizedBox(
+                        height: AppSize.s20,
+                      ),
+                      Container(
+                        height: AppSize.s50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(AppSize.s30),
                         ),
-                        const SizedBox(
-                          height: AppSize.s20,
-                        ),
-                        Container(
-                          height: AppSize.s50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppSize.s30),
-                          ),
-                          child: MyTextForm(
-                            enableBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: const BorderSide(color:  AppColors.grey)),
-                            isDense: true,
-                            controller: _controller,
-                            textInputType: TextInputType.text,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return AppStrings.searchHint.tr(context);
-                              } else {
-                                return null;
-                              }
+                        child: MyTextForm(
+                          enableBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide: const BorderSide(color:  AppColors.grey)),
+                          isDense: true,
+                          controller: _controller,
+                          textInputType: TextInputType.text,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return AppStrings.searchHint.tr(context);
+                            } else {
+                              return null;
+                            }
+                          },
+                          prefixIcon: IconButton(
+                            onPressed: () {
+
+                                cubit.searchForHotel(
+                                  userSearchEntity: UserSearchEntity(
+                                    name: _controller.text,
+                                    address: '',
+                                    maxPrice: '',
+                                    minPrice: '',
+                                    latitude: '',
+                                    longitude: '',
+                                    distance: '',
+                                  ),
+                                );
+
                             },
-                            prefixIcon: IconButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  cubit.searchForHotel(
-                                    userSearchEntity: UserSearchEntity(
-                                      name: _controller.text,
-                                      address: '',
-                                      maxPrice: '',
-                                      minPrice: '',
-                                      latitude: '',
-                                      longitude: '',
-                                      distance: '',
-                                    ),
-                                  );
-                                }
-                              },
-                              icon: const Icon(
-                                Icons.search,
-                                color: AppColors.teal,
-                              ),
+                            icon: const Icon(
+                              Icons.search,
+                              color: AppColors.teal,
                             ),
-                            hintText: AppStrings.whereAreYouGoing.tr(context),
-                            radius: AppSize.s30,
                           ),
+                          hintText: AppStrings.whereAreYouGoing.tr(context),
+                          radius: AppSize.s30,
                         ),
-                        const SizedBox(
-                          height: AppSize.s20,
-                        ),
-                        SizedBox(
-                          height: 105,
-                          child: CircleAvatarItems(),
-                        ),
-                        const SizedBox(
-                          height: AppSize.s20,
-                        ),
-                        Row(
-                          children: [
-                             MyText(
-                                text: AppStrings.searchResult.tr(context),
-                                fontSize: AppSize.s16),
-                            const Spacer(),
-                            TextButton(
-                              onPressed: () {},
-                              child: MyText(
-                                text: AppStrings.clear.tr(context),
-                                fontSize: AppSize.s16,
-                                colors: AppColors.teal,
-                              ),
+                      ),
+                      const SizedBox(
+                        height: AppSize.s20,
+                      ),
+                      SizedBox(
+                        height: 105,
+                        child: CircleAvatarItems(),
+                      ),
+                      const SizedBox(
+                        height: AppSize.s20,
+                      ),
+                      Row(
+                        children: [
+                           MyText(
+                              text: AppStrings.searchResult,
+                              fontSize: AppSize.s16),
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () {
+
+                            },
+                            child: MyText(
+                              text: AppStrings.clear.tr(context),
+                              fontSize: AppSize.s16,
+                              colors: AppColors.teal,
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 600,
-                      width: 900,
-                      child: SearchItem(),
-                    ),
-                  ],
-                ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 600,
+                    width: 900,
+                    child: SearchItem(),
+                  ),
+                ],
               ),
             ),
           ),

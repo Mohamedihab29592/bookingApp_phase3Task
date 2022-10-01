@@ -10,11 +10,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../../core/routes/routes_manager.dart';
 import '../../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../../core/utilis/constants/colors.dart';
-import '../../../../../core/utilis/constants/themes.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
 import '../../../../../core/component/my_button.dart';
 import '../../../../../core/component/my_text.dart';
-import '../../../../../core/component/my_text_form_field.dart';
 import '../../../../search/presentation/screens/filterSearch/filterSearch.dart';
 import '../../widgets/hotelCardItem.dart';
 
@@ -54,7 +52,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
     super.dispose();
   }
 
-  final _controller = TextEditingController();
 
   final List<String> _images = [
     ImageAssets.hotel6,
@@ -168,13 +165,16 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                   const MyText(
                                     text: AppStrings.capTown,
                                     fontSize: AppSize.s35,
+                                    colors: AppColors.white,
                                   ),
                                   const SizedBox(
                                     height: AppSize.s10,
                                   ),
                                   const MyText(
                                       text: AppStrings.extraordinary,
-                                      fontSize: AppSize.s20),
+                                      fontSize: AppSize.s20,
+                                    colors: AppColors.white,
+                                  ),
                                   const SizedBox(
                                     height: AppSize.s15,
                                   ),

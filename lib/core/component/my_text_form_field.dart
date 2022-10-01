@@ -48,7 +48,9 @@ class MyTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: AppColors.grey,
+        onTap:onTap ,
+
+        cursorColor: AppColors.grey,
       readOnly: readOnly,
       onFieldSubmitted: onSubmit,
       controller: controller,
@@ -68,7 +70,7 @@ class MyTextForm extends StatelessWidget {
         hintText: hintText,
         labelText: labelText,
         prefixIcon:  prefixIcon,
-        suffixIcon: IconButton(onPressed: suffixIconPressed, icon: Icon(suffixIcon,color: AppColors.white,),),
+        suffixIcon: IconButton(onPressed: suffixIconPressed, icon: Icon(suffixIcon,color: AppColors.teal,),),
         isDense: isDense,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
@@ -78,11 +80,12 @@ class MyTextForm extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(color:  AppColors.red)),
 
-        enabledBorder: enableBorder,
+        enabledBorder:  OutlineInputBorder(
+    borderRadius: BorderRadius.circular(radius!),
+    borderSide: const BorderSide(color:  AppColors.blue),
       ),
 
 
-      onTap:onTap ,
-    );
+      ));
   }
 }
