@@ -85,7 +85,6 @@ class _HotelViewState extends State<HotelView> {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-            backgroundColor: AppColors.kPrimaryColor,
             body: DefaultTabController(
               length: 1,
               child: NestedScrollView(
@@ -126,7 +125,7 @@ class _HotelViewState extends State<HotelView> {
                       systemOverlayStyle: const SystemUiOverlayStyle(
                           statusBarColor: AppColors.transparent,
                           statusBarIconBrightness: Brightness.dark),
-                      expandedHeight: AppSize.s711,
+                      expandedHeight: AppSize.s715,
                       collapsedHeight: AppSize.s70,
                       actionsIconTheme:
                           const IconThemeData(opacity: AppSize.s0),
@@ -165,6 +164,8 @@ class _HotelViewState extends State<HotelView> {
                                               overflow: TextOverflow.ellipsis,
                                               text: widget.hotelName,
                                               fontSize: AppSize.s20,
+                                              colors: AppColors.white74,
+
                                             ),
                                             const SizedBox(
                                               height: AppSize.s5,
@@ -182,20 +183,13 @@ class _HotelViewState extends State<HotelView> {
                                                     colors: AppColors.white74,
                                                   ),
                                                 ),
-                                                const Icon(
-                                                  Icons.location_on,
-                                                  color: AppColors.teal,
-                                                  size: 11,
-                                                ),
-                                                const MyText(
-                                                    text: "2.0 Km to City",
-                                                    fontSize: 14,
-                                                    colors: AppColors.white74),
-                                                const Spacer(),
+
                                                 MyText(
                                                   text: "\$${widget.price}",
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
+                                                  colors: AppColors.white74,
+
                                                 ),
                                               ],
                                             ),
@@ -354,11 +348,12 @@ class _HotelViewState extends State<HotelView> {
                           height: AppSize.s10,
                         ),
                         MyText(
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           text: widget.locationName,
                           fontSize: 14,
-                          fontWeight: FontWeight.w900,
-                          colors: AppColors.white74,
+                          fontWeight: FontWeight.bold,
+                          colors: AppColors.grey,
                         ),
                         const SizedBox(
                           height: AppSize.s20,
@@ -386,12 +381,23 @@ class _HotelViewState extends State<HotelView> {
                         const SizedBox(
                           height: AppSize.s10,
                         ),
-                        SizedBox(
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).brightness == Brightness.light ?  AppColors.white:AppColors.darkGrey,
+
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 2,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+
+                          ),
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
                           height: 156,
                           width: double.infinity,
                           child: Card(
                             elevation: 10,
-                            color: AppColors.darkGrey,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             child: Padding(
@@ -715,8 +721,8 @@ class _HotelViewState extends State<HotelView> {
                                 var cubit = HomeCubit.get(context);
 
                                 return MyButton(
-                                  onPressed: () {
-                                    cubit.bookAHotel(
+                                  onPressed: () async{
+                                 await   cubit.bookAHotel(
                                         hotelId: widget.id.toString());
                                     HomeCubit.get(context).getHomeData();
                                   },

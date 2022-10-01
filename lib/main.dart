@@ -7,7 +7,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'bloc_observer.dart';
-import 'core/local/cache_helper.dart';
 import 'core/routes/routes_manager.dart';
 import 'core/utilis/constants/app_strings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,14 +25,14 @@ void main() async {
   );
 
   final sharedPreferences = await SharedPreferences.getInstance();
-  bool ? isDarkMode =  sharedPreferences.getBool("isDarkMode");
+  bool ? isDarkMode =  sharedPreferences.getBool("isDarkMode")?? false;
 print(isDarkMode);
 
 
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   di.init();
-  runApp( MotelApp(isDarkMode: isDarkMode!,));
+  runApp( MotelApp(isDarkMode: isDarkMode,));
 }
 
 class MotelApp extends StatelessWidget {

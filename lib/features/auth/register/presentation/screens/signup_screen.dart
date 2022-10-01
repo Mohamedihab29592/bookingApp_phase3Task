@@ -198,6 +198,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Routes.loginRoute,
                               );
                             }
+
+                            if (state is UserRegisterErrorState)
+                              {
+                                showToast(
+                                text: AppStrings.errorRegisterEn,
+                                state: ToastStates.error,
+                              );
+
+                              }
                           },
                           builder: (BuildContext context, Object? state) {
                             var cubit = UserRegisterCubit.get(context);
@@ -224,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               );
                             } else {
                               return const Center(
-                                child: CircularProgressIndicator(),
+                                child: CircularProgressIndicator(color: AppColors.teal,),
                               );
                             }
                           },

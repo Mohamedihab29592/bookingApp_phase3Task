@@ -566,7 +566,7 @@ packages:
       name: lottie
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.3"
+    version: "1.4.2"
   matcher:
     dependency: transitive
     description:
@@ -895,5 +895,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.0 <3.0.0"
-  flutter: ">=3.3.0"
+  dart: ">=2.18.0-165.1.beta <3.0.0"
+  flutter: ">=3.0.0"

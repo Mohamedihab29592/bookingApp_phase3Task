@@ -14,7 +14,7 @@ class Maps extends StatefulWidget {
   _MapsState createState() => _MapsState();
 }
 
-class _MapsState extends State<Maps> {
+class _MapsState extends State<Maps> with WidgetsBindingObserver {
 // created controller for displaying Google Maps
   final Completer<GoogleMapController> _controller = Completer();
 
@@ -36,14 +36,47 @@ class _MapsState extends State<Maps> {
 
   }
 
+  late String _darkMapStyle;
+ late  String _lightMapStyle;
+
+  Future _loadMapStyles() async {
+    _darkMapStyle  = await rootBundle.loadString('assets/map_styles/dark.json');
+    _lightMapStyle = await rootBundle.loadString('assets/map_styles/light.json');
+  }
 
 
   @override
   void initState() {
 
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+
     // initialize loadData method
     loadData();
+    _loadMapStyles();
+  }
+
+
+  Future _setMapStyle() async {
+    final controller = await _controller.future;
+    final theme = WidgetsBinding.instance.window.platformBrightness;
+    if (theme == Brightness.dark) {
+      controller.setMapStyle(_darkMapStyle);
+    } else {
+      controller.setMapStyle(_lightMapStyle);
+    }
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    setState(() {
+      _setMapStyle();
+    });
+  }
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
 // created method for displaying custom markers according to index
@@ -63,6 +96,7 @@ class _MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
+
     return  GoogleMap(
       // given camera position
       initialCameraPosition: CameraPosition(
@@ -72,7 +106,7 @@ class _MapsState extends State<Maps> {
       // set markers on google map
       markers: Set<Marker>.of(_markers),
       // on below line we have given map type
-      mapType: MapType.normal,
+      mapType: MapType.satellite,
       // on below line we have enabled location
       myLocationEnabled: true,
       myLocationButtonEnabled: true,

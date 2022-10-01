@@ -175,6 +175,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Routes.homeLayout,
                               );
                             }
+                            if (state is LoginErrorState)
+                              {
+                                showToast(
+                                  text: AppStrings.errorLoginEn.tr(context),
+                                  state: ToastStates.error,
+                                );
+                              }
                           },
                           builder: (BuildContext context, Object? state) {
                             var cubit = LoginCubit.get(context);

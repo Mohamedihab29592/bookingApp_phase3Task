@@ -27,7 +27,7 @@ class AppStrings {
   static const String successLoginEn = "signed in successfully";
   static const String successRegisterEn = "User Registered Successfully";
   static const String errorLoginEn = "email or password is incorrect";
-  static const String errorRegisterEn = "email  is registered before";
+  static const String errorRegisterEn = "email registered before";
   static const String explore = "Explore";
   static const String trips = "Trips";
   static const String profile = "Profile";
@@ -40,7 +40,7 @@ class AppStrings {
   static const String extraordinary = "Extraordinary five-star outdoor activities";
   static const String viewHotel = "View Hotel";
   static const String search = "Search";
-  static const String searchResult = "Search Result";
+  static const String searchResult = "Recent Search";
   static const String hotel = "Hotel";
   static const String backPacker = "BackPacker";
   static const String resort = "Resort";

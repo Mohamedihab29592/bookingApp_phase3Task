@@ -118,7 +118,7 @@ class EditProfileScreen extends StatelessWidget {
                             return null;
                           },
                           decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.only(bottom: 3),
+                            contentPadding: const EdgeInsets.all(8),
                             labelText: 'UserName'.tr(context),
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             hintText: 'User Name'.tr(context),
@@ -158,7 +158,7 @@ class EditProfileScreen extends StatelessWidget {
                             return null;
                           },
                           decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.only(bottom: 3),
+                            contentPadding: const EdgeInsets.all(8),
                             labelText: 'Email'.tr(context),
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             hintText: 'Email'.tr(context),

@@ -1,11 +1,9 @@
-import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../screens/view_hotel_details.dart';
 import 'build_upcoming_item.dart';
 
 class UpcomingWidget extends StatefulWidget {
@@ -28,7 +26,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
       listener: (context, state) {},
       builder: (context, state) {
         var upcomingItem = HomeCubit.get(context);
-        if (state is GetBookingDataLoadingState) {
+        if (upcomingItem.upComingModel == null) {
           return const Center(child: CupertinoActivityIndicator(color: AppColors.teal,));
         }
         else  if (state is GetBookingDataErrorState || upcomingItem.upComingModel!.bookingData.isEmpty)
@@ -62,7 +60,6 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: (){
-                      navigateTo(context: context, widget: const ViewHotelDetails());
                     },
                     child: BuildUpcomingItem(
                       id: upcomingItem.upComingModel!.bookingData[index].id,

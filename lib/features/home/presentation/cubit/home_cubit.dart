@@ -129,7 +129,7 @@ class HomeCubit extends Cubit<HomeState> {
   ProfileModel? profileModel;
 
   void getProfileData() {
-    var token = CacheHelper.getData(key: AppStrings.token);
+    CacheHelper.getData(key: AppStrings.token);
     emit(GetProfileDataLoadingState());
     profileDataUseCase.call(NoParams()).then((value) {
       value.fold((failure) {
@@ -220,7 +220,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   BookingHotelModel? bookingHotelModel;
 
-  void bookAHotel({required String hotelId}) {
+  Future<void> bookAHotel({required String hotelId}) async {
     emit(BookingHotelLoadingState());
     bookingHotelUseCase.call(hotelId: hotelId).then((value) {
       value.fold((failure) {

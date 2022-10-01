@@ -1,8 +1,8 @@
+import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../core/utilis/constants/colors.dart';
 import '../../../../core/utilis/constants/values_manger.dart';
 import '../../../../core/component/my_text.dart';
@@ -41,21 +41,15 @@ class SearchItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                       if(_item.images.isEmpty )
-                    const Image(
-                image: AssetImage(ImageAssets.hotel),
-                height: AppSize.s100,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-                        if(_item.images.isNotEmpty)
-                      const Image(
-                        image: AssetImage(ImageAssets.guestHouse),
+                      Image(
+                        image: NetworkImage(imageBaseUrl + _item.images[0].image),
                         height: AppSize.s100,
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
                       MyText(
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         text: _item.name,
                         fontSize: AppSize.s15,
                         fontWeight: FontWeight.w900,
@@ -82,7 +76,7 @@ class SearchItem extends StatelessWidget {
           );
         }
         if (state is SearchHotelLoadingState) {
-          return  const Center(child: CircularProgressIndicator());
+          return  const Center(child: CircularProgressIndicator(color: AppColors.teal,));
         }
         else
         {return
