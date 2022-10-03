@@ -85,9 +85,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
-                    enableBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: AppColors.grey)),
                     labelText: AppStrings.name.tr(context),
                     isDense: true,
                     radius: AppSize.s40,
@@ -104,9 +101,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
-                    enableBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: AppColors.grey)),
                     labelText: AppStrings.email.tr(context),
                     isDense: true,
                     radius: AppSize.s40,
@@ -124,9 +118,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
-                    enableBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: AppColors.grey)),
                     isPassword: _isHidePass,
                     suffixIcon:
                         _isHidePass ? Icons.visibility_off : Icons.visibility,
@@ -151,9 +142,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: AppSize.s15,
                   ),
                   MyTextForm(
-                    enableBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: AppColors.grey)),
                     isPassword: _isHidePasss,
                     suffixIcon:
                         _isHidePasss ? Icons.visibility_off : Icons.visibility,
@@ -212,11 +200,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             var cubit = UserRegisterCubit.get(context);
                             if (state is! UserRegisterLoadingState) {
                               return MyButton(
+                                width: double.infinity,
+
                                 label: AppStrings.signUp.tr(context),
                                 fontWeight: FontWeight.w700,
                                 fontSize: AppSize.s15,
                                 radius: AppPadding.p12,
                                 onPressed: () {
+                                  FocusManager.instance.primaryFocus!.unfocus();
+
                                   if (_formKey.currentState!.validate()) {
                                     cubit.registerWithEmail(
                                       userInfoEntity: UserInfoEntity(

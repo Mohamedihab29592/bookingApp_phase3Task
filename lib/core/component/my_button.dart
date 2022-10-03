@@ -4,6 +4,7 @@ import '../utilis/constants/values_manger.dart';
 
 class MyButton extends StatelessWidget {
   final String label;
+  final double width;
   final Color backGroundColor;
   final Color textColor;
   final double radius;
@@ -19,15 +20,16 @@ class MyButton extends StatelessWidget {
     required this.radius,
     required this.fontSize,
     required this.fontWeight,
-    required this.onPressed,
+    required this.onPressed, required this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppSize.s55,
-      width: AppSize.s120,
+      height: AppSize.s50,
+      width: width,
       child: ElevatedButton(
+
           onPressed: onPressed,
         style: ElevatedButton.styleFrom(
             backgroundColor: backGroundColor,

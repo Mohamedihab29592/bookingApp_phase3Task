@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 class AppThemes{
   static final darkMode=ThemeData(
 
-
+elevatedButtonTheme: ElevatedButtonThemeData(style:ButtonStyle(backgroundColor:MaterialStateProperty.all(AppColors.darkGrey),foregroundColor:MaterialStateProperty.all(Colors.white) ) ),
 cardTheme: CardTheme(color: AppColors.darkGrey),
     scaffoldBackgroundColor: AppColors.kPrimaryColor,
     colorScheme: const ColorScheme.dark(),
@@ -59,6 +59,8 @@ cardTheme: CardTheme(color: AppColors.darkGrey),
 
 
   static final lightMode=ThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(style:ButtonStyle(backgroundColor:MaterialStateProperty.all(AppColors.white74),foregroundColor:MaterialStateProperty.all(Colors.black) ) ),
+
     cardTheme: const CardTheme(color: AppColors.white),
 
 

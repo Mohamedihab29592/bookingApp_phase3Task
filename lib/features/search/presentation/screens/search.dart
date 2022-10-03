@@ -30,109 +30,128 @@ class _SearchState extends State<Search> {
       builder: (BuildContext context, Object? state) {
         var cubit = SearchCubit.get(context);
         return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.close),
-            ),
-          ),
           body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(AppPadding.p20),
+            child: SafeArea(
               child: Column(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                       MyText(
-                        text: AppStrings.search.tr(context),
-                        fontSize: AppSize.s22,
-                      ),
-                      const SizedBox(
-                        height: AppSize.s20,
-                      ),
-                      Container(
-                        height: AppSize.s50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(AppSize.s30),
-                        ),
-                        child: MyTextForm(
-                          enableBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: const BorderSide(color:  AppColors.grey)),
-                          isDense: true,
-                          controller: _controller,
-                          textInputType: TextInputType.text,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return AppStrings.searchHint.tr(context);
-                            } else {
-                              return null;
-                            }
-                          },
-                          prefixIcon: IconButton(
-                            onPressed: () {
+                      IconButton(
+                        splashRadius: 15,
 
-                                cubit.searchForHotel(
-                                  userSearchEntity: UserSearchEntity(
-                                    name: _controller.text,
-                                    address: '',
-                                    maxPrice: '',
-                                    minPrice: '',
-                                    latitude: '',
-                                    longitude: '',
-                                    distance: '',
-                                  ),
-                                );
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.close,color: AppColors.teal,),
+                      ),
+                     const Spacer(),
+                      IconButton(
+                        splashRadius: 15,
+                        onPressed: () {
+                        },
+                        icon: const Icon(Icons.location_on_outlined,color: AppColors.teal,),
+                      ),
+                      IconButton(
+                        splashRadius: 15,
 
-                            },
-                            icon: const Icon(
-                              Icons.search,
-                              color: AppColors.teal,
-                            ),
-                          ),
-                          hintText: AppStrings.whereAreYouGoing.tr(context),
-                          radius: AppSize.s30,
-                        ),
+                        onPressed: () {
+                        },
+                        icon: const Icon(Icons.filter_alt,color: AppColors.teal,),
                       ),
-                      const SizedBox(
-                        height: AppSize.s20,
-                      ),
-                      SizedBox(
-                        height: 105,
-                        child: CircleAvatarItems(),
-                      ),
-                      const SizedBox(
-                        height: AppSize.s20,
-                      ),
-                      Row(
-                        children: [
-                           MyText(
-                              text: AppStrings.searchResult,
-                              fontSize: AppSize.s16),
-                          const Spacer(),
-                          TextButton(
-                            onPressed: () {
 
-                            },
-                            child: MyText(
-                              text: AppStrings.clear.tr(context),
-                              fontSize: AppSize.s16,
-                              colors: AppColors.teal,
-                            ),
-                          ),
-                        ],
-                      ),
+
                     ],
                   ),
-                  SizedBox(
-                    height: 600,
-                    width: 900,
-                    child: SearchItem(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0,right: 15,left: 18,),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                         MyText(
+                          text: AppStrings.search.tr(context),
+                          fontSize: AppSize.s22,
+                        ),
+                        const SizedBox(
+                          height: AppSize.s20,
+                        ),
+                        Container(
+                          height: AppSize.s50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(AppSize.s30),
+                          ),
+                          child: MyTextForm(
+                            isDense: true,
+                            controller: _controller,
+                            textInputType: TextInputType.text,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return AppStrings.searchHint.tr(context);
+                              } else {
+                                return null;
+                              }
+                            },
+                            prefixIcon: IconButton(
+                              onPressed: () {
+                                FocusManager.instance.primaryFocus!.unfocus();
+
+                                  cubit.searchForHotel(
+                                    userSearchEntity: UserSearchEntity(
+                                      name: _controller.text,
+                                      address: '',
+                                      maxPrice: '',
+                                      minPrice: '',
+                                      latitude: '',
+                                      longitude: '',
+                                      distance: '',
+                                    ),
+                                  );
+
+                              },
+                              icon: const Icon(
+                                Icons.search,
+                                color: AppColors.teal,
+                              ),
+                            ),
+                            hintText: AppStrings.whereAreYouGoing.tr(context),
+                            radius: AppSize.s30,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: AppSize.s20,
+                        ),
+                        SizedBox(
+                          height: 105,
+                          child: CircleAvatarItems(),
+                        ),
+                        const SizedBox(
+                          height: AppSize.s20,
+                        ),
+                        Row(
+                          children: [
+                             const MyText(
+                                text: AppStrings.searchResult,
+                                fontSize: AppSize.s16),
+                            const Spacer(),
+                            TextButton(
+                              onPressed: () {
+
+                              },
+                              child: MyText(
+                                text: AppStrings.clear.tr(context),
+                                fontSize: AppSize.s16,
+                                colors: AppColors.teal,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: SearchItem(),
+                        ),
+                      ],
+                    ),
                   ),
+
                 ],
               ),
             ),

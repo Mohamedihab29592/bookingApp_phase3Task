@@ -20,7 +20,7 @@ class MyTextForm extends StatelessWidget {
   final VoidCallback? prefixIconPressed;
   final VoidCallback? onTap;
   final bool readOnly;
-  final InputBorder? enableBorder;
+
 
 
 
@@ -42,13 +42,14 @@ class MyTextForm extends StatelessWidget {
     required this.textInputType,
     this.isDense,
     this.onTap,
-    this.readOnly =false, this.prefixIconPressed,  this.enableBorder,
+    this.readOnly =false, this.prefixIconPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        onTap:onTap ,
+
+
 
         cursorColor: AppColors.grey,
       readOnly: readOnly,
@@ -59,6 +60,7 @@ class MyTextForm extends StatelessWidget {
       onChanged: onChange,
       validator: validator,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(left: 20),
         hintStyle:  const TextStyle(
             fontWeight: FontWeight.bold,
             color: AppColors.grey
@@ -71,21 +73,15 @@ class MyTextForm extends StatelessWidget {
         labelText: labelText,
         prefixIcon:  prefixIcon,
         suffixIcon: IconButton(onPressed: suffixIconPressed, icon: Icon(suffixIcon,color: AppColors.teal,),),
-        isDense: isDense,
-        focusedBorder: OutlineInputBorder(
+        border:  OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius!),
-          borderSide: const BorderSide(color:  AppColors.blue),
+          borderSide: BorderSide(color: Colors.grey,),
         ),
-        errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(color:  AppColors.red)),
-
-        enabledBorder:  OutlineInputBorder(
+        focusedBorder:
+    OutlineInputBorder(
     borderRadius: BorderRadius.circular(radius!),
-    borderSide: const BorderSide(color:  AppColors.blue),
-      ),
+    borderSide: BorderSide(color: Colors.blue,),
 
-
-      ));
+    )));
   }
 }

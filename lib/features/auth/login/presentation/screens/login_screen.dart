@@ -37,133 +37,119 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocProvider(
       create: (context) => di.sl<LoginCubit>(),
       child: Scaffold(
-
-        appBar: AppBar(
-          elevation: AppSize.s0,
-
-
-        ),
         body: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Padding(
               padding: const EdgeInsets.all(AppPadding.p16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      children:  [
-                        MyText(
-                          text: AppStrings.logIn.tr(context),
-                          fontSize: AppSize.s28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ],
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    const SizedBox(height: AppSize.s100,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        children:  [
+                          MyText(
+                            text: AppStrings.logIn.tr(context),
+                            fontSize: AppSize.s28,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.s15,
-                  ),
-                  Align(
-                      alignment: Alignment.center,
-                      child: BlocConsumer<LoginCubit, LoginState>(
-                        listener: (context, state) {
-                          if(state is CreateGoogleUserSuccessState)
-                            {
-                              showToast(
-                                text: AppStrings.successLoginEn.tr(context),
-                                state: ToastStates.success,
-                              );
-                              Navigator.pushReplacementNamed(
-                                context,
-                                Routes.homeLayout,
-                              );                            }
-                        },
-                        builder: (context, state) {
-                          return MySignButton(ontap: () {
-                            LoginCubit.get(context).signInwithGoogle();
-
-                          },);
-                        },
-                      )),
-                  const SizedBox(
-                    height: AppSize.s15,
-                  ),
-                   Center(
-                    child: MyText(
-                      text: AppStrings.orLoginWith.tr(context),
-                      fontSize: AppSize.s15,
-                      colors: AppColors.grey,
+                    const SizedBox(
+                      height: AppSize.s15,
                     ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.s20,
-                  ),
-                  MyTextForm(
-                    enableBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: AppColors.grey)),
-                    isDense: true,
-                    radius: AppSize.s40,
-                    labelText: AppStrings.email.tr(context),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return AppStrings.emailHint.tr(context);
-                      } else {
-                        return null;
-                      }
-                    },
-                    controller: emailController,
-                    textInputType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(height: AppSize.s15),
-                  MyTextForm(
-                    enableBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: AppColors.grey)),
-                    isPassword: _isHidePass,
-                    suffixIcon: _isHidePass
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                    suffixIconPressed: () {
-                      setState(() {
-                        _isHidePass = !_isHidePass;
-                      });
-                    },
-                    isDense: true,
-                    radius: AppSize.s40,
-                    labelText: AppStrings.password.tr(context),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return AppStrings.passHint.tr(context);
-                      } else {
-                        return null;
-                      }
-                    },
-                    controller: passwordController,
-                    textInputType: TextInputType.visiblePassword,
-
-                  ),
-                  const SizedBox(height: AppSize.s15),
-                  Align(
-                    alignment: AlignmentDirectional.bottomStart,
-                    child: MyText(
-                      text: AppStrings.passForget.tr(context),
-                      fontSize: AppSize.s15,
-                      colors: AppColors.grey,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.s15,
-                  ),
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: AppSize.s50,
-                        width: double.infinity,
+                    Align(
+                        alignment: Alignment.center,
                         child: BlocConsumer<LoginCubit, LoginState>(
+                          listener: (context, state) {
+                            if(state is CreateGoogleUserSuccessState)
+                              {
+                                showToast(
+                                  text: AppStrings.successLoginEn.tr(context),
+                                  state: ToastStates.success,
+                                );
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  Routes.homeLayout,
+                                );                            }
+                          },
+                          builder: (context, state) {
+                            return MySignButton(ontap: () {
+                              LoginCubit.get(context).signInwithGoogle();
+
+                            },);
+                          },
+                        )),
+                    const SizedBox(
+                      height: AppSize.s15,
+                    ),
+                     Center(
+                      child: MyText(
+                        text: AppStrings.orLoginWith.tr(context),
+                        fontSize: AppSize.s15,
+                        colors: AppColors.grey,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.s20,
+                    ),
+                    MyTextForm(
+                      isDense: true,
+                      radius: AppSize.s40,
+                      labelText: AppStrings.email.tr(context),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return AppStrings.emailHint.tr(context);
+                        } else {
+                          return null;
+                        }
+                      },
+                      controller: emailController,
+                      textInputType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(height: AppSize.s15),
+                    MyTextForm(
+
+                      isPassword: _isHidePass,
+                      suffixIcon: _isHidePass
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      suffixIconPressed: () {
+                        setState(() {
+                          _isHidePass = !_isHidePass;
+                        });
+                      },
+                      radius: AppSize.s40,
+                      labelText: AppStrings.password.tr(context),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return AppStrings.passHint.tr(context);
+                        } else {
+                          return null;
+                        }
+                      },
+                      controller: passwordController,
+                      textInputType: TextInputType.visiblePassword,
+
+                    ),
+                    const SizedBox(height: AppSize.s15),
+                    Align(
+                      alignment: AlignmentDirectional.bottomStart,
+                      child: MyText(
+                        text: AppStrings.passForget.tr(context),
+                        fontSize: AppSize.s15,
+                        colors: AppColors.grey,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.s15,
+                    ),
+                    Column(
+                      children: [
+                        BlocConsumer<LoginCubit, LoginState>(
                           listener: (BuildContext context, state) {
                             if (state is LoginSuccessState) {
                               showToast(
@@ -187,7 +173,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             var cubit = LoginCubit.get(context);
                             if (state is! LoginLoadingState) {
                               return MyButton(
+                                width: double.infinity,
                                 onPressed: () {
+                                  FocusManager.instance.primaryFocus!.unfocus();
                                   if (_formKey.currentState!.validate()) {
                                     cubit.loginEmail(
                                         userLoginEntity: UserLoginEntity(
@@ -207,25 +195,25 @@ class _LoginScreenState extends State<LoginScreen> {
                             }
                           },
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                       MyText(
-                        text: AppStrings.haveNotAnAccount.tr(context),
-                        fontSize: AppSize.s15,
-                        colors: AppColors.grey,
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, Routes.registerRoute);
-                          },
-                          child:  Text(AppStrings.createAcc.tr(context),style: TextStyle(color: AppColors.teal),))
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                         MyText(
+                          text: AppStrings.haveNotAnAccount.tr(context),
+                          fontSize: AppSize.s15,
+                          colors: AppColors.grey,
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.registerRoute);
+                            },
+                            child:  Text(AppStrings.createAcc.tr(context),style: TextStyle(color: AppColors.teal),))
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

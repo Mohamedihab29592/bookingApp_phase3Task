@@ -12,33 +12,28 @@ class BuildProfileItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      customBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       onTap: (){
         function();
       },
-      child: Column(
+      child:  Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              children: [
-                Text(
-                  text,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                  ),
-                ),
-                const Spacer(),
-                Icon(icon,color: AppColors.grey,size: 30,),
-              ],
+          Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
             ),
           ),
-          const SizedBox(height: 30,),
-
+          const Spacer(),
+          Icon(icon,color: AppColors.grey,size: 30,),
         ],
       ),
+
     );
   }
 }

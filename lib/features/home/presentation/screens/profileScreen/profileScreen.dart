@@ -27,91 +27,108 @@ class _ProfileScreenState extends State<ProfileScreen> {
         var cubit = HomeCubit.get(context);
         return Scaffold(
             body: Padding(
-              padding:  const EdgeInsets.only(top:AppPadding.p30,right:AppPadding.p20,left: AppPadding.p20 ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: AppSize.s20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditProfileScreen()));
-                    },
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children:  [
-                                Text(
-                                  cubit.profileModel!.profileData.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 3,
-                                ),
-                                 Text(
-                                  'View and Edit Profile'.tr(context),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 75,
-                          height: 75,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 4, color: AppColors.darkGrey),
-
-                            image:  DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  cubit.profileModel!.profileData.image,),
-                            ),
-                          ),
-                        ),
-                      ],
+              padding:  const EdgeInsets.all(20 ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: AppSize.s20,
                     ),
-                  ),
-                  Divider(
-                    height: 10,
-                  ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfileScreen()));
+                      },
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:  [
+                                  Text(
+                                    cubit.profileModel!.profileData.name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 3,
+                                  ),
+                                   Text(
+                                    'View and Edit Profile'.tr(context),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 75,
+                            height: 75,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(width: 4, color: AppColors.darkGrey),
 
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  BuildProfileItem(
-                      text: 'Change Password'.tr(context), icon: Icons.lock, function: () {}),
-                  BuildProfileItem(
-                      text: 'Invite Friend'.tr(context), icon: Icons.people, function: () {}),
-                  BuildProfileItem(
-                      text: 'Credit & Coupons'.tr(context),
-                      icon: Icons.card_giftcard,
-                      function: () {}),
-                  BuildProfileItem(
-                      text: 'Help Center'.tr(context), icon: Icons.info, function: () {}),
-                  BuildProfileItem(
-                      text: 'Payment'.tr(context), icon: Icons.payment, function: () {}),
-                  BuildProfileItem(
-                      text: 'Settings'.tr(context), icon: Icons.settings, function: () {
-                        navigateTo(context: context, widget: SettingScreen());
-                  }),
-                ],
+                              image:  DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    cubit.profileModel!.profileData.image,),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(
+                      height: 10,
+                    ),
+
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    BuildProfileItem(
+                        text: 'Change Password'.tr(context), icon: Icons.lock, function: () {}),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    BuildProfileItem(
+                        text: 'Invite Friend'.tr(context), icon: Icons.people, function: () {}),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    BuildProfileItem(
+                        text: 'Credit & Coupons'.tr(context),
+                        icon: Icons.card_giftcard,
+                        function: () {}),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    BuildProfileItem(
+                        text: 'Help Center'.tr(context), icon: Icons.info, function: () {}),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    BuildProfileItem(
+                        text: 'Payment'.tr(context), icon: Icons.payment, function: () {}),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    BuildProfileItem(
+                        text: 'Settings'.tr(context), icon: Icons.settings, function: () {
+                          navigateTo(context: context, widget: SettingScreen());
+                    }),
+                  ],
+                ),
               ),
             ),
           );

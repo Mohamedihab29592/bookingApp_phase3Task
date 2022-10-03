@@ -1,5 +1,4 @@
 import 'package:booking_app/core/app_localization/app_localization.dart';
-import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/utilis/constants/app_strings.dart';
 import 'package:booking_app/core/utilis/constants/constats_manager.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
@@ -13,7 +12,6 @@ import '../../../../../core/utilis/constants/colors.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
 import '../../../../../core/component/my_button.dart';
 import '../../../../../core/component/my_text.dart';
-import '../../../../search/presentation/screens/filterSearch/filterSearch.dart';
 import '../../widgets/hotelCardItem.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -75,19 +73,18 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DefaultTabController(
-        length: 1,
-        child: NestedScrollView(
-          controller: _scrollController,
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                floating: true,
-                pinned: true,
-                expandedHeight: AppSize.s500,
-                collapsedHeight: AppSize.s172,
-                actionsIconTheme: const IconThemeData(opacity: AppSize.s0),
-                flexibleSpace: Stack(
+      body: NestedScrollView(
+        controller: _scrollController,
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              floating: true,
+              pinned: true,
+              expandedHeight: AppSize.s500,
+              collapsedHeight: AppSize.s172,
+              actionsIconTheme: const IconThemeData(opacity: AppSize.s0),
+              flexibleSpace: SafeArea(
+                child: Stack(
                   children: <Widget>[
                     CarouselSlider.builder(
                       carouselController: _carouselController,
@@ -126,209 +123,216 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           right: AppSize.s20,
                           left: AppSize.s20,
                           bottom: AppSize.s20),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: AppSize.s50,
-                              child: Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSize.s30)),
-                                child:  InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, Routes.search);
-                                  },
-                                  child: Row(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: AppSize.s50,
+                            child: Card(
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSize.s30)),
+                              child:  InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, Routes.search);
+                                },
+                                child: Row(
 
-                                    children: [
-                                      IconButton(onPressed: (){},icon:const Icon(Icons.search,color: AppColors.teal,) ,),
-                                      Text(
-                                        AppStrings.whereAreYouGoing.tr(context),
-                                        style: const TextStyle(
-                                            color: AppColors.grey,
-                                            fontSize: 18.0
-                                        ),
+                                  children: [
+                                    IconButton(onPressed: (){},icon:const Icon(Icons.search,color: AppColors.teal,) ,),
+                                    Text(
+                                      AppStrings.whereAreYouGoing.tr(context),
+                                      style: const TextStyle(
+                                          color: AppColors.grey,
+                                          fontSize: 18.0
                                       ),
-                                      const Spacer(),
-                                    ],
-                                  ),
+                                    ),
+
+                                  ],
                                 ),
                               ),
                             ),
-                            const Spacer(),
-                            if (_appBarCollapsed == true)
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const MyText(
-                                    text: AppStrings.capTown,
-                                    fontSize: AppSize.s35,
-                                    colors: AppColors.white,
-                                  ),
-                                  const SizedBox(
-                                    height: AppSize.s10,
-                                  ),
-                                  const MyText(
-                                      text: AppStrings.extraordinary,
-                                      fontSize: AppSize.s20,
-                                    colors: AppColors.white,
-                                  ),
-                                  const SizedBox(
-                                    height: AppSize.s15,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: MyButton(
-                                            label:
-                                                AppStrings.viewHotel.tr(context),
-                                            radius: AppSize.s100,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w900,
-                                            onPressed: () {
-                                              navigateTo(
-                                                  context: context,
-                                                  widget: const FilterPage());
-                                            }),
-                                      ),
-                                      const Spacer(),
-                                      AnimatedSmoothIndicator(
-                                        activeIndex: _current,
-                                        count: _images.length,
-                                        effect: const ExpandingDotsEffect(
-                                            activeDotColor: AppColors.teal,
-                                            dotWidth: 8,
-                                            dotHeight: 8),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            if (_appBarCollapsed == false)
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  AnimatedSmoothIndicator(
-                                    activeIndex: _current,
-                                    count: _images.length,
-                                    effect: const ExpandingDotsEffect(
-                                        activeDotColor: AppColors.teal,
-                                        dotWidth: 8,
-                                        dotHeight: 8),
-                                  ),
-                                ],
-                              ),
-                          ],
-                        ),
+                          ),
+                          const Spacer(),
+
+                         if (_appBarCollapsed == true)
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const MyText(
+                                  text: AppStrings.capTown,
+                                  fontSize: AppSize.s35,
+                                  colors: AppColors.white,
+                                ),
+                                const SizedBox(
+                                  height: AppSize.s10,
+                                ),
+                                const MyText(
+                                  text: AppStrings.extraordinary,
+                                  fontSize: AppSize.s20,
+                                  colors: AppColors.white,
+                                ),
+                                const SizedBox(
+                                  height: AppSize.s15,
+                                ),
+                                Row(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child: MyButton(
+                                        width: MediaQuery.of(context).size.width/3.3,
+                                        backGroundColor: AppColors.teal,
+                                          label:
+                                          AppStrings.viewHotel.tr(context),
+                                          radius: AppSize.s100,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w900,
+                                          onPressed: () {
+                                            _jumpTo();
+                                          }),
+                                    ),
+                                    const Spacer(),
+                                    AnimatedSmoothIndicator(
+                                      activeIndex: _current,
+                                      count: _images.length,
+                                      effect: const ExpandingDotsEffect(
+                                          activeDotColor: AppColors.teal,
+                                          dotWidth: 8,
+                                          dotHeight: 8),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          if (_appBarCollapsed == false)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                AnimatedSmoothIndicator(
+                                  activeIndex: _current,
+                                  count: _images.length,
+                                  effect: const ExpandingDotsEffect(
+                                      activeDotColor: AppColors.teal,
+                                      dotWidth: 8,
+                                      dotHeight: 8),
+                                ),
+                              ],
+                            ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-            ];
-          },
-          body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 15,
-              vertical: 15,
             ),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyText(
-                      text: AppStrings.popularDestination.tr(context),
-                      fontSize: AppSize.s20,
-                      ),
-                  const SizedBox(
-                    height: AppSize.s20,
-                  ),
-                  SizedBox(
-                    height: AppSize.s140,
-                    width: double.infinity,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: AppPadding.p5),
-                      child: ListView.separated(
-                        itemCount: _popularDestination.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: ((context, index) {
-                          return SizedBox(
-                            height: AppSize.s100,
-                            width: AppSize.s300,
-                            child: Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              child: Stack(
-                                alignment: Alignment.bottomLeft,
-                                children: [
-                                  Image.asset(
-                                    _popularDestination[index],
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: AppPadding.p20,
-                                          top: AppPadding.p10),
-                                      child: MyText(
-                                        text: _popularDestinationNames[index],
-                                        fontSize: AppSize.s25,
-                                        colors: AppColors.white,
-                                      ),
+          ];
+        },
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 15,
+          ),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MyText(
+                  text: AppStrings.popularDestination.tr(context),
+                  fontSize: AppSize.s20,
+                ),
+                const SizedBox(
+                  height: AppSize.s20,
+                ),
+                SizedBox(
+                  height: AppSize.s140,
+                  width: double.infinity,
+                  child: Padding(
+                    padding:
+                    const EdgeInsets.symmetric(vertical: AppPadding.p5),
+                    child: ListView.separated(
+                      itemCount: _popularDestination.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: ((context, index) {
+                        return SizedBox(
+                          height: AppSize.s100,
+                          width: AppSize.s300,
+                          child: Card(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            child: Stack(
+                              alignment: Alignment.bottomLeft,
+                              children: [
+                                Image.asset(
+                                  _popularDestination[index],
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: AppPadding.p20,
+                                        top: AppPadding.p10),
+                                    child: MyText(
+                                      text: _popularDestinationNames[index],
+                                      fontSize: AppSize.s25,
+                                      colors: AppColors.white,
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          );
-                        }),
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const SizedBox(
-                          width: AppSize.s15,
-                        ),
+                          ),
+                        );
+                      }),
+                      separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(
+                        width: AppSize.s15,
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MyText(
-                        text: AppStrings.bestDeals.tr(context),
-                        fontSize: AppSize.s20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MyText(
+                      text: AppStrings.bestDeals.tr(context),
+                      fontSize: AppSize.s20,
+                    ),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {},
+                      child: MyText(
+                        text: AppStrings.viewAll.tr(context),
+                        fontSize: AppSize.s16,
+                        colors: AppColors.teal,
                       ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: MyText(
-                          text: AppStrings.viewAll.tr(context),
-                          fontSize: AppSize.s16,
-                          colors: AppColors.teal,
-                        ),
-                      ),
-                      const Icon(
-                        Icons.arrow_forward,
-                        color: AppColors.teal,
-                      ),
-                    ],
-                  ),
-                  const CardOfHotel(),
-                ],
-              ),
+                    ),
+                    const Icon(
+                      Icons.arrow_forward,
+                      color: AppColors.teal,
+                    ),
+                  ],
+                ),
+                const CardOfHotel(),
+              ],
             ),
           ),
         ),
       ),
     );
   }
+  void _jumpTo() {
+    final maxExtent = _scrollController.position.maxScrollExtent;
+    _scrollController.animateTo(
+      maxExtent * 1, // scrolls to 90% of maxScrollExtent
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
 }

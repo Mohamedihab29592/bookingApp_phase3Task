@@ -64,10 +64,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                   children: [
                     Expanded(
                       child: MyTextForm(
-                        enableBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: AppColors.grey)),
                         isDense: true,
                         radius: 40,
                         validator: (value) {

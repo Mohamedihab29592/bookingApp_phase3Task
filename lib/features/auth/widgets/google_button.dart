@@ -14,18 +14,20 @@ class MySignButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: ontap,
-      icon: Image.asset(ImageAssets.google,height: 20,),
-      label: const Text(AppStrings.google),
-      style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.white,
-          foregroundColor: AppColors.black,
-          padding:const EdgeInsets.all(AppPadding.p14),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSize.s30),
-          ),
-          textStyle: const TextStyle(fontSize: AppSize.s20, fontWeight: FontWeight.bold)),
+    return Container(
+      width: double.infinity,
+
+      child: ElevatedButton.icon(
+        onPressed: ontap,
+        icon: Image.asset(ImageAssets.google,height: 20,),
+        label: const Text(AppStrings.google),
+        style: ElevatedButton.styleFrom(
+            padding:const EdgeInsets.all(AppPadding.p14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSize.s30),
+            ),
+            textStyle: const TextStyle(fontSize: AppSize.s20, fontWeight: FontWeight.bold)),
+      ),
     );
   }
 }

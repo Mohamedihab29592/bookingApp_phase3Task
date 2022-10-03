@@ -40,7 +40,7 @@ class AppStrings {
   static const String extraordinary = "Extraordinary five-star outdoor activities";
   static const String viewHotel = "View Hotel";
   static const String search = "Search";
-  static const String searchResult = "Recent Search";
+  static const String searchResult = "Search Result";
   static const String hotel = "Hotel";
   static const String backPacker = "BackPacker";
   static const String resort = "Resort";

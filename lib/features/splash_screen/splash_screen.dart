@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       Navigator.pushReplacementNamed(
         context,
-        Routes.loginRoute,
+        Routes.onBoardingRoute,
       );
     }
   }
@@ -44,8 +44,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Lottie.asset(JsonAssets.splashLogo),
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset(JsonAssets.splashLogo),
+        ],
       ),
     );
   }
