@@ -14,7 +14,6 @@ class BuildCanceledItem extends StatelessWidget {
   final int peopleNumber;
   final String hotelName;
   final String city;
-  final String day;
   final String location;
   final String price;
   final double initialRating;
@@ -28,7 +27,6 @@ class BuildCanceledItem extends StatelessWidget {
     required this.peopleNumber,
     required this.hotelName,
     required this.city,
-    required this.day,
     required this.location,
     required this.price,
     required this.initialRating,
@@ -78,7 +76,7 @@ class BuildCanceledItem extends StatelessWidget {
                       ),
                       const SizedBox(height: 5,),
                       CustomText(
-                        text: '$day, $city',
+                        text: city,
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: AppColors.grey,

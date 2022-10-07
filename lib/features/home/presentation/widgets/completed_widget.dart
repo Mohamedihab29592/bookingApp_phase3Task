@@ -34,28 +34,24 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                 padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: (){
-                    },
-                    child: BuildCanceledItem(
-                      urlImage: imageBaseUrl+ upcomingItem.completedModel!.bookingData[index].hotel!.images[0].image,
-                      startDate: '25 Sep',
-                      endDate: '29 Sep',
-                      roomsNumber: index + 1,
-                      peopleNumber: (index + 1) * 2,
-                      hotelName: upcomingItem
-                          .completedModel!.bookingData[index].hotel!.name
-                          .toString(),
-                      city: upcomingItem
-                          .completedModel!.bookingData[index].hotel!.address
-                          .toString(),
-                      day: 'Sunday',
-                      location: '$index.0km to you city',
-                      price: upcomingItem.completedModel!.bookingData[index].hotel!.price
-                          .toString(),
-                      initialRating: double.parse(upcomingItem
-                          .completedModel!.bookingData[index].hotel!.rate!) / 2,
-                    ),
+                  return BuildCanceledItem(
+                    urlImage: imageBaseUrl+ upcomingItem.completedModel!.bookingData[index].hotel!.images[0].image,
+                    startDate: '25 Sep',
+                    endDate: '29 Sep',
+                    roomsNumber: index + 1,
+                    peopleNumber: (index + 1) * 2,
+                    hotelName: upcomingItem
+                        .completedModel!.bookingData[index].hotel!.name
+                        .toString(),
+                    city: upcomingItem
+                        .completedModel!.bookingData[index].hotel!.address
+                        .toString(),
+
+                    location: '$index.0km to you city',
+                    price: upcomingItem.completedModel!.bookingData[index].hotel!.price
+                        .toString(),
+                    initialRating: double.parse(upcomingItem
+                        .completedModel!.bookingData[index].hotel!.rate!) / 2,
                   );
                 },
                 itemCount: upcomingItem.completedModel!.bookingData.length,

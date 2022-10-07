@@ -58,8 +58,10 @@ class DataHotelModel {
   final String latitude;
   @JsonKey(name: 'hotel_images')
   final List<SearchHotelImages> images;
+  @JsonKey(name: 'facilities')
+  final List<Searchfacilities> facilities;
 
-  DataHotelModel( {
+  DataHotelModel({
     required this.id,
     required this.name,
     required this.description,
@@ -69,6 +71,7 @@ class DataHotelModel {
     required this.images,
     required this.longitude,
     required this.latitude,
+    required  this.facilities,
   });
 
   factory DataHotelModel.fromJson(Map<String, dynamic> json) =>
@@ -96,4 +99,25 @@ class SearchHotelImages {
       _$SearchHotelImagesFromJson(json);
 
   Map<String, dynamic> toJson() => _$SearchHotelImagesToJson(this);
+}
+
+@JsonSerializable()
+class Searchfacilities {
+  @JsonKey(name: 'id')
+  final int id;
+  @JsonKey(name: 'name')
+  final String name;
+  @JsonKey(name: 'image')
+  final String image;
+
+  Searchfacilities({
+    required this.id,
+    required this.name,
+    required this.image,
+  });
+
+  factory Searchfacilities.fromJson(Map<String, dynamic> json) =>
+      _$SearchfacilitiesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchfacilitiesToJson(this);
 }

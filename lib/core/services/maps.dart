@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../app_localization/cubit/locale_cubit.dart';
+
 class Maps extends StatefulWidget {
   final String lat;
   final String long;
@@ -84,7 +86,8 @@ class _MapsState extends State<Maps> with WidgetsBindingObserver {
 
       _markers.add(
          Marker(
-          markerId: MarkerId("1"),
+          markerId: const MarkerId(" "),
+
           position: LatLng(double.parse((widget.lat)), double.parse(widget.long)),
           icon: BitmapDescriptor.defaultMarker,
         ),
@@ -101,12 +104,12 @@ class _MapsState extends State<Maps> with WidgetsBindingObserver {
       // given camera position
       initialCameraPosition: CameraPosition(
         target: LatLng(double.parse(widget.lat),double.parse(widget.long) ),
-        zoom: 15,
+        zoom: 10,
       ),
       // set markers on google map
       markers: Set<Marker>.of(_markers),
       // on below line we have given map type
-      mapType: MapType.satellite,
+      mapType: LocaleCubit.get(context).isDarkMode? MapType.satellite: MapType.normal,
       // on below line we have enabled location
       myLocationEnabled: true,
       myLocationButtonEnabled: true,

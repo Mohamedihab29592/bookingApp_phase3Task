@@ -33,7 +33,7 @@ class MyTextForm extends StatelessWidget {
     required this.validator,
     this.onChange,
     this.onSubmit,
-    this.radius = 0,
+    this.radius ,
     required this.controller,
     this.labelText,
     this.obscureText = false,
@@ -60,7 +60,7 @@ class MyTextForm extends StatelessWidget {
       onChanged: onChange,
       validator: validator,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(left: 20),
+        contentPadding: const EdgeInsets.only(left: 20),
         hintStyle:  const TextStyle(
             fontWeight: FontWeight.bold,
             color: AppColors.grey
@@ -74,13 +74,13 @@ class MyTextForm extends StatelessWidget {
         prefixIcon:  prefixIcon,
         suffixIcon: IconButton(onPressed: suffixIconPressed, icon: Icon(suffixIcon,color: AppColors.teal,),),
         border:  OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius!),
-          borderSide: BorderSide(color: Colors.grey,),
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(color: Colors.grey,),
         ),
         focusedBorder:
     OutlineInputBorder(
-    borderRadius: BorderRadius.circular(radius!),
-    borderSide: BorderSide(color: Colors.blue,),
+    borderRadius: BorderRadius.circular(30),
+    borderSide: const BorderSide(color: Colors.blue,),
 
     )));
   }

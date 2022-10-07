@@ -31,7 +31,7 @@ class RouteGenerator {
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (context) => const SignUpScreen());
         case Routes.homeLayout:
-        return MaterialPageRoute(builder: (context) => const HomeLayout());
+        return MaterialPageRoute(builder: (context) =>  const HomeLayout());
       case Routes.search:
         return MaterialPageRoute(builder: (context) =>  const Search());
         default:

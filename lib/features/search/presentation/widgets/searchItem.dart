@@ -1,20 +1,23 @@
+import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
+import 'package:booking_app/features/search/presentation/screens/hotelSearchView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../../../core/component/custom_text.dart';
 import '../../../../core/utilis/constants/colors.dart';
-import '../../../../core/utilis/constants/values_manger.dart';
-import '../../../../core/component/my_text.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
+
+
 class SearchItem extends StatelessWidget {
-   SearchItem({Key? key,}) : super(key: key);
+   const SearchItem({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
 
     return BlocConsumer<SearchCubit,SearchState>(
      listener: (context,state){},
@@ -22,57 +25,133 @@ class SearchItem extends StatelessWidget {
       builder: (context,state) {
         var cubit = SearchCubit.get(context);
         if (state is SearchHotelSuccessState) {
-          return GridView.builder(
+          return  ListView.builder(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3),
-            itemCount: cubit.searchModel!.data.data.length,
+            padding: EdgeInsets.zero,
+            physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
-              var _item = cubit.searchModel!.data.data[index];
-              return  Padding(
-                padding: const EdgeInsets.all(AppSize.s8),
-                child: Card(
-                  elevation: 10,
+              return InkWell(
 
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSize.s30),),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: NetworkImage(imageBaseUrl + _item.images[0].image),
-                        height: AppSize.s100,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      MyText(
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        text: _item.name,
-                        fontSize: AppSize.s15,
-                        fontWeight: FontWeight.w900,
-                      ),
-                      const SizedBox(height: AppSize.s5,),
-                      const MyText(
-                        text: "1 Room 3 People",
-                        fontSize: AppSize.s10,
-                        colors: AppColors.grey,
-                      ),
-                      const MyText(
-                        text: "12 - 22 sep",
-                        fontSize: AppSize.s10,
-                        fontWeight: FontWeight.w900,
-                        colors: AppColors.grey,
-                      )
-                    ],
+                radius: 10,
+                onTap: (){
+                  navigateTo(context: context, widget: HotelSearchView(
+                    hotelName:cubit.searchModel!.data.data[index].name,
+                    locationName: cubit.searchModel!.data.data[index].address,
+                    rate: cubit.searchModel!.data.data[index].rate,
+                    price: cubit.searchModel!.data.data[index].price,
+                    desc: cubit.searchModel!.data.data[index].description,
+                    image: imageBaseUrl+cubit.searchModel!.data.data[index].images[0].image,
+                    id: cubit.searchModel!.data.data[index].id,
+                    lat: cubit.searchModel!.data.data[index].latitude,
+                    long: cubit.searchModel!.data.data[index].longitude,
+                    index: index,
+                    facilities: cubit.searchModel!.data.data[index].facilities[0].image,));
+                },
+                child:SizedBox(
+                  height: 162,
+                  child: Card(
+                    clipBehavior: Clip.none,
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 130,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(imageBaseUrl+ cubit.searchModel!.data.data[index].images[0].image),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: cubit.searchModel!.data.data[index].name,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+
+                                ),
+                                const SizedBox(height: 5,),
+                                CustomText(
+                                  text:  cubit.searchModel!.data.data[index].address,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.grey,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 5,),
+                                RatingBar.builder(
+                                  initialRating:  double.parse(cubit.searchModel!.data.data[index].rate)/2,
+                                  minRating: 0,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  itemBuilder: (context, _) => const Icon(
+                                    Icons.star,
+                                    color: AppColors.teal,
+                                  ),
+                                  onRatingUpdate: (rating) {},
+                                  itemSize: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    CustomText(
+                                      text: '\$${cubit.searchModel!.data.data[index].price}',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const CustomText(
+                                      text: '/per night',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.grey,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 5,),
+                                SizedBox(
+                                  height: 40,
+                                  child: ListView.separated(
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    separatorBuilder: (context,index)=>const Text(" / ",),
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    padding: EdgeInsets.zero,
+                                    itemBuilder: (BuildContext context, int index) => CustomText(text: cubit.searchModel!.data.data[0].facilities[index].name,fontSize: 14,),
+                                    itemCount: cubit.searchModel!.data.data[index].facilities.length,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
-            }
-
-
+            },
+            itemCount: cubit.searchModel!.data.total,
           );
         }
         if (state is SearchHotelLoadingState) {
@@ -90,3 +169,5 @@ class SearchItem extends StatelessWidget {
 
   }
 }
+
+

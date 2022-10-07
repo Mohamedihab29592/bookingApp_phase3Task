@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeLayout extends StatefulWidget {
-  const HomeLayout({Key? key}) : super(key: key);
+  const HomeLayout({Key? key, }) : super(key: key);
 
   @override
   State<HomeLayout> createState() => _HomeLayoutState();

@@ -186,7 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 label: AppStrings.logIn.tr(context),
                                 fontWeight: FontWeight.bold,
                                 fontSize: AppSize.s18,
-                                radius: AppPadding.p12,
                               );
                             } else {
                               return const Center(

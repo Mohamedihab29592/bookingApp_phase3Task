@@ -4,7 +4,7 @@ class UserSearchEntity extends Equatable {
   final String address;
   final String maxPrice;
   final String minPrice;
-  // final Map<String, int> facilities;
+  final Map<String, int> ?facilities;
   final String latitude;
   final String longitude;
   final String distance;
@@ -14,7 +14,7 @@ class UserSearchEntity extends Equatable {
     required this.address,
     required this.maxPrice,
     required this.minPrice,
-    // required this.facilities,
+      this.facilities,
     required this.latitude,
     required this.longitude,
     required this.distance,

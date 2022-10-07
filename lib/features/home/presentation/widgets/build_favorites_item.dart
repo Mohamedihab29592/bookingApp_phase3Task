@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../../../../../../core/component/custom_text.dart';
-import '../../../../../../../core/utilis/constants/colors.dart';
+import '../../../../../core/component/custom_text.dart';
+import '../../../../../core/utilis/constants/colors.dart';
 
 
 
@@ -11,7 +11,6 @@ class BuildCanceledItem extends StatelessWidget {
   final String urlImage;
   final String hotelName;
   final String city;
-  final String day;
   final String location;
   final String price;
   final double initialRating;
@@ -21,7 +20,6 @@ class BuildCanceledItem extends StatelessWidget {
       required this.urlImage,
       required this.hotelName,
       required this.city,
-      required this.day,
       required this.location,
       required this.price,
       required this.initialRating})
@@ -76,7 +74,7 @@ class BuildCanceledItem extends StatelessWidget {
                     ),
                     const SizedBox(height: 4,),
                     CustomText(
-                      text: '$day, $city',
+                      text: city,
                       fontSize: 16,fontWeight: FontWeight.w400,color: AppColors.grey,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

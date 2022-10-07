@@ -4,6 +4,7 @@ import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'build_upcoming_item.dart';
 
 class UpcomingWidget extends StatefulWidget {
@@ -58,24 +59,19 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                 padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: (){
-                    },
-                    child: BuildUpcomingItem(
-                      id: upcomingItem.upComingModel!.bookingData[index].id,
-                      urlImage: imageBaseUrl+ upcomingItem.upComingModel!.bookingData[index].hotel!.images[0].image,
-                      startDate: '25 Sep',
-                      endDate: '29 Sep',
-                      roomsNumber: index + 1,
-                      peopleNumber: (index + 1) * 2,
-                      isFavorite: index % 2 == 0 ? false : true,
-                      hotelName: upcomingItem.upComingModel!.bookingData[index].hotel!.name.toString(),
-                      city: upcomingItem.upComingModel!.bookingData[index].hotel!.address.toString(),
-                      day: 'Sunday',
-                      location: '$index.0km to ${upcomingItem.upComingModel!.bookingData[index].hotel!.name}',
-                      price: upcomingItem.upComingModel!.bookingData[index].hotel!.price.toString(),
-                      initialRating: double.parse(upcomingItem.upComingModel!.bookingData[index].hotel!.rate!) / 2,
-                    ),
+                  return BuildUpcomingItem(
+                    id: upcomingItem.upComingModel!.bookingData[index].id,
+                    urlImage: imageBaseUrl+ upcomingItem.upComingModel!.bookingData[index].hotel!.images[0].image,
+                    startDate: '25 Sep',
+                    endDate: '29 Sep',
+                    roomsNumber: index + 1,
+                    peopleNumber: (index + 1) * 2,
+                    isFavorite: index % 2 == 0 ? false : true,
+                    hotelName: upcomingItem.upComingModel!.bookingData[index].hotel!.name.toString(),
+                    city: upcomingItem.upComingModel!.bookingData[index].hotel!.address.toString(),
+                    location: '$index.0km to ${upcomingItem.upComingModel!.bookingData[index].hotel!.name}',
+                    price: upcomingItem.upComingModel!.bookingData[index].hotel!.price.toString(),
+                    initialRating: double.parse(upcomingItem.upComingModel!.bookingData[index].hotel!.rate!) / 2,
                   );
                 },
                 itemCount: upcomingItem.upComingModel!.bookingData.length,

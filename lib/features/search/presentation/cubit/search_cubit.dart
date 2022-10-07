@@ -19,10 +19,16 @@ class SearchCubit extends Cubit<SearchState> {
 
   static SearchCubit get(context) => BlocProvider.of(context);
   SearchModel? searchModel;
-
   void searchForHotel({required UserSearchEntity userSearchEntity}) {
     emit(SearchHotelLoadingState());
-    searchHotelUseCase.call(userSearchEntity: userSearchEntity).then((value) {
+    searchHotelUseCase.call(userSearchEntity: userSearchEntity, facilities: {
+      ...selectedFacilities.asMap().map(
+            (key, value) => MapEntry(
+          'facilities[$key]',
+          value,
+        ),
+      ),
+    }).then((value) {
       value.fold((failure) {
         emit(SearchHotelErrorState(error: _mapFailureToMsg(failure: failure)));
       }, (model) {
@@ -31,6 +37,7 @@ class SearchCubit extends Cubit<SearchState> {
       });
     });
   }
+
 
   String _mapFailureToMsg({required Failure failure}) {
     switch (failure.runtimeType) {
@@ -55,7 +62,6 @@ class SearchCubit extends Cubit<SearchState> {
     });
   }
 
-  TextEditingController searchController = TextEditingController();
 
   List<int> selectedFacilities = [];
 
@@ -69,22 +75,4 @@ class SearchCubit extends Cubit<SearchState> {
     emit(SelectFacilityState());
   }
 
-  void searchForHotel2({required UserSearchEntity userSearchEntity}) {
-    emit(SearchHotelLoadingState());
-    searchHotelUseCase.call(userSearchEntity: userSearchEntity, facilities: {
-      ...selectedFacilities.asMap().map(
-            (key, value) => MapEntry(
-              'facilities[$key]',
-              value,
-            ),
-          ),
-    }).then((value) {
-      value.fold((failure) {
-        emit(SearchHotelErrorState(error: _mapFailureToMsg(failure: failure)));
-      }, (model) {
-        searchModel = model;
-        emit(SearchHotelSuccessState());
-      });
-    });
-  }
 }

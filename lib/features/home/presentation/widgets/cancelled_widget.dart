@@ -33,22 +33,17 @@ class _CanceledWidgetState extends State<CanceledWidget> {
                 padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: (){
-                    },
-                    child: BuildCanceledItem(
-                      urlImage: imageBaseUrl +upcomingItem.cancelledModel!.bookingData[index].hotel!.images[0].image,
-                      hotelName: upcomingItem
-                          .cancelledModel!.bookingData[index].hotel!.name
-                          .toString(),
-                      city: upcomingItem
-                          .cancelledModel!.bookingData[index].hotel!.address
-                          .toString(),
-                      day: 'Sunday',
-                      location: '$index.5 km to your city',
-                      price: upcomingItem.cancelledModel!.bookingData[index].hotel!.price.toString(),
-                      initialRating: double.parse(upcomingItem.cancelledModel!.bookingData[index].hotel!.rate!) / 2,
-                    ),
+                  return BuildCanceledItem(
+                    urlImage: imageBaseUrl +upcomingItem.cancelledModel!.bookingData[index].hotel!.images[0].image,
+                    hotelName: upcomingItem
+                        .cancelledModel!.bookingData[index].hotel!.name
+                        .toString(),
+                    city: upcomingItem
+                        .cancelledModel!.bookingData[index].hotel!.address
+                        .toString(),
+                    location: '$index.5 km to your city',
+                    price: upcomingItem.cancelledModel!.bookingData[index].hotel!.price.toString(),
+                    initialRating: double.parse(upcomingItem.cancelledModel!.bookingData[index].hotel!.rate!) / 2,
                   );
                 },
                 itemCount: upcomingItem.cancelledModel!.bookingData.length,

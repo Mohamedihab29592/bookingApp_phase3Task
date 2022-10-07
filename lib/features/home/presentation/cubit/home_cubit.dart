@@ -24,7 +24,7 @@ import '../../../../core/routes/routes_manager.dart';
 import '../../data/models/update_book_model.dart';
 import '../screens/exploreScreen/exploreScreen.dart';
 import '../screens/profileScreen/profileScreen.dart';
-import '../screens/trips/presentation/screens/trips_screen.dart';
+import '../screens/trips/trips_screen.dart';
 
 part 'home_state.dart';
 

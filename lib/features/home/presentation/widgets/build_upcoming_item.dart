@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../../../../../../core/component/custom_text.dart';
-import '../../../../../../../core/utilis/constants/colors.dart';
+import '../../../../../core/component/custom_text.dart';
+import '../../../../../core/utilis/constants/colors.dart';
 
 class BuildUpcomingItem extends StatelessWidget {
   final String urlImage;
@@ -17,7 +17,6 @@ class BuildUpcomingItem extends StatelessWidget {
   final bool isFavorite;
   final String hotelName;
   final String city;
-  final String day;
   final String location;
   final String price;
   final double initialRating;
@@ -32,7 +31,6 @@ class BuildUpcomingItem extends StatelessWidget {
       required this.isFavorite,
       required this.hotelName,
       required this.city,
-      required this.day,
       required this.location,
       required this.price,
       required this.initialRating,  required this.id})
@@ -153,7 +151,7 @@ class BuildUpcomingItem extends StatelessWidget {
                       Row(
                         children: [Expanded(
                           child: CustomText(
-                              text: '$day, $city ',
+                              text: city,
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               maxLines: 1,

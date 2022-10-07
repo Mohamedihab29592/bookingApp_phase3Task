@@ -43,21 +43,22 @@ class CardOfHotel extends StatelessWidget {
             shrinkWrap: true,
             itemCount: cubit.hotelsEntity!.homeEntity.data.length,
             itemBuilder: (context, index) {
-              var _item = cubit.hotelsEntity!.homeEntity.data[index];
+              var item = cubit.hotelsEntity!.homeEntity.data[index];
               return InkWell(
                 onTap: () {
                   navigateTo(
                       context: context,
                       widget: HotelView(
-                        hotelName: _item.name,
-                        locationName: _item.address,
-                        rate: _item.rate,
-                        price: _item.price,
-                        image: imageBaseUrl + _item.images[0].image,
-                        id: _item.id,
-                        lat: _item.latitude,
-                        long: _item.longitude,
-                        desc: _item.description,
+                        index:index,
+                        hotelName: item.name,
+                        locationName: item.address,
+                        rate: item.rate,
+                        price: item.price,
+                        image: imageBaseUrl + item.images[0].image,
+                        id: item.id,
+                        lat: item.latitude,
+                        long: item.longitude,
+                        desc: item.description,
                       ));
                 },
                 child: SizedBox(
@@ -72,10 +73,10 @@ class CardOfHotel extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // if(_item.images.isEmpty )
+                        // if(item.images.isEmpty )
                         Image(
                           image: NetworkImage(
-                              imageBaseUrl + _item.images[0].image),
+                              imageBaseUrl + item.images[0].image),
                           fit: BoxFit.cover,
                           width: MediaQuery.of(context).size.width / 3,
                           height: double.infinity,
@@ -92,7 +93,7 @@ class CardOfHotel extends StatelessWidget {
                                   child: MyText(
                                     maxLines: 1,
                                     overflow: TextOverflow.fade,
-                                    text: _item.name,
+                                    text: item.name,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w900,
                                   ),
@@ -100,7 +101,7 @@ class CardOfHotel extends StatelessWidget {
                                 MyText(
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  text: _item.address,
+                                  text: item.address,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w900,
                                   colors: AppColors.grey,
@@ -119,7 +120,7 @@ class CardOfHotel extends StatelessWidget {
                                         colors: AppColors.grey),
                                     const Spacer(),
                                     MyText(
-                                      text: "\$${_item.price}",
+                                      text: "\$${item.price}",
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -130,7 +131,7 @@ class CardOfHotel extends StatelessWidget {
                                     RatingBar.builder(
                                       itemSize: 18,
                                       initialRating:
-                                          double.parse(_item.rate) / 2,
+                                          double.parse(item.rate) / 2,
                                       minRating: 1,
                                       direction: Axis.horizontal,
                                       allowHalfRating: true,

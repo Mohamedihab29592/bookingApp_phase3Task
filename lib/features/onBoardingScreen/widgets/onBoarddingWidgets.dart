@@ -33,7 +33,6 @@ class OnBoardingWidget extends StatelessWidget {
                 label: AppStrings.logIn.tr(context),
                 fontWeight: FontWeight.bold,
                 fontSize: AppSize.s18,
-                radius: AppPadding.p12,
               ),
               const SizedBox(
                 height: 15,
@@ -47,7 +46,6 @@ class OnBoardingWidget extends StatelessWidget {
                 label: AppStrings.signUp.tr(context),
                 fontWeight: FontWeight.bold,
                 fontSize: AppSize.s18,
-                radius: AppPadding.p12,
                 backGroundColor: AppColors.grey,
               ),
             ],

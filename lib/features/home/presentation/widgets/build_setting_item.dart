@@ -1,5 +1,4 @@
 import 'package:booking_app/core/component/custom_text.dart';
-import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class BuildSettingItem extends StatelessWidget {

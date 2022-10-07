@@ -205,7 +205,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 label: AppStrings.signUp.tr(context),
                                 fontWeight: FontWeight.w700,
                                 fontSize: AppSize.s15,
-                                radius: AppPadding.p12,
                                 onPressed: () {
                                   FocusManager.instance.primaryFocus!.unfocus();
 

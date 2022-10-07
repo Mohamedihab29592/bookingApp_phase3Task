@@ -30,14 +30,12 @@ static LocaleCubit get(context) => BlocProvider.of(context);
 
   void changeAppMode({ bool ? fromShared})async {
     if (fromShared != null) {
-      print("if""$isDarkMode");
 
       isDarkMode = fromShared;
     } else {
       isDarkMode = !isDarkMode;
       final sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.setBool('isDarkMode',  isDarkMode).then((value) {
-        print(isDarkMode);
       });
     }
     emit(ChangeAppModeSucces());

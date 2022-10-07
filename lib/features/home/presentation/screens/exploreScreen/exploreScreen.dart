@@ -183,7 +183,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         backGroundColor: AppColors.teal,
                                           label:
                                           AppStrings.viewHotel.tr(context),
-                                          radius: AppSize.s100,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w900,
                                           onPressed: () {

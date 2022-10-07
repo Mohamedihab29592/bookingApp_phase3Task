@@ -7,7 +7,6 @@ class MyButton extends StatelessWidget {
   final double width;
   final Color backGroundColor;
   final Color textColor;
-  final double radius;
   final double fontSize;
   final FontWeight fontWeight;
   final VoidCallback? onPressed;
@@ -17,7 +16,6 @@ class MyButton extends StatelessWidget {
     required this.label,
     this.backGroundColor = Colors.teal,
     this.textColor = Colors.white,
-    required this.radius,
     required this.fontSize,
     required this.fontWeight,
     required this.onPressed, required this.width,

@@ -2,6 +2,7 @@ import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/app_strings.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,36 +16,37 @@ import '../../../../../core/utilis/constants/assets_manager.dart';
 import '../../../../../core/utilis/constants/colors.dart';
 import '../../../../../core/utilis/constants/values_manger.dart';
 
-class HotelView extends StatefulWidget {
+class HotelSearchView extends StatefulWidget {
   final String hotelName;
   final String locationName;
   final String rate;
   final String price;
   final String image;
+  final String facilities;
   final String lat;
   final String long;
   final int id;
   final int index;
   final String desc;
 
-  const   HotelView(
+  const HotelSearchView(
       {Key? key,
-      required this.hotelName,
-      required this.locationName,
-      required this.rate,
-      required this.price,
-      required this.desc,
-      required this.image,
-      required this.id,
-      required this.lat,
-      required this.long, required this.index, })
+        required this.hotelName,
+        required this.locationName,
+        required this.rate,
+        required this.price,
+        required this.desc,
+        required this.image,
+        required this.id,
+        required this.lat,
+        required this.long, required this.index, required this.facilities, })
       : super(key: key);
 
   @override
-  State<HotelView> createState() => _HotelViewState();
+  State<HotelSearchView> createState() => _HotelSearchViewState();
 }
 
-class _HotelViewState extends State<HotelView> {
+class _HotelSearchViewState extends State<HotelSearchView> {
   late ScrollController _scrollController;
   bool _appBarCollapsed = false;
 
@@ -74,10 +76,10 @@ class _HotelViewState extends State<HotelView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeState>(
+    return BlocConsumer<SearchCubit, SearchState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = HomeCubit.get(context);
+        var cubit = SearchCubit.get(context);
 
         return Scaffold(
             body: NestedScrollView(
@@ -121,7 +123,7 @@ class _HotelViewState extends State<HotelView> {
                     expandedHeight: AppSize.s715,
                     collapsedHeight: AppSize.s70,
                     actionsIconTheme:
-                        const IconThemeData(opacity: AppSize.s0),
+                    const IconThemeData(opacity: AppSize.s0),
                     flexibleSpace: Stack(
                       children: <Widget>[
                         Positioned.fill(
@@ -143,14 +145,14 @@ class _HotelViewState extends State<HotelView> {
                                     elevation: 10,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(20)),
+                                        BorderRadius.circular(20)),
                                     color: AppColors.cardColors,
                                     child: Padding(
                                       padding: const EdgeInsets.all(
                                           AppPadding.p20),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           MyText(
                                             maxLines: 2,
@@ -169,7 +171,7 @@ class _HotelViewState extends State<HotelView> {
                                                 child: MyText(
                                                   maxLines: 1,
                                                   overflow:
-                                                      TextOverflow.ellipsis,
+                                                  TextOverflow.ellipsis,
                                                   text: widget.locationName,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w900,
@@ -191,14 +193,14 @@ class _HotelViewState extends State<HotelView> {
                                               RatingBar.builder(
                                                 itemSize: 18,
                                                 initialRating: double.parse(
-                                                        widget.rate) /
+                                                    widget.rate) /
                                                     2,
                                                 minRating: 1,
                                                 direction: Axis.horizontal,
                                                 allowHalfRating: true,
                                                 itemCount: 5,
                                                 itemBuilder: (context, _) =>
-                                                    const Icon(
+                                                const Icon(
                                                   Icons.star,
                                                   color: AppColors.teal,
                                                 ),
@@ -215,7 +217,7 @@ class _HotelViewState extends State<HotelView> {
                                               const Spacer(),
                                               MyText(
                                                 text:
-                                                    "/per night".tr(context),
+                                                "/per night".tr(context),
                                                 fontSize: 16,
                                                 colors: AppColors.white74,
                                               ),
@@ -224,6 +226,7 @@ class _HotelViewState extends State<HotelView> {
                                           const SizedBox(
                                             height: AppSize.s10,
                                           ),
+
                                           Center(
                                             child: SizedBox(
                                               width: double.infinity,
@@ -232,7 +235,7 @@ class _HotelViewState extends State<HotelView> {
                                                   HomeState>(
                                                 listener: (context, state) {
                                                   if (state
-                                                      is BookingHotelSuccessState) {
+                                                  is BookingHotelSuccessState) {
                                                     showToast(
                                                         text: state.message,
                                                         state: ToastStates
@@ -241,7 +244,7 @@ class _HotelViewState extends State<HotelView> {
                                                 },
                                                 builder: (context, state) {
                                                   var cubit =
-                                                      HomeCubit.get(context);
+                                                  HomeCubit.get(context);
 
                                                   return MyButton(
                                                     width: double.infinity,
@@ -252,11 +255,12 @@ class _HotelViewState extends State<HotelView> {
                                                               .toString());
                                                       HomeCubit.get(context)
                                                           .getHomeData();
+
                                                     },
                                                     label: AppStrings.bookNow
                                                         .tr(context),
                                                     fontWeight:
-                                                        FontWeight.normal,
+                                                    FontWeight.normal,
                                                     fontSize: AppSize.s18,
                                                   );
                                                 },
@@ -281,7 +285,7 @@ class _HotelViewState extends State<HotelView> {
                                       },
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             AppStrings.moreDetails
@@ -371,6 +375,23 @@ class _HotelViewState extends State<HotelView> {
                           fontWeight: FontWeight.normal,
                           colors: AppColors.grey,
                         ),
+                      ),
+                      const SizedBox(
+                        height: AppSize.s5,
+                      ),
+                      SizedBox(
+                        height: 30,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context,index)=>Image.network(imageBaseUrl+
+                                cubit.searchModel!.data.data[widget.index].facilities[index].image,
+                              color: AppColors.teal,
+
+                            ),
+                            separatorBuilder: (context,index)=>const SizedBox(width: 10,),
+                            itemCount:cubit.searchModel!.data.data[widget.index].facilities.length ),
                       ),
                       const SizedBox(
                         height: AppSize.s10,
@@ -515,7 +536,7 @@ class _HotelViewState extends State<HotelView> {
                           padding: const EdgeInsets.symmetric(
                               vertical: AppPadding.p5),
                           child: ListView.separated(
-                            itemCount: cubit.hotelsEntity!.homeEntity.data[widget.index].images.length,
+                            itemCount: cubit.searchModel!.data.data[widget.index].images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: ((context, index) {
                               return Container(
@@ -527,7 +548,7 @@ class _HotelViewState extends State<HotelView> {
                                   alignment: Alignment.bottomLeft,
                                   children: [
                                     Image.network(imageBaseUrl+
-                                      cubit.hotelsEntity!.homeEntity.data[widget.index].images[index].image,
+                                        cubit.searchModel!.data.data[widget.index].images[index].image,
                                       height: double.infinity,
                                       width: double.infinity,
                                       fit: BoxFit.cover,
@@ -538,7 +559,7 @@ class _HotelViewState extends State<HotelView> {
                             }),
                             separatorBuilder:
                                 (BuildContext context, int index) =>
-                                    const SizedBox(
+                            const SizedBox(
                               width: AppSize.s15,
                             ),
                           ),
@@ -574,19 +595,19 @@ class _HotelViewState extends State<HotelView> {
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(
                                         borderRadius:
-                                            BorderRadius.circular(20)),
+                                        BorderRadius.circular(20)),
                                     height: 60,
                                     width: 60,
                                     child: const Image(
                                         image:
-                                            AssetImage(ImageAssets.profile))),
+                                        AssetImage(ImageAssets.profile))),
                                 const SizedBox(
                                   width: 10,
                                 ),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: const [
                                       MyText(
                                         text: 'Alexia Jane',
@@ -634,17 +655,17 @@ class _HotelViewState extends State<HotelView> {
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(
                                         borderRadius:
-                                            BorderRadius.circular(20)),
+                                        BorderRadius.circular(20)),
                                     height: 60,
                                     width: 60,
                                     child: const Image(
                                         image:
-                                            AssetImage(ImageAssets.profile))),
+                                        AssetImage(ImageAssets.profile))),
                                 const SizedBox(width: 20.0,),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: const [
                                       MyText(
                                         text: 'Jacky Dep',
@@ -687,8 +708,9 @@ class _HotelViewState extends State<HotelView> {
                       SizedBox(
                           height: 250,
                           width: double.infinity,
-                          child: Maps(lat: widget.lat,long: widget.long,
-
+                          child: Maps(
+                            lat: widget.lat,
+                            long: widget.long,
                           )),
                       const SizedBox(
                         height: 20,
@@ -712,7 +734,7 @@ class _HotelViewState extends State<HotelView> {
                                 width: double.infinity,
 
                                 onPressed: () async{
-                               await   cubit.bookAHotel(
+                                  await   cubit.bookAHotel(
                                       hotelId: widget.id.toString());
                                   HomeCubit.get(context).getHomeData();
                                 },

@@ -42,7 +42,7 @@ class CircleAvatarItems extends StatelessWidget {
       itemBuilder: (context,index)=>Column(
         children:   [
           CircleAvatar(
-            radius: AppSize.s40,
+            radius: AppSize.s35,
             backgroundImage: AssetImage(_circleAvatarImages[index]),
 
 

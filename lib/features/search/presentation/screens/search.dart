@@ -1,7 +1,9 @@
 import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/component/my_text.dart';
+import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/features/search/domain/entity/search_entity.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +14,8 @@ import '../../../../core/utilis/constants/values_manger.dart';
 import '../../../../core/component/my_text_form_field.dart';
 import '../widgets/circuleAvatarImages.dart';
 import '../widgets/searchItem.dart';
+import 'filterPage.dart';
+import 'hotelsOnGoogle.dart';
 
 class Search extends StatefulWidget {
  const Search({Key? key}) : super(key: key);
@@ -23,6 +27,9 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   final _controller = TextEditingController();
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SearchCubit, SearchState>(
@@ -30,134 +37,223 @@ class _SearchState extends State<Search> {
       builder: (BuildContext context, Object? state) {
         var cubit = SearchCubit.get(context);
         return Scaffold(
-          body: SingleChildScrollView(
-            child: SafeArea(
-              child: Column(
+          body: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              SliverAppBar(
+                pinned: true,
+                title:   Row(
+                  children: [
+                    const Spacer(),
+                    if(cubit.searchModel!=null && cubit.searchModel!.data.data.isNotEmpty)
+                      IconButton(
+                        splashRadius: 15,
+                        onPressed: () {
+                          navigateTo(context: context, widget: HotelsOnMapPage(hotelsMap:cubit.searchModel!.data.data));
+
+                        },
+                        icon:  const Icon(Icons.location_on_outlined,
+                            color:AppColors.teal),
+                      ),
+
+                    if(cubit.searchModel==null||cubit.searchModel!.data.data.isEmpty)
+                      IconButton(
+                        splashRadius: 15,
+                        onPressed: () {},
+                        icon:  const Icon(Icons.location_off,
+                            color:AppColors.grey),
+                      ),
+                    IconButton(
+                      splashRadius: 15,
+
+                      onPressed: () {
+                        navigateTo(context: context, widget: FilterPageNew(searchText: _controller.text,));
+                      },
+                      icon: const Icon(Icons.filter_alt,color: AppColors.teal,),
+                    ),
+
+
+                  ],
+                ),
+
+              ),
+
+            SliverPersistentHeader(
+              pinned: false,
+                floating: true,
+                delegate: SliverAppBarDelegate(
+              minHeight: 115,
+              maxHeight: 55,
+              child:  Column(
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        splashRadius: 15,
-
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(Icons.close,color: AppColors.teal,),
-                      ),
-                     const Spacer(),
-                      IconButton(
-                        splashRadius: 15,
-                        onPressed: () {
-                        },
-                        icon: const Icon(Icons.location_on_outlined,color: AppColors.teal,),
-                      ),
-                      IconButton(
-                        splashRadius: 15,
-
-                        onPressed: () {
-                        },
-                        icon: const Icon(Icons.filter_alt,color: AppColors.teal,),
-                      ),
-
-
-                    ],
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0,right: 15,left: 18,),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         MyText(
+                        MyText(
                           text: AppStrings.search.tr(context),
                           fontSize: AppSize.s22,
                         ),
                         const SizedBox(
-                          height: AppSize.s20,
+                          height: AppSize.s10,
                         ),
-                        Container(
-                          height: AppSize.s50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppSize.s30),
-                          ),
-                          child: MyTextForm(
-                            isDense: true,
-                            controller: _controller,
-                            textInputType: TextInputType.text,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return AppStrings.searchHint.tr(context);
-                              } else {
-                                return null;
-                              }
-                            },
-                            prefixIcon: IconButton(
-                              onPressed: () {
-                                FocusManager.instance.primaryFocus!.unfocus();
 
-                                  cubit.searchForHotel(
-                                    userSearchEntity: UserSearchEntity(
-                                      name: _controller.text,
-                                      address: '',
-                                      maxPrice: '',
-                                      minPrice: '',
-                                      latitude: '',
-                                      longitude: '',
-                                      distance: '',
+                        MyTextForm(
+                          controller: _controller,
+                          textInputType: TextInputType.text,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return AppStrings.searchHint.tr(context);
+                            } else {
+                              return null;
+                            }
+                          },
+                          prefixIcon: IconButton(
+                            onPressed: () {
+                              FocusManager.instance.primaryFocus!.unfocus();
+
+                              cubit.searchForHotel(
+                                userSearchEntity: UserSearchEntity(
+                                  name: _controller.text,
+                                  address: '',
+                                  maxPrice: '',
+                                  minPrice: '',
+                                  latitude: '',
+                                  longitude: '',
+                                  distance: '',
+                                  facilities: {
+                                    ...SearchCubit.get(context).selectedFacilities.asMap().map(
+                                          (key, value) => MapEntry(
+                                        'facilities[$key]',
+                                        value,
+                                      ),
                                     ),
-                                  );
+                                  },
+                                ),
+                              );
 
-                              },
-                              icon: const Icon(
-                                Icons.search,
-                                color: AppColors.teal,
-                              ),
+                            },
+                            icon: const Icon(
+                              Icons.search,
+                              color: AppColors.teal,
                             ),
-                            hintText: AppStrings.whereAreYouGoing.tr(context),
-                            radius: AppSize.s30,
                           ),
-                        ),
-                        const SizedBox(
-                          height: AppSize.s20,
-                        ),
-                        SizedBox(
-                          height: 105,
-                          child: CircleAvatarItems(),
-                        ),
-                        const SizedBox(
-                          height: AppSize.s20,
-                        ),
-                        Row(
-                          children: [
-                             const MyText(
-                                text: AppStrings.searchResult,
-                                fontSize: AppSize.s16),
-                            const Spacer(),
-                            TextButton(
-                              onPressed: () {
+                          hintText: AppStrings.whereAreYouGoing.tr(context),
+                          radius: AppSize.s30,
 
-                              },
-                              child: MyText(
-                                text: AppStrings.clear.tr(context),
-                                fontSize: AppSize.s16,
-                                colors: AppColors.teal,
-                              ),
-                            ),
-                          ],
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: SearchItem(),
-                        ),
+
                       ],
                     ),
                   ),
-
                 ],
               ),
-            ),
+
+
+
+            
+            )),
+              SliverList(
+
+                  delegate: SliverChildListDelegate(
+
+                [
+                  Column(
+                    children: [
+
+
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15,left: 18,),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (cubit.searchModel != null)
+                              Text(
+                                "${cubit.searchModel!.data.total.toString()} Hotel Found",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            if (cubit.searchModel == null)
+                               Container(),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              height: 105,
+                              child: CircleAvatarItems(),
+                            ),
+
+                            Row(
+                              children: [
+                                const MyText(
+                                    text: AppStrings.searchRecent,
+                                    fontSize: AppSize.s16),
+                                const Spacer(),
+                                TextButton(
+                                  onPressed: () {
+
+                                  },
+                                  child: MyText(
+                                    text: AppStrings.clear.tr(context),
+                                    fontSize: AppSize.s16,
+                                    colors: AppColors.teal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: double.infinity,
+                              child: SearchItem(),
+                            ),
+                          ],),
+                      )
+
+                    ],
+                  ),
+                ]
+
+
+              )),
+            ]
           ),
         );
       },
     );
+  }
+
+}
+
+
+class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  @override
+  double get minExtent => minHeight;
+
+  @override
+  double get maxExtent => math.max(maxHeight, minHeight);
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset,
+      bool overlapsContent) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 100),
+      child: child,
+    );
+  }
+
+  @override
+  bool shouldRebuild(SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }

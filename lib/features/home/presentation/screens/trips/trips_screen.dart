@@ -1,10 +1,10 @@
 import 'package:booking_app/core/component/custom_button.dart';
 import 'package:booking_app/core/component/custom_text.dart';
-import 'package:booking_app/features/home/presentation/screens/trips/presentation/widgets/cancelled_widget.dart';
 import 'package:flutter/material.dart';
-import '../../../../../../../core/utilis/constants/colors.dart';
-import '../widgets/completed_widget.dart';
-import '../widgets/upcoming_widget.dart';
+import '../../../../../../core/utilis/constants/colors.dart';
+import '../../widgets/cancelled_widget.dart';
+import '../../widgets/completed_widget.dart';
+import '../../widgets/upcoming_widget.dart';
 
 class TripsScreen extends StatefulWidget {
   const TripsScreen({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class _TripsScreenState extends State<TripsScreen> {
               Container(
 
                 decoration: BoxDecoration(
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         blurRadius: 2,
                       ),

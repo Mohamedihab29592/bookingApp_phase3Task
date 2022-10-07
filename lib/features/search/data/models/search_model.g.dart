@@ -32,7 +32,6 @@ Map<String, dynamic> _$SearchDataModelToJson(SearchDataModel instance) =>
 
 DataHotelModel _$DataHotelModelFromJson(Map<String, dynamic> json) =>
     DataHotelModel(
-
       id: json['id'] as int,
       name: json['name'] as String,
       description: json['description'] as String,
@@ -44,6 +43,10 @@ DataHotelModel _$DataHotelModelFromJson(Map<String, dynamic> json) =>
       images: (json['hotel_images'] as List<dynamic>)
           .map((e) => SearchHotelImages.fromJson(e as Map<String, dynamic>))
           .toList(),
+      facilities: (json['facilities'] as List<dynamic>)
+          .map((e) => Searchfacilities.fromJson(e as Map<String, dynamic>))
+          .toList(),
+
 
     );
 
@@ -56,6 +59,7 @@ Map<String, dynamic> _$DataHotelModelToJson(DataHotelModel instance) =>
       'address': instance.address,
       'rate': instance.rate,
       'hotel_images': instance.images,
+      'facilities': instance.facilities,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
     };
@@ -71,5 +75,20 @@ Map<String, dynamic> _$SearchHotelImagesToJson(SearchHotelImages instance) =>
     <String, dynamic>{
       'id': instance.id,
       'hotel_id': instance.hotelID,
+      'image': instance.image,
+    };
+
+
+Searchfacilities _$SearchfacilitiesFromJson(Map<String, dynamic> json) =>
+    Searchfacilities(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      image: json['image'] as String,
+    );
+
+Map<String, dynamic> _$SearchfacilitiesToJson(Searchfacilities instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
       'image': instance.image,
     };

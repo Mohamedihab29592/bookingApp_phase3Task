@@ -4,11 +4,12 @@ import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../../core/component/custom_text.dart';
-import '../../../../../../../core/utilis/constants/colors.dart';
+import '../../../../../core/component/custom_text.dart';
+import '../../../../../core/utilis/constants/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../layout/layoutScreen.dart';
+import '../screens/layout/layoutScreen.dart';
+
 
 class BuildBooKingOrCancelItem extends StatelessWidget {
   final String roomName;
