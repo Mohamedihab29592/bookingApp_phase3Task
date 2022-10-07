@@ -22,7 +22,7 @@ class _HotelsOnMapPageState extends State<HotelsOnMapPage> {
         title: const Text('Maps'),),
       body: Stack(
         children: [
-          HotelsOnGoogleMapWidget(hotels: widget.hotelsMap),
+          MapsList(hotels: widget.hotelsMap),
           Positioned(
             left: 10,
             right: 10,

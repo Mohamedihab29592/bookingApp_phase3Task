@@ -21,4 +21,5 @@ class RegisterRepositoryImpl implements BaseRegisterRepository {
       return Left(ServerFailure());
     }
   }
+
 }

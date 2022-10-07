@@ -5,6 +5,8 @@ import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+
 class HomeLayout extends StatefulWidget {
   const HomeLayout({Key? key, }) : super(key: key);
 
@@ -12,7 +14,11 @@ class HomeLayout extends StatefulWidget {
   State<HomeLayout> createState() => _HomeLayoutState();
 }
 
+
+
+
 class _HomeLayoutState extends State<HomeLayout> {
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(

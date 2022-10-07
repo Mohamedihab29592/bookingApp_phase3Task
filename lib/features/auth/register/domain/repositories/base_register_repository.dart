@@ -6,4 +6,7 @@ abstract class BaseRegisterRepository {
   Future<Either<Failure, Unit>> registerWithEmail(
       {required UserInfoEntity userInfoEntity});
 
+
 }
+
+

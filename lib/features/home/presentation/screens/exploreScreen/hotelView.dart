@@ -388,7 +388,7 @@ class _HotelViewState extends State<HotelView> {
 
                         ),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                        height: 156,
+                        height: 177,
                         width: double.infinity,
                         child: Card(
                           elevation: 10,

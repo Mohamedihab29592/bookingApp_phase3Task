@@ -409,7 +409,7 @@ class _HotelSearchViewState extends State<HotelSearchView> {
 
                         ),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                        height: 156,
+                        height: 177,
                         width: double.infinity,
                         child: Card(
                           elevation: 10,
@@ -547,12 +547,16 @@ class _HotelSearchViewState extends State<HotelSearchView> {
                                 child: Stack(
                                   alignment: Alignment.bottomLeft,
                                   children: [
+                                    if(cubit.searchModel!.data.data[widget.index].images.isNotEmpty)
                                     Image.network(imageBaseUrl+
                                         cubit.searchModel!.data.data[widget.index].images[index].image,
                                       height: double.infinity,
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
+                                    if(cubit.searchModel!.data.data[widget.index].images.isEmpty)
+                                      const Center(child: CircularProgressIndicator(),),
+
                                   ],
                                 ),
                               );

@@ -1,7 +1,9 @@
+import 'package:booking_app/core/app_localization/app_localization.dart';
 import 'package:booking_app/core/component/custom_button.dart';
 import 'package:booking_app/core/component/custom_text.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/utilis/constants/colors.dart';
+import '../../../../../core/utilis/constants/app_strings.dart';
 import '../../widgets/cancelled_widget.dart';
 import '../../widgets/completed_widget.dart';
 import '../../widgets/upcoming_widget.dart';
@@ -31,8 +33,8 @@ class _TripsScreenState extends State<TripsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomText(
-                text: 'My Trip',
+               CustomText(
+                text: AppStrings.myTrip.tr(context),
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -61,7 +63,7 @@ class _TripsScreenState extends State<TripsScreen> {
                           });
                         },
                         child: CustomText(
-                          text: 'Upcoming',
+                          text: AppStrings.upcoming.tr(context),
                           fontSize: 16,
                           fontWeight: currentScreen == 0
                               ? FontWeight.w800
@@ -80,7 +82,7 @@ class _TripsScreenState extends State<TripsScreen> {
                           });
                         },
                         child: CustomText(
-                          text: 'Completed',
+                          text: AppStrings.completed.tr(context),
                           fontSize: 16,
                           fontWeight: currentScreen == 1
                               ? FontWeight.w800
@@ -99,7 +101,7 @@ class _TripsScreenState extends State<TripsScreen> {
                           });
                         },
                         child: CustomText(
-                          text: 'Cancelled',
+                          text: AppStrings.cancelled.tr(context),
                           fontSize: 16,
                           fontWeight: currentScreen == 2
                               ? FontWeight.w800

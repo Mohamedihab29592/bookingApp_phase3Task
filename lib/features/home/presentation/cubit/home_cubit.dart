@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:booking_app/core/network/end_points.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+
 import 'package:booking_app/core/network/network.dart';
 import 'package:booking_app/features/home/data/models/booking_hotel_model.dart';
 import 'package:booking_app/features/home/data/models/get_booking_model.dart';
@@ -84,10 +86,7 @@ class HomeCubit extends Cubit<HomeState> {
   void getHomeData({
     bool isForce = false,
   }) {
-    // if (isForce) {
-    //   list = [];
-    //   currentPage = 1;
-    // }
+
     emit(GetHomeDataLoadingState());
     homeDataUseCase.call(params: NoParams(), page: currentPage).then((value) {
       value.fold((failure) {
@@ -95,12 +94,7 @@ class HomeCubit extends Cubit<HomeState> {
             GetHomeDataErrorState(error: _mapFailureToMsg(failure: failure)));
       }, (hotelEntity) {
         hotelsEntity = hotelEntity;
-        // list.addAll(hotelEntity.homeEntity.data);
-        // currentPage++;
-        //
-        // if (lastPage == 1) {
-        //   lastPage = hotelEntity.homeEntity.lastPage;
-        // }
+
 
         isEnd = false;
         return emit(GetHomeDataSuccessState());
@@ -271,6 +265,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
 
   }
+
 
 
 }

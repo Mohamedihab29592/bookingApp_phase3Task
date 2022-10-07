@@ -24,7 +24,6 @@ class CardOfHotel extends StatelessWidget {
       listener: (BuildContext context, state) {},
       builder: (BuildContext context, state) {
         var cubit = HomeCubit.get(context);
-
         if (state is GetHomeDataLoadingState) {
           return const Center(child: CupertinoActivityIndicator(color: AppColors.teal,));
         }
@@ -73,7 +72,6 @@ class CardOfHotel extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // if(item.images.isEmpty )
                         Image(
                           image: NetworkImage(
                               imageBaseUrl + item.images[0].image),

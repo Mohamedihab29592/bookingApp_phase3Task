@@ -7,18 +7,18 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../../core/app_localization/cubit/locale_cubit.dart';
 
 
-class HotelsOnGoogleMapWidget extends StatefulWidget {
-  const HotelsOnGoogleMapWidget({Key? key,  required this.hotels, })
+class MapsList extends StatefulWidget {
+  const MapsList({Key? key,  required this.hotels, })
       : super(key: key);
 
   final List<dynamic> hotels;
 
   @override
-  _HotelsOnGoogleMapWidgetState createState() =>
-      _HotelsOnGoogleMapWidgetState();
+  _MapsListState createState() =>
+      _MapsListState();
 }
 
-class _HotelsOnGoogleMapWidgetState extends State<HotelsOnGoogleMapWidget> {
+class _MapsListState extends State<MapsList> {
   GoogleMapController? mapController; //contrller for Google map
   final Set<Marker> markers = {}; //markers for google map
 //location to show in map

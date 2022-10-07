@@ -23,6 +23,10 @@ class AppStrings {
   static const String moreDetails = "More Details";
   static const String token = "token";
   static const String kmToCity = "2 Km to City";
+  static const String myTrip = "My Trip";
+  static const String upcoming = "Upcoming";
+  static const String completed = "Completed";
+  static const String cancelled = "Cancelled";
 
   static const String successLoginEn = "signed in successfully";
   static const String successRegisterEn = "User Registered Successfully";
