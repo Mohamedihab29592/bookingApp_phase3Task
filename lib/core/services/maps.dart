@@ -41,10 +41,6 @@ class _MapsState extends State<Maps> with WidgetsBindingObserver {
   late String _darkMapStyle;
  late  String _lightMapStyle;
 
-  Future _loadMapStyles() async {
-    _darkMapStyle  = await rootBundle.loadString('assets/map_styles/dark.json');
-    _lightMapStyle = await rootBundle.loadString('assets/map_styles/light.json');
-  }
 
 
   @override
@@ -55,7 +51,6 @@ class _MapsState extends State<Maps> with WidgetsBindingObserver {
 
     // initialize loadData method
     loadData();
-    _loadMapStyles();
   }
 
 

@@ -30,7 +30,7 @@ class SearchItem extends StatelessWidget {
             padding: EdgeInsets.zero,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
-              return InkWell(
+                return InkWell(
 
                 radius: 10,
                 onTap: (){
@@ -150,13 +150,17 @@ class SearchItem extends StatelessWidget {
                   ),
                 ),
               );
-            },
+                },
             itemCount: cubit.searchModel!.data.total,
           );
         }
         if (state is SearchHotelLoadingState) {
           return  const Center(child: CircularProgressIndicator(color: AppColors.teal,));
         }
+        if (state is SearchDeleteSuccessState)
+          {
+            return Container();
+          }
         else
         {return
           Center(child: Container());}

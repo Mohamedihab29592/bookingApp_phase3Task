@@ -168,14 +168,14 @@ class _SearchState extends State<Search> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (cubit.searchModel != null)
+                            if (cubit.searchModel != null&&cubit.searchModel!.data.data.isNotEmpty)
                               Text(
                                 "${cubit.searchModel!.data.total.toString()} Hotel Found",
                                 style: const TextStyle(
                                   fontSize: 14,
                                 ),
                               ),
-                            if (cubit.searchModel == null)
+                            if (cubit.searchModel == null || cubit.searchModel!.data.data.isEmpty)
                                Container(),
                             const SizedBox(
                               height: 20,
@@ -193,6 +193,7 @@ class _SearchState extends State<Search> {
                                 const Spacer(),
                                 TextButton(
                                   onPressed: () {
+                                    cubit.clearList();
 
                                   },
                                   child: MyText(

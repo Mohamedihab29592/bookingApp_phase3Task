@@ -8,6 +8,7 @@ class SearchInitial extends SearchState {}
 class SearchHotelLoadingState extends SearchState {}
 
 class SearchHotelSuccessState extends SearchState {}
+class SearchDeleteSuccessState extends SearchState {}
 
 class SearchHotelErrorState extends SearchState {
   final String error;

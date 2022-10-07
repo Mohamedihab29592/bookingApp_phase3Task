@@ -19,14 +19,16 @@ class SearchCubit extends Cubit<SearchState> {
 
   static SearchCubit get(context) => BlocProvider.of(context);
   SearchModel? searchModel;
+
   void searchForHotel({required UserSearchEntity userSearchEntity}) {
     emit(SearchHotelLoadingState());
     searchHotelUseCase.call(userSearchEntity: userSearchEntity, facilities: {
       ...selectedFacilities.asMap().map(
-            (key, value) => MapEntry(
-          'facilities[$key]',
-          value,
-        ),
+            (key, value) =>
+            MapEntry(
+              'facilities[$key]',
+              value,
+            ),
       ),
     }).then((value) {
       value.fold((failure) {
@@ -74,5 +76,18 @@ class SearchCubit extends Cubit<SearchState> {
 
     emit(SelectFacilityState());
   }
+
+
+  List<dynamic> clearList()
+  {
+    emit(SearchHotelLoadingState());
+
+    searchModel!.data.data.clear();
+    emit(SearchDeleteSuccessState());
+    return searchModel!.data.data;
+
+
+  }
+
 
 }
