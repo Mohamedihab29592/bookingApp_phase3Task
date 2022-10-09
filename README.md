@@ -107,7 +107,7 @@ Here are some screeshots for the application:
 <img src="https://user-images.githubusercontent.com/64233832/194778873-77e4a339-0cd5-4323-8dad-3bd89d258156.jpeg" width="300"> <img src="https://user-images.githubusercontent.com/64233832/194778875-a95bc450-0d5b-427d-b884-0e9442109fa1.jpeg" width="300"> <img src="https://user-images.githubusercontent.com/64233832/194778876-bddfb06a-338f-44e0-af52-edebcf6be422.jpeg" width="300"> 
 
 
-<img src="https://user-images.githubusercontent.com/64233832/194778878-0741978c-0dfa-4f47-a3b2-825f2d6d6cfe.jpeg" width="300"> <img src="https://user-images.githubusercontent.com/64233832/194778880-04c66ea0-1bd0-4504-90bd-1da531cb9dbe.jpeg" width="300"> <img src="https://user-images.githubusercontent.com/64233832/194778880-04c66ea0-1bd0-4504-90bd-1da531cb9dbe.jpeg" width="300> <img src="https://user-images.githubusercontent.com/64233832/194778881-74bdae6c-5d42-4078-99f6-7915076af135.jpeg" width="300">
+<img src="https://user-images.githubusercontent.com/64233832/194778878-0741978c-0dfa-4f47-a3b2-825f2d6d6cfe.jpeg" width="300"> <img src="https://user-images.githubusercontent.com/64233832/194778880-04c66ea0-1bd0-4504-90bd-1da531cb9dbe.jpeg" width="300"> 
 
 ## Demo Video
 
