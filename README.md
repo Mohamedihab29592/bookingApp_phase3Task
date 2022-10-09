@@ -86,6 +86,9 @@ Here are some screeshots for the application:
 
 <img src="https://user-images.githubusercontent.com/64233832/194778303-7d429e5b-38fb-4837-8bda-03257cf3e09d.jpeg" width="300"> <img src="https://user-images.githubusercontent.com/64233832/194778304-ffba60a0-5522-4745-9da4-9f4bc2af7e31.jpeg" width="300"> 
 
+<img src="https://user-images.githubusercontent.com/64233832/194778364-f04e8fba-ab52-4cae-bcaf-23b4ec3577b4.jpeg" width="300"> <img src="https://user-images.githubusercontent.com/64233832/194778367-8c3e1a30-e543-4e2b-b92e-f09cde515d85.jpeg" width="300"> 
+
+
 
 
 
