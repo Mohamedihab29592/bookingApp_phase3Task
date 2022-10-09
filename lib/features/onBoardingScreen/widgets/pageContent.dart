@@ -14,7 +14,7 @@ class PageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+      return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

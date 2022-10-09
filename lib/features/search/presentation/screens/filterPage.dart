@@ -8,6 +8,8 @@ import 'package:booking_app/features/search/presentation/widgets/rangeSlider.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utilis/constants/colors.dart';
+
 
 class FilterPageNew extends StatefulWidget {
   const FilterPageNew({super.key, required this.searchText});
@@ -76,7 +78,7 @@ class _FilterPageNewState extends State<FilterPageNew> {
                         const SizedBox(height: 10),
                         SearchCubit.get(context).facilitiesModel != null
                             ? const PopularFilterWidget()
-                            : const Center(child: CircularProgressIndicator()),
+                            : const Center(child: CircularProgressIndicator(color: AppColors.teal,)),
                         // const DividerWidget(),
                         const SizedBox(height: 10),
                         const DistanceWidget(),
