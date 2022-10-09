@@ -77,11 +77,9 @@ presentation
 ```
 
 
-
 ## Screenshots
 Here are some screeshots for the application:
-![1]|<img src="https://user-images.githubusercontent.com/64233832/194777838-d626bb99-06a3-4bc0-a0a8-d1ab9622da6a.jpeg"width="300">|
-![2](https://user-images.githubusercontent.com/64233832/194777840-f2610e7b-9e85-499b-9747-a99788d031f9.jpeg)
+|<img src="https://user-images.githubusercontent.com/64233832/194777838-d626bb99-06a3-4bc0-a0a8-d1ab9622da6a.jpeg" width="300"> |
 ![3](https://user-images.githubusercontent.com/64233832/194777841-c33aceab-1a98-4f22-920a-f095955b1144.jpeg)
 ![4](https://user-images.githubusercontent.com/64233832/194777843-50851755-fa3f-4f57-8f96-21ccd56b3c03.jpeg)
 
