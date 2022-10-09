@@ -16,8 +16,8 @@ class _DistanceWidgetState extends State<DistanceWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Text(
             'Distance from city center',
             style: TextStyle(

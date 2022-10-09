@@ -16,3 +16,11 @@ class UserRegisterErrorState extends UserRegisterState {
 
 class SuccessGetUserImageState extends UserRegisterState{}
 class ErrorGetUserImageState extends UserRegisterState{}
+
+
+///CreateGoogleUSer State
+class CreateGoogleUserLoadingState extends UserRegisterState{}
+class CreateGoogleUserSuccessState extends UserRegisterState{
+
+}
+class CreateGoogleUserErrorState extends UserRegisterState{}

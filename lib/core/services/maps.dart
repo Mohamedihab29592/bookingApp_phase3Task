@@ -13,10 +13,10 @@ class Maps extends StatefulWidget {
   const Maps({Key? key, required this.lat, required this.long}) : super(key: key);
 
   @override
-  _MapsState createState() => _MapsState();
+  MapsState createState() => MapsState();
 }
 
-class _MapsState extends State<Maps> with WidgetsBindingObserver {
+class MapsState extends State<Maps> with WidgetsBindingObserver {
 // created controller for displaying Google Maps
   final Completer<GoogleMapController> _controller = Completer();
 

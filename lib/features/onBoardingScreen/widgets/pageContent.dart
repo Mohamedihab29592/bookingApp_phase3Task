@@ -14,18 +14,17 @@ class PageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Spacer(),
+          const Spacer(),
           Image.asset(
             image,
             alignment: Alignment.center,
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Expanded(
             child: Text(
               title,

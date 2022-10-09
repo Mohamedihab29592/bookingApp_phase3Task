@@ -33,7 +33,7 @@ class _PopularFilterWidgetState extends State<PopularFilterWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Popular filter',
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -72,7 +72,7 @@ class _PopularFilterWidgetState extends State<PopularFilterWidget> {
             Checkbox(
               activeColor: AppColors.teal,
 
-              side: BorderSide(
+              side: const BorderSide(
                 width: 2,
 
               ),

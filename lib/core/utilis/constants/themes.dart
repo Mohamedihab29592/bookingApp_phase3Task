@@ -33,7 +33,7 @@ cardTheme: CardTheme(color: AppColors.darkGrey),
       iconTheme: const IconThemeData(
         color: AppColors.teal,
       ),
-      systemOverlayStyle: SystemUiOverlayStyle(
+      systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
         statusBarIconBrightness: Brightness.light,
       ),

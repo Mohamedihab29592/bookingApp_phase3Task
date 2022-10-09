@@ -711,8 +711,8 @@ class _HotelViewState extends State<HotelView> {
                               return MyButton(
                                 width: double.infinity,
 
-                                onPressed: () async{
-                               await   cubit.bookAHotel(
+                                onPressed: () {
+                                  cubit.bookAHotel(
                                       hotelId: widget.id.toString());
                                   HomeCubit.get(context).getHomeData();
                                 },
@@ -734,9 +734,9 @@ class _HotelViewState extends State<HotelView> {
   }
 
   void _jumpTo() {
-    final _maxExtent = _scrollController.position.maxScrollExtent;
+    final maxExtent = _scrollController.position.maxScrollExtent;
     _scrollController.animateTo(
-      _maxExtent * 0.85, // scrolls to 85% of maxScrollExtent
+      maxExtent * 0.85, // scrolls to 85% of maxScrollExtent
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );

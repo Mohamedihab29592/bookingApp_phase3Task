@@ -2,7 +2,6 @@ import 'package:booking_app/core/component/others.dart';
 import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:booking_app/features/search/presentation/screens/hotelSearchView.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 

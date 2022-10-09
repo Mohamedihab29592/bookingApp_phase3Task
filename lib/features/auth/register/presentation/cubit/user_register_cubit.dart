@@ -2,8 +2,9 @@ import 'dart:io';
 import 'package:booking_app/core/error/failures.dart';
 import 'package:booking_app/features/auth/register/domain/entities/user_info_entity.dart';
 import 'package:booking_app/features/auth/register/domain/use_cases/register_email_usecase.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../core/utilis/constants/app_strings.dart';
@@ -17,6 +18,7 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
 
   static UserRegisterCubit get(context) => BlocProvider.of(context);
 
+
   void registerWithEmail({required UserInfoEntity userInfoEntity}) async {
     emit(UserRegisterLoadingState());
     await registerWithEmailUseCase
@@ -28,15 +30,21 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
     ))
         .then((value) {
       value.fold((failure) {
-        print('fail');
+        if (kDebugMode) {
+          print('fail');
+        }
         return emit(
             UserRegisterErrorState(error: _mapFailureToMsg(failure: failure)));
       }, (unit) {
-        print('success');
+        if (kDebugMode) {
+          print('success');
+        }
         return emit(UserRegisterSuccessState());
       });
     });
   }
+
+
 
   String _mapFailureToMsg({required Failure failure}) {
     switch (failure.runtimeType) {
@@ -49,8 +57,36 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
     }
   }
 
+  void registerWithGoogle() async {
+
+    // Trigger the authentication flow
+    await GoogleSignIn().signIn().then((value) {
+
+      registerWithEmail(userInfoEntity: UserInfoEntity(name: value!.displayName!, email: value.email, password: value.id, passwordConfirmation: value.id));
+
+    });
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+
   File? userImage;
   final ImagePicker picker = ImagePicker();
+
+
+
+
 
   Future<void> getPostImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);

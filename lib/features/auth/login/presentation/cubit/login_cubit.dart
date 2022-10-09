@@ -1,5 +1,5 @@
 import 'package:booking_app/core/error/failures.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -25,11 +25,15 @@ class LoginCubit extends Cubit<LoginState> {
     ))
         .then((value) {
       value.fold((failure) {
-        print('fail');
+        if (kDebugMode) {
+          print('fail');
+        }
         return emit(
             LoginErrorState(error: _mapFailureToMsg(failure: failure)));
       }, (unit) {
-        print('success');
+        if (kDebugMode) {
+          print('success');
+        }
         return emit(LoginSuccessState());
       });
     });
@@ -48,52 +52,18 @@ class LoginCubit extends Cubit<LoginState> {
 
 
 
-  // Future<String?> signInwithGoogle2() async {
-  //   emit(CreateGoogleUserLoadingState());
-  //   try {
-  //     final GoogleSignInAccount? googleSignInAccount =
-  //     await _googleSignIn.signIn();
-  //     final GoogleSignInAuthentication googleSignInAuthentication =
-  //     await googleSignInAccount!.authentication;
-  //     final AuthCredential credential = GoogleAuthProvider.credential(
-  //       accessToken: googleSignInAuthentication.accessToken,
-  //       idToken: googleSignInAuthentication.idToken,
-  //     );
-  //     emit(CreateGoogleUserSuccessState());
-  //     await _auth.signInWithCredential(credential);
-  //   } on FirebaseAuthException catch (errrorrrrrr) {
-  //     print('errrorrrrrr${errrorrrrrr.message}');
-  //     throw errrorrrrrr;
-  //   }
-  // }
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  Future<UserCredential> signInwithGoogle() async {
-    emit(CreateGoogleUserLoadingState());
+  void signInWithGoogle() async {
 
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+     await GoogleSignIn().signIn().then((value) {
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser
-        ?.authentication;
+      loginEmail(userLoginEntity: UserLoginEntity(email: value!.email, password: value.id, ));
+    });
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
 
-    emit(CreateGoogleUserSuccessState());
-    // Once signed in, return the UserCredential
-    return await _auth.signInWithCredential(credential);
+
   }
 
 
-  Future<void> signOutFromGoogle() async{
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-    await _googleSignIn.signOut();
-    await _auth.signOut();
-  }
 }

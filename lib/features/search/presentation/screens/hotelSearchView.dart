@@ -737,8 +737,8 @@ class _HotelSearchViewState extends State<HotelSearchView> {
                               return MyButton(
                                 width: double.infinity,
 
-                                onPressed: () async{
-                                  await   cubit.bookAHotel(
+                                onPressed: () {
+                                     cubit.bookAHotel(
                                       hotelId: widget.id.toString());
                                   HomeCubit.get(context).getHomeData();
                                 },

@@ -3,8 +3,6 @@ import 'package:booking_app/core/app_localization/cubit/locale_cubit.dart';
 import 'package:booking_app/core/component/toast.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:booking_app/features/search/presentation/cubit/search_cubit.dart';
-import 'package:booking_app/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'bloc_observer.dart';
@@ -13,16 +11,14 @@ import 'core/utilis/constants/app_strings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/utilis/constants/themes.dart';
-import 'injection_container.dart' as di;
+import 'core/di/injection_container.dart' as di;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 void main() async {
   Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
 
   bool result = await InternetConnectionChecker().hasConnection;
   if (result == true) {

@@ -2,7 +2,6 @@ import 'package:booking_app/core/network/end_points.dart';
 import 'package:booking_app/core/utilis/constants/colors.dart';
 import 'package:booking_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'build_upcoming_item.dart';

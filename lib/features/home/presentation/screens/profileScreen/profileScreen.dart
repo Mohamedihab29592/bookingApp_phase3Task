@@ -125,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     BuildProfileItem(
                         text: 'Settings'.tr(context), icon: Icons.settings, function: () {
-                          navigateTo(context: context, widget: SettingScreen());
+                          navigateTo(context: context, widget: const SettingScreen());
                     }),
                   ],
                 ),

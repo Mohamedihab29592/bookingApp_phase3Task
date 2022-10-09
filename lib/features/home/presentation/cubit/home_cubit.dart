@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:booking_app/core/network/end_points.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:booking_app/core/network/network.dart';
 import 'package:booking_app/features/home/data/models/booking_hotel_model.dart';

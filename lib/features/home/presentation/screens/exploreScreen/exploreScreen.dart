@@ -78,6 +78,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
             SliverAppBar(
+              automaticallyImplyLeading:false,
               floating: true,
               pinned: true,
               expandedHeight: AppSize.s500,

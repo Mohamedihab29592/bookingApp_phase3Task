@@ -8,7 +8,7 @@ import 'package:booking_app/core/component/my_text.dart';
 import 'package:booking_app/core/component/my_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:booking_app/injection_container.dart' as di;
+import 'package:booking_app/core/di/injection_container.dart' as di;
 
 import '../../../../../core/routes/routes_manager.dart';
 import '../../../../../core/utilis/constants/app_strings.dart';
@@ -66,11 +66,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: AppSize.s15,
                   ),
-                  Align(
+                  BlocConsumer<UserRegisterCubit,UserRegisterState>
+                    (
+                      listener: (context, state) {},
+                    builder:(context,state)=>Align(
                       alignment: Alignment.center,
                       child: MySignButton(
-                        ontap: () {},
+                        ontap: () {
+                          UserRegisterCubit.get(context).registerWithGoogle();
+                        },
                       )),
+                       ),
                   const SizedBox(
                     height: AppSize.s30,
                   ),

@@ -14,11 +14,11 @@ class MapsList extends StatefulWidget {
   final List<dynamic> hotels;
 
   @override
-  _MapsListState createState() =>
-      _MapsListState();
+  MapsListState createState() =>
+      MapsListState();
 }
 
-class _MapsListState extends State<MapsList> {
+class MapsListState extends State<MapsList> {
   GoogleMapController? mapController; //contrller for Google map
   final Set<Marker> markers = {}; //markers for google map
 //location to show in map
@@ -65,7 +65,7 @@ class _MapsListState extends State<MapsList> {
       markers.add(Marker(
         //add second marker
 
-        markerId: MarkerId("1"),
+        markerId: const MarkerId("1"),
         position: LatLng(double.parse(hotel.latitude),double.parse(hotel.longitude)
         ), //position of marker
         infoWindow: InfoWindow(
@@ -87,7 +87,7 @@ class _MapsListState extends State<MapsList> {
     markers.add(Marker(
       //add second marker
 
-      markerId: MarkerId("1"),
+      markerId: const MarkerId("1"),
       position: LatLng(double.parse(widget.hotels[0].latitude),double.parse(widget.hotels[0].longitude)
       ), //position of marker
       infoWindow: InfoWindow(

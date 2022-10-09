@@ -1,5 +1,4 @@
 import 'package:booking_app/core/error/failures.dart';
-import 'package:booking_app/core/usecases/usecase.dart';
 import 'package:booking_app/features/search/data/models/search_model.dart';
 import 'package:booking_app/features/search/domain/entity/search_entity.dart';
 import 'package:booking_app/features/search/domain/repositories/search_hotel_repo.dart';

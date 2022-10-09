@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../core/utilis/constants/app_strings.dart';
 import '../../../core/utilis/constants/assets_manager.dart';
-import '../../../core/utilis/constants/colors.dart';
 import '../../../core/utilis/constants/values_manger.dart';
 
 
@@ -14,7 +13,7 @@ class MySignButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
 
       child: ElevatedButton.icon(

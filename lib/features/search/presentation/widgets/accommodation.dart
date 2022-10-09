@@ -32,7 +32,7 @@ class _TypeAccommodationWidgetState extends State<TypeAccommodationWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Type of Accommodation',
             style: TextStyle(
               fontWeight: FontWeight.w400,

@@ -8,10 +8,9 @@ import 'package:booking_app/features/auth/widgets/google_button.dart';
 import 'package:booking_app/core/component/my_button.dart';
 import 'package:booking_app/core/component/my_text.dart';
 import 'package:booking_app/core/component/my_text_form_field.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:booking_app/injection_container.dart' as di;
+import 'package:booking_app/core/di/injection_container.dart' as di;
 
 import '../../../../../core/utilis/constants/app_strings.dart';
 import '../../../../../core/utilis/constants/colors.dart';
@@ -68,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         alignment: Alignment.center,
                         child: BlocConsumer<LoginCubit, LoginState>(
                           listener: (context, state) {
-                            if (state is CreateGoogleUserSuccessState) {
+                            if (state is LoginGoogleUserSuccessState) {
                               showToast(
                                 text: AppStrings.successLoginEn.tr(context),
                                 state: ToastStates.success,
@@ -82,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           builder: (context, state) {
                             return MySignButton(
                               ontap: () {
-                                LoginCubit.get(context).signInwithGoogle();
+                                LoginCubit.get(context).signInWithGoogle();
                               },
                             );
                           },
@@ -216,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: Text(
                               AppStrings.createAcc.tr(context),
-                              style: TextStyle(color: AppColors.teal),
+                              style: const TextStyle(color: AppColors.teal),
                             ))
                       ],
                     ),
