@@ -4,14 +4,17 @@
 
 ## Getting Started
 
-project modules and features  we create (splash screen , Authentication , Profile ,Trips . Explore, Filter ,maps and Bookings modules ).
-
-features (localization, theme mode ,and google sign in ).
-# A few resources:
-
-
-![Capture](https://user-images.githubusercontent.com/64233832/193407061-d3898461-69eb-4b97-b40d-9300c6d97f43.JPG)
-![Capture1](https://user-images.githubusercontent.com/64233832/193407057-8a8763db-4c6d-4639-991b-ec87ab95851d.JPG)
+# Main packages used
+dio to make integration with API
+flutter_bloc as state management
+shared_preferences to handle caching data
+flutter_screenutil to make the application responsive
+google_maps_flutter to use Google map
+internet_connection_checker to handle internet connection
+get_it to make dependency injection
+location to get user's location
+image_picker to pick image from mobile storage
+easy_localization to handle localization
 
 
 # Video :
