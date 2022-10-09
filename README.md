@@ -16,7 +16,9 @@
 - [get_it](https://pub.dev/packages/get_it) to make dependency injection
 - [location](https://pub.dev/packages/location) to get user's location
 - [image_picker](https://pub.dev/packages/image_picker) to pick image from mobile storage
-- [easy_localization](https://pub.dev/packages/easy_localization) to handle localization
+- [localization](https://pub.dev/packages/localization) to handle localization
+- [google_sign in](https://pub.dev/packages/google_sign_in) to handle localization
+
 
 
 ## Folder structure
