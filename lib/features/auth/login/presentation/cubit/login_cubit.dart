@@ -3,6 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../../../core/local/cache_helper.dart';
+import '../../../../../core/network/end_points.dart';
+import '../../../../../core/network/network.dart';
 import '../../../../../core/utilis/constants/app_strings.dart';
 import '../../domain/entities/user_login_entity.dart';
 import '../../domain/use_cases/login_email_usecase.dart';
@@ -51,19 +54,29 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
 
-
-
   void signInWithGoogle() async {
+    String email = "";
+    String password = "";
 
     // Trigger the authentication flow
-     await GoogleSignIn().signIn().then((value) {
-
-      loginEmail(userLoginEntity: UserLoginEntity(email: value!.email, password: value.id, ));
+    emit(LoginGoogleUserLoadingState());
+  await  GoogleSignIn().signIn().then((value) async{
+      email =value!.email;
+      password =value.displayName!;
     });
+    await DioHelper.postData(url: loginEndPoint, data: {
+      "email": email,
+      "password": password,
+    }).then((value) {
+      CacheHelper.saveData(
+          key: AppStrings.token, value: value.data['data']['api_token']);
+      debugPrint(value.data.toString());
+      emit(LoginGoogleUserSuccessState());
+    }).catchError((error) {
+      debugPrint(error.toString());
+      emit(LoginGoogleUserErrorState());
 
 
-
+    });
   }
-
-
 }
