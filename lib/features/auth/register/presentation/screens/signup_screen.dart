@@ -68,7 +68,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   BlocConsumer<UserRegisterCubit,UserRegisterState>
                     (
-                      listener: (context, state) {},
+                      listener: (context, state) {
+                        if (state is CreateGoogleUserSuccessState) {
+                          showToast(
+                            text: AppStrings.successRegisterEn.tr(context),
+                            state: ToastStates.success,
+                          );
+                          Navigator.pushReplacementNamed(
+                            context,
+                            Routes.loginRoute,
+                          );
+                        }
+                        if (state is CreateGoogleUserErrorState)
+                        {
+                          showToast(
+                            text: AppStrings.errorRegisterEn,
+                            state: ToastStates.error,
+                          );
+
+                        }
+
+
+
+                      },
                     builder:(context,state)=>Align(
                       alignment: Alignment.center,
                       child: MySignButton(
