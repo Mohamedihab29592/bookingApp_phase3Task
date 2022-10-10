@@ -92,8 +92,9 @@ Here are some screeshots for the application:
 --- |---|---
 
 
-|<img src="https://user-images.githubusercontent.com/64233832/194778838-54ad7374-4dcb-4bcf-8ead-ec640b46cd78.jpeg" width="300">|<img src="https://user-images.githubusercontent.com/64233832/194778841-6dacd2bc-e0c8-48fe-9f93-2a556cbd7810.jpeg" width="300">|<img src="https://user-images.githubusercontent.com/64233832/194778867-c8be568b-8da8-4f2d-b7d7-13e4f9d59105.jpeg" width="300">|
+|<img src="https://user-images.githubusercontent.com/64233832/194778838-54ad7374-4dcb-4bcf-8ead-ec640b46cd78.jpeg" width="300">|<img src="https://user-images.githubusercontent.com/64233832/194778841-6dacd2bc-e0c8-48fe-9f93-2a556cbd7810.jpeg" width="300">|<img src="https://user-images.githubusercontent.com/64233832/194895784-3da875bd-c4cc-4d3e-8bcd-fd69574678ec.jpeg" width="300">|
 --- |---|---
+
 
 
 |<img src="https://user-images.githubusercontent.com/64233832/194778869-4d4e1149-ec74-4050-810f-1d9ec3ac3dbb.jpeg" width="300">|<img src="https://user-images.githubusercontent.com/64233832/194778870-6a408e6f-ff88-4f1a-96de-8ab47e12915f.jpeg" width="300">|<img src="https://user-images.githubusercontent.com/64233832/194778872-266a2e5a-707f-45b7-9c5a-f5720191a0e3.jpeg" width="300">|
