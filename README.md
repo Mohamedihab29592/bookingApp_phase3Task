@@ -10,7 +10,7 @@ A mobile application developed using Flutter. It supports both Android and IOS.
 - ### [Demo video =>](#demo-video)
 
 ## Main packages used
-```
+
 - [dio](https://pub.dev/packages/dio) to make integration with API
 - [flutter_bloc](https://pub.dev/packages/flutter_bloc) as state management
 - [shared_preferences](https://pub.dev/packages/shared_preferences) to handle caching data
@@ -29,7 +29,7 @@ We have applied clean archeticture concept and here is the basic folder structur
 
 core folder structure that flutter provides:
 
-```
+
 booking_app
 ├── android
 ├── assets
