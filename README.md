@@ -37,22 +37,22 @@ booking_app
 ├── ios
 ├── lib
 └── test
-```
+
 
 Here is the folder structure we have been using in this project:
-```
+
 lib
 
 ├── core
 ├── featuers
 ├── bloc_observer.dart
 └── main.dart
-```
+
 
 
 ### core
 This folder contains all services and tools related to the application
-```
+
 core
 ├── app_localization
 ├── compnent
@@ -70,14 +70,14 @@ core
 
 ### features
 This folder containes everything related to the screen of the application and the business logic of the application specificly state management.
-```
+
 presentation
 ├── auth
 ├── home
 └── onBoarding
 ├── search
 ├── splash_screen
-```
+
 
 
 ## Screenshots
