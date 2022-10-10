@@ -104,7 +104,7 @@ Here are some screeshots for the application:
 --- |---|---
 
 
-|<img src="https://user-images.githubusercontent.com/64233832/194778878-0741978c-0dfa-4f47-a3b2-825f2d6d6cfe.jpeg" width="300">|<img src="https://user-images.githubusercontent.com/64233832/194778880-04c66ea0-1bd0-4504-90bd-1da531cb9dbe.jpeg" width="300">
+|<img src="https://user-images.githubusercontent.com/64233832/194778878-0741978c-0dfa-4f47-a3b2-825f2d6d6cfe.jpeg" width="300">|<img src="https://user-images.githubusercontent.com/64233832/194778880-04c66ea0-1bd0-4504-90bd-1da531cb9dbe.jpeg" width="300">|
 --- |---|---
 
 ## Demo Video
