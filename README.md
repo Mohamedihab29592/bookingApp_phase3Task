@@ -1,5 +1,4 @@
 # booking_app
-
 ## Table of contents
 - ### [main packages used =>](#main-packages-used)
 - ### [Folder structure =>](#folder-structure)
