@@ -1,4 +1,8 @@
 # booking_app
+A mobile application developed using Flutter. It supports both Android and IOS.
+ It allows the user to find hotels, book hotels, search for specific hotel, and filter hotels by different filterations like: price, location, and facilities.
+
+
 ## Table of contents
 - ### [main packages used =>](#main-packages-used)
 - ### [Folder structure =>](#folder-structure)
