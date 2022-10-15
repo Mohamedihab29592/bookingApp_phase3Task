@@ -12,9 +12,8 @@ import '../../../../core/utilis/constants/colors.dart';
 
 
 class FilterPageNew extends StatefulWidget {
-  const FilterPageNew({super.key, required this.searchText});
+  const FilterPageNew({super.key,});
 
-  final String searchText;
 
   @override
   State<FilterPageNew> createState() => _FilterPageNewState();
@@ -111,7 +110,7 @@ class _FilterPageNewState extends State<FilterPageNew> {
                   latitude: " ",
                   longitude: " ",
                   distance: " ",
-                  name: widget.searchText,
+                  name: " ",
 
                 ));
                 Navigator.pop(context);

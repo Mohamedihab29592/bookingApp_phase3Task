@@ -42,6 +42,8 @@ class _DistanceWidgetState extends State<DistanceWidget> {
           max: 10.0,
           divisions: 100,
           activeColor: AppColors.teal,
+          inactiveColor: AppColors.grey,
+
 
           label: 'Less than $_value km',
           onChanged: (double newValue) {

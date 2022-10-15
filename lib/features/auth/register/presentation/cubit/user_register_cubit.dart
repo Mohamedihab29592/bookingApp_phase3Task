@@ -62,6 +62,7 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
     String email = "";
     String password = "";
     String confiPass = "";
+    String image = "";
     // Trigger the authentication flow
     emit(CreateGoogleUserLoadingState());
    await GoogleSignIn().signIn().then((value) {
@@ -69,6 +70,7 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
       email =value.email;
       password =value.displayName!;
       confiPass =value.displayName!;
+      image = value.photoUrl!;
 
     });
     DioHelper.postData(url: registerEndPoint, data: {
@@ -76,6 +78,7 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
       "email": email,
       "password": password,
       "password_confirmation": confiPass,
+      "image": image,
 
     }).then((value) {
       debugPrint(value.data.toString());

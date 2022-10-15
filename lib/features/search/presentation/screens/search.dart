@@ -67,7 +67,7 @@ class _SearchState extends State<Search> {
                       splashRadius: 15,
 
                       onPressed: () {
-                        navigateTo(context: context, widget: FilterPageNew(searchText: _controller.text,));
+                        navigateTo(context: context, widget: const FilterPageNew());
                       },
                       icon: const Icon(Icons.filter_alt,color: AppColors.teal,),
                     ),
